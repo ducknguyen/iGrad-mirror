@@ -214,6 +214,10 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\User\Address\Address.cs" />
+    <Compile Include="Models\User\BirthPlace\BirthPlaceLocation.cs" />
+    <Compile Include="Models\User\Phone\HomePhone.cs" />
+    <Compile Include="Models\User\Sibling\Sibling.cs" />
     <Compile Include="Models\User\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
