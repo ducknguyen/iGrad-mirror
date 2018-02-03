@@ -7,12 +7,13 @@ namespace IGrad.Models.User
 {
     public class UserModel
     {
+        public Name Name { get; set; } 
         public DateTime Birthday { get; set; }
         public BirthPlaceLocation BirthPlace { get; set; }
         public LoginViewModel LoginInfo { get; set; }
         public Address ResidentAddress { get; set; }
         public Address MailingAddress { get; set; }
-        public HomePhone PhoneObject { get; set; }
+        public Phone PhoneInfo { get; set; }
         public ParentPlan StudentsParentingPlan { get; set; }
         public Sibling[] Siblings { get; set; }
         public ChildCare StudentChildCare { get; set; }
