@@ -80,3 +80,9 @@ C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Microsoft.Owin.Security.M
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.csprojResolveAssemblyReference.cache
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.pdb
+C:\Users\jpratt\Documents\GitHub\igrad\iGrad\IGrad\bin\PdfSharp.Charting.dll
+C:\Users\jpratt\Documents\GitHub\igrad\iGrad\IGrad\bin\PdfSharp.dll
+C:\Users\jpratt\Documents\GitHub\igrad\iGrad\IGrad\bin\PdfSharp.xml
+C:\Users\jpratt\Documents\GitHub\igrad\iGrad\IGrad\bin\PdfSharp.Charting.xml
+C:\Users\jpratt\Documents\GitHub\igrad\iGrad\IGrad\bin\de\PdfSharp.resources.dll
+C:\Users\jpratt\Documents\GitHub\igrad\iGrad\IGrad\bin\de\PdfSharp.Charting.resources.dll
