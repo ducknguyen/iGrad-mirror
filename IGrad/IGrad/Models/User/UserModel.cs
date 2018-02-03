@@ -8,6 +8,8 @@ namespace IGrad.Models.User
     public class UserModel
     {
         public Name Name { get; set; } 
+        public Guardian[] Guardians { get; set; }
+        public LivesWithList LivesWith { get; set; }
         public DateTime Birthday { get; set; }
         public BirthPlaceLocation BirthPlace { get; set; }
         public LoginViewModel LoginInfo { get; set; }

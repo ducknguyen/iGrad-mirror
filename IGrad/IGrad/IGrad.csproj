@@ -218,7 +218,9 @@
     <Compile Include="Models\User\BirthPlace\BirthPlaceLocation.cs" />
     <Compile Include="Models\User\ChildCare\ChildCare.cs" />
     <Compile Include="Models\User\EmergencyContact\EmergencyContact.cs" />
+    <Compile Include="Models\User\Guardian\Guardian.cs" />
     <Compile Include="Models\User\Health\Health.cs" />
+    <Compile Include="Models\User\LivesWith\LivesWithList.cs" />
     <Compile Include="Models\User\Name\Name.cs" />
     <Compile Include="Models\User\ParentPlan\ParentPlan.cs" />
     <Compile Include="Models\User\Phone\Phone.cs" />
