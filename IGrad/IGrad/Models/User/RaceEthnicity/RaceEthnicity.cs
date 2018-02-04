@@ -1,9 +1,16 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IGrad.Models.User
 {
     public class RaceEthnicity
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int fieldId { get; set; }
+        public Guid UserID { get; set; }
         [DisplayName("Not Hispanic Or Latino")]
         public bool isNotHispanicOrLatino { get; set; }
         [DisplayName("Cuban")]

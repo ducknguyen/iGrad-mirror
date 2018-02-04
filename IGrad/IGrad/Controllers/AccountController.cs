@@ -9,6 +9,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using IGrad.Models;
+using IGrad.Context;
+using IGrad.Models.User;
+using System.Data.Entity.Validation;
 
 namespace IGrad.Controllers
 {
@@ -155,6 +158,63 @@ namespace IGrad.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
+                    // Create the Users Model
+                    UserModel _userModel = new UserModel();
+                    using (UserContext db = new UserContext())
+                    {
+                        Guid newGuid = Guid.Parse(user.Id);
+                        /* 
+                         * Need to create the association between database
+                         * Should create this on user registration which should be first form!
+                         * NOTE! We are not creating the array'd objects yet as we need to still 
+                         * figure out how to handle them in the database
+                        */
+                        _userModel.UserID = newGuid;
+                        _userModel.Email = user.Email;
+                        _userModel.Birthday = new Date();
+                        _userModel.Birthday.UserID = newGuid;
+                        _userModel.BirthPlace = new BirthPlaceLocation();
+                        _userModel.BirthPlace.UserID = newGuid;
+                        _userModel.ConsideredRaceAndEthnicity = new RaceEthnicity();
+                        _userModel.ConsideredRaceAndEthnicity.UserID = newGuid;
+                        _userModel.HealthInfo = new Health();
+                        _userModel.HealthInfo.UserID = newGuid;
+                        _userModel.SchoolInfo = new SchoolInfo();
+                        _userModel.SchoolInfo.UserID = newGuid;
+                        _userModel.LivesWith = new LivesWithList();
+                        _userModel.LivesWith.UserID = newGuid;
+                        _userModel.MailingAddress = new Address();
+                        _userModel.MailingAddress.UserID = newGuid;
+                        _userModel.Name = new Name();
+                        _userModel.Name.UserID = newGuid;
+                        _userModel.PhoneInfo = new Phone();
+                        _userModel.PhoneInfo.UserID = newGuid;
+                        _userModel.ResidentAddress = new Address();
+                        _userModel.ResidentAddress.UserID = newGuid;
+                        _userModel.Retainment = new Retained();
+                        _userModel.Retainment.UserID = newGuid;
+                        _userModel.StudentChildCare = new ChildCare();
+                        _userModel.StudentChildCare.UserID = newGuid;
+                        _userModel.StudentsParentingPlan = new ParentPlan();
+                        _userModel.StudentsParentingPlan.UserID = newGuid;
+
+                        // now add the form info
+                        db.Users.Add(_userModel);
+                        try
+                        {
+                            db.SaveChanges();
+                        }
+                        catch (DbEntityValidationException ex)
+                        {
+                            foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                            {
+                                foreach (var validationError in entityValidationErrors.ValidationErrors)
+                                {
+                                    Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                                }
+                            }
+                        }
+                    }
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
                     
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

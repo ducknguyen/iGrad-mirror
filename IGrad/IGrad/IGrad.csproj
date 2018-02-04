@@ -88,6 +88,8 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -203,7 +205,10 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Context\ContextHelper.cs" />
+    <Compile Include="Context\UserContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\ApplicationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -217,6 +222,7 @@
     <Compile Include="Models\User\Address\Address.cs" />
     <Compile Include="Models\User\BirthPlace\BirthPlaceLocation.cs" />
     <Compile Include="Models\User\ChildCare\ChildCare.cs" />
+    <Compile Include="Models\User\Date\Date.cs" />
     <Compile Include="Models\User\EmergencyContact\EmergencyContact.cs" />
     <Compile Include="Models\User\Guardian\Guardian.cs" />
     <Compile Include="Models\User\Health\Health.cs" />
@@ -244,11 +250,26 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="media\images\existingapp.png" />
+    <Content Include="media\images\homepagetexture.png" />
+    <Content Include="media\images\igradicon.png" />
+    <Content Include="media\images\igradicon_sm.png" />
+    <Content Include="media\images\igradlogo.png" />
+    <Content Include="media\images\newappplaceholder.png" />
+    <Content Include="media\images\penpaper.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Properties\PublishProfiles\codedot.net - Web Deploy %282%29.pubxml" />
+    <None Include="Properties\PublishProfiles\codedot.net - Web Deploy %283%29.pubxml" />
+    <None Include="Properties\PublishProfiles\codedot.net - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\FileShare.pubxml" />
+    <None Include="Properties\PublishProfiles\FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\godaddy.pubxml" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
+    <None Include="Properties\PublishProfiles\testftp.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -261,7 +282,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -299,10 +322,11 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Application\Index.cshtml" />
     <Content Include="Views\Application\GetNewApplication.cshtml" />
+    <Content Include="Views\Admin\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="media\images\" />
+    <Folder Include="Views\Login\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

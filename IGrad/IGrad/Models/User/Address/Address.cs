@@ -1,7 +1,15 @@
-﻿namespace IGrad.Models.User
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace IGrad.Models.User
 {
     public class Address
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int fieldId { get; set; }
+        public Guid UserID { get; set; }
         public string Street { get; set; }
         public string AptNum { get; set; }
         public string City { get; set; }

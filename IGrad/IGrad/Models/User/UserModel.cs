@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace IGrad.Models.User
 {
+    [Table("User")]
     public class UserModel
     {
-        public Name Name { get; set; } 
+        [Key]
+        public Guid UserID { get; set; }
+        public Name Name { get; set; }
+        public string Email { get; set; }
         public Guardian[] Guardians { get; set; }
         public LivesWithList LivesWith { get; set; }
-        public DateTime Birthday { get; set; }
+        public Date Birthday { get; set; }
         public BirthPlaceLocation BirthPlace { get; set; }
-        public LoginViewModel LoginInfo { get; set; }
         public Address ResidentAddress { get; set; }
         public Address MailingAddress { get; set; }
         public Phone PhoneInfo { get; set; }
@@ -25,7 +30,7 @@ namespace IGrad.Models.User
         public EmergencyContact[] EmergencyContacts { get; set; }
         public RaceEthnicity ConsideredRaceAndEthnicity { get; set; }
         public string CountryBornIn { get; set; }
-        public SchoolInfo HighSchoolInfo { get; set; }
+        public SchoolInfo SchoolInfo { get; set; }
         public Health HealthInfo { get; set; }
 
     }
