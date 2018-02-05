@@ -23,6 +23,7 @@ textarea {
     max-width: 280px;
 }
 
+/* #region Application/GetNewApplication */
 .homepage{
     color :dimgray;
     height:100%;
@@ -71,4 +72,18 @@ div .card{
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
 }
+
+.race-checkbox{
+    padding:5px;
+}
+
+.btn-submit{
+    background-color: green;
+    color: white;
+    width: 150px;
+    float:right;
+    margin-top: 15px;
+}
+
+/*#endregion*/
 

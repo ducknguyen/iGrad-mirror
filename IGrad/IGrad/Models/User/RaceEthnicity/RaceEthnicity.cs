@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IGrad.Models.User
 {
+    [DisplayName("Considered Ethnicity")]
     public class RaceEthnicity
     {
         [Key]
