@@ -48,7 +48,6 @@ div .card{
     opacity: 0.5;
 }
 
-
 .existing-application:hover {
     opacity: 0.5;
     border-color: deepskyblue;
@@ -56,6 +55,26 @@ div .card{
 
 .existing-application h1{
     opacity: 1;
+}
+
+.nav-app{
+    padding: 5px;
+    margin-top: 5px;
+    border-right:solid gray 1px;
+    border-bottom:groove gray 1px;
+    border-left: solid gray 1px;
+    border-top:solid gray 1px;
+    margin-right:10px;
+    background-color:white;
+}
+
+.selected-nav{
+    border-bottom: solid red 10px;
+}
+
+.nav-pane{
+    margin-top:20px;
+    margin-bottom: 15px;
 }
 
 .card-register {

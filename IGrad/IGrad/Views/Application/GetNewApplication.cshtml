@@ -3,20 +3,14 @@
     ViewBag.Title = "GetNewApplication";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@Html.Partial("_ApplicationNavigation")
 @using (Html.BeginForm("Index", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-
-    <br />
-    <h1>Student Information</h1>
-    <h3>* Required Fields</h3>
-    <hr />
     <div class="row form-group">
         <div class="col-md-4 form-group">
-
             @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.Name.FName, new { htmlAttributes = new { @class = "form-control formtextbox" } })
             @Html.ValidationMessageFor(model => model.Name.FName, "", new { @class = "text-danger" })
-
         </div>
         <div class="col-md-4 form-group">
 
@@ -49,7 +43,6 @@
             @Html.ValidationMessageFor(model => model.BirthPlace.Country, "", new { @class = "text-danger" })
         </div>
     </div>
-
 
     <div class="row form-group">
         <div class="col-md-4 form-group">
@@ -104,8 +97,7 @@
         </div>
     </div>
 
-
-    <div class="row">
+    <div class="row form-group">
         <div class="row col-md-4 form-group">
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
