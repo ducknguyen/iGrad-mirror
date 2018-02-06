@@ -1,0 +1,259 @@
+﻿body,html{
+    height:100%;
+    font-family: Copernicus,Arial,sans-serif;
+}
+a:hover{
+    text-decoration: none;
+}
+header h4{
+    color: #F5F5F5;
+}
+
+.contact-head{
+	background-color:#075241;
+}
+
+.navbar-default{
+    font-size:20px;
+    height:12em;
+    background-color: #f3f2ed;
+}
+
+#left-nav, #right-nav{
+    margin-top:1.5em;
+}
+
+#logo{
+    padding: 0;
+    margin: 0;
+}
+
+#logo img{
+    position: relative;
+    height:8.5em;
+    width:7em;
+    z-index:2;
+}
+
+#left-nav #apply-igrad{
+    padding: 1px;
+}
+
+#left-nav #apply-igrad a{
+    font-size:30px;
+    color:#075241;
+}
+
+#right-nav .btn-login{
+    height: 50px;
+    margin-top: 0.5em;
+    padding: 0 40px;
+    background-color: transparent;
+    border: 0;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 50px;
+    color: #7578B0;
+    border:1px solid #7578B0;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+    text-shadow: none;
+    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+
+#right-nav .btn-login:hover{
+    color:#fff;
+    background-color:#7578B0;
+    transition: all .2s ease-in-out;
+}
+
+.landscape{
+    position: relative;
+    margin-top:-16em;
+    height:41em;
+    z-index:1;
+}
+.test{
+    background-image: url('https://www.auto.edu/wp-content/uploads/2014/12/ati-student-housing.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-top:204px;
+    height:100%;
+}
+
+.form-box {
+    display: block;
+    margin: 8em auto;
+    width:24em;
+}
+.form-bottom {
+	padding: 25px 25px 0px 25px;
+
+	background: #444;
+	background: rgba(0, 0, 0, 0.3);
+	-moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
+	text-align: left;
+
+}
+.form-bottom label{
+    font-size:16px;
+    color:#fff;
+}
+input[type="text"], 
+input[type="password"], 
+input[type="date"]{
+	height: 50px;
+    margin: 0;
+    vertical-align: middle;
+    background: #fff;
+    border: 3px solid #fff;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 50px;
+    color: #888;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+
+input[type="text"]:focus, 
+input[type="password"]:focus, 
+input[type="date"]:focus {
+	outline: 0;
+	background: #fff;
+    border: 3px solid #fff;
+    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+}
+
+button.btn-signup {
+	height: 50px;
+    width:100%;
+    margin-top: 0.5em;
+    padding: 0 20px;
+    vertical-align: middle;
+    background-color:#7578B0;
+    border: 0;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 50px;
+    color: #fff;
+    -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
+    text-shadow: none;
+    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
+    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
+}
+
+button.btn-signup:hover { opacity: 0.8; color: #fff; }
+
+button.btn-signup:active { outline: 0; opacity: 0.6; color: #fff; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
+
+button.btn-signup:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
+
+button.btn-signup:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
+
+.igrad-external{
+    position: relative;
+    height:100%;
+}
+#external-icon{
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    bottom: -1px;
+    box-sizing: content-box;
+    margin: auto;
+    padding: 5px 20px;
+    padding-top:20px;
+    height: auto;
+    background-color: #075241;
+    transform: translateX(-100%);
+    border-right: 1px solid #075241;
+}
+#igrad-external{
+    margin-right: -0.9em;
+    height:65px;
+    position: absolute;
+    right: 0;
+    bottom:0;
+    z-index: 1;
+    transform: translateY(50%);
+    padding: 5px 30px;
+    background-color: #7CB342;
+    border:1px solid #7CB342;
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 50px;
+    color:#fff;
+}
+#igrad-external:hover{
+    background-color: #075241;
+    border:1px solid #075241;
+    transition: all .2s ease-in-out;
+}
+
+.short-intro{
+    margin-top:275px;
+    padding-bottom: 1em;
+}
+.short-intro h2{
+    color:#075241;
+    text-align: center;
+}
+
+.short-intro p{
+    width:80%;
+    margin:0 auto;
+    padding:1em;
+    line-height: 1.75;
+    color: #2f3337;
+}
+
+footer{
+    height:8em;
+    width: 100%;
+	background-color:#075241;
+    padding:5px 0 3px 0;
+    color:#fff;
+    bottom: 0;
+}
+
+footer a, footer a:hover{
+    color: #fff;   
+}
+footer h4{
+    color:#7CB342;
+}
+footer ul.list-social {
+    margin-bottom: 0;
+}
+footer ul.list-social li a {
+    text-align: center;
+    display: block;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    font-size: 22px;
+    color: white;
+}
+footer ul.list-social li a:hover{
+    opacity: 0.7;
+}
+footer ul.list-social li.social-facebook a {
+    background-color: #3B5998;
+}
+footer ul.list-social li.social-twitter a {
+    background-color: #55ACEE;
+}
+
+footer ul.list-social li.social-linkedin a {
+    background-color: #007bb5;
+}
+footer ul.list-social li.social-youtube a {
+    background-color: #bb0000;
+}
+
+.form-text{
+    color: #F5F5F5;
+}

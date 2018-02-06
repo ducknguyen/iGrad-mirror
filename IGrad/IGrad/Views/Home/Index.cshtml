@@ -1,49 +1,99 @@
 ﻿@model IGrad.Models.RegisterViewModel
 @{
-    ViewBag.Title = "iGrad Home";
+    ViewBag.Title = "Apply To iGrad";
 }
 
-<h2>@ViewBag.Title.</h2>
+@Styles.Render("~/Content/homepage.css")
+<h2></h2>
+
+
+
+
+<header class="contact-head">
+    <div class="container">
+        <h4 class="text-right">(253) 373-4723</h4>
+    </div>
+</header>
+<div class="wrapper">
+    <nav class="navbar navbar-default bottom-wrapper" role="navigation">
+        <div class="container">
+            <div id="home-nav">
+                <ul id="left-nav" class="nav navbar-nav">
+                    <li><a id="logo" href="./"><img src=@Url.Content("~/media/images/logo-bg.png") alt=""></a></li>
+                    <li id="apply-igrad"><a href="">Apply to iGrad</a></li>
+                </ul>
+                <div id="right-nav" class="nav navbar-nav pull-right">
+                    <a href="login.html" class="btn btn-login">
+                        <i class="fas fa-lock"></i>
+                        LOGIN
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<div class="container landscape">
+    <div class="col-md-12 test">
+        <div class="col-md-6 test1">
+            <div class="form-box">
+                <div class="form-bottom">
+                    <div class="container">
+                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <h4 class="form-text">Create a new account.</h4>
+                            <hr />
+                            @Html.ValidationSummary("", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                   <button type="submit" class="btn btn-signup">
+                                       <span class="glyphicon glyphicon-pencil"></span>
+                                        APPLY NOW
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 igrad-external">
+            <a id="igrad-external" href="https://www.kent.k12.wa.us/iG" target="_blank">
+                <span id="external-icon" class="glyphicon glyphicon-new-window"></span>
+                iGRAD HOME
+            </a>
+        </div>
+    </div>
+</div>
 
 <div class="container">
-    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        @Html.AntiForgeryToken()
-        <h4>Create a new account.</h4>
-        <hr />
-        @Html.ValidationSummary("", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
-            <div class="col-md-10">
-                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="Register" />
-            </div>
-        </div>
-    }
+    <div class="short-intro text-center">
+        <h2>A Step Closer To Your Dream</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur</p>
+    </div>
 </div>
+<br><br>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
-
-
-
-
-
-
