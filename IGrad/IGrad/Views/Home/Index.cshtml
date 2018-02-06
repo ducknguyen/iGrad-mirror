@@ -1,32 +1,49 @@
-﻿
+﻿@model IGrad.Models.RegisterViewModel
 @{
     ViewBag.Title = "iGrad Home";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row text-center">
-    <h1>Welcome to IGrad</h1>
-    <h2>Your new future begins now.</h2>
+<h2>@ViewBag.Title.</h2>
+
+<div class="container">
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <h4>Create a new account.</h4>
+        <hr />
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.ConfirmPassword, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" class="btn btn-default" value="Register" />
+            </div>
+        </div>
+    }
 </div>
 
-<div class="container homepage">
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
 
-    <div class="row col-md-5">
-        <a href=@Url.Action("GetNewApplication", "Application")>
-            <div class="row new-application card text-center">
-                <h1>Start <br /> A New  <br /> Application!</h1>
-            </div>
-        </a>
-    </div>
 
-    <div class="row col-md-5 col-md-offset-2">
-        <a href=@Url.Action("Controller","Route")>
-            <div class="row existing-application card text-center">
-                <h1>Continue <br /> Existing <br /> Application!</h1>
-            </div>
-        </a>
-    </div>
-</div>
+
 
 
 
