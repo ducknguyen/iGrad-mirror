@@ -226,6 +226,7 @@
     <Compile Include="Models\User\EmergencyContact\EmergencyContact.cs" />
     <Compile Include="Models\User\Guardian\Guardian.cs" />
     <Compile Include="Models\User\Health\Health.cs" />
+    <Compile Include="Models\User\Language\Language.cs" />
     <Compile Include="Models\User\LivesWith\LivesWithList.cs" />
     <Compile Include="Models\User\Name\Name.cs" />
     <Compile Include="Models\User\ParentPlan\ParentPlan.cs" />
@@ -325,6 +326,11 @@
     <Content Include="Views\Application\GetNewApplication.cshtml" />
     <Content Include="Views\Admin\View.cshtml" />
     <Content Include="Views\Shared\_ApplicationNavigation.cshtml" />
+    <Content Include="Views\Application\GetLanguageForm.cshtml" />
+    <Content Include="Views\Application\GetEducationForm.cshtml" />
+    <Content Include="Views\Application\GetHouseholdForm.cshtml" />
+    <Content Include="Views\Application\GetHealthForm.cshtml" />
+    <Content Include="Views\Application\GetOtherInfoForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

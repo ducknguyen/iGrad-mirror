@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+using IGrad.Models.User.Language;
 
 namespace IGrad.Models.User
 {
@@ -14,6 +12,7 @@ namespace IGrad.Models.User
         public Guid UserID { get; set; }
         public Name Name { get; set; }
         public string Email { get; set; }
+        public LanguageHistory LanguageHisory { get; set; }
         public Guardian[] Guardians { get; set; }
         public LivesWithList LivesWith { get; set; }
         public Date Birthday { get; set; }

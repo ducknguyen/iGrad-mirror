@@ -69,14 +69,64 @@ namespace IGrad.Controllers
                 }
             }
 
-            return RedirectToAction("Page2", "Application");
+            return RedirectToAction("GetLanguageForm", "Application");
         }
 
         [Authorize]
-        public ActionResult Page2()
+        public ActionResult GetLanguageForm()
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult GetLanguageForm(UserModel user)
+        {
+            return View();
+        }
+
+        public ActionResult GetEducationForm()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult GetEducationForm(UserModel user)
+        {
+            return View();
+        }
+
+        public ActionResult GetHouseholdForm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GetHouseHoldForm(UserModel user)
+        {
+            return View();
+        }
+
+        public ActionResult GetHealthForm()
+        {
+            return View();
+        }
+        
+        [HttpPost]
+        public ActionResult GetHealthForm(UserModel user)
+        {
+            return View();
+        }
+
+        public ActionResult GetOtherInfoForm()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GetOtherInfoForm(UserModel user)
+        {
+            return View();
+        }
+
 
         [Authorize]
         public ActionResult GetNewApplication()

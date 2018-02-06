@@ -1,0 +1,17 @@
+﻿@model IGrad.Models.User.UserModel
+@{
+    ViewBag.Title = "GetLanguageForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>GetLanguageForm</h2>
+
+<p>Indicate your language preference so we can provide an interpreter or translated documents, free of charge, when you need them.
+
+All parents have the right to information about their student's education in a language they understand.
+
+1. In what language(s) would your family prefer to communicate with school? *</p>
+
+<div class="row">
+    @Html.LabelFor(model => model.Lan, htmlAttributes: new { @class = "control-label" })
+</div>
