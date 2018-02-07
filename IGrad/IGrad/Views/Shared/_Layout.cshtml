@@ -9,60 +9,10 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <a href="@Url.Action("Index","Home")" title="iGrad Home">
-                <img class="navbar-brand pull-left" src="@Url.Content("~/media/images/igradicon_sm.png")" />
-            </a>
-            <div class="navbar-header">               
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Apply Now!", "GetNewApplication", "Application")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
-            </div>
-        </div>
-    </div>
     <div class="container body-content">
         @RenderBody()
         <hr />
         <footer>
- 
-            <div class="container">
-                <div class="col-md-4">
-                    <h4>Find iGrad</h4>
-                    <a href="https://www.google.com/maps" target="_blank">25668 104th Ave SE<br>Kent, WA 98030</a>
-                </div>
-                <div class="col-md-4">
-                    <h4>Open Hours</h4>
-                    <p>Monday - Friday<br>8:00 am - 8:15 pm</p>
-                </div>
-                <div class="col-md-4">
-                    <h4>Follow Us</h4>
-                    <ul class="list-inline list-social">
-                        <li class="social-facebook">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        </li>
-                        <li class="social-twitter">
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                        </li>
-                        <li class="social-linkedin">
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                        </li>
-                        <li class="social-youtube">
-                            <a href="#"><i class="fab fa-youtube"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </footer>
     </div>
 

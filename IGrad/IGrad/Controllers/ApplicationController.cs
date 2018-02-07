@@ -1,10 +1,7 @@
 ﻿using IGrad.Context;
 using IGrad.Models.User;
 using System;
-using System.Collections.Generic;
 using System.Data.Entity.Validation;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace IGrad.Controllers
@@ -126,7 +123,6 @@ namespace IGrad.Controllers
         {
             return View();
         }
-
 
         [Authorize]
         public ActionResult GetNewApplication()

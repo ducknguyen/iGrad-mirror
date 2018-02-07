@@ -1,10 +1,13 @@
 ﻿@model IGrad.Models.User.UserModel
 @{
-    ViewBag.Title = "GetLanguageForm";
+    ViewBag.Title = "iGrad - Language";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GetLanguageForm</h2>
+@Html.Partial("_ApplicationNavigation")
+
+
+<h2>Preferred Language History</h2>
 
 <p>Indicate your language preference so we can provide an interpreter or translated documents, free of charge, when you need them.
 
@@ -13,5 +16,35 @@ All parents have the right to information about their student's education in a l
 1. In what language(s) would your family prefer to communicate with school? *</p>
 
 <div class="row">
-    @Html.LabelFor(model => model.Lan, htmlAttributes: new { @class = "control-label" })
+    @Html.LabelFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "control-label" })
+    @Html.TextBoxFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "form-control" })
+</div>
+
+<div class="row">
+    @Html.LabelFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "control-label" })
+    @Html.TextBoxFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "form-control" })
+</div>
+
+<div class="row">
+    @Html.LabelFor(model => model.LanguageHisory.StudentPrimaryLanguageAtHome, htmlAttributes: new { @class = "control-label" })
+    @Html.TextBoxFor(model => model.LanguageHisory.StudentPrimaryLanguageAtHome, htmlAttributes: new { @class = "form-control" })
+</div>
+
+<div class="row">
+    @Html.LabelFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, htmlAttributes: new { @class = "control-label" })
+    @Html.TextBoxFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, htmlAttributes: new { @class = "form-control" })
+</div>
+
+<div class="row">
+    @Html.LabelFor(model => model.LanguageHisory.PrimaryLanguageSpokenAtHome, htmlAttributes: new { @class = "control-label" })
+    @Html.TextBoxFor(model => model.LanguageHisory.PrimaryLanguageSpokenAtHome, htmlAttributes: new { @class = "form-control" })
+</div>
+<div class="row">
+    @Html.LabelFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+    @Html.RadioButtonFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, "True", htmlAttributes: new { @class = "form-control" })
+    @Html.RadioButtonFor( model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, "False", htmlAttributes: new { @class = "form-control" })
+</div>
+<div class="row">
+    @Html.LabelFor(model => model.LanguageHisory.StudentStartingGradeInUS, htmlAttributes: new { @class = "control-label" })
+    @Html.TextBoxFor(model => model.LanguageHisory.StudentStartingGradeInUS, htmlAttributes: new { @class = "form-control" })
 </div>

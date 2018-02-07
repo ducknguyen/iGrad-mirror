@@ -254,6 +254,7 @@
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="media\images\existingapp.png" />
+    <Content Include="media\images\homePageBackgroundImage.jpg" />
     <Content Include="media\images\homepagetexture.png" />
     <Content Include="media\images\igradicon.png" />
     <Content Include="media\images\igradicon_sm.png" />

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using IGrad.Models.User.Language;
+
 
 namespace IGrad.Models.User
 {

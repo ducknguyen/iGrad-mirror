@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IGrad.Models.User.Language
+namespace IGrad.Models.User
 {
     public class LanguageHistory
     {
