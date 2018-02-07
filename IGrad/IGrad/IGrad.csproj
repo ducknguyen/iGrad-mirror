@@ -259,6 +259,7 @@
     <Content Include="media\images\igradicon.png" />
     <Content Include="media\images\igradicon_sm.png" />
     <Content Include="media\images\igradlogo.png" />
+    <Content Include="media\images\logo-bg.png" />
     <Content Include="media\images\newappplaceholder.png" />
     <Content Include="media\images\penpaper.png" />
     <Content Include="Scripts\bootstrap.js" />
