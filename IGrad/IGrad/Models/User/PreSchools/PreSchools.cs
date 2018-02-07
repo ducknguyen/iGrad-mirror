@@ -9,6 +9,7 @@ namespace IGrad.Models.User
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int fieldId { get; set; }
+        [ForeignKey("UserID")]
         public Guid UserID { get; set; }
         public string Name { get; set; }
         public Address Address { get; set; }
