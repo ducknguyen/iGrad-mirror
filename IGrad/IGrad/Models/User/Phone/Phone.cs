@@ -9,7 +9,6 @@ namespace IGrad.Models.User
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int fieldId { get; set; }
-        [ForeignKey("UserID")]
         public Guid UserID { get; set; }
         public string PhoneNumber { get; set; }
         public bool isHomePhone { get; set; }
