@@ -3,7 +3,7 @@
     ViewBag.Title = "GetNewApplication";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Html.Partial("_ApplicationNavigation")
+
 @using (Html.BeginForm("Index", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="row form-group">

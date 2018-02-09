@@ -1,8 +1,134 @@
-﻿
+﻿@model IGrad.Models.User.UserModel
 @{
-    ViewBag.Title = "GetEducationForm";
+    ViewBag.Title = "Education | iGrad";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GetEducationForm</h2>
+<h2>Previous Education</h2>
+
+
+<div class="well well-lg col-md-6">
+    <h1>Prior Education</h1>
+<div class="row">
+    @Html.LabelFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+    @Html.CheckBoxFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "form-control" })
+</div>
+
+<div class="row">
+    @Html.LabelFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+    @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "form-control" })
+</div>
+
+<div class="row">
+    @Html.LabelFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+    @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "form-control" })
+</div>
+
+<div class="row">
+    @Html.LabelFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "control-label" })
+    @Html.CheckBoxFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "form-control" })
+</div>
+</div>
+
+
+<div class="well well-lg col-md-6">
+    <h1>High School Information</h1>
+    <h3>Add iteration for Highschool records.. collection</h3>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "control-label" })
+        @Html.CheckBoxFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "form-control" })
+    </div>
+</div>
+
+<div class="well well-lg col-md-6">
+    <h1>Violation Information</h1>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled, htmlAttributes: new { @class = "control-label" })
+        @Html.CheckBoxFor(model => model.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.PreviousSchoolViolation.hadWeaponViolation, htmlAttributes: new { @class = "control-label" })
+        @Html.CheckBoxFor(model => model.SchoolInfo.PreviousSchoolViolation.hadWeaponViolation, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.PreviousSchoolViolation.hasUnpaidFine, htmlAttributes: new { @class = "control-label" })
+        @Html.CheckBoxFor(model => model.SchoolInfo.PreviousSchoolViolation.hasUnpaidFine, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.PreviousSchoolViolation.ExplainUnpaidFine, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.SchoolInfo.PreviousSchoolViolation.ExplainUnpaidFine, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.PreviousSchoolViolation.hasDiciplanaryStatus, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.SchoolInfo.PreviousSchoolViolation.hasDiciplanaryStatus, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.PreviousSchoolViolation.hasOtherViolation, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.SchoolInfo.PreviousSchoolViolation.hasOtherViolation, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.PreviousSchoolViolation.ExplainOtherViolation, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.SchoolInfo.PreviousSchoolViolation.ExplainOtherViolation, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+
+
+
+
+</div>
+
+<div class="well well-lg col-md-6">
+    <h1>General Information</h1>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.LastYearAttended, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.SchoolInfo.LastYearAttended, htmlAttributes: new { @class = "form-control" })
+    </div>
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.CurrentGrade, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.SchoolInfo.CurrentGrade, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "form-control" })
+    </div>
+
+    <div class="row">
+        @Html.LabelFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "control-label" })
+        @Html.TextBoxFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "form-control" })
+    </div>
+</div>
+
 
