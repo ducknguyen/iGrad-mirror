@@ -7,5 +7,7 @@ namespace IGrad.Context
     {
         public UserContext() : base("DefaultConnection") { }
         public DbSet<UserModel> Users { get; set; }
+
+        public System.Data.Entity.DbSet<IGrad.Models.User.HighSchoolInfo> HighSchoolInfoes { get; set; }
     }
 }

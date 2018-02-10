@@ -91,6 +91,11 @@ namespace IGrad.Controllers
             return View();
         }
 
+        public ActionResult GetHighSchoolInfoPartial(UserModel user)
+        {
+            return PartialView("~/Views/Application/_GetHighSchoolInfo.cshtml", new HighSchoolInfo());
+        }
+
         public ActionResult GetHouseholdForm()
         {
             return View();
