@@ -1,5 +1,7 @@
 ﻿using IGrad.Context;
+using IGrad.Models;
 using IGrad.Models.User;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Validation;
@@ -151,15 +153,17 @@ namespace IGrad.Controllers
         [Authorize]
         public ActionResult GetNewApplication()
         {
-            ContextHelper helper = new ContextHelper();
+            string userid = HttpContext.User.Identity.GetUserId();
+            Guid UserID = Guid.Parse(userid);
+            ContextHelper.GetUserInfo(UserID);
+
             return View();
         }
 
         [HttpPost]
         public ActionResult GetNewApplication(UserModel user)
         {
-            ContextHelper helper = new ContextHelper();
-            helper.UpdateRecord(user);
+            ContextHelper.UpdateRecord(user);
             return View();
         }
     }

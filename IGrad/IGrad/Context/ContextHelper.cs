@@ -1,6 +1,9 @@
-﻿using IGrad.Models.User;
+﻿using IGrad.Models;
+using IGrad.Models.User;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Linq;
+using System.Web;
 
 namespace IGrad.Context
 {
