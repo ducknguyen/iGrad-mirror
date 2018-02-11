@@ -8,7 +8,7 @@ namespace IGrad.Controllers
         {
             if (Request.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Application");
+                return RedirectToAction("GetNewApplication", "Application");
             }
             // Example of saving a record
             //using (UserContext db = new UserContext())
