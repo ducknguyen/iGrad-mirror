@@ -339,6 +339,7 @@
     <Content Include="Views\Application\GetHealthForm.cshtml" />
     <Content Include="Views\Application\GetOtherInfoForm.cshtml" />
     <Content Include="Views\Application\_GetHighSchoolInfo.cshtml" />
+    <Content Include="Views\Shared\_HomeLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
