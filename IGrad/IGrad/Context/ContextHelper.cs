@@ -1,5 +1,6 @@
 ﻿using IGrad.Models.User;
 using System;
+using System.Linq;
 
 namespace IGrad.Context
 {
@@ -9,13 +10,14 @@ namespace IGrad.Context
         {
             try
             {
-                
                 using (UserContext db = new UserContext())
                 {
-                    db.Database.Log = Console.WriteLine;
-                    db.Users.Add(updatedUser);
-                    db.Entry(updatedUser).State = System.Data.Entity.EntityState.Modified;
-                    db.SaveChanges();
+                    var result = db.Users.SingleOrDefault(u => u.UserID == updatedUser.UserID);
+                    if (result != null)
+                    {
+                        result = updatedUser;
+                        db.SaveChanges();
+                    }
                 }
             }
             catch

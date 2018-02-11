@@ -1,0 +1,54 @@
+﻿@model List<IGrad.Models.User.UserModel>
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+@using (Html.BeginForm("Index", "Admin", FormMethod.Get))
+{
+    <p>
+        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Search" />
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            First Name
+        </th>
+        <th>
+            @Html.ActionLink("Last Updated Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Details
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name.LName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name.FName)
+            </td>
+            <td>
+                <!-- last modified date needs to be added -->
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                Details Link
+            </td>
+        </tr>
+    }
+
+</table>
+

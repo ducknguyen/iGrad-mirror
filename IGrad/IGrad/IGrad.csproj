@@ -331,7 +331,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Application\Index.cshtml" />
     <Content Include="Views\Application\GetNewApplication.cshtml" />
-    <Content Include="Views\Admin\View.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Shared\_ApplicationNavigation.cshtml" />
     <Content Include="Views\Application\GetLanguageForm.cshtml" />
     <Content Include="Views\Application\GetEducationForm.cshtml" />
