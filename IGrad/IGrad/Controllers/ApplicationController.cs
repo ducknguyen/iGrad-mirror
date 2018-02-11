@@ -162,6 +162,7 @@ namespace IGrad.Controllers
         [HttpPost]
         public ActionResult GetNewApplication(UserModel user)
         {
+            user.Name.UserID = user.UserID;
             ContextHelper.UpdateRecord(user);
             return RedirectToAction("GetLanguageForm", "Application");
         }

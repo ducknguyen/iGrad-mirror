@@ -2,6 +2,7 @@
 using IGrad.Models.User;
 using Microsoft.AspNet.Identity;
 using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -14,16 +15,23 @@ namespace IGrad.Context
             try
             {
                 using (UserContext db = new UserContext())
-                {
+                { 
                     var result = db.Users.SingleOrDefault(u => u.UserID == updatedUser.UserID);
                     if (result != null)
                     {
-                        result = updatedUser;
+                        var Name = result.Name;
+                        if(Name == null)
+                        {
+                            db.Users.SingleOrDefault(u => u.UserID == updatedUser.UserID).Name = updatedUser.Name;
+                        }
+                        db.Entry(result).CurrentValues.SetValues(updatedUser);
                         db.SaveChanges();
+                        //result = updatedUser;
+                        //db.SaveChanges();
                     }
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 // TODO: what we wanna do here?
             }
