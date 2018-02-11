@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -16,7 +17,7 @@ namespace IGrad.Models.User
         public string HowDoingInSchool { get; set; }
         public string StrengthAndWeakness { get; set; }
         public string ParentAdditionalFeedbackInfo { get; set; }
-        public HighSchoolInfo[] HighSchoolInformation { get; set; }
+        public List<HighSchoolInfo> HighSchoolInformation { get; set; }
         public Violation PreviousSchoolViolation { get; set; }
         public PriorEducation PriorEducation { get; set; }
     }

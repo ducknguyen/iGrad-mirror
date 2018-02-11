@@ -1,6 +1,7 @@
 ﻿using IGrad.Context;
 using IGrad.Models.User;
 using System;
+using System.Collections.Generic;
 using System.Data.Entity.Validation;
 using System.Web.Mvc;
 
@@ -83,8 +84,20 @@ namespace IGrad.Controllers
 
         public ActionResult GetEducationForm()
         {
-            return View();
+            UserModel user = new UserModel();
+            user.SchoolInfo = new SchoolInfo();
+            user.SchoolInfo.HighSchoolInformation = new List<HighSchoolInfo>();
+            HighSchoolInfo hsi = new HighSchoolInfo();
+            hsi.HighSchoolCity = "Auburn";
+            hsi.HighSchoolGrade = 10;
+            hsi.HighSchoolName = "Fake High School";
+            hsi.isLastHighSchoolAttended = true;
+            hsi.HighSchoolYear = "2016";
+            user.SchoolInfo.HighSchoolInformation.Add(hsi);
+            return View(user);
         }
+
+
         [HttpPost]
         public ActionResult GetEducationForm(UserModel user)
         {
@@ -96,6 +109,12 @@ namespace IGrad.Controllers
             return PartialView("~/Views/Application/_GetHighSchoolInfo.cshtml", new HighSchoolInfo());
         }
 
+        [HttpPost]
+        public void SubmitHighSchoolInfo(HighSchoolInfo highSchoolInfo, UserModel user)
+        {
+            //Add the submitted info to user
+            user.SchoolInfo.HighSchoolInformation.Add(highSchoolInfo);
+        }
         public ActionResult GetHouseholdForm()
         {
             return View();
