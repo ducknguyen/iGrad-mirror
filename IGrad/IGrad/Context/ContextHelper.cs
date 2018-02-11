@@ -6,7 +6,7 @@ namespace IGrad.Context
 {
     public class ContextHelper
     {
-        public void UpdateRecord(UserModel updatedUser)
+        public static void UpdateRecord(UserModel updatedUser)
         {
             try
             {
@@ -23,6 +23,27 @@ namespace IGrad.Context
             catch
             {
                 // TODO: what we wanna do here?
+            }
+        }
+
+        public static UserModel GetUserInfo(Guid userId)
+        {
+            try
+            {
+                using (UserContext db = new UserContext())
+                {
+                    var result = db.Users.SingleOrDefault(u => u.UserID == userId);
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                    else return null;
+                }
+            }
+            catch
+            {
+                // TODO: what we wanna do here?
+                return null;
             }
         }
     }
