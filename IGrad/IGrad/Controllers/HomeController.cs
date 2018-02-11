@@ -6,6 +6,10 @@ namespace IGrad.Controllers
     {
         public ActionResult Index()
         {
+            if (Request.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Application");
+            }
             // Example of saving a record
             //using (UserContext db = new UserContext())
             //{
