@@ -3,45 +3,71 @@
     ViewBag.Title = "iGrad - Language";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<script type="text/javascript" src="@Url.Content("~/Scripts/language-form.js")"></script>
 <h2>Preferred Language History</h2>
 
-<p>Indicate your language preference so we can provide an interpreter or translated documents, free of charge, when you need them.
+<p>
+    Indicate your language preference so we can provide an interpreter or translated documents, free of charge, when you need them.
 
-All parents have the right to information about their student's education in a language they understand.
+    All parents have the right to information about their student's education in a language they understand.
 
-1. In what language(s) would your family prefer to communicate with school? *</p>
 
-<div class="row">
-    @Html.LabelFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "control-label" })
-    @Html.TextBoxFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "form-control" })
-</div>
 
-<div class="row">
-    @Html.LabelFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "control-label" })
-    @Html.TextBoxFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "form-control" })
-</div>
+    <div class="container col-md-6 ">
+        <div class="row form-group">
+            <strong>In what language(s) would your family prefer to communicate with school? *</strong>
+            @Html.TextBoxFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "form-control" })
+        </div>
 
-<div class="row">
-    @Html.LabelFor(model => model.LanguageHisory.StudentPrimaryLanguageAtHome, htmlAttributes: new { @class = "control-label" })
-    @Html.TextBoxFor(model => model.LanguageHisory.StudentPrimaryLanguageAtHome, htmlAttributes: new { @class = "form-control" })
-</div>
+        <div class="row form-group">
+            <strong>What Language did the applicant (student) learn first?</strong>
+            @Html.TextBoxFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "form-control" })
+        </div>
 
-<div class="row">
-    @Html.LabelFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, htmlAttributes: new { @class = "control-label" })
-    @Html.TextBoxFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, htmlAttributes: new { @class = "form-control" })
-</div>
+        <div class="row form-group ">
+            <strong>What Language does the applicant (student) use the most at home?</strong>
+            @Html.TextBoxFor(model => model.LanguageHisory.StudentPrimaryLanguageAtHome, htmlAttributes: new { @class = "form-control" })
+        </div>
 
-<div class="row">
-    @Html.LabelFor(model => model.LanguageHisory.PrimaryLanguageSpokenAtHome, htmlAttributes: new { @class = "control-label" })
-    @Html.TextBoxFor(model => model.LanguageHisory.PrimaryLanguageSpokenAtHome, htmlAttributes: new { @class = "form-control" })
-</div>
-<div class="row">
-    @Html.LabelFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
-    @Html.RadioButtonFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, "True", htmlAttributes: new { @class = "form-control" })
-    @Html.RadioButtonFor( model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, "False", htmlAttributes: new { @class = "form-control" })
-</div>
-<div class="row">
-    @Html.LabelFor(model => model.LanguageHisory.StudentStartingGradeInUS, htmlAttributes: new { @class = "control-label" })
-    @Html.TextBoxFor(model => model.LanguageHisory.StudentStartingGradeInUS, htmlAttributes: new { @class = "form-control" })
-</div>
+        <div class="row form-group">
+            <strong>Has the applicant (student) ever received English language development support in a previous school?</strong>
+            @Html.TextBoxFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        <div class="row form-group">
+            <strong>What is the primary language spoken at home, regardless of the language spoken by your child?</strong>
+            @Html.TextBoxFor(model => model.LanguageHisory.PrimaryLanguageSpokenAtHome, htmlAttributes: new { @class = "form-control" })
+        </div>
+
+    </div>
+
+    <div class="container col-md-6">
+        <strong>Has the student received formal education outside the US?</strong>
+        <div class="row">
+            <div class="btn-group col-md-4">
+                <strong>Yes</strong>
+                @Html.RadioButtonFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, "True", htmlAttributes: new { @class = "radio radio-inline input-lg", @onClick = "showPriorEducationInfo()" })
+            </div>
+            <div class="btn-group col-md-4">
+                <strong>No</strong>
+                @Html.RadioButtonFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, "False", htmlAttributes: new { @class = "radio radio-inline input-lg", @onClick = "hidePriorEducationInfo()" })
+            </div>
+        </div>
+        <div class="col-md-12" id="prior-education" hidden>
+            1. What country was student born in?<br />
+            2. Formal education outside US? <br />
+            3. Number of months, language of instruction <br />
+            <div>
+                <strong>Applicant (student) starting grade in the United States.</strong>
+                @Html.TextBoxFor(model => model.LanguageHisory.StudentStartingGradeInUS, htmlAttributes: new { @class = "form-control" })
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-4 form-group">
+        <button class="btn btn-lg  btn-success">
+            @Html.ActionLink("Continue To Education", "GetEducationForm", "Application")
+        </button>
+    </div>
+
+

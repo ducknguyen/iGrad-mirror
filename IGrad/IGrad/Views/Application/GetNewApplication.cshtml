@@ -107,7 +107,9 @@
                 @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
         </div>
         <div class="row col-md-4 form-group">
-            <input id="submitButton" type="submit" class="btn-submit btn btn-lg" value="Continue.." />
+                <button class="btn btn-lg btn-success" type="submit">
+                    @Html.ActionLink("Continue To Language", "GetLanguageForm", "Application")
+                </button>
         </div>
     </div>
         
