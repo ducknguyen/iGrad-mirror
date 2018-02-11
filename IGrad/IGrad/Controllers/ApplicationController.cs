@@ -155,16 +155,15 @@ namespace IGrad.Controllers
         {
             string userid = HttpContext.User.Identity.GetUserId();
             Guid UserID = Guid.Parse(userid);
-            ContextHelper.GetUserInfo(UserID);
-
-            return View();
+            UserModel user = ContextHelper.GetUserInfo(UserID);
+            return View(user);
         }
 
         [HttpPost]
         public ActionResult GetNewApplication(UserModel user)
         {
             ContextHelper.UpdateRecord(user);
-            return View();
+            return RedirectToAction("GetLanguageForm", "Application");
         }
     }
 }
