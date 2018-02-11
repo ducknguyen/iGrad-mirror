@@ -4,10 +4,6 @@
 }
 
 @Styles.Render("~/Content/homepage.css")
-<h2></h2>
-
-
-
 
 <header class="contact-head">
     <div class="container">
@@ -23,11 +19,21 @@
                     <li id="apply-igrad"><a href="">Apply to iGrad</a></li>
                 </ul>
                 <div id="right-nav" class="nav navbar-nav pull-right">
-                    <button  class="btn btn-login">@Html.ActionLink("Login", "Login", "Account")
-                        <span class="glyphicon glyphicon-lock">
-                            
-                        </span>
+                    <!--<button class="btn btn-login">
+                     @Html.ActionLink("Login", "Login", "Account")
+                    <span class="glyphicon glyphicon-lock">
+
+                    </span>
                     </button>
+                    -->
+
+                    <a href="" class="btn btn-login">
+                        @Html.ActionLink("Login", "Login", "Account")
+                        <i class="fas fa-lock"></i>
+                        LOGIN
+                    </a>
+                       LOGIN
+                    </a>
                 </div>
             </div>
         </div>
@@ -66,8 +72,8 @@
                             </div>
                             <div class="form-group">
                                 <div class="col-md-12">
-                                   <button type="submit" class="btn btn-signup">
-                                       <span class="glyphicon glyphicon-pencil"></span>
+                                    <button type="submit" class="btn btn-signup">
+                                        <i class="fas fa-pencil-alt"></i>
                                         APPLY NOW
                                     </button>
                                 </div>
@@ -79,7 +85,7 @@
         </div>
         <div class="col-md-6 igrad-external">
             <a id="igrad-external" href="https://www.kent.k12.wa.us/iG" target="_blank">
-                <span id="external-icon" class="glyphicon glyphicon-new-window"></span>
+                <span id="external-icon"><i class="fas fa-external-link-alt"></i></span>
                 iGRAD HOME
             </a>
         </div>
