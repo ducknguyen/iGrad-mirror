@@ -41,7 +41,7 @@
 </div>
 </div>
 
-<div id="school-information"class="well well-lg col-md-6">
+<div class="well well-lg col-md-6">
     <div class="row col-md-12">
         @if(Model != null)
         {
@@ -65,12 +65,11 @@
                             else { } }
                     </tr>
                 </table>
-                <div class="row">
-                    
-  
+                <div class="row" id="school-information">
+
                 </div>
-            }
-        }
+    }
+}
     </div>
     <h1>High School Information</h1>
     <button class="btn" onclick="loadHighSchoolInfo()">
@@ -155,3 +154,8 @@
 </div>
 
 
+<div class="container col-md-4">
+    <button class="btn btn-lg btn-success">
+        @Html.ActionLink("Continue To Household", "GetHouseholdForm", "Application")
+    </button>
+</div>

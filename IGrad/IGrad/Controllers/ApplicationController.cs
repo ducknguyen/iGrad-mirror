@@ -151,6 +151,15 @@ namespace IGrad.Controllers
         [Authorize]
         public ActionResult GetNewApplication()
         {
+            ContextHelper helper = new ContextHelper();
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult GetNewApplication(UserModel user)
+        {
+            ContextHelper helper = new ContextHelper();
+            helper.UpdateRecord(user);
             return View();
         }
     }
