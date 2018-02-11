@@ -1,7 +1,7 @@
 ﻿@model IGrad.Models.RegisterViewModel
 @{
     ViewBag.Title = "Apply To iGrad";
-    Layout = "~/Views/Shared/_HomeLayout.cshtml"
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
 @Styles.Render("~/Content/homepage.css")
@@ -20,21 +20,10 @@
                     <li id="apply-igrad"><a href="">Apply to iGrad</a></li>
                 </ul>
                 <div id="right-nav" class="nav navbar-nav pull-right">
-                    <!--<button class="btn btn-login">
-                     @Html.ActionLink("Login", "Login", "Account")
-                    <span class="glyphicon glyphicon-lock">
-
-                    </span>
-                    </button>
-                    -->
-
-                    <a href="" class="btn btn-login">
-                        @Html.ActionLink("Login", "Login", "Account")
+                    <button class="btn btn-login">
                         <i class="fas fa-lock"></i>
-                        LOGIN
-                    </a>
-                       LOGIN
-                    </a>
+                        @Html.ActionLink("Login", "Login", "Account")
+                    </button>
                 </div>
             </div>
         </div>
