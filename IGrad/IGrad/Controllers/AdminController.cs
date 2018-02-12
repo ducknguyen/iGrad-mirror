@@ -1,8 +1,14 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using IGrad.Context;
+using IGrad.Models;
 using IGrad.Models.User;
-using IGrad.Context;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Data.Entity.Validation;
+using System.Linq;
+using System.Web.Mvc;
 
 namespace IGrad.Controllers
 {
@@ -11,13 +17,18 @@ namespace IGrad.Controllers
         // GET: Admin
         public ActionResult Index(string sortOrder)
         {
-            List<UserModel> users = new List<UserModel>();
-            UserContext context = new UserContext();
-            foreach (var row in context.Users)
+            using (UserContext db = new UserContext())
             {
-                users.Add(row);
+
+                var data = db.Users
+                    .Include(u => u.Name)
+                    .Include(u => u.BirthPlace)
+                    .Include(u => u.ConsideredRaceAndEthnicity)
+                    .Include(u => u.PhoneInfo)
+                    .ToList();
+
+                return View(data);
             }
-            return View(users);
         }
     }
 }

@@ -26,6 +26,7 @@ namespace IGrad.Controllers
         {
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/iGradFirstForm.pdf");
             PdfDocument document = PdfReader.Open(filePath);
+            document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
             PdfTextField firstName = (PdfTextField)(document.AcroForm.Fields["StudentFirstName"]);
             firstName.Value = new PdfString(user.Name.FName);
             firstName.ReadOnly = true;
@@ -44,6 +45,10 @@ namespace IGrad.Controllers
             formAge.Value = new PdfString(age.ToString());
             formAge.ReadOnly = true;
 
+            document.SecuritySettings.PermitFormsFill = false;
+            document.SecuritySettings.PermitModifyDocument = false;
+            document.SecuritySettings.PermitFullQualityPrint = true;
+            document.SecuritySettings.PermitPrint = true;
 
             byte[] fileContents = null;
             using(MemoryStream stream = new MemoryStream())
