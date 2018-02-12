@@ -24,6 +24,11 @@
             @Html.EditorFor(model => model.Name.LName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Name.LName, "", new { @class = "text-danger" })
         </div>
+        <div class="col-md-4 form-group">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        </div>
     </div>
 
     <div class="row form-group">

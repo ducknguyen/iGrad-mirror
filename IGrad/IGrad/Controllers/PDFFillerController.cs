@@ -39,6 +39,9 @@ namespace IGrad.Controllers
             PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
             birthday.Value = new PdfString(user.Birthday.ToString("MM-dd-yyyy"));
             birthday.ReadOnly = true;
+            PdfTextField gender = (PdfTextField)(document.AcroForm.Fields["Gender"]);
+            gender.Value = new PdfString(user.Gender);
+            gender.ReadOnly = true;
 
             int age = DateTime.Now.Year - user.Birthday.Year;
             PdfTextField formAge = (PdfTextField)(document.AcroForm.Fields["Age"]);

@@ -12,6 +12,7 @@ namespace IGrad.Models.User
         [Key]
         public Guid UserID { get; set; }
         public Name Name { get; set; }
+        public string Gender { get; set; }
         public string Email { get; set; }
         public LanguageHistory LanguageHisory { get; set; }
         public List<Guardian> Guardians { get; set; }

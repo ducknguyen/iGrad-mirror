@@ -193,6 +193,9 @@ namespace IGrad.Controllers
                        .Where(u => u.UserID == user.UserID)
                        .FirstOrDefault<UserModel>();
 
+                // Add gender
+                data.Gender = user.Gender;
+
                 #region updateName
                 if (data.Name != null)
                 {
