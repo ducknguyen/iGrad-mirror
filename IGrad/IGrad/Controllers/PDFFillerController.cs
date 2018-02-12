@@ -24,19 +24,25 @@ namespace IGrad.Controllers
 
         public ActionResult FillPdf(UserModel user)
         {
-            PdfDocument document = PdfReader.Open("C:/Users/jpratt/Documents/GitHub/igrad/IGrad/IGrad/media/documents/iGradFirstForm.pdf");
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/iGradFirstForm.pdf");
+            PdfDocument document = PdfReader.Open(filePath);
             PdfTextField firstName = (PdfTextField)(document.AcroForm.Fields["StudentFirstName"]);
             firstName.Value = new PdfString(user.Name.FName);
+            firstName.ReadOnly = true;
             PdfTextField lastName = (PdfTextField)(document.AcroForm.Fields["StudentLastName"]);
             lastName.Value = new PdfString(user.Name.LName);
+            lastName.ReadOnly = true;
             PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MI"]);
             middleInitial.Value = new PdfString(user.Name.MName);
+            middleInitial.ReadOnly = true;
             PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
             birthday.Value = new PdfString(user.Birthday.ToString("MM-dd-yyyy"));
+            birthday.ReadOnly = true;
 
             int age = DateTime.Now.Year - user.Birthday.Year;
             PdfTextField formAge = (PdfTextField)(document.AcroForm.Fields["Age"]);
             formAge.Value = new PdfString(age.ToString());
+            formAge.ReadOnly = true;
 
 
             byte[] fileContents = null;
