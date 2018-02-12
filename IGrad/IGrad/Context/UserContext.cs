@@ -5,7 +5,10 @@ namespace IGrad.Context
 {
     public class UserContext : DbContext
     {
-        public UserContext() : base("DefaultConnection") { }
+        public UserContext() : base("DefaultConnection")
+        {
+            this.Configuration.LazyLoadingEnabled = true;
+        }
         public DbSet<UserModel> Users { get; set; }
 
         public System.Data.Entity.DbSet<IGrad.Models.User.HighSchoolInfo> HighSchoolInfoes { get; set; }

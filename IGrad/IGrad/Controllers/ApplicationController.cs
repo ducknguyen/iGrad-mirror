@@ -4,7 +4,10 @@ using IGrad.Models.User;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace IGrad.Controllers
@@ -150,20 +153,114 @@ namespace IGrad.Controllers
             return View();
         }
 
+        
         [Authorize]
         public ActionResult GetNewApplication()
         {
-            string userid = HttpContext.User.Identity.GetUserId();
-            Guid UserID = Guid.Parse(userid);
-            UserModel user = ContextHelper.GetUserInfo(UserID);
-            return View(user);
+            UserModel _user;
+            try
+            {
+                string userid = HttpContext.User.Identity.GetUserId();
+                Guid UserID = Guid.Parse(userid);
+                UserContext db = new UserContext();
+                _user = db.Users.Where(u => u.UserID == UserID)
+                    .Include(u => u.Name)
+                    .Include(u => u.BirthPlace)
+                    .Include(u => u.ConsideredRaceAndEthnicity)
+                    .Include(u => u.PhoneInfo)
+                    .FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+            return View(_user);
         }
 
         [HttpPost]
         public ActionResult GetNewApplication(UserModel user)
         {
-            user.Name.UserID = user.UserID;
-            ContextHelper.UpdateRecord(user);
+            string userid = HttpContext.User.Identity.GetUserId();
+            Guid UserID = Guid.Parse(userid);
+            user.UserID = UserID;
+            using (UserContext db = new UserContext())
+            {
+                var data = db.Users
+                       .Include(u => u.Name)
+                       .Include(u => u.BirthPlace)
+                       .Include(u => u.ConsideredRaceAndEthnicity)
+                       .Include(u => u.PhoneInfo)
+                       .Where(u => u.UserID == user.UserID)
+                       .FirstOrDefault<UserModel>();
+
+                #region updateName
+                if (data.Name != null)
+                {
+                    // name already exists so lets update it!
+                    user.Name.fieldId = data.Name.fieldId;
+                    db.Entry(data.Name).CurrentValues.SetValues(user.Name);
+                }
+                // does not exist so lets add it :)
+                else
+                {
+                    data.Name = user.Name;
+                }
+                // make sure user id is set for child
+                data.Name.UserID = user.UserID;
+                #endregion
+
+                #region updateBirthPlace
+                if (data.BirthPlace != null)
+                {
+                    user.BirthPlace.fieldId = data.BirthPlace.fieldId;
+                    db.Entry(data.BirthPlace)
+                        .CurrentValues
+                        .SetValues(user.BirthPlace);
+                }
+                else
+                {
+                    data.BirthPlace = user.BirthPlace;
+                }
+                // make sure user id is set for child
+                data.BirthPlace.UserID = user.UserID;
+                #endregion
+
+                #region updateConsideredRace
+                if (data.ConsideredRaceAndEthnicity != null)
+                {
+                    user.ConsideredRaceAndEthnicity.fieldId = data.ConsideredRaceAndEthnicity.fieldId;
+                    db.Entry(data.ConsideredRaceAndEthnicity)
+                        .CurrentValues
+                        .SetValues(user.ConsideredRaceAndEthnicity);
+                }
+                else
+                {
+                    data.ConsideredRaceAndEthnicity = user.ConsideredRaceAndEthnicity;
+                }
+
+                // make sure user id is set for child
+                data.ConsideredRaceAndEthnicity.UserID = user.UserID;
+                #endregion
+
+                #region updatePhoneNumber
+
+                if (data.PhoneInfo != null)
+                {
+                    user.PhoneInfo.fieldId = data.PhoneInfo.fieldId;
+                    db.Entry(data.PhoneInfo)
+                        .CurrentValues
+                        .SetValues(user.PhoneInfo);
+                }
+                else
+                {
+                    data.PhoneInfo = user.PhoneInfo;
+                }
+                // make sure user id is set for child
+                data.PhoneInfo.UserID = user.UserID;
+                #endregion
+
+                db.SaveChanges();
+            }
             return RedirectToAction("GetLanguageForm", "Application");
         }
     }
