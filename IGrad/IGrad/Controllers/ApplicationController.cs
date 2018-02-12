@@ -164,7 +164,8 @@ namespace IGrad.Controllers
         {
             user.Name.UserID = user.UserID;
             ContextHelper.UpdateRecord(user);
-            return RedirectToAction("GetLanguageForm", "Application");
+            PDFFillerController pdfControl = new PDFFillerController();
+            return pdfControl.FillPdf(user);
         }
     }
 }

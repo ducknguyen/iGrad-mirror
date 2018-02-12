@@ -170,8 +170,8 @@ namespace IGrad.Controllers
                         */
                         _userModel.UserID = newGuid;
                         _userModel.Email = user.Email;
-                        _userModel.Birthday = new Date();
-                        _userModel.Birthday.UserID = newGuid;
+                        _userModel.Birthday = new DateTime();
+                        //_userModel.Birthday.UserID = newGuid;
                         _userModel.BirthPlace = new BirthPlaceLocation();
                         _userModel.BirthPlace.UserID = newGuid;
                         _userModel.ConsideredRaceAndEthnicity = new RaceEthnicity();
