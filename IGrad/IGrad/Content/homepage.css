@@ -14,8 +14,10 @@ header h4{
 }
 
 .navbar-default{
+    position:relative;
+    z-index:1;
     font-size:20px;
-    height:12em;
+    height:16em;
     background-color: #f3f2ed;
 }
 
@@ -23,17 +25,17 @@ header h4{
     margin-top:1.5em;
 }
 
-#logo{
+#logo {
     padding: 0;
     margin: 0;
 }
 
-#logo img{
-    position: relative;
-    height:8.5em;
-    width:7em;
-    z-index:2;
-}
+    #logo img {
+        position: relative;
+        z-index: 3;
+        height: 8.5em;
+        width: 7em;
+    }
 
 #left-nav #apply-igrad{
     padding: 1px;
@@ -66,33 +68,29 @@ header h4{
     background-color:#7578B0;
     transition: all .2s ease-in-out;
 }
-
 .landscape{
     position: relative;
-    margin-top:-16em;
-    height:41em;
-    z-index:1;
+    height:40em;
+    z-index:2;
+    margin-top:-12em;
 }
 .test{
     background-image: url('https://www.auto.edu/wp-content/uploads/2014/12/ati-student-housing.jpg');
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    margin-top:204px;
     height:100%;
 }
 
 .form-box {
     display: block;
-    margin: 8em auto;
+    margin: 3em auto;
     width:24em;
 }
 .form-bottom {
 	padding: 25px 25px 0px 25px;
-
 	background: #444;
 	background: rgba(0, 0, 0, 0.3);
-	-moz-border-radius: 0 0 4px 4px; -webkit-border-radius: 0 0 4px 4px; border-radius: 0 0 4px 4px;
 	text-align: left;
 
 }
@@ -194,8 +192,8 @@ button.btn-signup:active:focus, button.btn.active:focus { outline: 0; opacity: 0
 }
 
 .short-intro{
-    margin-top:275px;
-    padding-bottom: 1em;
+    margin-top:3em;
+    padding-bottom: 9em;
 }
 .short-intro h2{
     color:#075241;
