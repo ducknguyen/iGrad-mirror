@@ -16,9 +16,8 @@ namespace IGrad.Models.User
         public LanguageHistory LanguageHisory { get; set; }
         public List<Guardian> Guardians { get; set; }
         public LivesWithList LivesWith { get; set; }
-
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Birthday { get; set; }
         public BirthPlaceLocation BirthPlace { get; set; }
         public Address ResidentAddress { get; set; }

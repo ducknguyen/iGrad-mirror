@@ -3,7 +3,6 @@
     ViewBag.Title = "GetNewApplication";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @using (Html.BeginForm("GetNewApplication", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     
@@ -112,12 +111,7 @@
                 <button class="btn btn-lg btn-success" type="submit">
                     Continue
                 </button>
-            <button class="btn btn-lg btn-success" type="submit">
-               @Html.ActionLink("Print PDF", "FillPdf", "PDFFiller");
-            </button>
         </div>
-
-  
     </div>
         
 }
