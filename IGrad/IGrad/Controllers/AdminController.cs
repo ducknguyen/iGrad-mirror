@@ -44,5 +44,11 @@ namespace IGrad.Controllers
                 return View(model);
             }
         }
+
+        public ActionResult Download(Guid userID)
+        {
+            PDFFillerController pdfControl = new PDFFillerController();
+            return pdfControl.FillPdf(userID);
+        }
     }
 }
