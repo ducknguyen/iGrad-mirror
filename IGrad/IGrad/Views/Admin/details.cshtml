@@ -4,36 +4,49 @@
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 
-<div class="container-fluid">
-    @Html.LabelFor(model => model.Name.FName)
-    @Html.DisplayFor(model => model.Name.FName)
-    <br />
-    @Html.LabelFor(model => model.Name.LName)
-    @Html.DisplayFor(model => model.Name.LName)
-    <br />
-    @Html.LabelFor(model => model.Birthday)
-    @Html.DisplayFor(model => model.Birthday)
-    <br />
-    @Html.LabelFor(model => model.MailingAddress.Street)
-    @Html.DisplayFor(model => model.MailingAddress.Street)
-    <br />
-    @Html.LabelFor(model => model.MailingAddress.AptNum)
-    @Html.DisplayFor(model => model.MailingAddress.AptNum)
-    <br />
-    @Html.LabelFor(model => model.MailingAddress.City)
-    @Html.DisplayFor(model => model.MailingAddress.City)
-    <br />
-    @Html.LabelFor(model => model.MailingAddress.State)
-    @Html.DisplayFor(model => model.MailingAddress.State)
-    <br />
-    @Html.LabelFor(model => model.MailingAddress.Zip)
-    @Html.DisplayFor(model => model.MailingAddress.Zip)
-    <br />
-    @Html.LabelFor(model => model.MailingAddress.POBox)
-    @Html.DisplayFor(model => model.MailingAddress.POBox)
-    <br />
-    @Html.LabelFor(model => model.PhoneInfo.PhoneNumber)
-    @Html.DisplayFor(model => model.PhoneInfo.PhoneNumber)
+<div class="container">
+    <div class="alert alert-info" style="color: black">
+        <strong>Phone Number: </strong>@Html.DisplayFor(model => model.PhoneInfo.PhoneNumber)
+    </div>
+    <div style="display: inline-block;">
+        <div class="panel panel-success pull-left" style="width: 400px; margin: 20px">
+            <div class="panel-heading">Personal Info</div>
+            <div class="panel-body">
+                @Html.LabelFor(model => model.Name.FName)
+                @Html.DisplayFor(model => model.Name.FName)
+                <br />
+                @Html.LabelFor(model => model.Name.LName)
+                @Html.DisplayFor(model => model.Name.LName)
+                <br />
+                @Html.LabelFor(model => model.Birthday)
+                @Html.DisplayFor(model => model.Birthday)
+                <br />
+            </div>
+        </div>
+        <div class="panel panel-success pull-right" style="width: 400px; margin: 20px">
+            <div class="panel-heading">Address</div>
+            <div class="panel-body">
+                @Html.LabelFor(model => model.MailingAddress.Street)
+                @Html.DisplayFor(model => model.MailingAddress.Street)
+                <br />
+                @Html.LabelFor(model => model.MailingAddress.AptNum)
+                @Html.DisplayFor(model => model.MailingAddress.AptNum)
+                <br />
+                @Html.LabelFor(model => model.MailingAddress.City)
+                @Html.DisplayFor(model => model.MailingAddress.City)
+                <br />
+                @Html.LabelFor(model => model.MailingAddress.State)
+                @Html.DisplayFor(model => model.MailingAddress.State)
+                <br />
+                @Html.LabelFor(model => model.MailingAddress.Zip)
+                @Html.DisplayFor(model => model.MailingAddress.Zip)
+                <br />
+                @Html.LabelFor(model => model.MailingAddress.POBox)
+                @Html.DisplayFor(model => model.MailingAddress.POBox)
+                <br />
+            </div>
+        </div>
+    </div>
 
     
    

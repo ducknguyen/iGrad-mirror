@@ -30,8 +30,12 @@ namespace IGrad.Controllers
             }
         }
 
-        public ActionResult Details(Guid userID)
+        public ActionResult Details(Guid? userID)
         {
+            if(userID == null)
+            {
+                return RedirectToAction("Index", "Admin");
+            }
             using (UserContext db = new UserContext())
             {
                var data = db.Users.Where(u => u.UserID == userID)
