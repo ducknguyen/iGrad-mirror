@@ -81,3 +81,6 @@ _[Ss]cripts
 /IGrad/.vs/config/applicationhost.config
 /IGrad/IGrad.Tests/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 /IGrad/IGrad/obj/Debug/IGrad.csproj.FileListAbsolute.txt
+IGrad/.vs/config/applicationhost.config
+IGrad/IGrad.Tests/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+IGrad/IGrad/obj/Debug/IGrad.csproj.FileListAbsolute.txt

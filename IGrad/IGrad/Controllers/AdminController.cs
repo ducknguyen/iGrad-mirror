@@ -19,7 +19,6 @@ namespace IGrad.Controllers
         {
             using (UserContext db = new UserContext())
             {
-
                 var data = db.Users
                     .Include(u => u.Name)
                     .Include(u => u.BirthPlace)
@@ -28,6 +27,21 @@ namespace IGrad.Controllers
                     .ToList();
 
                 return View(data);
+            }
+        }
+
+        public ActionResult Details(Guid userID)
+        {
+            using (UserContext db = new UserContext())
+            {
+               var data = db.Users.Where(u => u.UserID == userID)
+                    .Include(u => u.Name)
+                    .Include(u => u.MailingAddress)
+                    .Include(u => u.PhoneInfo).SingleOrDefault();
+
+                UserModel model = (UserModel)data;
+
+                return View(model);
             }
         }
     }

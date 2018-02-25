@@ -1,0 +1,47 @@
+﻿@model IGrad.Models.User.UserModel
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="container-fluid">
+    @Html.LabelFor(model => model.Name.FName)
+    @Html.DisplayFor(model => model.Name.FName)
+    <br />
+    @Html.LabelFor(model => model.Name.LName)
+    @Html.DisplayFor(model => model.Name.LName)
+    <br />
+    @Html.LabelFor(model => model.Birthday)
+    @Html.DisplayFor(model => model.Birthday)
+    <br />
+    @Html.LabelFor(model => model.MailingAddress.Street)
+    @Html.DisplayFor(model => model.MailingAddress.Street)
+    <br />
+    @Html.LabelFor(model => model.MailingAddress.AptNum)
+    @Html.DisplayFor(model => model.MailingAddress.AptNum)
+    <br />
+    @Html.LabelFor(model => model.MailingAddress.City)
+    @Html.DisplayFor(model => model.MailingAddress.City)
+    <br />
+    @Html.LabelFor(model => model.MailingAddress.State)
+    @Html.DisplayFor(model => model.MailingAddress.State)
+    <br />
+    @Html.LabelFor(model => model.MailingAddress.Zip)
+    @Html.DisplayFor(model => model.MailingAddress.Zip)
+    <br />
+    @Html.LabelFor(model => model.MailingAddress.POBox)
+    @Html.DisplayFor(model => model.MailingAddress.POBox)
+    <br />
+    @Html.LabelFor(model => model.PhoneInfo.PhoneNumber)
+    @Html.DisplayFor(model => model.PhoneInfo.PhoneNumber)
+
+    
+   
+    
+   
+   
+    
+    
+    
+    
+</div>
