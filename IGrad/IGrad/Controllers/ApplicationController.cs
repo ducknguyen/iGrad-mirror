@@ -113,9 +113,9 @@ namespace IGrad.Controllers
             return View();
         }
 
-        public ActionResult AddHighSchoolInfoPartial(UserModel user)
+        public ActionResult AddHighSchoolInfoPartial()
         {
-            return PartialView("~/Views/Application/_AddHighSchoolInfo.cshtml", new HighSchoolInfo());
+            return PartialView("~/Views/Application/_AddHighSchool.cshtml", new HighSchoolInfo());
         }
 
         public ActionResult GetHighSchoolInfoPartial(List<HighSchoolInfo> highSchoolInfoList)
@@ -124,7 +124,7 @@ namespace IGrad.Controllers
         }
 
         [HttpPost]
-        public void SubmitHighSchoolInfoPartial(HighSchoolInfo highSchoolInfo)
+        public ActionResult SubmitHighSchoolInfoPartial(HighSchoolInfo highSchoolInfo)
         {
             Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
             using (UserContext db = new UserContext())
@@ -145,6 +145,8 @@ namespace IGrad.Controllers
                 data.SchoolInfo.HighSchoolInformation.Add(highSchoolInfo);
                 //db.Entry(data.SchoolInfo.HighSchoolInformation).CurrentValues.SetValues(highSchoolInfo);
                 db.SaveChanges();
+
+                return GetHighSchoolInfoPartial(data.SchoolInfo.HighSchoolInformation);
             }
         }
 
