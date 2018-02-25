@@ -299,7 +299,7 @@ namespace IGrad.Controllers
                 db.SaveChanges();
             }
             PDFFillerController pdfControl = new PDFFillerController();
-            return pdfControl.FillPdf(user);
+            return pdfControl.FillPdf(UserID);
             //return RedirectToAction("GetLanguageForm", "Application");
         }
     }

@@ -1,54 +1,70 @@
-﻿@model List<IGrad.Models.User.UserModel>
+﻿@model PagedList.IPagedList<IGrad.Models.User.UserModel>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "View";
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
-@using (Html.BeginForm("Index", "Admin", FormMethod.Get))
-{
-    <p>
-        Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-        <input type="submit" value="Search" />
-    </p>
-}
-<table class="table">
-    <tr>
-        <th>
-            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            First Name
-        </th>
-        <th>
-            @Html.ActionLink("Last Updated Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
-        </th>
-        <th>
-            Email
-        </th>
-        <th>
-            Details
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
+<div class="container">
+    @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name.LName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name.FName)
-            </td>
-            <td>
-                <!-- last modified date needs to be added -->
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                Details Link
-            </td>
-        </tr>
+        <p>
+            Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+            <input type="submit" value="Search" />
+        </p>
     }
+    <table class="table">
+        <tr>
+            <th>
+                @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                First Name
+            </th>
+            <th>
+                @Html.ActionLink("Last Updated Date", "Index", new { sortOrder = ViewBag.DateSortParm, currentFilter = ViewBag.CurrentFilter })
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Details
+            </th>
+            <th>
+                Enrollment Form
+            </th>
+        </tr>
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name.LName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name.FName)
+                </td>
+                <td>
+                    <!-- last modified date needs to be added -->
+                </td>
+                <td>
+                    <a href="mailto:@Html.DisplayFor(modelItem => item.Email)">@Html.DisplayFor(modelItem => item.Email)</a>
+                </td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { userid = item.UserID })
+                </td>
+                <td>
+                    <button type="button" class="btn btn-success">
+                        @Html.ActionLink("Download PDF", "Download", new { userid = item.UserID })
+                    </button>
+                </td>
+            </tr>
+        }
 
+    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+    new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
+
+</div>

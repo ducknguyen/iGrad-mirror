@@ -184,18 +184,6 @@ button.btn-signin {
     line-height: 50px;
     color: #fff;
     -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
-    text-shadow: none;
-    -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none;
-    -o-transition: all .3s; -moz-transition: all .3s; -webkit-transition: all .3s; -ms-transition: all .3s; transition: all .3s;
-}
-
-button.btn-signin:hover { opacity: 0.8; color: #fff; }
-
-button.btn-signin:active { outline: 0; opacity: 0.6; color: #fff; -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
-
-button.btn-signin:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
-
-button.btn-signin:active:focus, button.btn.active:focus { outline: 0; opacity: 0.6; background: #19b9e7; color: #fff; }
 
 .call-to-apply{
     width:22em;
@@ -208,3 +196,54 @@ button.btn-signin:active:focus, button.btn.active:focus { outline: 0; opacity: 0
     border-radius: 5px;
 }
 /*#endregion*/
+
+footer {
+    height: 8em;
+    width: 100%;
+    background-color: #075241;
+    padding: 5px 0 3px 0;
+    color: #fff;
+    bottom: 0;
+}
+
+footer a, footer a:hover {
+    color: #fff;
+}
+
+footer h4 {
+    color: #7CB342;
+}
+
+footer ul.list-social {
+    margin-bottom: 0;
+}
+
+footer ul.list-social li a {
+    text-align: center;
+    display: block;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    font-size: 22px;
+    color: white;
+}
+
+footer ul.list-social li a:hover {
+    opacity: 0.7;
+}
+
+footer ul.list-social li.social-facebook a {
+    background-color: #3B5998;
+}
+
+footer ul.list-social li.social-twitter a {
+    background-color: #55ACEE;
+}
+
+footer ul.list-social li.social-linkedin a {
+    background-color: #007bb5;
+}
+
+footer ul.list-social li.social-youtube a {
+    background-color: #bb0000;
+}
