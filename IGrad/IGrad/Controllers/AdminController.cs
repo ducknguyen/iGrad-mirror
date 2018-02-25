@@ -9,16 +9,34 @@ using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
+using PagedList;
 
 namespace IGrad.Controllers
 {
     public class AdminController : Controller
     {
         // GET: Admin
-        public ViewResult Index(string sortOrder, string searchString)
+        public ViewResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
+            ViewBag.CurrentSort = sortOrder;
+
+            if (searchString != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             using (UserContext db = new UserContext())
             {
+
+                int pageSize = 10;
+                int pageNumber = (page ?? 1);
+
                 var data = db.Users
                     .Include(u => u.Name)
                     .Include(u => u.BirthPlace)
@@ -39,10 +57,10 @@ namespace IGrad.Controllers
                     _tempList.AddRange(_tempFname);
                     _tempList.Union(_tempLname);
 
-                    return View(_tempList);
+                    return View(_tempList.ToPagedList(pageNumber, pageSize));
                 }
 
-                return View(data);
+                return View(data.ToPagedList(pageNumber, pageSize));
             }
         }
 
