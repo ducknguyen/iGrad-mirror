@@ -276,6 +276,7 @@
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\CodedotNet.pubxml" />
     <None Include="Properties\PublishProfiles\FileShare.pubxml" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Properties\PublishProfiles\godaddy.pubxml" />
@@ -341,9 +342,10 @@
     <Content Include="Views\Application\GetHouseholdForm.cshtml" />
     <Content Include="Views\Application\GetHealthForm.cshtml" />
     <Content Include="Views\Application\GetOtherInfoForm.cshtml" />
-    <Content Include="Views\Application\_GetHighSchoolInfo.cshtml" />
+    <Content Include="Views\Application\_AddHighSchoolInfo.cshtml" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
     <Content Include="Views\Shared\_LogoutViewPartial.cshtml" />
+    <Content Include="Views\Application\_GetHighSchoolInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

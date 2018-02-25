@@ -34,7 +34,7 @@ namespace IGrad.Controllers
                 user.UserID = Guid.NewGuid();
                 //user.Birthday = new Date();
                 //user.Birthday.UserID = user.UserID;
-               // user.BirthPlace.UserID = user.UserID;
+                // user.BirthPlace.UserID = user.UserID;
                 //user.ConsideredRaceAndEthnicity.UserID = user.UserID;
                 //user.HealthInfo.UserID = user.UserID;
                 //user.EmergencyContacts[0].UserID = user.UserID;
@@ -89,19 +89,23 @@ namespace IGrad.Controllers
 
         public ActionResult GetEducationForm()
         {
-            UserModel user = new UserModel();
-            user.SchoolInfo = new SchoolInfo();
-            user.SchoolInfo.HighSchoolInformation = new List<HighSchoolInfo>();
-            HighSchoolInfo hsi = new HighSchoolInfo();
-            hsi.HighSchoolCity = "Auburn";
-            hsi.HighSchoolGrade = 10;
-            hsi.HighSchoolName = "Fake High School";
-            hsi.isLastHighSchoolAttended = true;
-            hsi.HighSchoolYear = "2016";
-            user.SchoolInfo.HighSchoolInformation.Add(hsi);
-            return View(user);
+            UserModel _user;
+            try
+            {
+                Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+                UserContext db = new UserContext();
+                _user = db.Users.Where(u => u.UserID == UserID)
+                    .Include(u => u.SchoolInfo)
+                    .Include(u => u.SchoolInfo.HighSchoolInformation)
+                    .Include(u => u.SchoolInfo.PreviousSchoolViolation)
+                    .FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+            return View(_user);
         }
-
 
         [HttpPost]
         public ActionResult GetEducationForm(UserModel user)
@@ -109,9 +113,39 @@ namespace IGrad.Controllers
             return View();
         }
 
-        public ActionResult GetHighSchoolInfoPartial(UserModel user)
+        public ActionResult AddHighSchoolInfoPartial(UserModel user)
         {
-            return PartialView("~/Views/Application/_GetHighSchoolInfo.cshtml", new HighSchoolInfo());
+            return PartialView("~/Views/Application/_AddHighSchoolInfo.cshtml", new HighSchoolInfo());
+        }
+
+        public ActionResult GetHighSchoolInfoPartial(List<HighSchoolInfo> highSchoolInfoList)
+        {
+            return PartialView("~/Views/Application/_GetHighSchoolInfo.cshtml", highSchoolInfoList);
+        }
+
+        [HttpPost]
+        public void SubmitHighSchoolInfoPartial(HighSchoolInfo highSchoolInfo)
+        {
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                var data = db.Users
+                       .Include(u => u.SchoolInfo)
+                       .Include(u => u.SchoolInfo.HighSchoolInformation)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+
+                if (data.SchoolInfo == null)
+                {
+                    data.SchoolInfo = new SchoolInfo();
+                    data.SchoolInfo.HighSchoolInformation = new List<HighSchoolInfo>();
+                }
+                data.SchoolInfo.UserID = UserID;
+                highSchoolInfo.UserID = UserID;
+                data.SchoolInfo.HighSchoolInformation.Add(highSchoolInfo);
+                //db.Entry(data.SchoolInfo.HighSchoolInformation).CurrentValues.SetValues(highSchoolInfo);
+                db.SaveChanges();
+            }
         }
 
         [HttpPost]
@@ -135,7 +169,7 @@ namespace IGrad.Controllers
         {
             return View();
         }
-        
+
         [HttpPost]
         public ActionResult GetHealthForm(UserModel user)
         {
@@ -153,7 +187,7 @@ namespace IGrad.Controllers
             return View();
         }
 
-        
+
         [Authorize]
         public ActionResult GetNewApplication()
         {
