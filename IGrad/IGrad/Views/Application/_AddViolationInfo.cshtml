@@ -1,0 +1,62 @@
+﻿@model IGrad.Models.User.Violation
+
+
+@using (Ajax.BeginForm("SubmitViolationInfoPartial", "Application", new AjaxOptions()
+{
+    HttpMethod = "Post",
+    UpdateTargetId = "existing-violation-information",
+    InsertionMode = InsertionMode.Replace,
+
+}))
+{
+    <div class="container">
+        <hr />
+        <div class="row">
+            @Html.LabelFor(model => model.isSuspendedOrExpelled, htmlAttributes: new { @class = "control-label" })
+            @Html.CheckBoxFor(model => model.isSuspendedOrExpelled, htmlAttributes: new { @class = "chk-box pull-left" })
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.hadWeaponViolation, htmlAttributes: new { @class = "control-label" })
+            @Html.CheckBoxFor(model => model.hadWeaponViolation, htmlAttributes: new { @class = "chk-box pull-left" })
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.dateOfWeaponViolation, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.dateOfWeaponViolation, new { htmlAttributes = new { @class = "form-control datepicker" } })
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.hasUnpaidFine, htmlAttributes: new { @class = "control-label" })
+            @Html.CheckBoxFor(model => model.hasUnpaidFine, htmlAttributes: new { @class = "chk-box pull-left" })
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.ExplainUnpaidFine, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.ExplainUnpaidFine, htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.hasDiciplanaryStatus, htmlAttributes: new { @class = "control-label" })
+            @Html.CheckBoxFor(model => model.hasDiciplanaryStatus, htmlAttributes: new { @class = "chk-box pull-left" })
+        </div>
+        <div class="row">
+            @Html.LabelFor(model => model.hasOtherViolation, htmlAttributes: new { @class = "control-label" })
+            @Html.CheckBoxFor(model => model.hasOtherViolation, htmlAttributes: new { @class = "chk-box pull-left" })
+        </div>
+
+        <div class="row">
+            @Html.LabelFor(model => model.ExplainOtherViolation, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.ExplainOtherViolation, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <br />
+        <div class="container">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button id="submitButton" type="submit" class="btn btn-primary" onclick="hideTarget('violation-information')">Add Violation</button>
+                    <button id="cancelButton" type="button" class="btn" onclick="hideTarget('violation-information')">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

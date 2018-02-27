@@ -1,12 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IGrad.Models.User
 {
     public class LanguageHistory
     {
+       
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int fieldId { get; set; }
+        public Guid UserID { get; set; }
         public string PreferredLanguage { get; set; }
         public string UserFirstLanguageLearned { get; set; }
         public string StudentPrimaryLanguageAtHome { get; set; }

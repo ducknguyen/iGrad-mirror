@@ -1,0 +1,18 @@
+﻿@model IGrad.Models.User.Violation
+
+@if (Model != null)
+{
+    <table id="highschool-info-table" class="table table-responsive">
+        <tr>
+            <th>Suspended</th>
+            <th>Weapon</th>
+            <th>Date</th>
+        </tr>
+        <tr>
+                <td>@Model.isSuspendedOrExpelled</td>
+                <td>@Model.hadWeaponViolation</td>
+                <td>@Model.dateOfWeaponViolation.ToShortDateString()</td>
+         </tr>
+    </table>
+}
+

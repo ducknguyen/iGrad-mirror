@@ -85,6 +85,9 @@ C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\bin\de\PdfSharp.resources.dll
 C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\bin\de\PdfSharp.Charting.resources.dll
 C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\obj\Debug\IGrad.dll
 C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\obj\Debug\IGrad.pdb
+C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\bin\WebDriver.dll
+C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\bin\WebDriver.xml
+C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\obj\Debug\IGrad.csprojResolveAssemblyReference.cache
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\ApplicationInsights.config
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\roslyn\csc.exe
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -127,6 +130,8 @@ C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Microsoft.Owin.Security.T
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Newtonsoft.Json.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Owin.dll
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\PagedList.dll
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\PagedList.Mvc.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\PdfSharp.Charting.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\PdfSharp.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\System.Web.Helpers.dll
@@ -136,6 +141,7 @@ C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\System.Web.Razor.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\System.Web.WebPages.Deployment.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\System.Web.WebPages.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\System.Web.WebPages.Razor.dll
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\WebDriver.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\WebGrease.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Microsoft.AI.DependencyCollector.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Microsoft.AI.ServerTelemetryChannel.xml
@@ -143,6 +149,8 @@ C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Microsoft.AI.Web.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Microsoft.AI.WindowsServer.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Microsoft.ApplicationInsights.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\PagedList.xml
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\PagedList.Mvc.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\PdfSharp.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\PdfSharp.Charting.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\System.Web.Helpers.xml
@@ -152,6 +160,7 @@ C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\System.Web.Razor.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\System.Web.WebPages.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\System.Web.WebPages.Deployment.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\System.Web.WebPages.Razor.xml
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\WebDriver.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Antlr3.Runtime.pdb
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Newtonsoft.Json.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\EntityFramework.xml
@@ -173,8 +182,3 @@ C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\de\PdfSharp.Charting.reso
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.csprojResolveAssemblyReference.cache
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.pdb
-C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\WebDriver.dll
-C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\WebDriver.xml
-C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\bin\WebDriver.dll
-C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\bin\WebDriver.xml
-C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\obj\Debug\IGrad.csprojResolveAssemblyReference.cache

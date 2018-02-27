@@ -78,7 +78,26 @@ namespace IGrad.Controllers
         [Authorize]
         public ActionResult GetLanguageForm()
         {
-            return View();
+            UserModel _user;
+            try
+            {
+                Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+                UserContext db = new UserContext();
+                _user = db.Users.Where(u => u.UserID == UserID)
+                    .Include(u => u.LanguageHisory)
+                    .FirstOrDefault();
+
+                if(_user.LanguageHisory == null)
+                {
+                    _user.LanguageHisory = new LanguageHistory();
+                }
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+            return View(_user);
+
         }
 
         [HttpPost]
@@ -87,6 +106,30 @@ namespace IGrad.Controllers
             return View();
         }
 
+        public ActionResult SubmitLanguageInfo(UserModel user)
+        {
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                var data = db.Users
+                       .Include(u => u.LanguageHisory)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+
+                if (data.LanguageHisory == null)
+                {
+                    user.LanguageHisory.UserID = UserID;
+                    data.LanguageHisory = user.LanguageHisory;
+                }
+                else
+                {
+                    db.Entry(data.LanguageHisory).CurrentValues.SetValues(user.LanguageHisory);
+                }
+                db.SaveChanges();
+            }
+                return GetEducationForm();
+        }
+        [Authorize]
         public ActionResult GetEducationForm()
         {
             UserModel _user;
@@ -150,6 +193,48 @@ namespace IGrad.Controllers
             }
         }
 
+        public ActionResult GetAddViolation()
+        {
+            Violation defaultViolation = new Violation();
+            defaultViolation.dateOfWeaponViolation = DateTime.Now;
+            return PartialView("_AddViolationInfo", defaultViolation);
+        }
+
+        public ActionResult GetViolationInfo(Violation violation)
+        {
+            return PartialView("_GetViolationInfo", violation);
+        }
+
+        [HttpPost]
+        public ActionResult SubmitViolationInfoPartial(Violation violation)
+        {
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                var data = db.Users
+                       .Include(u => u.SchoolInfo)
+                       .Include(u => u.SchoolInfo.PreviousSchoolViolation)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+
+                if (data.SchoolInfo == null)
+                {
+                    data.SchoolInfo = new SchoolInfo();
+                }
+                if (data.SchoolInfo.PreviousSchoolViolation == null)
+                {
+                    data.SchoolInfo.PreviousSchoolViolation = violation;
+                }
+
+                data.SchoolInfo.UserID = UserID;
+                data.SchoolInfo.PreviousSchoolViolation.UserID = UserID;
+
+                db.Entry(data.SchoolInfo.PreviousSchoolViolation).CurrentValues.SetValues(violation);
+                db.SaveChanges();
+
+                return GetViolationInfo(violation);
+            }
+        }
         [HttpPost]
         public void SubmitHighSchoolInfo(HighSchoolInfo highSchoolInfo, UserModel user)
         {

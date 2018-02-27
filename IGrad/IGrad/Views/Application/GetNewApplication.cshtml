@@ -5,7 +5,6 @@
 }
 @using (Html.BeginForm("GetNewApplication", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    
     <div class="row form-group">
         <div class="col-md-4 form-group">
             @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "control-label" })
@@ -35,7 +34,6 @@
         <div class="col-md-4 form-group">
             @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "datepicker" } })
-            
             @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-4 form-group">

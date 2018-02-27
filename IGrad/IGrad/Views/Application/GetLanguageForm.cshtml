@@ -12,7 +12,7 @@
     All parents have the right to information about their student's education in a language they understand.
 
 
-
+@using(Html.BeginForm("SubmitLanguageInfo","Application",FormMethod.Post, new { enctype = "multipart/form-data" })){ 
     <div class="container col-md-6 ">
         <div class="row form-group">
             <strong>In what language(s) would your family prefer to communicate with school? *</strong>
@@ -39,35 +39,15 @@
             @Html.TextBoxFor(model => model.LanguageHisory.PrimaryLanguageSpokenAtHome, htmlAttributes: new { @class = "form-control" })
         </div>
 
-    </div>
-
-    <div class="container col-md-6">
-        <strong>Has the student received formal education outside the US?</strong>
-        <div class="row">
-            <div class="btn-group col-md-4">
-                <strong>Yes</strong>
-                @Html.RadioButtonFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, "True", htmlAttributes: new { @class = "radio radio-inline input-lg", @onClick = "showPriorEducationInfo()" })
-            </div>
-            <div class="btn-group col-md-4">
-                <strong>No</strong>
-                @Html.RadioButtonFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, "False", htmlAttributes: new { @class = "radio radio-inline input-lg", @onClick = "hidePriorEducationInfo()" })
-            </div>
-        </div>
-        <div class="col-md-12" id="prior-education" hidden>
-            1. What country was student born in?<br />
-            2. Formal education outside US? <br />
-            3. Number of months, language of instruction <br />
-            <div>
-                <strong>Applicant (student) starting grade in the United States.</strong>
-                @Html.TextBoxFor(model => model.LanguageHisory.StudentStartingGradeInUS, htmlAttributes: new { @class = "form-control" })
-            </div>
+        <div class="row col-md-4 form-group">
+            <button class="btn btn-lg  btn-success" type="submit">
+                Continue..                
+            </button>
         </div>
     </div>
+  }
 
-    <div class="row col-md-4 form-group">
-        <button class="btn btn-lg  btn-success">
-            @Html.ActionLink("Continue To Education", "GetEducationForm", "Application")
-        </button>
-    </div>
+ 
+    
 
 
