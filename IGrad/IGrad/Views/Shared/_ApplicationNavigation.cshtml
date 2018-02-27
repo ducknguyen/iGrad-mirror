@@ -1,4 +1,66 @@
-﻿
+﻿<header class="contact-head">
+    <div class="container">
+        <h4 class="text-right">(253) 373-4723</h4>
+    </div>
+</header>
+<div class="container">
+    <nav class="navbar navbar-toggleable-md">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle navbar-toggler-right" data-toggle="collapse" data-target="#myNavbar" aria-controls="myNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand-logo" href=""><img src="images/logo-bg.png"></a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="myNavbar">
+            <ul class="nav navbar-nav main-nav" style="padding-left:-10px">
+                <li>
+                    <a href="@Url.Action("GetNewApplication","Application")">
+                        <p>Personal</p>
+                        <i class="fas fa-user nav-icons" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("GetEducationForm","Application")">
+                        <p>Education</p>
+                        <i class="fas fa-graduation-cap nav-icons" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("GetLanguageForm","Application")">
+                        <p>Language</p>
+                        <i class="fas fa-language nav-icons" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("GetLanguageForm","Application")">>
+                        <p>Household</p>
+                        <i class="fas fa-home nav-icons" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("GetHealthForm","Application")">
+                        <p>Health</p>
+                        <i class="fa fa-heartbeat nav-icons" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="@Url.Action("GetOtherInfoForm","Application")">
+                        <p>Other</p>
+                        <i class="fas fa-file-alt nav-icons" aria-hidden="true"></i>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+        <hr>
+    </nav>
+</div>
+
+<!-- ORIGINAL CODE
 <ul class="nav nav-pills nav-pane">
     <li class="nav navbar-btn nav-app img-rounded">
         <a href="@Url.Action("GetNewApplication","Application")">
@@ -31,6 +93,7 @@
         </a>
     </li>
     <li class="nav navbar-btn nav-app img-rounded pull-right">
-            @Html.Partial("_LogoutViewPartial")
+        @Html.Partial("_LogoutViewPartial")
     </li>
 </ul>
+-->

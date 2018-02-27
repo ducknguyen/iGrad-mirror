@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title </title>
-    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/form-layout.css")
     @Scripts.Render("~/bundles/modernizr")
 
 </head>
@@ -48,6 +48,29 @@
     @Scripts.Render("~/bundles/bootstrap")
     <!-- FONTAWESOME JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+
+    <!-- PROGRESS BAR JS -->
+    <script type="text/javascript" src="~/Scripts/progress-bar.js"></script>
+
+    <script type="text/javascript">
+        $(':input').change(function () {
+        var count = 0;
+        var totalRequiredFields = ($('.required-marker').length);
+        console.log(totalRequiredFields);
+
+        $(':input[required]:visible').each(function () {
+        if ((this.validity.valid) == true) {
+        count++;
+        console.log(this);
+        }
+        });
+        var progress = $("#application-progress");
+        var calculateProgress = (count / totalRequiredFields) * 100;
+        console.log(calculateProgress);
+        progress.attr("value", calculateProgress);
+        });
+    </script>
+
     @RenderSection("scripts", required: false)
 
 </body>
