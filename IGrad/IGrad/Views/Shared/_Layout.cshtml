@@ -10,7 +10,7 @@
 </head>
 <body>
 
-    <div class="container body-content">
+    <div class="container-fluid body-content">
         @Html.Partial("_ApplicationNavigation")
         @RenderBody()
     </div>
@@ -46,6 +46,7 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+
     <!-- FONTAWESOME JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     @RenderSection("scripts", required: false)

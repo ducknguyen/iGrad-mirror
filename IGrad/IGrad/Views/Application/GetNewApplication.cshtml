@@ -1,34 +1,38 @@
 ﻿@model IGrad.Models.User.UserModel
 @{
-    ViewBag.Title = "GetNewApplication";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "iGrad | Personal Information";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<div class="container">
+    <progress max="100" value="0" id="application-progress"></progress>
+</div>
 @using (Html.BeginForm("GetNewApplication", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <div class="row form-group">
-        <div class="col-md-4 form-group">
+    <!-- STUDENT NAME STARTS -->
+    <div class="form-row">
+        <div class="form-group col-md-4 ">
             @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.Name.FName, new { htmlAttributes = new { @class = "form-control formtextbox" } })
             @Html.ValidationMessageFor(model => model.Name.FName, "", new { @class = "text-danger" })
         </div>
-        <div class="col-md-4 form-group">
-
+        <div class="form-group col-md-1">
             @Html.LabelFor(model => model.Name.MName, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.Name.MName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Name.MName, "", new { @class = "text-danger" })
-
         </div>
-        <div class="col-md-4 form-group">
+        <div class="form-group col-md-3">
             @Html.LabelFor(model => model.Name.LName, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.Name.LName, new { htmlAttributes = new { @class = "form-control" } })
             @Html.ValidationMessageFor(model => model.Name.LName, "", new { @class = "text-danger" })
         </div>
-        <div class="col-md-4 form-group">
-            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        <div class="form-group col-md-4">
+            <label for="studentNamePrevious">Previous Name(if applicable)</label>
+            <input type="text" class="form-control " id="studentNamePrevious" name="studentNamePrevious" value="" placeholder="First M.I. Last">
         </div>
     </div>
+    <!-- STUDENT NAME ENDS -->
 
     <div class="row form-group">
         <div class="col-md-4 form-group">
@@ -56,7 +60,7 @@
         </div>
         @Html.LabelFor(model => model.ConsideredRaceAndEthnicity, htmlAttributes: new { @class = "control-label" })
         <div class="col-md-8 well-lg well">
-          <div class="form-group">
+            <div class="form-group">
                 <div class="row col-md-6">
                     @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCentralAmerican, htmlAttributes: new { @class = "row control-label col-md-6" })
                     @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCentralAmerican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
@@ -103,20 +107,20 @@
 
     <div class="row form-group">
         <div class="row col-md-4 form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
         </div>
         <div class="row col-md-4 form-group">
-                @Html.LabelFor(model => model.PhoneInfo.PhoneNumber, htmlAttributes: new { @class = "control-label " })
-                @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.LabelFor(model => model.PhoneInfo.PhoneNumber, htmlAttributes: new { @class = "control-label " })
+            @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
         </div>
         <div class="row col-md-4 form-group">
-                <button class="btn btn-lg btn-success" type="submit">
-                    Continue
-                </button>
+            <button class="btn btn-lg btn-success" type="submit">
+                Continue
+            </button>
         </div>
     </div>
-        
+
 }
 
 
