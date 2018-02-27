@@ -2,6 +2,9 @@
     height:100%;
     font-family: Copernicus,Arial,sans-serif;
 }
+a:hover{
+    text-decoration:none;
+}
 header h4{
     color: #F5F5F5;
 }

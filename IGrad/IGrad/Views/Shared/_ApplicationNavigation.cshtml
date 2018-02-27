@@ -12,7 +12,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand-logo" href=""><img src="images/logo-bg.png"></a>
+            <a class="navbar-brand-logo" href="@Url.Action("Index", "Home")"><img src=@Url.Content("~/media/images/logo-bg.png")></a>
         </div>
 
         <div class="collapse navbar-collapse" id="myNavbar">
@@ -36,7 +36,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="@Url.Action("GetLanguageForm","Application")">>
+                    <a href="@Url.Action("GetLanguageForm","Application")">
                         <p>Household</p>
                         <i class="fas fa-home nav-icons" aria-hidden="true"></i>
                     </a>
