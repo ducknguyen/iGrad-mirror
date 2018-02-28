@@ -6,7 +6,7 @@
 @Styles.Render("~/Content/css")
 
 <header class="logo-head">
-    <a id="login-logo" href="index.html"><img src=@Url.Content("~/media/images/igradlogo.png")></a>
+    <a id="login-logo" href="@Url.Action("Index", "Home")"><img src=@Url.Content("~/media/images/igradlogo.png")></a>
     <h4>Sign in to iGrad</h4>
 </header>
 
@@ -36,9 +36,6 @@
                     </div>
                     <button type="submit" class="btn btn-signin">SIGN IN</button>
                     <br />
-
-
-
             }
         </section>
 
