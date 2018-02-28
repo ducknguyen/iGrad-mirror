@@ -51,7 +51,7 @@ nav {
 
 #log-off > a {
     width: 100px;
-    background-color:red;
+    background-color:orangered;
 }
 
 .navbar-brand-logo > img {
@@ -110,7 +110,7 @@ progress {
     REQUIRED MARKER
 ----------------------------------------------------- */
 .required-marker {
-    color: orangered;
+    color: orange;
 }
 
 /* ---------------------------------------------------
@@ -122,6 +122,8 @@ footer {
     padding: 5px 0 10px 0;
     color: #fff;
     margin-top: 5em;
+    position:fixed;
+    bottom:0;
 }
 
     footer a, footer a:hover {
