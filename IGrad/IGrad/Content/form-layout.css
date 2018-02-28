@@ -49,9 +49,9 @@ nav {
     -webkit-border-radius: 5px;
 }
 
-#logout a {
-    width: 90px;
-    text-align: center;
+#log-off > a {
+    width: 100px;
+    background-color:red;
 }
 
 .navbar-brand-logo > img {

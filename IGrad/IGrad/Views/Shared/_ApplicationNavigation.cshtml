@@ -53,7 +53,7 @@
                         <i class="fas fa-file-alt nav-icons" aria-hidden="true"></i>
                     </a>
                 </li>
-                <li>
+                <li id="log-off">
                     @Html.Partial("_LogoutViewPartial")
                 </li>
             </ul>
@@ -62,41 +62,3 @@
         <hr>
     </nav>
 </div>
-
-<!-- ORIGINAL CODE
-<ul class="nav nav-pills nav-pane">
-    <li class="nav navbar-btn nav-app img-rounded">
-        <a href="@Url.Action("GetNewApplication","Application")">
-            <span id="Personal" class="glyphicon glyphicon-user"></span>  Personal
-        </a>
-    </li>
-    <li class="nav navbar-btn nav-app img-rounded">
-        <a href="@Url.Action("GetLanguageForm","Application")">
-            <span id="Language" class="glyphicon glyphicon-font"></span>  Language
-        </a>
-    </li>
-    <li class="nav navbar-btn nav-app img-rounded">
-        <a href="@Url.Action("GetEducationForm","Application")">
-            <span class="glyphicon glyphicon-book"></span>  Education
-        </a>
-    </li>
-    <li class="nav navbar-btn nav-app img-rounded">
-        <a href="@Url.Action("GetHouseholdForm","Application")">
-            <span class="glyphicon glyphicon-home"></span>  Household
-        </a>
-    </li>
-    <li class="nav navbar-btn nav-app img-rounded">
-        <a href="@Url.Action("GetHealthForm","Application")">
-            <span class="glyphicon glyphicon-heart"></span>  Health
-        </a>
-    </li>
-    <li class="nav navbar-btn nav-app img-rounded">
-        <a href="@Url.Action("GetOtherInfoForm","Application")">
-            <span class="glyphicon glyphicon-pencil"></span>  Other Info
-        </a>
-    </li>
-    <li class="nav navbar-btn nav-app img-rounded pull-right">
-        @Html.Partial("_LogoutViewPartial")
-    </li>
-</ul>
--->
