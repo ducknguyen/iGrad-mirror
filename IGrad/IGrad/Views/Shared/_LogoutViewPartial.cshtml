@@ -1,12 +1,19 @@
 ﻿@using Microsoft.AspNet.Identity
+
+@Styles.Render("~/Content/form-layout.css")
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "" }))
     {
         @Html.AntiForgeryToken()
 
-        <ul class="nav">
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+        <ul class="nav navbar-nav main-nav">
+            <li>
+                <a href="javascript:document.getElementById('logoutForm').submit()">
+                    <p>Log off</p>
+                    <i class="fas fa-2x fa-sign-out-alt nav-icons" aria-hidden="true"></i>
+                </a>
+            </li>
         </ul>
     }
 }
