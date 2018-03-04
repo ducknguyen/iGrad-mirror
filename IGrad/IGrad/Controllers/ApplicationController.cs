@@ -147,6 +147,14 @@ namespace IGrad.Controllers
             {
                 return View();
             }
+            if(_user.SchoolInfo == null)
+            {
+                _user.SchoolInfo = new SchoolInfo();
+            }
+            if(_user.SchoolInfo.HighSchoolInformation == null)
+            {
+                _user.SchoolInfo.HighSchoolInformation = new List<HighSchoolInfo>();
+            }
             return View(_user);
         }
 
@@ -229,7 +237,7 @@ namespace IGrad.Controllers
                 data.SchoolInfo.UserID = UserID;
                 data.SchoolInfo.PreviousSchoolViolation.UserID = UserID;
 
-                db.Entry(data.SchoolInfo.PreviousSchoolViolation).CurrentValues.SetValues(violation);
+                //db.Entry(data.SchoolInfo.PreviousSchoolViolation).CurrentValues.SetValues(violation);
                 db.SaveChanges();
 
                 return GetViolationInfo(violation);
@@ -243,8 +251,102 @@ namespace IGrad.Controllers
         }
         public ActionResult GetHouseholdForm()
         {
-            return View();
+            UserModel _user;
+            try
+            {
+                Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+                UserContext db = new UserContext();
+                _user = db.Users.Where(u => u.UserID == UserID)
+                    .Include(u => u.Guardians)
+                    .Include(u => u.Siblings)
+                    .Include(u => u.LivesWith)
+                    .Include(u => u.ResidentAddress)
+                    .Include(u => u.MailingAddress)
+                    .Include(u => u.EmergencyContact)
+                    .FirstOrDefault();
+            }
+            catch (Exception ex)
+            {
+                return View();
+            }
+
+            if (_user.Guardians == null)
+            {
+                _user.Guardians = new List<Guardian>();
+            }
+            if (_user.Siblings == null)
+            {
+                _user.Siblings = new List<Sibling>();
+            }
+            if (_user.ResidentAddress == null)
+            {
+                _user.ResidentAddress = new Address();
+            }
+            if (_user.MailingAddress == null)
+            {
+                _user.MailingAddress = new Address();
+            }
+            if(_user.LivesWith == null)
+            {
+                _user.LivesWith = new LivesWith();
+            }
+            return View(_user);
         }
+
+        public ActionResult GetAddGuardian()
+        {
+            Guardian defaultGuardian = new Guardian();
+            return PartialView("_AddGuardian", defaultGuardian);
+        }
+        public void SubmitGuardianInfo(Guardian guardian)
+        {
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                var data = db.Users
+                       .Include(u => u.Guardians)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+
+                if (data.Guardians == null)
+                {
+                    guardian.UserID = UserID;
+                    data.Guardians = new List<Guardian>();
+                    data.Guardians.Add(guardian);
+                }
+
+                //db.Entry(data.SchoolInfo.PreviousSchoolViolation).CurrentValues.SetValues(violation);
+                db.SaveChanges();
+            }
+        }
+
+        public ActionResult GetAddSibling()
+        {
+            Sibling sibling = new Sibling();
+            return PartialView("_AddSibling", sibling);
+        }
+
+        public void SubmitAddSiblingInfo(Sibling sibling)
+        {
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                var data = db.Users
+                       .Include(u => u.Siblings)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+
+                if (data.Siblings == null)
+                {
+                    sibling.UserID = UserID;
+                    data.Siblings = new List<Sibling>();
+                    data.Siblings.Add(sibling);
+                }
+                //db.Entry(data.SchoolInfo.PreviousSchoolViolation).CurrentValues.SetValues(violation);
+                db.SaveChanges();
+            }
+        }
+
 
         [HttpPost]
         public ActionResult GetHouseHoldForm(UserModel user)
@@ -278,6 +380,7 @@ namespace IGrad.Controllers
         [Authorize]
         public ActionResult GetNewApplication()
         {
+            
             UserModel _user;
             try
             {

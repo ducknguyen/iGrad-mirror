@@ -53,12 +53,12 @@
 
         <div class="row">
             @Html.LabelFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "control-label" })
-            @Html.TextBoxFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "form-control" })
+            @Html.TextAreaFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "form-control" })
         </div>
 
         <div class="row">
             @Html.LabelFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "control-label" })
-            @Html.TextBoxFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "form-control" })
+            @Html.TextAreaFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "form-control" })
         </div>
     </div>
 
@@ -80,16 +80,38 @@
             @Html.LabelFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
             @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "form-control" })
         </div>
+    </div>
+</div>
+<div class="container">
+    <div class="well well-lg col-md-6">
+        <p>Did the student participate in any of the following programs? <br /> (Check all that apply)</p>
+
+        @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.SpecialEducation, htmlAttributes: new { @class = "" })
+        @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.SpecialEducation, htmlAttributes: new { @class = "" })
+        <br />
+        @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.plan504, htmlAttributes: new { @class = "" })
+        @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.plan504, htmlAttributes: new { @class = "" })
+        <br />
+        @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.Title, htmlAttributes: new { @class = "" })
+        @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.Title, htmlAttributes: new { @class = "" })
+        <br />
+        @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.LAP, htmlAttributes: new { @class = "" })
+        @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.LAP, htmlAttributes: new { @class = "" })
+        <br />
+        @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.HighlyCapable, htmlAttributes: new { @class = "" })
+        @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.HighlyCapable, htmlAttributes: new { @class = "" })
+        <br />
+        @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.EngishAsSecondLanguage, htmlAttributes: new { @class = "" })
+        @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.EngishAsSecondLanguage, htmlAttributes: new { @class = "" })
 
     </div>
-
 </div>
 
 <div class="container">
     <div class="well well-lg col-md-6">
         <h2>High School Information</h2>
         <div class="row col-md-12" id="highschool-info">
-            @{Html.RenderPartial("_GetHighSchoolInfo", Model.SchoolInfo.HighSchoolInformation.ToList());}
+            @{Html.RenderAction("GetHighSchoolInfoPartial", "Application", Model.SchoolInfo.HighSchoolInformation.ToList());}
         </div>
         <div class="row" id="school-information">
             <!--Form to add High School Information will be rendered here-->
@@ -97,7 +119,7 @@
         <button class="btn btn-primary btn-lg" id="add-new-highschool-button" onclick="loadHighSchoolInfoForm()">Add High School</button>
     </div>
     <div id="violation-container" class="well well-lg col-md-6">
-        <h3>Previous Violations</h3>
+        <h3>Previous Violation</h3>
         @{if (Model.SchoolInfo.PreviousSchoolViolation == null)
             {
                 <div class="row">
@@ -106,12 +128,12 @@
                     <button class="btn btn-lg" value="" onclick="hideTarget('violation-container')">No</button>
                 </div>
             }
-                else
-                {
+            else
+            {
                 <div class="container" id="existing-violation-information">
                     @{Html.RenderPartial("_GetViolationInfo", Model.SchoolInfo.PreviousSchoolViolation);}
                 </div>
-                }
+                        }
         }
         <div class="container" id="add-violation-information">
 

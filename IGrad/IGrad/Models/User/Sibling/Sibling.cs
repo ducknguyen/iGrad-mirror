@@ -14,5 +14,6 @@ namespace IGrad.Models.User
         public string FName { get; set; }
         public string School { get; set; }
         public string Grade { get; set; }
+        public int Age { get; set; }
     }
 }

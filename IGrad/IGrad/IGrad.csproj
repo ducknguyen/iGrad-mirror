@@ -240,7 +240,7 @@
     <Compile Include="Models\User\Health\Health.cs" />
     <Compile Include="Models\User\Language\Language.cs" />
     <Compile Include="Models\User\LivesWith\LivesWithList.cs" />
-    <Compile Include="Models\User\Name\Name.cs" />
+    <Compile Include="Models\User\Language\Name\Name.cs" />
     <Compile Include="Models\User\ParentPlan\ParentPlan.cs" />
     <Compile Include="Models\User\Phone\Phone.cs" />
     <Compile Include="Models\User\PreSchools\PreSchools.cs" />
@@ -277,6 +277,7 @@
     <Content Include="media\images\logo-bg.png" />
     <Content Include="media\images\newappplaceholder.png" />
     <Content Include="media\images\penpaper.png" />
+    <Content Include="Scripts\application.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -305,6 +306,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\language-form.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\progress-bar.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
@@ -363,6 +365,9 @@
     <Content Include="Views\Application\_AddHighSchoolInfo.cshtml" />
     <Content Include="Views\Application\_AddViolationInfo.cshtml" />
     <Content Include="Views\Application\_GetViolationInfo.cshtml" />
+    <Content Include="Views\Application\_AddGuardian.cshtml" />
+    <Content Include="Views\Application\_AddSibling.cshtml" />
+    <Content Include="Views\Application\_AddHealthInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

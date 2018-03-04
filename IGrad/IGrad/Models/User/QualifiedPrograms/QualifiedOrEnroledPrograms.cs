@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IGrad.Models.User
 {
-    public class QualifiedOrEnroledPrograms
+    public class QualifiedOrEnrolledInProgram
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

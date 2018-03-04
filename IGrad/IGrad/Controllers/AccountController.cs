@@ -181,7 +181,7 @@ namespace IGrad.Controllers
                         _userModel.HealthInfo.UserID = newGuid;
                         _userModel.SchoolInfo = new SchoolInfo();
                         _userModel.SchoolInfo.UserID = newGuid;
-                        _userModel.LivesWith = new LivesWithList();
+                        _userModel.LivesWith = new LivesWith();
                         _userModel.LivesWith.UserID = newGuid;
                         _userModel.MailingAddress = new Address();
                         _userModel.MailingAddress.UserID = newGuid;
@@ -197,6 +197,7 @@ namespace IGrad.Controllers
                         _userModel.StudentChildCare.UserID = newGuid;
                         _userModel.StudentsParentingPlan = new ParentPlan();
                         _userModel.StudentsParentingPlan.UserID = newGuid;
+                        _userModel.LastUpdateDate = DateTime.Now;
 
                         // now add the form info
                         db.Users.Add(_userModel);

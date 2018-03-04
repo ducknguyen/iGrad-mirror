@@ -12,5 +12,7 @@ namespace IGrad.Context
         public DbSet<UserModel> Users { get; set; }
 
         public System.Data.Entity.DbSet<IGrad.Models.User.HighSchoolInfo> HighSchoolInfoes { get; set; }
+
+        public System.Data.Entity.DbSet<IGrad.Models.User.Health> Healths { get; set; }
     }
 }

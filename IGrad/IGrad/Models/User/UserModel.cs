@@ -16,7 +16,7 @@ namespace IGrad.Models.User
         public string Email { get; set; }
         public LanguageHistory LanguageHisory { get; set; }
         public List<Guardian> Guardians { get; set; }
-        public LivesWithList LivesWith { get; set; }
+        public LivesWith LivesWith { get; set; }
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Birthday { get; set; }
@@ -28,13 +28,16 @@ namespace IGrad.Models.User
         public List<Sibling> Siblings { get; set; }
         public ChildCare StudentChildCare { get; set; }
         public List<PreSchools> PreSchool { get; set; }
-        public List<QualifiedOrEnroledPrograms> QualifiedOrEnrolledProgam { get; set; }
+        public QualifiedOrEnrolledInProgram QualifiedOrEnrolledInProgam { get; set; }
         public Retained Retainment { get; set; }
-        public List<EmergencyContact> EmergencyContacts { get; set; }
+        public EmergencyContact EmergencyContact { get; set; }
         public RaceEthnicity ConsideredRaceAndEthnicity { get; set; }
         public string CountryBornIn { get; set; }
         public SchoolInfo SchoolInfo { get; set; }
         public Health HealthInfo { get; set; }
-
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime LastUpdateDate { get; set; }
+        public Boolean isComplete { get; set; }
     }
 }

@@ -1,11 +1,106 @@
-﻿
+﻿@model IGrad.Models.User.UserModel
 @{
     ViewBag.Title = "GetHouseholdForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<script type="text/javascript" src="~/Scripts/application.js"></script>
+<script type="text/javascript">
+    function loadGuardianInfoForm() {
+        hideTarget('add-guardian-button');
+        showTarget('add-guardian');
+        $("#add-guardian").load('@Url.Action("GetAddGuardian", "Application")');
+    }
 
+    function loadSiblingInfoForm() {
+        hideTarget('add-sibling-button');
+        showTarget('add-sibling');
+        $("#add-sibling").load('@Url.Action("GetAddSibling", "Application")');
+    }
+
+</script>
 <h2>GetHouseholdForm</h2>
+<p>* required fields.</p>
+<hr />
+<div class="container" id="living-situation">
+    <p>Student lives with : </p>
+    <p>Both Parents</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithBothParents, htmlAttributes: new { @class = "" })
+    <p>Mother Only</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithMotherOnly, htmlAttributes: new { @class = "chk-box " })
+    <p>Father Only</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithFatherOnly, htmlAttributes: new { @class = "chk-box" })
+    <p>Grandparents</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithGrandparents, htmlAttributes: new { @class = "chk-box" })
+    <p>Own Residence</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithSelf,htmlAttributes: new { @class = "chk-box" })
+    <p>Homeless / Distressed</p>@Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "chk-box" })
 
+    <p>Total Individuals In Residence</p>@Html.TextBoxFor(model => model.LivesWith.TotalPeopleInResidence, htmlAttributes: new { @class = "" })
+    
+    @Html.LabelFor(model => model.LivesWith.AnnualHouseHoldIncome, htmlAttributes : new { @class = ""})
+    @Html.TextBoxFor(model => model.LivesWith.AnnualHouseHoldIncome, htmlAttributes: new { @class = "" })
+
+    <hr />
+    <h7>Current Residence</h7>
+    @Html.LabelFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
+    @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
+
+    @Html.LabelFor(model => model.ResidentAddress.City, htmlAttributes: new { @class = "" })
+    @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
+
+    @Html.LabelFor(model => model.ResidentAddress.State, htmlAttributes: new { @class = "" })
+    @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
+    
+
+    @Html.LabelFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "" })
+    @Html.TextBoxFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "" })
+    @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
+
+    <p>Same as mailing? *</p>
+    <input type="radio" value="Yes" onclick="hideTarget('mailing-address')" /> Yes
+    <input type="radio" value="No" onclick="showTarget('mailing-address')"/> No
+    
+    <div class="container hidden" id="mailing-address">
+        <p>Please Specify Mailing Address * </p>
+        @Html.LabelFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
+
+        @Html.LabelFor(model => model.MailingAddress.City, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
+
+        @Html.LabelFor(model => model.MailingAddress.State, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
+
+        @Html.LabelFor(model => model.MailingAddress.Zip, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.MailingAddress.Zip, htmlAttributes: new { @class = "" })
+        @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
+
+        @Html.LabelFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = ""})
+        @Html.TextBoxFor(model => model.MailingAddress.POBox, htmlAttributes : new { @class = "" })
+    </div>
+    <hr />
+    <div class="container" id="emergency-contact">
+        <p>Please add an emergency contact</p>
+        @Html.LabelFor(model => model.EmergencyContact.Name.FName, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.EmergencyContact.Name.FName, htmlAttributes: new { @class = "" })
+        @Html.LabelFor(model => model.EmergencyContact.Name.LName, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.EmergencyContact.Name.LName, htmlAttributes: new { @class = "" })
+        @Html.LabelFor(model => model.EmergencyContact.PhoneNumber.PhoneNumber, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.EmergencyContact.PhoneNumber.PhoneNumber, htmlAttributes: new { @class = "" })
+        @Html.LabelFor(model => model.EmergencyContact.PhoneNumber.PhoneType, htmlAttributes: new { @class = "" })
+        @Html.DropDownListFor(model => model.EmergencyContact.PhoneNumber.PhoneType, Model.EmergencyContact.PhoneNumber.PhoneTypeSelectList, htmlAttributes: new { @class = "" })
+        @Html.LabelFor(model => model.EmergencyContact.EmailAddress, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.EmergencyContact.EmailAddress, htmlAttributes: new { @class = "" })
+        @Html.LabelFor(model => model.EmergencyContact.Relationship, htmlAttributes: new { @class = "" })
+        @Html.DropDownListFor(model => model.EmergencyContact.Relationship, Model.EmergencyContact.RelationshipTypeSelectList, htmlAttributes: new { @class = "" })
+    </div>
+
+    <p>Household Information:</p>
+    <div class="container" id="add-guardian">
+        <p>add guardian functionality here</p>
+        <button class="btn btn-lg btn-primary" id="add-guardian-button">+ Add Parent/Guardian(s)</button>
+    </div>
+
+    <div class="container" id="add-sibling">
+        <p> add sibling functionality here</p>
+        <button class="btn btn-lg btn-primary" id="add-sibling-button">+ Add Sibling(s)</button>
+    </div>
+</div>
 <div class="row col-md-4 form-group">
     <button class="btn btn-lg btn-success">
         @Html.ActionLink("Continue To Health", "GetHealthForm", "Application")

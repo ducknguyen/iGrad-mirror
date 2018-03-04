@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace IGrad.Models.User
 {
@@ -13,6 +14,24 @@ namespace IGrad.Models.User
         public Guid UserID { get; set; }
         public Name Name { get; set; }
         public string Relationship { get; set; }
-        public List<Phone> PhoneNumbers { get; set; } 
+        public IEnumerable<SelectListItem> RelationshipTypeSelectList
+        {
+            get
+            {
+                List<SelectListItem> items = new List<SelectListItem>();
+                items.Add(new SelectListItem { Text = "Mother", Value = "Mother", Selected = true });
+                items.Add(new SelectListItem { Text = "Father", Value = "Father" });
+                items.Add(new SelectListItem { Text = "Grandparent", Value = "Grandparent" });
+                items.Add(new SelectListItem { Text = "Step Mother", Value = "Step Mother" });
+                items.Add(new SelectListItem { Text = "Step Father", Value = "Step Father" });
+                items.Add(new SelectListItem { Text = "Guardian", Value = "Guardian" });
+                return items;
+            }
+        }
+
+        public string EmailAddress { get; set; }
+        public Phone PhoneNumber { get; set; }
+         
+      
     }
 }

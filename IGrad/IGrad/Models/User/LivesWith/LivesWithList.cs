@@ -1,10 +1,11 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace IGrad.Models.User
 {
-    public class LivesWithList
+    public class LivesWith
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -19,6 +20,11 @@ namespace IGrad.Models.User
         public bool LivesWithMotherAndStepDad { get; set; }
         public bool LivesWithFosterParents { get; set; }
         public bool LivesWithAgency { get; set; }
+        [DisplayName("Homeless / Distressed")]
+        public bool HomelessDistressed { get; set; }
+        public int TotalPeopleInResidence { get; set; }
+        [DisplayName("Annual Household Income")]
+        public int AnnualHouseHoldIncome { get; set; }
         public string AgencyName { get; set; }
         public string Other { get; set; }
     }

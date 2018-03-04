@@ -1,0 +1,64 @@
+﻿@model IGrad.Models.User.Guardian
+
+@Styles.Render("~/Content/site.css")
+@using (Ajax.BeginForm("SubmitGuardianInfo", "Application", new AjaxOptions()
+{
+    HttpMethod = "Post",
+    UpdateTargetId = "",
+    InsertionMode = InsertionMode.Replace,
+
+}))
+{
+    @Html.AntiForgeryToken()
+    <div class="container form-horizontal" id="add-guardian-form">
+        <h4>Guardian Info</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "control-label " })
+            @Html.EditorFor(model => model.Name.FName, new { htmlAttributes = new { @class = "form-control" } })
+       
+            @Html.LabelFor(model => model.Name.MName, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Name.MName, new { htmlAttributes = new { @class = "form-control" } })
+       
+            @Html.LabelFor(model => model.Name.LName, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Name.LName, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="row">
+            @Html.LabelFor(model => model.Phone.PhoneNumber, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Phone.PhoneNumber, new { htmlAttributes = new { @class = "" } })
+
+            @Html.LabelFor(model => model.Phone.PhoneType, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.Phone.PhoneType, Model.Phone.PhoneTypeSelectList, new { htmlAttributes = new { @class = "" } })
+
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="row">
+            @Html.LabelFor(model => model.Address.Street, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Address.Street, new { htmlAttributes = new { @class = "" } })
+
+            @Html.LabelFor(model => model.Address.City, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Address.City, new { htmlAttributes = new { @class = "" } })
+        
+            @Html.LabelFor(model => model.Address.State, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Address.State, new { htmlAttributes = new { @class = "" } })
+
+            @Html.LabelFor(model => model.Address.State, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Address.State, new { htmlAttributes = new { @class = "" } })
+
+            @Html.LabelFor(model => model.Address.POBox, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Address.POBox, new { htmlAttributes = new { @class = "" } })
+
+        </div>
+        <br />
+        <div class="container">
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <button id="submitButton" type="submit" class="btn btn-primary" onclick="hideTarget('add-guardian-form');showTarget('add-guardian-button')">Add Guardian</button>
+                    <button id="cancelButton" type="button" class="btn" onclick="hideTarget('add-guardian-form');showTarget('add-guardian-button')">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
