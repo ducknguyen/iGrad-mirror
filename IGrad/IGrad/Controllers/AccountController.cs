@@ -150,13 +150,13 @@ namespace IGrad.Controllers
         // POST: /Account/Register
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public void RegisterDefaultAdmin(String secretCode)
+        public async Task RegisterDefaultAdmin(String secretCode)
         {
 
             if (secretCode.Equals("7617ed14946fe0c5005b301a30b15820e8a012db"))
             {
                 var user = new ApplicationUser { UserName = "Admin@Admin.com", Email = "Admin@Admin.com" };
-                var result = UserManager.Create(user, "igrad2018");
+                var result = UserManager.Create(user, "iGrad2018!");
                 if (result.Succeeded)
                 {
                     // Create the Users Model
@@ -222,7 +222,7 @@ namespace IGrad.Controllers
                             }
                         }
                     }
-                    SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                 }
             }
         }
@@ -241,7 +241,7 @@ namespace IGrad.Controllers
             if (_user == null)
             {
 
-                RegisterDefaultAdmin("7617ed14946fe0c5005b301a30b15820e8a012db");
+                await RegisterDefaultAdmin("7617ed14946fe0c5005b301a30b15820e8a012db");
             }
             dbAdmin.Dispose();
 
