@@ -15,6 +15,5 @@ namespace IGrad.CustomHelpers
         {
             return new MvcHtmlString("<input type=\"submit\" class=\"btn " + cssFormatting + "\" value=\"" + buttonText + "\"/>");
         }
-
     }
 }

@@ -109,8 +109,9 @@ progress {
 /* ---------------------------------------------------
     REQUIRED MARKER
 ----------------------------------------------------- */
-.required-marker {
-    color: orange;
+.required-marker::after {
+    content: " *";
+    color:orangered;
 }
 
 /* ---------------------------------------------------
@@ -122,8 +123,6 @@ footer {
     padding: 5px 0 10px 0;
     color: #fff;
     margin-top: 5em;
-    position:fixed;
-    bottom:0;
 }
 
     footer a, footer a:hover {
