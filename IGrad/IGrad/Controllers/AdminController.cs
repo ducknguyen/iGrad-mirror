@@ -9,6 +9,7 @@ using System.Data.Entity.Migrations;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web.Mvc;
+using System.IO;
 using PagedList;
 
 namespace IGrad.Controllers
@@ -16,9 +17,9 @@ namespace IGrad.Controllers
     public class AdminController : Controller
     {
         // GET: Admin
-        public async System.Threading.Tasks.Task<ViewResult> Index(string sortOrder, string currentFilter, string searchString, int? page)
+        [Authorize]
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-
             Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
             using (UserContext db = new UserContext())
             {
@@ -78,6 +79,7 @@ namespace IGrad.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Details(Guid? userID)
         {
             if (userID == null)
@@ -97,10 +99,35 @@ namespace IGrad.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult Download(Guid userID)
         {
             PDFFillerController pdfControl = new PDFFillerController();
             return pdfControl.FillPdf(userID);
+        }
+
+        public ActionResult Drop()
+        {
+            string script = System.IO.File.ReadAllText(Server.MapPath(@"~/Content/drop.sql"));
+            using (UserContext context = new UserContext())
+            {
+                
+                for(int i = 0; i < 20; i++)
+                {
+                    try
+                    {
+                        context.Database.ExecuteSqlCommand(script);
+                    }
+                    catch(Exception e)
+                    {
+                        // do nothing
+                    }
+                }
+
+                context.SaveChanges();
+            }
+
+            return View("Index", "Home");
         }
     }
 }

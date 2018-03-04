@@ -28,6 +28,9 @@
                 Email
             </th>
             <th>
+                Complete
+            </th>
+            <th>
                 Details
             </th>
             <th>
@@ -45,10 +48,13 @@
                     @Html.DisplayFor(modelItem => item.Name.FName)
                 </td>
                 <td>
-                    <!-- last modified date needs to be added -->
+                    @Html.DisplayFor(modelItem => item.LastUpdateDate)
                 </td>
                 <td>
                     <a href="mailto:@Html.DisplayFor(modelItem => item.Email)">@Html.DisplayFor(modelItem => item.Email)</a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.isComplete)
                 </td>
                 <td>
                     @Html.ActionLink("Details", "Details", new { userid = item.UserID })
