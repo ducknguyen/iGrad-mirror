@@ -17,14 +17,6 @@
         $("#add-sibling").load('@Url.Action("GetAddSibling", "Application")');
     }
 
-    function hideTarget(targetId) {
-        $('#' + targetId).addClass('hidden');
-    }
-
-    function showTarget(targetId) {
-        $('#' + targetId).removeClass('hidden');
-    }
-
 </script>
 <h2>GetHouseholdForm</h2>
 <p>* required fields.</p>
@@ -102,7 +94,7 @@
 
     <div class="container well-lg well" id="add-guardian-container">
         <button class="btn btn-lg btn-primary" id="add-guardian-button" onclick="loadGuardianInfoForm()">+ Add Parent/Guardian(s)</button>
-        <div class=" hidden" id="add-guardian" >
+        <div class="hidden" id="add-guardian" >
         </div>
     </div>
 

@@ -243,10 +243,10 @@ namespace IGrad.Controllers
                 return GetViolationInfo(violation);
             }
         }
+
         [HttpPost]
         public void SubmitHighSchoolInfo(HighSchoolInfo highSchoolInfo, UserModel user)
         {
-            //Add the submitted info to user
             user.SchoolInfo.HighSchoolInformation.Add(highSchoolInfo);
         }
         public ActionResult GetHouseholdForm()
@@ -319,12 +319,12 @@ namespace IGrad.Controllers
 
                 if (data.Guardians == null)
                 {
-                    guardian.UserID = UserID;
                     data.Guardians = new List<Guardian>();
-                    data.Guardians.Add(guardian);
                 }
 
-                //db.Entry(data.SchoolInfo.PreviousSchoolViolation).CurrentValues.SetValues(violation);
+                guardian.UserID = UserID;
+                data.Guardians.Add(guardian);
+
                 db.SaveChanges();
             }
         }
@@ -356,7 +356,6 @@ namespace IGrad.Controllers
             }
         }
 
-
         [HttpPost]
         public ActionResult GetHouseHoldForm(UserModel user)
         {
@@ -366,6 +365,31 @@ namespace IGrad.Controllers
         public ActionResult GetHealthForm()
         {
             return View();
+        }
+
+        public ActionResult GetAddHealthInfo()
+        {
+            Health defaultHealth = new Health();
+            return PartialView("_AddHealthInfo",defaultHealth);
+        }
+
+        public void SubmitHealthInfo(Health health)
+        {
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                //get user
+                var data = db.Users
+                       .Include(u => u.HealthInfo)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+                
+                //set health info
+                data.HealthInfo = health;
+                data.HealthInfo.UserID = UserID;
+                //save
+                db.SaveChanges();
+            }
         }
 
         [HttpPost]
@@ -384,7 +408,6 @@ namespace IGrad.Controllers
         {
             return View();
         }
-
 
         [Authorize]
         public ActionResult GetNewApplication()
