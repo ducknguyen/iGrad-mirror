@@ -240,7 +240,6 @@ namespace IGrad.Controllers
 
             if (_user == null)
             {
-
                 await RegisterDefaultAdmin("7617ed14946fe0c5005b301a30b15820e8a012db");
             }
             dbAdmin.Dispose();

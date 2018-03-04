@@ -1,9 +1,9 @@
 ﻿@model IGrad.Models.User.UserModel
 @{
-                /**/
+    /**/
 
-                ViewBag.Title = "iGrad | Personal Information";
-                Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "iGrad | Personal Information";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="container">
     <progress max="100" value="0" id="application-progress"></progress>
@@ -14,22 +14,24 @@
     <div class="form-row">
         <div class="form-group col-md-3">
             @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.Name.FName, new { htmlAttributes = new { @class = "form-control formtextbox", required = "required" } })
+            @Html.EditorFor(model => model.Name.FName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name", required = "required" } })
             @Html.ValidationMessageFor(model => model.Name.FName, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-2">
             @Html.LabelFor(model => model.Name.MName, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Name.MName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.EditorFor(model => model.Name.MName, new { htmlAttributes = new { @class = "form-control", @placeholder = "M.I.", required = "required" } })
             @Html.ValidationMessageFor(model => model.Name.MName, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-3">
             @Html.LabelFor(model => model.Name.LName, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.Name.LName, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.EditorFor(model => model.Name.LName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last", required = "required" } })
             @Html.ValidationMessageFor(model => model.Name.LName, "", new { @class = "text-danger" })
         </div>
+        <!-- need to add this to model/controller? -->
         <div class="form-group col-md-4">
             <label for="studentNamePrevious">Previous Name(if applicable)</label>
             <input type="text" class="form-control " id="studentNamePrevious" name="studentNamePrevious" value="" placeholder="First M.I. Last">
+        
         </div>
     </div>
     <!-- STUDENT NAME ENDS -->
@@ -37,7 +39,7 @@
     <div class="form-row">
         <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "datepicker", required = "required" } })
+            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control datepicker", @placeholder="First", required = "required" } })
             @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-4">
