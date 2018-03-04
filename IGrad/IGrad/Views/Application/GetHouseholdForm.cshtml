@@ -17,6 +17,14 @@
         $("#add-sibling").load('@Url.Action("GetAddSibling", "Application")');
     }
 
+    function hideTarget(targetId) {
+        $('#' + targetId).addClass('hidden');
+    }
+
+    function showTarget(targetId) {
+        $('#' + targetId).removeClass('hidden');
+    }
+
 </script>
 <h2>GetHouseholdForm</h2>
 <p>* required fields.</p>
@@ -91,14 +99,17 @@
     </div>
 
     <p>Household Information:</p>
-    <div class="container" id="add-guardian">
-        <p>add guardian functionality here</p>
-        <button class="btn btn-lg btn-primary" id="add-guardian-button">+ Add Parent/Guardian(s)</button>
+
+    <div class="container well-lg well" id="add-guardian-container">
+        <button class="btn btn-lg btn-primary" id="add-guardian-button" onclick="loadGuardianInfoForm()">+ Add Parent/Guardian(s)</button>
+        <div class=" hidden" id="add-guardian" >
+        </div>
     </div>
 
-    <div class="container" id="add-sibling">
-        <p> add sibling functionality here</p>
-        <button class="btn btn-lg btn-primary" id="add-sibling-button">+ Add Sibling(s)</button>
+    <div class="container well-lg well" id="add-sibling-container">
+        <button class="btn btn-lg btn-primary" id="add-sibling-button" onclick="loadSiblingInfoForm()">+ Add Sibling(s)</button>
+        <div class="hidden" id="add-sibling">
+        </div>
     </div>
 </div>
 <div class="row col-md-4 form-group">

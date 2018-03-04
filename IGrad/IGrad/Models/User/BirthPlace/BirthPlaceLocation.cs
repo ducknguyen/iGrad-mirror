@@ -14,5 +14,7 @@ namespace IGrad.Models.User
         public string State { get; set; }
         public string Country { get; set; }
 
+
+
     }
 }

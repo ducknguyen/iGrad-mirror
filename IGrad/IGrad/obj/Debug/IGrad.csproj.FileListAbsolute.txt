@@ -179,6 +179,5 @@ C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Microsoft.Owin.Security.T
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\de\PdfSharp.resources.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\de\PdfSharp.Charting.resources.dll
-C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.csprojResolveAssemblyReference.cache
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.pdb

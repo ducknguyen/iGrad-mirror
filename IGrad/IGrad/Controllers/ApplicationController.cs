@@ -290,12 +290,21 @@ namespace IGrad.Controllers
             {
                 _user.LivesWith = new LivesWith();
             }
+            if(_user.EmergencyContact == null)
+            {
+                _user.EmergencyContact = new EmergencyContact();
+                _user.EmergencyContact.UserID = _user.UserID;
+                _user.EmergencyContact.Name = new Name();
+                _user.EmergencyContact.PhoneNumber = new Phone();
+            }
             return View(_user);
         }
 
         public ActionResult GetAddGuardian()
         {
             Guardian defaultGuardian = new Guardian();
+            defaultGuardian.Phone = new Phone();
+            defaultGuardian.Name = new Name();
             return PartialView("_AddGuardian", defaultGuardian);
         }
         public void SubmitGuardianInfo(Guardian guardian)

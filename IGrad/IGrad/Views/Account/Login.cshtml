@@ -2,8 +2,10 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "iGrad | Application Login";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
-@Styles.Render("~/Content/css")
+
+@Styles.Render("~/Content/Login.css")
 
 <header class="logo-head">
     <a id="login-logo" href="@Url.Action("Index", "Home")"><img src=@Url.Content("~/media/images/igradlogo.png")></a>
