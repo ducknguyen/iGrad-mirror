@@ -203,7 +203,7 @@ namespace IGrad.Controllers
                         _userModel.LastUpdateDate = DateTime.Now;
                         _userModel.role = new Roles();
 
-                        _userModel.role.isUser = true;
+                        _userModel.role.isAdmin = true;
 
                         // now add the form info
                         db.Users.Add(_userModel);
@@ -295,7 +295,7 @@ namespace IGrad.Controllers
                         _userModel.LastUpdateDate = DateTime.Now;
                         _userModel.role = new Roles();
 
-                        _userModel.role.isAdmin = true;
+                        _userModel.role.isUser = true;
 
                         // now add the form info
                         db.Users.Add(_userModel);
