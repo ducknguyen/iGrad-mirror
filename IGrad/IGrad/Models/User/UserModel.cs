@@ -39,5 +39,7 @@ namespace IGrad.Models.User
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime LastUpdateDate { get; set; }
         public Boolean isComplete { get; set; }
+
+        public Roles role { get; set; }
     }
 }

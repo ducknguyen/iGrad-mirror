@@ -420,6 +420,10 @@ namespace IGrad.Controllers
                 // Add gender
                 data.Gender = user.Gender;
 
+                #region Update Last Updated Date
+                data.LastUpdateDate = DateTime.Now;
+                #endregion
+
                 #region updateName
                 if (data.Name != null)
                 {

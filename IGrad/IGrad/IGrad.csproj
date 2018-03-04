@@ -247,6 +247,7 @@
     <Compile Include="Models\User\QualifiedPrograms\QualifiedOrEnroledPrograms.cs" />
     <Compile Include="Models\User\RaceEthnicity\RaceEthnicity.cs" />
     <Compile Include="Models\User\Retained\Retained.cs" />
+    <Compile Include="Models\User\Roles.cs" />
     <Compile Include="Models\User\SchoolInfo\HighSchoolInfo\HighSchoolInfo.cs" />
     <Compile Include="Models\User\SchoolInfo\PriorEducation\PriorEducation.cs" />
     <Compile Include="Models\User\SchoolInfo\SchoolInfo.cs" />
