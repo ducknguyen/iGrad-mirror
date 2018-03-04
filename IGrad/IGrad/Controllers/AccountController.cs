@@ -156,8 +156,8 @@ namespace IGrad.Controllers
             if (secretCode.Equals("7617ed14946fe0c5005b301a30b15820e8a012db"))
             {
                 var user = new ApplicationUser { UserName = "Admin@Admin.com", Email = "Admin@Admin.com" };
-                var result = UserManager.CreateAsync(user, "igrad2018");
-                if (result.IsCompleted)
+                var result = UserManager.Create(user, "igrad2018");
+                if (result.Succeeded)
                 {
                     // Create the Users Model
                     UserModel _userModel = new UserModel();
