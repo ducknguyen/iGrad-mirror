@@ -254,3 +254,28 @@ footer ul.list-social li.social-youtube a {
 .form-text{
     color: #F5F5F5;
 }
+
+
+/* Pop up css */
+.container-popup {
+    position: relative;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0,0,0,.8);
+    z-index: 1000;
+}
+
+.popup {
+    width: 50%;
+    height: 50%;
+    /* background: #075241; */
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
