@@ -1,0 +1,15 @@
+﻿@using IGrad.Models.User;
+@model List<EmergencyContact>
+
+<div class="container">
+        @foreach(EmergencyContact contact in Model)
+        {
+            <div class="row">
+                <p>@contact.Name.FName</p>
+                <p>@contact.Name.LName</p>
+                <p>@contact.Relationship</p>
+            </div>
+        }
+</div>
+
+

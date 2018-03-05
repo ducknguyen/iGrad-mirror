@@ -1,0 +1,20 @@
+﻿@using IGrad.Models.User;
+@model List<Guardian>
+
+<div>
+    <h4>Guardian</h4>
+    <hr />
+
+    <div class="dl-horizontal">
+        @{foreach (Guardian guardian in Model)
+            {
+                <div class="col-md-3">
+                    <p>@guardian.Name.FName</p>
+                    <p>@guardian.Name.LName</p>
+                    <p>@guardian.Phone.PhoneNumber</p>
+                </div>
+            }
+        }
+    </div>
+</div>
+

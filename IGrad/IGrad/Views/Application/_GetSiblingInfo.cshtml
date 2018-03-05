@@ -1,0 +1,18 @@
+﻿@using IGrad.Models.User;
+@model List<Sibling>
+
+<div class="container">
+    @foreach (Sibling sibling in Model)
+    {
+        <div class="row">
+            <p>@sibling.FName</p>
+            <p>@sibling.LName</p>
+            <p>@sibling.Grade</p>
+            <p>@sibling.School</p>
+        </div>
+    }
+</div>
+
+
+
+

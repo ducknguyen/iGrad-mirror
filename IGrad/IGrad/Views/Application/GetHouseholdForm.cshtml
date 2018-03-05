@@ -5,6 +5,12 @@
 }
 <script type="text/javascript" src="~/Scripts/application.js"></script>
 <script type="text/javascript">
+    function loadEmergencyContactInfoForm() {
+        hideTarget('add-emergency-contact-button');
+        showTarget('add-emergency-contact');
+        $("#add-emergency-contact").load('@Url.Action("GetAddEmergencyContact", "Application")');
+    }
+
     function loadGuardianInfoForm() {
         hideTarget('add-guardian-button');
         showTarget('add-guardian');
@@ -27,12 +33,12 @@
     <p>Mother Only</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithMotherOnly, htmlAttributes: new { @class = "chk-box " })
     <p>Father Only</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithFatherOnly, htmlAttributes: new { @class = "chk-box" })
     <p>Grandparents</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithGrandparents, htmlAttributes: new { @class = "chk-box" })
-    <p>Own Residence</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithSelf,htmlAttributes: new { @class = "chk-box" })
+    <p>Own Residence</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithSelf, htmlAttributes: new { @class = "chk-box" })
     <p>Homeless / Distressed</p>@Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "chk-box" })
 
     <p>Total Individuals In Residence</p>@Html.TextBoxFor(model => model.LivesWith.TotalPeopleInResidence, htmlAttributes: new { @class = "" })
-    
-    @Html.LabelFor(model => model.LivesWith.AnnualHouseHoldIncome, htmlAttributes : new { @class = ""})
+
+    @Html.LabelFor(model => model.LivesWith.AnnualHouseHoldIncome, htmlAttributes: new { @class = "" })
     @Html.TextBoxFor(model => model.LivesWith.AnnualHouseHoldIncome, htmlAttributes: new { @class = "" })
 
     <hr />
@@ -45,16 +51,18 @@
 
     @Html.LabelFor(model => model.ResidentAddress.State, htmlAttributes: new { @class = "" })
     @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
-    
+
 
     @Html.LabelFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "" })
     @Html.TextBoxFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "" })
     @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
 
-    <p>Same as mailing? *</p>
+    <p>Address is mailing address? *</p>
+    @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, true, htmlAttributes: new { @class = "chk-box" })
     <input type="radio" value="Yes" onclick="hideTarget('mailing-address')" /> Yes
-    <input type="radio" value="No" onclick="showTarget('mailing-address')"/> No
-    
+    @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, false, htmlAttributes: new { @class = "chk-box" })
+    <input type="radio" value="No" onclick="showTarget('mailing-address')" /> No
+
     <div class="container hidden" id="mailing-address">
         <p>Please Specify Mailing Address * </p>
         @Html.LabelFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
@@ -70,35 +78,38 @@
         @Html.TextBoxFor(model => model.MailingAddress.Zip, htmlAttributes: new { @class = "" })
         @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = ""})
-        @Html.TextBoxFor(model => model.MailingAddress.POBox, htmlAttributes : new { @class = "" })
+        @Html.LabelFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = "" })
     </div>
     <hr />
-    <div class="container" id="emergency-contact">
-        <p>Please add an emergency contact</p>
-        @Html.LabelFor(model => model.EmergencyContact.Name.FName, htmlAttributes: new { @class = "" })
-        @Html.TextBoxFor(model => model.EmergencyContact.Name.FName, htmlAttributes: new { @class = "" })
-        @Html.LabelFor(model => model.EmergencyContact.Name.LName, htmlAttributes: new { @class = "" })
-        @Html.TextBoxFor(model => model.EmergencyContact.Name.LName, htmlAttributes: new { @class = "" })
-        @Html.LabelFor(model => model.EmergencyContact.PhoneNumber.PhoneNumber, htmlAttributes: new { @class = "" })
-        @Html.TextBoxFor(model => model.EmergencyContact.PhoneNumber.PhoneNumber, htmlAttributes: new { @class = "" })
-        @Html.LabelFor(model => model.EmergencyContact.PhoneNumber.PhoneType, htmlAttributes: new { @class = "" })
-        @Html.DropDownListFor(model => model.EmergencyContact.PhoneNumber.PhoneType, Model.EmergencyContact.PhoneNumber.PhoneTypeSelectList, htmlAttributes: new { @class = "" })
-        @Html.LabelFor(model => model.EmergencyContact.EmailAddress, htmlAttributes: new { @class = "" })
-        @Html.TextBoxFor(model => model.EmergencyContact.EmailAddress, htmlAttributes: new { @class = "" })
-        @Html.LabelFor(model => model.EmergencyContact.Relationship, htmlAttributes: new { @class = "" })
-        @Html.DropDownListFor(model => model.EmergencyContact.Relationship, Model.EmergencyContact.RelationshipTypeSelectList, htmlAttributes: new { @class = "" })
+    <div class="container" id="add-emergency-contact-container">
+        <div class="container" id="emergency-contacts">
+            <!-- emergency partial view here-->
+            @{Html.RenderAction("GetEmergencyContactsPartial", "Application", Model.EmergencyContacts);}
+        </div>
+        <div class="container" id="add-emergency-contact">
+
+        </div>
+        <button class="btn btn-lg btn-primary" id="add-emergency-contact-button" onclick="loadEmergencyContactInfoForm()">+ Add Emergency Contact</button>
     </div>
 
     <p>Household Information:</p>
 
     <div class="container well-lg well" id="add-guardian-container">
+        <div class="container" id="guardians">
+            <!-- guardians partial view here-->
+            @{Html.RenderAction("GetGuardiansPartial", "Application", Model.EmergencyContacts);}
+        </div>
         <button class="btn btn-lg btn-primary" id="add-guardian-button" onclick="loadGuardianInfoForm()">+ Add Parent/Guardian(s)</button>
-        <div class="hidden" id="add-guardian" >
+        <div class="hidden" id="add-guardian">
         </div>
     </div>
 
     <div class="container well-lg well" id="add-sibling-container">
+        <div class="siblings">
+            <!-- sibling partial view here-->
+            @{Html.RenderAction("GetSiblingsPartial", "Application", Model.EmergencyContacts);}
+        </div>
         <button class="btn btn-lg btn-primary" id="add-sibling-button" onclick="loadSiblingInfoForm()">+ Add Sibling(s)</button>
         <div class="hidden" id="add-sibling">
         </div>

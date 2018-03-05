@@ -1,0 +1,36 @@
+﻿@using IGrad.Models.User;
+@model EmergencyContact
+
+@using (Ajax.BeginForm("SubmitEmergencyContact", "Application", new AjaxOptions()
+{
+    HttpMethod = "Post",
+    UpdateTargetId = "",
+    InsertionMode = InsertionMode.Replace,
+
+}))
+{
+<div class="container">
+    <p>Please add an emergency contact</p>
+    @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "" })
+    @Html.TextBoxFor(model => model.Name.FName, htmlAttributes: new { @class = "" })
+    @Html.LabelFor(model => model.Name.LName, htmlAttributes: new { @class = "" })
+    @Html.TextBoxFor(model => model.Name.LName, htmlAttributes: new { @class = "" })
+    @Html.LabelFor(model => model.PhoneNumber.PhoneNumber, htmlAttributes: new { @class = "" })
+    @Html.TextBoxFor(model => model.PhoneNumber.PhoneNumber, htmlAttributes: new { @class = "" })
+    @Html.LabelFor(model => model.PhoneNumber.PhoneType, htmlAttributes: new { @class = "" })
+    @Html.DropDownListFor(model => model.PhoneNumber.PhoneType, Model.PhoneNumber.PhoneTypeSelectList, htmlAttributes: new { @class = "" })
+    @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "" })
+    @Html.TextBoxFor(model => model.EmailAddress, htmlAttributes: new { @class = "" })
+    @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "" })
+    @Html.DropDownListFor(model => model.Relationship, Model.RelationshipTypeSelectList, htmlAttributes: new { @class = "" })
+</div>
+<br />
+<div class="container">
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button id="submitButton" type="submit" class="btn btn-primary" onclick="hideTarget('add-emergency-contact');showTarget('add-emergency-contact-button')">Submit Emergency Contact</button>
+            <button id="cancelButton" type="button" class="btn" onclick="showTarget('add-emergency-contact-button'); hideTarget('add-emergency-contact')">Cancel</button>
+        </div>
+    </div>
+</div>
+}
