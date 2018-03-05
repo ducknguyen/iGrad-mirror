@@ -263,6 +263,7 @@
     <Content Include="Content\drop.sql" />
     <Content Include="Content\educationform.css" />
     <Content Include="Content\form-layout.css" />
+    <Content Include="Content\healthform.css" />
     <Content Include="Content\homepage.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\PagedList.css" />
