@@ -6,13 +6,22 @@
     Layout = "~/Views/Shared/_HomeLayout.cshtml";
 }
 <div class="container">
-    @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
-    {
-        <p>
-            Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
-            <input type="submit" value="Search" />
-        </p>
-    }
+    <div>
+        <div class="pull-left">
+            @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
+            {
+                <p>
+                    Find by name: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+                    <input type="submit" value="Search" />
+                </p>
+            }
+        </div>
+        <div class="pull-right" style="padding-top: 5px">
+            <a href="@Url.Action("LateApps", "Admin")">
+                <button type="button" class="btn btn-warning">Late Apps: @ViewBag.LateAppCount</button>
+            </a>
+        </div>
+    </div>
     <table class="table">
         <tr>
             <th>
