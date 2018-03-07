@@ -372,6 +372,11 @@
     <Content Include="Views\Application\_AddGuardian.cshtml" />
     <Content Include="Views\Application\_AddSibling.cshtml" />
     <Content Include="Views\Application\_AddHealthInfo.cshtml" />
+    <Content Include="Views\Application\_GetGuardianInfo.cshtml" />
+    <Content Include="Views\Application\_AddEmergencyContact.cshtml" />
+    <Content Include="Views\Application\_GetEmergencyContacts.cshtml" />
+    <Content Include="Views\Application\_GetSiblingInfo.cshtml" />
+    <Content Include="Views\Application\_GetHealthInfo.cshtml" />
     <Content Include="Views\Admin\lateapps.cshtml" />
   </ItemGroup>
   <ItemGroup>

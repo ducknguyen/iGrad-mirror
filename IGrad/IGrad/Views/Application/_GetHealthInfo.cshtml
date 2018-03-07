@@ -1,0 +1,13 @@
+﻿@using IGrad.Models.User;
+@model Health 
+
+<div class="container">
+    <div class="row">
+        @{ 
+            foreach(var prop in Model.GetType().GetProperties())
+            {
+                Console.WriteLine(prop.Name + " " + prop.GetValue(prop,null));
+            }
+        }
+    </div>
+</div>

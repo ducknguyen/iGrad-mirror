@@ -23,6 +23,7 @@ namespace IGrad.Models.User
         public BirthPlaceLocation BirthPlace { get; set; }
         public Address ResidentAddress { get; set; }
         public Address MailingAddress { get; set; }
+        public bool ResidentAddressIsMailingAddress { get; set; }
         public Phone PhoneInfo { get; set; }
         public ParentPlan StudentsParentingPlan { get; set; }
         public List<Sibling> Siblings { get; set; }
@@ -30,7 +31,7 @@ namespace IGrad.Models.User
         public List<PreSchools> PreSchool { get; set; }
         public QualifiedOrEnrolledInProgram QualifiedOrEnrolledInProgam { get; set; }
         public Retained Retainment { get; set; }
-        public EmergencyContact EmergencyContact { get; set; }
+        public List<EmergencyContact> EmergencyContacts{ get; set; }
         public RaceEthnicity ConsideredRaceAndEthnicity { get; set; }
         public string CountryBornIn { get; set; }
         public SchoolInfo SchoolInfo { get; set; }

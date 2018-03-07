@@ -15,7 +15,7 @@ namespace IGrad.Models.User
         public string FName { get; set; }
         [DisplayName("Last Name")]
         public string LName { get; set; }
-        [DisplayName("Middle Name")]
+        [DisplayName("M.I.")]
         public string MName { get; set; }
         [DisplayName("Nick Name")]
         public string NickName { get; set; }
