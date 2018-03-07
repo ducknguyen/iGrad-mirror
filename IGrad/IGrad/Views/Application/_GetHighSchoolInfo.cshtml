@@ -2,23 +2,25 @@
 
 @if (Model != null)
 {
-    <table id="highschool-info-table" class="table table-responsive">
-        <tr>
-            <th>Year</th>
-            <th>Name</th>
-            <th>City</th>
-            <th>Grade</th>
-            <th>Last High School Attended?</th>
-        </tr>
-        @foreach (var hsi in Model)
-        {
+    <div class="container">
+        <table id="highschool-info-table" class="table table-responsive">
             <tr>
-                <td>@hsi.HighSchoolYear</td>
-                <td>@hsi.HighSchoolName</td>
-                <td>@hsi.HighSchoolCity</td>
-                <td>@hsi.HighSchoolGrade</td>
-                <td>@(hsi.isLastHighSchoolAttended? "Yes" : "No")</td>
-              </tr>
-        }
-    </table>
+                <th>Year</th>
+                <th>Name</th>
+                <th>City</th>
+                <th>Grade</th>
+                <th>Last High School Attended?</th>
+            </tr>
+            @foreach (var hsi in Model)
+            {
+                <tr>
+                    <td>@hsi.HighSchoolYear</td>
+                    <td>@hsi.HighSchoolName</td>
+                    <td>@hsi.HighSchoolCity</td>
+                    <td>@hsi.HighSchoolGrade</td>
+                    <td>@(hsi.isLastHighSchoolAttended ? "Yes" : "No")</td>
+                </tr>
+            }
+        </table>
+    </div>
 }

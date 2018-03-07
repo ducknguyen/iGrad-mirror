@@ -2,11 +2,11 @@
 @model List<Sibling>
 
 <div class="container">
+    <h4>Sibling(s)</h4>
     @foreach (Sibling sibling in Model)
     {
         <div class="row">
-            <p>@sibling.FName</p>
-            <p>@sibling.LName</p>
+            <p>@sibling.FName @sibling.LName</p>
             <p>@sibling.Grade</p>
             <p>@sibling.School</p>
         </div>

@@ -58,10 +58,8 @@
     @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
 
     <p>Address is mailing address? *</p>
-    @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, true, htmlAttributes: new { @class = "chk-box" })
-    <input type="radio" value="Yes" onclick="hideTarget('mailing-address')" /> Yes
-    @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, false, htmlAttributes: new { @class = "chk-box" })
-    <input type="radio" value="No" onclick="showTarget('mailing-address')" /> No
+    @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, true, htmlAttributes: new { @class = "" , @onclick = "hideTarget('mailing-address')" })Yes
+    @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, false, htmlAttributes: new { @class = "", @onclick = "showTarget('mailing-address')" })No
 
     <div class="container hidden" id="mailing-address">
         <p>Please Specify Mailing Address * </p>
@@ -82,10 +80,14 @@
         @Html.TextBoxFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = "" })
     </div>
     <hr />
-    <div class="container" id="add-emergency-contact-container">
+    <div class="container well-lg well" id="add-emergency-contact-container">
         <div class="container" id="emergency-contacts">
             <!-- emergency partial view here-->
-            @{Html.RenderAction("GetEmergencyContactsPartial", "Application", Model.EmergencyContacts);}
+            @{if (Model.EmergencyContacts != null)
+                {
+                    Html.RenderPartial("_GetEmergencyContacts", Model.EmergencyContacts.ToList());
+                }
+            }
         </div>
         <div class="container" id="add-emergency-contact">
 
@@ -98,7 +100,12 @@
     <div class="container well-lg well" id="add-guardian-container">
         <div class="container" id="guardians">
             <!-- guardians partial view here-->
-            @{Html.RenderAction("GetGuardiansPartial", "Application", Model.EmergencyContacts);}
+
+            @{if (Model.Guardians != null)
+                {
+                    Html.RenderPartial("_GetGuardianInfo", Model.Guardians.ToList());
+                }
+            }
         </div>
         <button class="btn btn-lg btn-primary" id="add-guardian-button" onclick="loadGuardianInfoForm()">+ Add Parent/Guardian(s)</button>
         <div class="hidden" id="add-guardian">
@@ -106,9 +113,13 @@
     </div>
 
     <div class="container well-lg well" id="add-sibling-container">
-        <div class="siblings">
+        <div class="siblings" id="siblings">
             <!-- sibling partial view here-->
-            @{Html.RenderAction("GetSiblingsPartial", "Application", Model.EmergencyContacts);}
+            @{if (Model.Siblings != null)
+                {
+                    Html.RenderPartial("_GetSiblingInfo", Model.Siblings.ToList());
+                } 
+             }
         </div>
         <button class="btn btn-lg btn-primary" id="add-sibling-button" onclick="loadSiblingInfoForm()">+ Add Sibling(s)</button>
         <div class="hidden" id="add-sibling">

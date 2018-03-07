@@ -2,13 +2,13 @@
 @model List<EmergencyContact>
 
 <div class="container">
-        @foreach(EmergencyContact contact in Model)
+        @foreach (EmergencyContact contact in Model)
         {
-            <div class="row">
-                <p>@contact.Name.FName</p>
-                <p>@contact.Name.LName</p>
-                <p>@contact.Relationship</p>
-            </div>
+            <div class="row col-md-3" style="background-color:blue; border:solid 1px black">
+                <p>@(contact.Name == null ? "Default FName" : contact.Name.FName) </p>
+                <p>@(contact.Name == null ? "Default LName" : contact.Name.LName)</p>
+                <p>@(contact.Relationship == null ? "Relationship" : contact.Relationship)</p>
+               </div>
         }
 </div>
 

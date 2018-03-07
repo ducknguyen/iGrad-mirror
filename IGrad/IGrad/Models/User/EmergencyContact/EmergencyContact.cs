@@ -19,19 +19,19 @@ namespace IGrad.Models.User
             get
             {
                 List<SelectListItem> items = new List<SelectListItem>();
-                items.Add(new SelectListItem { Text = "Mother", Value = "Mother", Selected = true });
+                items.Add(new SelectListItem { Text = "Mother", Value = "Mother" });
                 items.Add(new SelectListItem { Text = "Father", Value = "Father" });
                 items.Add(new SelectListItem { Text = "Grandparent", Value = "Grandparent" });
                 items.Add(new SelectListItem { Text = "Step Mother", Value = "Step Mother" });
                 items.Add(new SelectListItem { Text = "Step Father", Value = "Step Father" });
                 items.Add(new SelectListItem { Text = "Guardian", Value = "Guardian" });
+                items.Add(new SelectListItem { Text = "Other", Value = "Other" });
                 return items;
             }
         }
 
         public string EmailAddress { get; set; }
         public Phone PhoneNumber { get; set; }
-         
       
     }
 }

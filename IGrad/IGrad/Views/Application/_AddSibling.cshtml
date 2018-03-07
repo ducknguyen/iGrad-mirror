@@ -1,9 +1,9 @@
 ﻿@model IGrad.Models.User.Sibling
 
-@using (Ajax.BeginForm("SubmitSiblingInfo", "Application", new AjaxOptions()
+@using (Ajax.BeginForm("SubmitAddSiblingInfo", "Application", new AjaxOptions()
 {
     HttpMethod = "Post",
-    UpdateTargetId = "",
+    UpdateTargetId = "add-sibling",
     InsertionMode = InsertionMode.Replace,
 
 }))

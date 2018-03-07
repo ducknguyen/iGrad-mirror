@@ -376,6 +376,7 @@
     <Content Include="Views\Application\_AddEmergencyContact.cshtml" />
     <Content Include="Views\Application\_GetEmergencyContacts.cshtml" />
     <Content Include="Views\Application\_GetSiblingInfo.cshtml" />
+    <Content Include="Views\Application\_GetHealthInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

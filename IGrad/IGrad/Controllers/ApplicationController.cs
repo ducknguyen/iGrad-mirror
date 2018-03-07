@@ -192,7 +192,7 @@ namespace IGrad.Controllers
             return pdfControl.FillPdf(UserID);
             //return RedirectToAction("GetLanguageForm", "Application");
         }
-   
+
         [Authorize]
         public ActionResult GetEducationForm()
         {
@@ -233,7 +233,7 @@ namespace IGrad.Controllers
             return PartialView("~/Views/Application/_AddHighSchool.cshtml", new HighSchoolInfo());
         }
 
-        public ActionResult GetHighSchoolInfoPartial(List<HighSchoolInfo> highSchoolInfoList)
+        public ActionResult GetHighSchoolInfo(List<HighSchoolInfo> highSchoolInfoList)
         {
             return PartialView("~/Views/Application/_GetHighSchoolInfo.cshtml", highSchoolInfoList);
         }
@@ -261,7 +261,7 @@ namespace IGrad.Controllers
                 //db.Entry(data.SchoolInfo.HighSchoolInformation).CurrentValues.SetValues(highSchoolInfo);
                 db.SaveChanges();
 
-                return GetHighSchoolInfoPartial(data.SchoolInfo.HighSchoolInformation);
+                return GetHighSchoolInfo(data.SchoolInfo.HighSchoolInformation);
             }
         }
 
@@ -320,7 +320,7 @@ namespace IGrad.Controllers
                     .Include(u => u.LanguageHisory)
                     .FirstOrDefault();
 
-                if(_user.LanguageHisory == null)
+                if (_user.LanguageHisory == null)
                 {
                     _user.LanguageHisory = new LanguageHistory();
                 }
@@ -360,24 +360,28 @@ namespace IGrad.Controllers
                 }
                 db.SaveChanges();
             }
-                return GetEducationForm();
+            return GetEducationForm();
         }
-      
+
         [Authorize]
         public ActionResult GetHouseholdForm()
         {
             UserModel _user;
             try
-            {
+           { 
                 Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
                 UserContext db = new UserContext();
                 _user = db.Users.Where(u => u.UserID == UserID)
                     .Include(u => u.Guardians)
+                    .Include(u => u.Guardians.Select(n => n.Name))
+                    .Include(u => u.Guardians.Select(p => p.Phone))
                     .Include(u => u.Siblings)
                     .Include(u => u.LivesWith)
                     .Include(u => u.ResidentAddress)
                     .Include(u => u.MailingAddress)
                     .Include(u => u.EmergencyContacts)
+                    .Include(u => u.EmergencyContacts.Select(n => n.Name))
+                    .Include(u => u.EmergencyContacts.Select(p => p.PhoneNumber))
                     .FirstOrDefault();
             }
             catch (Exception ex)
@@ -401,11 +405,11 @@ namespace IGrad.Controllers
             {
                 _user.MailingAddress = new Address();
             }
-            if(_user.LivesWith == null)
+            if (_user.LivesWith == null)
             {
                 _user.LivesWith = new LivesWith();
             }
-            if(_user.EmergencyContacts == null)
+            if (_user.EmergencyContacts == null)
             {
                 _user.EmergencyContacts = new List<EmergencyContact>();
             }
@@ -422,6 +426,7 @@ namespace IGrad.Controllers
                        .Include(u => u.ResidentAddress)
                        .Include(u => u.MailingAddress)
                        .Include(u => u.EmergencyContacts)
+
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
 
@@ -432,7 +437,7 @@ namespace IGrad.Controllers
 
                 db.SaveChanges();
             }
-                return View();
+            return View();
         }
 
         public ActionResult GetAddEmergencyContact()
@@ -443,13 +448,15 @@ namespace IGrad.Controllers
             return PartialView("_AddEmergencyContact", contact);
         }
 
-        public void SubmitEmergencyContact(EmergencyContact contact)
+        public ActionResult SubmitEmergencyContact(EmergencyContact contact)
         {
             Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
             using (UserContext db = new UserContext())
             {
+
                 var data = db.Users
-                       .Include(u => u.EmergencyContacts)
+                       .Include(u => u.EmergencyContacts.Select(n => n.Name))
+                       .Include(u => u.EmergencyContacts.Select(p => p.PhoneNumber))
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
 
@@ -457,17 +464,37 @@ namespace IGrad.Controllers
                 {
                     data.EmergencyContacts = new List<EmergencyContact>();
                 }
+                //if(data.EmergencyContacts[0].Name == null)
+                //{
+                //    EmergencyContact currentContact = data.EmergencyContacts[0];
+                //    currentContact.Name = new Name();
+                //    currentContact.Name.FName = contact.Name.FName;
+                //    currentContact.Name.LName = contact.Name.LName;
+                //    currentContact.Name.UserID = UserID;
+                //}
+                //if(data.EmergencyContacts[0].PhoneNumber == null)
+                //{
+
+                //}
 
                 contact.UserID = UserID;
+                contact.Name.UserID = UserID;
+                contact.PhoneNumber.UserID = UserID;
                 data.EmergencyContacts.Add(contact);
 
                 db.SaveChanges();
+
+                return GetEmergencyContactsPartial(data.EmergencyContacts);
             }
         }
 
         public ActionResult GetEmergencyContactsPartial(List<EmergencyContact> emergencyContactList)
         {
-            return PartialView("_GetEmergencyContacts",emergencyContactList);
+            if (emergencyContactList == null)
+            {
+                emergencyContactList = new List<EmergencyContact>();
+            }
+            return PartialView("_GetEmergencyContacts", emergencyContactList);
         }
 
         public ActionResult GetAddGuardian()
@@ -477,13 +504,15 @@ namespace IGrad.Controllers
             defaultGuardian.Name = new Name();
             return PartialView("_AddGuardian", defaultGuardian);
         }
-        public void SubmitGuardianInfo(Guardian guardian)
+        public ActionResult SubmitGuardianInfo(Guardian guardian)
         {
             Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
             using (UserContext db = new UserContext())
             {
                 var data = db.Users
                        .Include(u => u.Guardians)
+                       .Include(u => u.Guardians.Select(n => n.Name))
+                       .Include(u => u.Guardians.Select(p => p.Phone))
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
 
@@ -496,11 +525,18 @@ namespace IGrad.Controllers
                 data.Guardians.Add(guardian);
 
                 db.SaveChanges();
+
+                return PartialView("_GetGuardianInfo", data.Guardians);
             }
+
         }
 
         public ActionResult GetGuardiansPartial(List<Guardian> guardianList)
         {
+            if (guardianList == null)
+            {
+                guardianList = new List<Guardian>();
+            }
             return PartialView("_GetGuardianInfo", guardianList);
         }
 
@@ -510,7 +546,7 @@ namespace IGrad.Controllers
             return PartialView("_AddSibling", sibling);
         }
 
-        public void SubmitAddSiblingInfo(Sibling sibling)
+        public ActionResult SubmitAddSiblingInfo(Sibling sibling)
         {
             Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
             using (UserContext db = new UserContext())
@@ -531,12 +567,18 @@ namespace IGrad.Controllers
                 data.Siblings.Add(sibling);
                 //save
                 db.SaveChanges();
+
+                return PartialView("_GetSiblingInfo", data.Siblings);
             }
         }
 
         public ActionResult GetSiblingsPartial(List<Sibling> siblingList)
         {
-            return PartialView("_GetSiblingInfo",siblingList);
+            if (siblingList == null)
+            {
+                siblingList = new List<Sibling>();
+            }
+            return PartialView("_GetSiblingInfo", siblingList);
         }
 
         [HttpPost]
@@ -554,7 +596,7 @@ namespace IGrad.Controllers
         public ActionResult GetAddHealthInfo()
         {
             Health defaultHealth = new Health();
-            return PartialView("_AddHealthInfo",defaultHealth);
+            return PartialView("_AddHealthInfo", defaultHealth);
         }
 
         public void SubmitHealthInfo(Health health)
@@ -567,7 +609,7 @@ namespace IGrad.Controllers
                        .Include(u => u.HealthInfo)
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
-                
+
                 //set health info
                 data.HealthInfo = health;
                 data.HealthInfo.UserID = UserID;
