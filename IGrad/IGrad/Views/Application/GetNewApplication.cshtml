@@ -1,15 +1,20 @@
 ﻿@model IGrad.Models.User.UserModel
 @{
-    /**/
+    /*
+     * http://localhost:59660/Application/GetNewApplication
+     */
 
     ViewBag.Title = "iGrad | Personal Information";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<div class="container">
-    <progress max="100" value="0" id="application-progress"></progress>
-</div>
+
+<progress max="100" value="0" id="application-progress"></progress>
+
 @using (Html.BeginForm("GetNewApplication", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
-{   <div class="container">
+{
+    <h4>Personal Information</h4>
+    <small class="form-text required-marker-indicator">* required fields.</small>
+    <hr>
 
     <!-- STUDENT NAME START -->
     <div class="form-row">
@@ -35,7 +40,6 @@
         </div>
     </div>
     <!-- STUDENT NAME END -->
-
     <!-- STUDENT BIRTHPLACE START -->
     <div class="form-row">
         <div class="form-group col-md-3">
@@ -50,72 +54,53 @@
         </div>
         <div class="form-group col-md-2">
             @Html.LabelFor(model => model.BirthPlace.State, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.DropDownListFor(model => model.BirthPlace.State, Model.BirthPlace.StateSelectList, "Select", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.BirthPlace.State, Model.BirthPlace.StateSelectList, "Select", htmlAttributes: new { @class = "form-control", required = "required" })
             @Html.ValidationMessageFor(model => model.BirthPlace.State, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-4">
             @Html.LabelFor(model => model.BirthPlace.Country, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.DropDownListFor(model => model.BirthPlace.Country, Model.BirthPlace.CountrySelectList, "Select a country", htmlAttributes: new { @class = "form-control" })
+            @Html.DropDownListFor(model => model.BirthPlace.Country, Model.BirthPlace.CountrySelectList, "Select a country", htmlAttributes: new { @class = "form-control", required = "required" })
             @Html.ValidationMessageFor(model => model.BirthPlace.Country, "", new { @class = "text-danger" })
         </div>
     </div>
 
+    <!-- **********RACE AND ETHNICITY START********** -->
     <div class="form-row">
-        <div class="form-group col-md-4">
-            @Html.LabelFor(model => model.BirthPlace.State, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.BirthPlace.State, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-            @Html.ValidationMessageFor(model => model.BirthPlace.State, "", new { @class = "text-danger" })
-        </div>
-        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity, htmlAttributes: new { @class = "control-label" })
-        <div class="form-group col-md-8 well-lg well">
-            <div class="row">
-                <div class="row col-md-6">
-                    @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCentralAmerican, htmlAttributes: new { @class = "row control-label col-md-6" })
-                    @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCentralAmerican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
+        <div class="form-group">
+            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity, htmlAttributes: new { @class = "control-label required-marker" })
+            <button class="btn btn-info" type="button" data-toggle="modal" data-target="#race-modal" id="race-button">
+                Student Race
+            </button>
+
+            <div class="modal fade" id="race-modal" tabindex="1" role="dialog" aria-labelledby="raceModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="raceModalLabel">Select all that apply</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="model-body">
+                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCentralAmerican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
+                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCentralAmerican, htmlAttributes: new { @class = "row control-label col-md-6" })
+
+
+                            <div class="modal-footer">
+                                <h1>this is footer</h1>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
-                <div class="row col-md-6">
-                    @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCuban, htmlAttributes: new { @class = "control-label col-md-3" })
-                    @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCuban, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
-                </div>
-            </div>
-            <div class="row">
-                <div class="row col-md-6">
-                    @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isDominican, htmlAttributes: new { @class = "control-label" })
-                    @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isDominican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
-                </div>
-                <div class="row col-md-6">
-                    @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isLatinAmerican, htmlAttributes: new { @class = "control-label" })
-                    @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isLatinAmerican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
-                </div>
-            </div>
-            <div class="row">
-                <div class="row col-md-6">
-                    @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMexican, htmlAttributes: new { @class = "control-label" })
-                    @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMexican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
-                </div>
-                <div class="row col-md-6">
-                    @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isNotHispanicOrLatino, htmlAttributes: new { @class = "control-label " })
-                    @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isNotHispanicOrLatino, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
-                </div>
-            </div>
-            <div class="row col-md-6">
-                @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isOtherHispanicLatino, htmlAttributes: new { @class = "control-label " })
-                @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isOtherHispanicLatino, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
-            </div>
-            <div class="row col-md-6">
-                @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isPuertoRican, htmlAttributes: new { @class = "control-label " })
-                @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isPuertoRican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
-            </div>
-            <div class="row col-md-6">
-                @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSouthAmerican, htmlAttributes: new { @class = "control-label " })
-                @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSouthAmerican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
-            </div>
-            <div class="row col-md-6">
-                @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSpaniard, htmlAttributes: new { @class = "control-label " })
-                @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSpaniard, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
             </div>
         </div>
     </div>
+    <!-- **********RACE AND ETHNICITY END********** -->
+
+
     <!-- STUDENT BIRTHPLACE END -->
 
     <div class="form-row">
@@ -128,7 +113,6 @@
             @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control", required = "required" } })
         </div>
     </div>
-</div>
 
 
 
@@ -142,5 +126,58 @@
             </div>
         </div>
     </div>
-    
+
+    <!--
+             <div class="form-group col-md-8 well-lg well">
+        <div class="row">
+            <div class="row col-md-6">
+                @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCentralAmerican, htmlAttributes: new { @class = "row control-label col-md-6" })
+                @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCentralAmerican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
+            </div>
+            <div class="row col-md-6">
+                @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCuban, htmlAttributes: new { @class = "control-label col-md-3" })
+                @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCuban, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
+            </div>
+        </div>
+        <div class="row">
+            <div class="row col-md-6">
+                @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isDominican, htmlAttributes: new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isDominican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
+            </div>
+            <div class="row col-md-6">
+                @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isLatinAmerican, htmlAttributes: new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isLatinAmerican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
+            </div>
+        </div>
+        <div class="row">
+            <div class="row col-md-6">
+                @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMexican, htmlAttributes: new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMexican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
+            </div>
+            <div class="row col-md-6">
+                @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isNotHispanicOrLatino, htmlAttributes: new { @class = "control-label " })
+                @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isNotHispanicOrLatino, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
+            </div>
+        </div>
+        <div class="row col-md-6">
+            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isOtherHispanicLatino, htmlAttributes: new { @class = "control-label " })
+            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isOtherHispanicLatino, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
+        </div>
+        <div class="row col-md-6">
+            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isPuertoRican, htmlAttributes: new { @class = "control-label " })
+            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isPuertoRican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
+        </div>
+        <div class="row col-md-6">
+            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSouthAmerican, htmlAttributes: new { @class = "control-label " })
+            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSouthAmerican, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
+        </div>
+        <div class="row col-md-6">
+            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSpaniard, htmlAttributes: new { @class = "control-label " })
+            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSpaniard, new { htmlAttributes = new { @class = "form-control race-checkbox" } })
+        </div>
+    </div>
+
+
+
+            -->
 }
