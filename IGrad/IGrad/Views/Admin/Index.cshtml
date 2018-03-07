@@ -7,6 +7,15 @@
 }
 <div class="container">
     <div>
+        <button type="button" class="btn btn-success">Update Income Table</button>
+        <div class="pull-right" style="padding-top: 5px">
+            <a href="@Url.Action("LateApps", "Admin")">
+                <button type="button" class="btn btn-warning">Late Apps: @ViewBag.LateAppCount</button>
+            </a>
+        </div>
+    </div>
+    <br />
+    <div>
         <div class="pull-left">
             @using (Html.BeginForm("Index", "Admin", FormMethod.Get))
             {
@@ -15,11 +24,6 @@
                     <input type="submit" value="Search" />
                 </p>
             }
-        </div>
-        <div class="pull-right" style="padding-top: 5px">
-            <a href="@Url.Action("LateApps", "Admin")">
-                <button type="button" class="btn btn-warning">Late Apps: @ViewBag.LateAppCount</button>
-            </a>
         </div>
     </div>
     <table class="table">
@@ -48,7 +52,7 @@
         </tr>
 
         @foreach (var item in Model)
-        {
+            {
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Name.LName)
