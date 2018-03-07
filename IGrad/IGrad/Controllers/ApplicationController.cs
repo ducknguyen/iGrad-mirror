@@ -30,29 +30,6 @@ namespace IGrad.Controllers
                 // Need to create the association between database; 
                 // Should create this on user registration which should be first form!
                 user.UserID = Guid.NewGuid();
-                //user.Birthday = new Date();
-                //user.Birthday.UserID = user.UserID;
-                // user.BirthPlace.UserID = user.UserID;
-                //user.ConsideredRaceAndEthnicity.UserID = user.UserID;
-                //user.HealthInfo.UserID = user.UserID;
-                //user.EmergencyContacts[0].UserID = user.UserID;
-                //user.Guardians[0].UserID = user.UserID;
-                //user.HealthInfo.UserID = user.UserID;
-                //user.HighSchoolInfo.HighSchoolInformation[0].UserID = user.UserID;
-                //user.LivesWith.UserID = user.UserID;
-                //user.LoginInfo.UserID = user.UserID;
-                //user.MailingAddress.UserID = user.UserID;
-                //user.Name.UserID = user.UserID;
-                //user.PhoneInfo.UserID = user.UserID;
-                //user.PreSchool[0].UserID = user.UserID;
-                //user.QualifiedOrEnrolledProgam[0].UserID = user.UserID;
-                //user.ResidentAddress.UserID = user.UserID;
-                //user.Retainment.UserID = user.UserID;
-                //user.Siblings[0].UserID = user.UserID;
-                //user.StudentChildCare.UserID = user.UserID;
-                //user.StudentsParentingPlan.UserID = user.UserID;
-
-                // now add the form info
                 db.Users.Add(user);
                 try
                 {
@@ -69,19 +46,16 @@ namespace IGrad.Controllers
                     }
                 }
             }
-
             return RedirectToAction("GetLanguageForm", "Application");
         }
 
         [Authorize]
         public ActionResult GetNewApplication()
         {
-
             UserModel _user;
             try
             {
-                string userid = HttpContext.User.Identity.GetUserId();
-                Guid UserID = Guid.Parse(userid);
+                Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
                 UserContext db = new UserContext();
                 _user = db.Users.Where(u => u.UserID == UserID)
                     .Include(u => u.Name)
@@ -100,8 +74,7 @@ namespace IGrad.Controllers
         [HttpPost]
         public ActionResult GetNewApplication(UserModel user)
         {
-            string userid = HttpContext.User.Identity.GetUserId();
-            Guid UserID = Guid.Parse(userid);
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
             user.UserID = UserID;
             using (UserContext db = new UserContext())
             {
@@ -188,6 +161,7 @@ namespace IGrad.Controllers
 
                 db.SaveChanges();
             }
+
             PDFFillerController pdfControl = new PDFFillerController();
             return pdfControl.FillPdf(UserID);
             //return RedirectToAction("GetLanguageForm", "Application");
@@ -258,7 +232,6 @@ namespace IGrad.Controllers
                 data.SchoolInfo.UserID = UserID;
                 highSchoolInfo.UserID = UserID;
                 data.SchoolInfo.HighSchoolInformation.Add(highSchoolInfo);
-                //db.Entry(data.SchoolInfo.HighSchoolInformation).CurrentValues.SetValues(highSchoolInfo);
                 db.SaveChanges();
 
                 return GetHighSchoolInfo(data.SchoolInfo.HighSchoolInformation);
@@ -301,7 +274,6 @@ namespace IGrad.Controllers
                 data.SchoolInfo.UserID = UserID;
                 data.SchoolInfo.PreviousSchoolViolation.UserID = UserID;
 
-                //db.Entry(data.SchoolInfo.PreviousSchoolViolation).CurrentValues.SetValues(violation);
                 db.SaveChanges();
 
                 return GetViolationInfo(violation);
@@ -368,7 +340,7 @@ namespace IGrad.Controllers
         {
             UserModel _user;
             try
-           { 
+            {
                 Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
                 UserContext db = new UserContext();
                 _user = db.Users.Where(u => u.UserID == UserID)
@@ -426,7 +398,6 @@ namespace IGrad.Controllers
                        .Include(u => u.ResidentAddress)
                        .Include(u => u.MailingAddress)
                        .Include(u => u.EmergencyContacts)
-
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
 
@@ -464,18 +435,6 @@ namespace IGrad.Controllers
                 {
                     data.EmergencyContacts = new List<EmergencyContact>();
                 }
-                //if(data.EmergencyContacts[0].Name == null)
-                //{
-                //    EmergencyContact currentContact = data.EmergencyContacts[0];
-                //    currentContact.Name = new Name();
-                //    currentContact.Name.FName = contact.Name.FName;
-                //    currentContact.Name.LName = contact.Name.LName;
-                //    currentContact.Name.UserID = UserID;
-                //}
-                //if(data.EmergencyContacts[0].PhoneNumber == null)
-                //{
-
-                //}
 
                 contact.UserID = UserID;
                 contact.Name.UserID = UserID;
@@ -496,7 +455,6 @@ namespace IGrad.Controllers
             }
             return PartialView("_GetEmergencyContacts", emergencyContactList);
         }
-
         public ActionResult GetAddGuardian()
         {
             Guardian defaultGuardian = new Guardian();
