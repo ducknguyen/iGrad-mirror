@@ -41,11 +41,16 @@ namespace IGrad.Controllers
 
         public ActionResult FillPdf(Guid userId)
         {
+            var FirstForm = new firstForm(userId);
+        }
+
+        private void firstForm(Guid userId)
+        {
             // Get the user data to use in the PDF
             UserModel user = GetUserData(userId);
 
             // Get the blank form to fill out
-            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/iGradFirstForm.pdf");
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/StudentEnrollmentChecklistApp.pdf");
             PdfDocument document = PdfReader.Open(filePath);
 
             // Set the flag so we can flatten once done.
@@ -84,18 +89,6 @@ namespace IGrad.Controllers
                 fileContents = stream.ToArray();
                 return File(fileContents, MediaTypeNames.Application.Octet, "FirstPage.pdf");
             }
-
-
-            //MemoryStream stream = new MemoryStream();
-            //document.Save(stream, false);
-            //Response.Clear();
-            //Response.ContentType = "application/pdf";
-            //Response.AddHeader("content-length", stream.Length.ToString());
-            //Response.BinaryWrite(stream.ToArray());
-            //Response.Flush();
-            //stream.Close();
-            //Response.End();
-
         }
     }
 }

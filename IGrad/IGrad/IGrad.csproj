@@ -290,7 +290,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="media\documents\iGradComplete.pdf" />
-    <Content Include="media\documents\iGradFirstForm.pdf" />
+    <Content Include="media\documents\StudentEnrollmentChecklistApp.pdf" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy.pubxml" />
