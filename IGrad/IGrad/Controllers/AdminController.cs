@@ -184,11 +184,11 @@ namespace IGrad.Controllers
         }
 
         [Authorize]
-        public ActionResult Download(Guid userID)
-        {
-            PDFFillerController pdfControl = new PDFFillerController();
-            return pdfControl.FillPdf(userID);
-        }
+        //public ActionResult Download(Guid userID)
+        //{
+        //    PDFFillerController pdfControl = new PDFFillerController();
+        //    return pdfControl.FillPdf(userID);
+        //}
 
         [Authorize]
         public ActionResult FamilyIncome()
