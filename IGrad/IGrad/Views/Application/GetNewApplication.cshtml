@@ -1,5 +1,7 @@
 ﻿@model IGrad.Models.User.UserModel
 @{
+    /**/
+
     ViewBag.Title = "iGrad | Personal Information";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -13,7 +15,7 @@
     <hr>
 
     <!-- STUDENT NAME START -->
-    <div class="form-row">
+    <div class="row">
         <div class="form-group col-md-3">
             @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "control-label required-marker" })
             @Html.EditorFor(model => model.Name.FName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name", required = "required" } })
@@ -29,42 +31,69 @@
             @Html.EditorFor(model => model.Name.LName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last", required = "required" } })
             @Html.ValidationMessageFor(model => model.Name.LName, "", new { @class = "text-danger" })
         </div>
-        <!-- need to add this to model/controller? -->
         <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Name.PreviousName, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Name.PreviousName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First M.I. Last"} })
+            @Html.EditorFor(model => model.Name.PreviousName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First M.I. Last" } })
             @Html.ValidationMessageFor(model => model.Name.PreviousName, "", new { @class = "text-danger" })
         </div>
     </div>
     <!-- STUDENT NAME END -->
-    <!-- STUDENT BIRTHPLACE START -->
-    <div class="form-row">
+
+    <!-- STUDENT BIRTHPLACE INFO START -->
+    <div class="row">
         <div class="form-group col-md-3">
             @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control datepicker", @placeholder = "First", required = "required" } })
+            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control datepicker", required = "required" } })
             @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-3">
             @Html.LabelFor(model => model.BirthPlace.City, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.BirthPlace.City, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            @Html.EditorFor(model => model.BirthPlace.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City", required = "required" } })
             @Html.ValidationMessageFor(model => model.BirthPlace.City, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-2">
             @Html.LabelFor(model => model.BirthPlace.State, htmlAttributes: new { @class = "control-label required-marker" })
             @*@Html.DropDownListFor(model => model.BirthPlace.State, Model.BirthPlace.StateSelectList, "Select", htmlAttributes: new { @class = "form-control", required = "required" })
-            @Html.ValidationMessageFor(model => model.BirthPlace.State, "", new { @class = "text-danger" })*@
+                @Html.ValidationMessageFor(model => model.BirthPlace.State, "", new { @class = "text-danger" })*@
         </div>
         <div class="form-group col-md-4">
             @Html.LabelFor(model => model.BirthPlace.Country, htmlAttributes: new { @class = "control-label required-marker" })
             @*@Html.DropDownListFor(model => model.BirthPlace.Country, Model.BirthPlace.CountrySelectList, "Select a country", htmlAttributes: new { @class = "form-control", required = "required" })
-            @Html.ValidationMessageFor(model => model.BirthPlace.Country, "", new { @class = "text-danger" })*@
+                @Html.ValidationMessageFor(model => model.BirthPlace.Country, "", new { @class = "text-danger" })*@
         </div>
     </div>
-        <div class="container">
-        <!-- **********RACE AND ETHNICITY START********** -->
-        <div class="form-row">
-            <div class="form-group">
-                @Html.LabelFor(model => model.ConsideredRaceAndEthnicity, htmlAttributes: new { @class = "control-label required-marker" })
+    <!-- STUDENT BIRTHPLACE INFO END -->
+
+    <!-- GENDER, EMAIL AND PHONE START --->
+    <div class="row">
+        <div class="col-md-3 form-group">
+            @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label required-marker" })
+            <br />
+            @Html.RadioButtonFor(model => model.Gender, "Male") Male
+            @Html.RadioButtonFor(model => model.Gender, "Female") Female
+            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-5 form-group">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label required-marker" })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email", required = "required" } })
+            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+        </div>
+        <div class="col-md-4 form-group">
+            @Html.LabelFor(model => model.PhoneInfo.PhoneNumber, htmlAttributes: new { @class = "control-label required-marker" })
+            @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone", required = "required" } })
+            @Html.ValidationMessageFor(model => model.PhoneInfo.PhoneNumber, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <!-- GENDER, EMAIL AND PHONE END --->
+
+    <!-- **********RACE AND ETHNICITY START********** -->
+    <div class="row">
+
+            <!-- RACE SELECTOR -->
+            <div class="col-md-3 form-group">
+                @*@Html.LabelFor(model => model.ConsideredRaceAndEthnicity, htmlAttributes: new { @class = "control-label required-marker" })*@
+                @Html.Label("Select your race", htmlAttributes: new { @class = "control-label required-marker" })
+                <br />
                 <button class="btn btn-info" type="button" data-toggle="modal" data-target="#race-modal" id="race-button">
                     Student Race
                 </button>
@@ -82,6 +111,7 @@
                                 </h4>
                             </div>
 
+                            <!-- MODAL BODY START -->
                             <div class="modal-body">
                                 <div id="accordion" role="tablist" aria-multiselectable="true">
                                     <!-- ASIAN CARD START -->
@@ -92,7 +122,8 @@
                                                     Asian
                                                 </a>
                                             </h5>
-                                        </div>	<div id="asian" class="collapse" role="tabpanel" aria-labelledby="asian-heading">
+                                        </div>
+                                        <div id="asian" class="collapse" role="tabpanel" aria-labelledby="asian-heading">
                                             <div class="card-block">
                                                 <div class="form-row">
                                                     <ul>
@@ -174,7 +205,8 @@
                                                     American Indian & Alaskan Native
                                                 </a>
                                             </h5>
-                                        </div>	<div id="american-indian" class="collapse" role="tabpanel" aria-labelledby="indian-heading">
+                                        </div>
+                                        <div id="american-indian" class="collapse" role="tabpanel" aria-labelledby="indian-heading">
                                             <div class="card-block">
                                                 <div class="form-row">
                                                     <ul>
@@ -316,7 +348,8 @@
                                                     Hispanic/Latino
                                                 </a>
                                             </h5>
-                                        </div>	<div id="hispanic-latino" class="collapse" role="tabpanel" aria-labelledby="hispanic-heading">
+                                        </div>
+                                        <div id="hispanic-latino" class="collapse" role="tabpanel" aria-labelledby="hispanic-heading">
                                             <div class="card-block">
                                                 <div class="form-row">
                                                     <ul>
@@ -370,7 +403,8 @@
                                                     Non Hispanic
                                                 </a>
                                             </h5>
-                                        </div>	<div id="non-hispanic" class="collapse" role="tabpanel" aria-labelledby="nonhispanic-heading">
+                                        </div>
+                                        <div id="non-hispanic" class="collapse" role="tabpanel" aria-labelledby="nonhispanic-heading">
                                             <div class="card-block">
                                                 <div class="form-row">
                                                     <ul>
@@ -428,7 +462,8 @@
                                                     Native Hawaiian/Other Pacific Islander
                                                 </a>
                                             </h5>
-                                        </div>	<div id="hawaiian-islander" class="collapse" role="tabpanel" aria-labelledby="islander-heading">
+                                        </div>
+                                        <div id="hawaiian-islander" class="collapse" role="tabpanel" aria-labelledby="islander-heading">
                                             <div class="card-block">
                                                 <div class="form-row">
                                                     <ul>
@@ -476,43 +511,36 @@
                                     <!-- NATIVE HAWAIIAN/OTHER PACIFIC ISLANDER CARD END -->
                                 </div>
                             </div>
+                            <!-- MODAL BODY END -->
 
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary close" data-dismiss="modal" aria-label="Close">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
                                     Continue
                                 </button>
                             </div>
                         </div>
-                        </div>
                     </div>
                 </div>
             </div>
-       </div>
-        <!-- **********RACE AND ETHNICITY END********** -->
-        <!-- STUDENT BIRTHPLACE END -->
 
+            <!-- DISPLAY SELECTED RACE(S) -->
+            <div class="col-md-9 form-group">
+                <p>Student Race:</p>
+                <ul id="studentRaceList">
+                    <!-- This filled out by jquery and race Selection -->
+                </ul>
+            </div>
+    </div>
+    <!-- **********RACE AND ETHNICITY END********** -->
+
+    <div class="container">
         <div class="form-row">
-            <div class="row col-md-6 form-group">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", required = "required" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-            </div>
-            <div class="row col-md-6 form-group">
-                @Html.LabelFor(model => model.PhoneInfo.PhoneNumber, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+            <div class="pull-right">
+                <button class="btn btn-primary btn-lg btn-success" type="submit">
+                    Continue
+                    <i class="fas fa-caret-right"></i>
+                </button>
             </div>
         </div>
-
-
-
-        <div class="container">
-            <div class="form-row">
-                <div class="pull-right">
-                    <button class="btn btn-primary btn-lg btn-success" type="submit">
-                        Continue
-                        <i class="fas fa-caret-right"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
+    </div>
 }
