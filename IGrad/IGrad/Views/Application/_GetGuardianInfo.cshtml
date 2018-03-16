@@ -4,17 +4,24 @@
 <div>
     <h4>Parent / Guardian(s)</h4>
     <hr />
-
-    <div class="dl-horizontal">
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Phone Number</th>
+            <th>Email</th>
+            <th>| Edit</th>
+        </tr>
         @{foreach (Guardian guardian in Model)
             {
-                <div class="col-md-3">
-                    <p>@guardian.Name.FName</p>
-                    <p>@guardian.Name.LName</p>
-                    <p>@guardian.Phone.PhoneNumber</p>
-                </div>
+                <tr>
+                    <td>@guardian.Name.FName @guardian.Name.LName</td>
+                    <td>@guardian.Phone.PhoneNumber</td>
+                    <td>@guardian.Email</td>
+                    <td>@Html.ActionLink("Delete", "DeleteGuardian", guardian)</td>
+                </tr>
             }
         }
-    </div>
+    </table>
+
 </div>
 

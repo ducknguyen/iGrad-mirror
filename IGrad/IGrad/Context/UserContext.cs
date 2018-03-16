@@ -1,6 +1,7 @@
 ﻿using IGrad.Models.User;
 using System.Data.Entity;
 
+
 namespace IGrad.Context
 {
     public class UserContext : DbContext
@@ -11,10 +12,17 @@ namespace IGrad.Context
         }
         public DbSet<UserModel> Users { get; set; }
 
-        public System.Data.Entity.DbSet<IGrad.Models.User.HighSchoolInfo> HighSchoolInfoes { get; set; }
+        public DbSet<HighSchoolInfo> HighSchoolInfoes { get; set; }
 
-        public System.Data.Entity.DbSet<IGrad.Models.User.Health> Healths { get; set; }
+        public DbSet<Health> Healths { get; set; }
 
-        public System.Data.Entity.DbSet<IGrad.Models.User.Guardian> Guardians { get; set; }
+        public DbSet<Guardian> Guardians { get; set; }
+        
+        public DbSet<Violation> Violations { get; set; }
+
+        public DbSet<Sibling> Siblings { get; set; }
+
+        public DbSet<EmergencyContact> EmergencyContacts { get; set; }
+
     }
 }

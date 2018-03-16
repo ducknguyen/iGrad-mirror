@@ -1,15 +1,26 @@
 ﻿@using IGrad.Models.User;
 @model List<EmergencyContact>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 
-<div class="container">
-        @foreach (EmergencyContact contact in Model)
-        {
-            <div class="row col-md-3" style="background-color:blue; border:solid 1px black">
-                <p>@(contact.Name == null ? "Default FName" : contact.Name.FName) </p>
-                <p>@(contact.Name == null ? "Default LName" : contact.Name.LName)</p>
-                <p>@(contact.Relationship == null ? "Relationship" : contact.Relationship)</p>
-               </div>
-        }
-</div>
+<table class="table table-responsive" id="emergency-contacts-table">
+    <tr>
+        <th>Name</th>
+        <th>Relationship</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>| Edit</th>
+    </tr>
+    @foreach (EmergencyContact contact in Model)
+    {
+                <tr>
+                    <td>@contact.Name.FName @contact.Name.LName</td>
+                    <td>@contact.Relationship</td>
+                    <td>@contact.EmailAddress</td>
+                    <td>(@contact.PhoneNumber.PhoneNumber) @contact.PhoneNumber.PhoneNumber</td>
+                    <td>@Html.ActionLink("Delete", "DeleteEmergencyContact", contact)</td>
+                </tr>
+    }
+</table>
+      
 
 

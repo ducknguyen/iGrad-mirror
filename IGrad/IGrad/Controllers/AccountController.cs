@@ -236,7 +236,7 @@ namespace IGrad.Controllers
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
             UserContext dbAdmin = new UserContext();
-            var _user = dbAdmin.Users.Where(u => u.Email == "Admin@Admin.com").FirstOrDefault();
+            var _user = dbAdmin.Users.Where(u => u.Email == "Admin@Admin.com").FirstOrDefault<UserModel>();
 
             if (_user == null)
             {

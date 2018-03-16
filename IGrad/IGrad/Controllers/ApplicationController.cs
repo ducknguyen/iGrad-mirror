@@ -62,11 +62,15 @@ namespace IGrad.Controllers
                     .Include(u => u.BirthPlace)
                     .Include(u => u.ConsideredRaceAndEthnicity)
                     .Include(u => u.PhoneInfo)
-                    .FirstOrDefault();
+                    .FirstOrDefault<UserModel>();
             }
             catch (Exception ex)
             {
                 return View();
+            }
+            if (_user.BirthPlace == null)
+            {
+                _user.BirthPlace = new BirthPlaceLocation();
             }
             return View(_user);
         }
@@ -238,6 +242,16 @@ namespace IGrad.Controllers
             }
         }
 
+        public void DeleteHighSchool(HighSchoolInfo hsi)
+        {
+            using (UserContext db = new UserContext())
+            {
+                db.HighSchoolInfoes.Attach(hsi);
+                db.HighSchoolInfoes.Remove(hsi);
+                db.SaveChanges();
+            }
+        }
+
         public ActionResult GetAddViolation()
         {
             Violation defaultViolation = new Violation();
@@ -280,6 +294,21 @@ namespace IGrad.Controllers
             }
         }
 
+        public void DeleteViolation(Violation violation)
+        {
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                var data = db.Users
+                      .Include(u => u.SchoolInfo)
+                      .Include(u => u.SchoolInfo.PreviousSchoolViolation)
+                      .Where(u => u.UserID == UserID)
+                      .FirstOrDefault<UserModel>();
+
+                data.SchoolInfo.PreviousSchoolViolation = null;
+                db.SaveChanges();
+            }
+        }
         [Authorize]
         public ActionResult GetLanguageForm()
         {
@@ -306,11 +335,6 @@ namespace IGrad.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetLanguageForm(UserModel user)
-        {
-            return View();
-        }
-
         public ActionResult SubmitLanguageInfo(UserModel user)
         {
             Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
@@ -328,11 +352,11 @@ namespace IGrad.Controllers
                 }
                 else
                 {
-                    db.Entry(data.LanguageHisory).CurrentValues.SetValues(user.LanguageHisory);
+                    data.LanguageHisory = user.LanguageHisory;
                 }
                 db.SaveChanges();
             }
-            return GetEducationForm();
+            return RedirectToAction("GetHouseholdForm", "Application");
         }
 
         [Authorize]
@@ -418,7 +442,7 @@ namespace IGrad.Controllers
             contact.PhoneNumber = new Phone();
             return PartialView("_AddEmergencyContact", contact);
         }
-
+        [HttpPost]
         public ActionResult SubmitEmergencyContact(EmergencyContact contact)
         {
             Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
@@ -455,6 +479,17 @@ namespace IGrad.Controllers
             }
             return PartialView("_GetEmergencyContacts", emergencyContactList);
         }
+
+        public void DeleteEmergencyContact(EmergencyContact contact)
+        {
+            using (UserContext db = new UserContext())
+            {
+                db.EmergencyContacts.Attach(contact);
+                db.EmergencyContacts.Remove(contact);
+                db.SaveChanges();
+            }
+        }
+
         public ActionResult GetAddGuardian()
         {
             Guardian defaultGuardian = new Guardian();
@@ -462,6 +497,8 @@ namespace IGrad.Controllers
             defaultGuardian.Name = new Name();
             return PartialView("_AddGuardian", defaultGuardian);
         }
+        
+        [HttpPost]
         public ActionResult SubmitGuardianInfo(Guardian guardian)
         {
             Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
@@ -498,12 +535,23 @@ namespace IGrad.Controllers
             return PartialView("_GetGuardianInfo", guardianList);
         }
 
+        public void DeleteGuardian(Guardian guardian)
+        {
+            using(UserContext db = new UserContext())
+            {
+                db.Guardians.Attach(guardian);
+                db.Guardians.Remove(guardian);
+                db.SaveChanges();
+            }
+        }
+
         public ActionResult GetAddSibling()
         {
             Sibling sibling = new Sibling();
             return PartialView("_AddSibling", sibling);
         }
 
+        [HttpPost]
         public ActionResult SubmitAddSiblingInfo(Sibling sibling)
         {
             Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
@@ -537,6 +585,16 @@ namespace IGrad.Controllers
                 siblingList = new List<Sibling>();
             }
             return PartialView("_GetSiblingInfo", siblingList);
+        }
+
+        public void DeleteSibling(Sibling sibling)
+        {
+            using(UserContext db = new UserContext())
+            {
+                db.Siblings.Attach(sibling);
+                db.Siblings.Remove(sibling);
+                db.SaveChanges();
+            }
         }
 
         [HttpPost]

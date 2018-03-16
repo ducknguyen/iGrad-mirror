@@ -7,11 +7,14 @@
             <th>Suspended</th>
             <th>Weapon</th>
             <th>Date</th>
+            <th>| Edit</th>
         </tr>
         <tr>
                 <td>@Model.isSuspendedOrExpelled</td>
                 <td>@Model.hadWeaponViolation</td>
                 <td>@Model.dateOfWeaponViolation.ToShortDateString()</td>
+                <td>@Html.ActionLink("Delete", "DeleteViolation", Model)</td>
+                
          </tr>
     </table>
 }

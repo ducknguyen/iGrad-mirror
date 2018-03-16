@@ -3,16 +3,26 @@
 
 <div class="container">
     <h4>Sibling(s)</h4>
-    @foreach (Sibling sibling in Model)
-    {
-        <div class="row">
-            <p>@sibling.FName @sibling.LName</p>
-            <p>@sibling.Grade</p>
-            <p>@sibling.School</p>
-        </div>
-    }
-</div>
 
+    <table class="table table-responsive" id="siblings-table">
+        <tr>
+            <th>Name</th>
+            <th>School</th>
+            <th>Grade</th>
+            <th>Age</th>
+            <th>| Edit</th>
+        </tr>
+        @foreach (Sibling sibling in Model)
+        {
+            <tr>
+                <td>@sibling.FName @sibling.LName</td>
+                <td>@sibling.Grade</td>
+                <td>@sibling.School</td>
+                <td>@sibling.Age</td>
+                <td>@Html.ActionLink("Delete", "DeleteSibling", sibling)</td>
+            </tr>
 
+        }
+    </table>
 
-
+    </div>

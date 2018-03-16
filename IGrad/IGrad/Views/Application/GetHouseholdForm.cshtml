@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script type="text/javascript" src="~/Scripts/application.js"></script>
+<script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     function loadEmergencyContactInfoForm() {
         hideTarget('add-emergency-contact-button');
@@ -29,12 +31,12 @@
 <hr />
 <div class="container" id="living-situation">
     <p>Student lives with : </p>
-    <p>Both Parents</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithBothParents, htmlAttributes: new { @class = "" })
-    <p>Mother Only</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithMotherOnly, htmlAttributes: new { @class = "chk-box " })
-    <p>Father Only</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithFatherOnly, htmlAttributes: new { @class = "chk-box" })
-    <p>Grandparents</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithGrandparents, htmlAttributes: new { @class = "chk-box" })
-    <p>Own Residence</p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithSelf, htmlAttributes: new { @class = "chk-box" })
-    <p>Homeless / Distressed</p>@Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "chk-box" })
+    <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithBothParents, htmlAttributes: new { @class = "" }) Both Parents</p>
+    <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithMotherOnly, htmlAttributes: new { @class = "chk-box " }) Mother Only</p>
+    <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithFatherOnly, htmlAttributes: new { @class = "chk-box" }) Father Only</p>
+    <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithGrandparents, htmlAttributes: new { @class = "chk-box" }) Grandparents</p>
+    <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithSelf, htmlAttributes: new { @class = "chk-box" }) Own Residence</p>
+    <p>@Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "chk-box" }) Homeless / Distressed</p>
 
     <p>Total Individuals In Residence</p>@Html.TextBoxFor(model => model.LivesWith.TotalPeopleInResidence, htmlAttributes: new { @class = "" })
 
