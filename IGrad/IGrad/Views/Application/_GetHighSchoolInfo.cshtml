@@ -1,17 +1,5 @@
 ﻿@model List<IGrad.Models.User.HighSchoolInfo>
-<script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
-<script type="text/javascript">
-    function deleteHighSchoolRecord(fieldId) {
-        $.ajax({
-            type: "POST",
-            url: '/Application/DeleteHighSchool',
-            data: {"fieldId":fieldId},
-            success: function (result) {
-                console.log(result);
-            }
-        });
-    }
-</script>
+
 @if (Model != null)
 {
 
@@ -26,14 +14,14 @@
             </tr>
             @foreach (var hsi in Model)
             {
-                <tr>
+                <tr id="highSchool_@hsi.fieldId">
                     <td>@hsi.HighSchoolYear</td>
                     <td>@hsi.HighSchoolName</td>
                     <td>@hsi.HighSchoolCity</td>
                     <td>@hsi.HighSchoolGrade</td>
                     <td>@(hsi.isLastHighSchoolAttended ? "Yes" : "No")</td>
                     <td>@hsi.fieldId</td>
-                    <td><input type="submit" class="hs_delete" value="Delete" onclick="deleteHighSchoolRecord(@hsi.fieldId)"></td>
+                    <td><input type="submit" value="Delete" onclick="deleteHighSchoolRecord(@hsi.fieldId)"></td>
                 </tr>
             }
         </table>

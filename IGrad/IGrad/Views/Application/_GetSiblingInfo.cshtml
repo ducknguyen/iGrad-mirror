@@ -14,14 +14,13 @@
         </tr>
         @foreach (Sibling sibling in Model)
         {
-            <tr>
+            <tr id="sibling_@sibling.fieldId">
                 <td>@sibling.FName @sibling.LName</td>
                 <td>@sibling.Grade</td>
                 <td>@sibling.School</td>
                 <td>@sibling.Age</td>
-                <td>@Html.ActionLink("Delete", "DeleteSibling", sibling)</td>
+                <td><input type="submit" value="Delete" onclick="deleteSibling(@sibling.fieldId)"></td>
             </tr>
-
         }
     </table>
 

@@ -1,6 +1,5 @@
 ﻿@using IGrad.Models.User;
 @model List<EmergencyContact>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 
 <table class="table table-responsive" id="emergency-contacts-table">
     <tr>
@@ -12,12 +11,12 @@
     </tr>
     @foreach (EmergencyContact contact in Model)
     {
-                <tr>
+                <tr id="ec_@contact.fieldId">
                     <td>@contact.Name.FName @contact.Name.LName</td>
                     <td>@contact.Relationship</td>
                     <td>@contact.EmailAddress</td>
                     <td>(@contact.PhoneNumber.PhoneNumber) @contact.PhoneNumber.PhoneNumber</td>
-                    <td>@Html.ActionLink("Delete", "DeleteEmergencyContact", contact)</td>
+                    <td><input type="submit" value="Delete" onclick="deleteEmergencyContact(@contact.fieldId)"></td>
                 </tr>
     }
 </table>

@@ -13,11 +13,11 @@
         </tr>
         @{foreach (Guardian guardian in Model)
             {
-                <tr>
+                <tr id="guardian_@guardian.fieldId">
                     <td>@guardian.Name.FName @guardian.Name.LName</td>
                     <td>@guardian.Phone.PhoneNumber</td>
                     <td>@guardian.Email</td>
-                    <td>@Html.ActionLink("Delete", "DeleteGuardian", guardian)</td>
+                    <td><input type="submit" value="Delete" onclick="deleteGuardian(@guardian.fieldId)"></td>
                 </tr>
             }
         }

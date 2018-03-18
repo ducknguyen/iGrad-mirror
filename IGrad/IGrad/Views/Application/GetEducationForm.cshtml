@@ -26,8 +26,23 @@
         $('#' + targetId).removeClass('hidden');
     }
 
-</script>
+    function deleteHighSchoolRecord(fieldId) {
+        $.ajax({
+            type: "POST",
+            url: '/Application/DeleteHighSchool',
+            data: { "fieldId": fieldId },
+            success: hideTarget('highSchool_' + fieldId)
+        });
+    }
 
+    function deleteViolation(fieldId) {
+        $.ajax({
+            type: "POST",
+            url: '/Application/DeleteViolation',
+            success: hideTarget('violation_' + fieldId)
+        });
+    }
+</script>
 
 
 <div class="container">
