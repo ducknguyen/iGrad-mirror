@@ -184,11 +184,11 @@ namespace IGrad.Controllers
         }
 
         [Authorize]
-        //public ActionResult Download(Guid userID)
-        //{
-        //    PDFFillerController pdfControl = new PDFFillerController();
-        //    return pdfControl.FillPdf(userID);
-        //}
+        public ActionResult Download(Guid userID)
+        {
+            PDFFillerController pdfControl = new PDFFillerController();
+            return pdfControl.FillPdf(userID);
+        }
 
         [Authorize]
         public ActionResult FamilyIncome()
@@ -199,30 +199,6 @@ namespace IGrad.Controllers
 
                 return View(data);
             }
-        }
-
-        public ActionResult Drop()
-        {
-            string script = System.IO.File.ReadAllText(Server.MapPath(@"~/Content/drop.sql"));
-            using (UserContext context = new UserContext())
-            {
-                
-                for(int i = 0; i < 20; i++)
-                {
-                    try
-                    {
-                        context.Database.ExecuteSqlCommand(script);
-                    }
-                    catch(Exception e)
-                    {
-                        // do nothing
-                    }
-                }
-
-                context.SaveChanges();
-            }
-
-            return View("Index", "Home");
         }
     }
 }

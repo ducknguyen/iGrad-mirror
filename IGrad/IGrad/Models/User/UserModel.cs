@@ -36,6 +36,9 @@ namespace IGrad.Models.User
         public string CountryBornIn { get; set; }
         public SchoolInfo SchoolInfo { get; set; }
         public Health HealthInfo { get; set; }
+        public LifeEvent LifeEvent { get; set; }
+        public Celebrate Celebrate { get; set; }
+
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime LastUpdateDate { get; set; }

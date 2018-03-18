@@ -16,6 +16,7 @@ namespace IGrad.Models.User
         public string StudentPrimaryLanguageAtHome { get; set; }
         public string PrimaryLanguageSpokenAtHome { get; set; }
         public bool StudentReceievedEnglishDevelopmentSupport {get;set;}
+        public bool unsureOfEnglishSupport { get; set; } // for Student recieved eng dev support, they have an unknown option
         public bool StudentHasReceivedFormalEducationOutsideUS { get; set; }
         public int StudentStartingGradeInUS { get; set; }
     }

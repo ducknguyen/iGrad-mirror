@@ -16,5 +16,28 @@ namespace IGrad.Models.User
         public string State { get; set; }
         public int Zip { get; set; }
         public string POBox { get; set; }
+
+        public string PrintAddress()
+        {
+            string addressString = "";
+
+            if(string.IsNullOrEmpty(POBox))
+            {
+                if (string.IsNullOrEmpty(AptNum))
+                {
+                    addressString = Street + ", " + City + ", " + State + ", " + Zip;
+                }
+                else
+                {
+                    addressString = Street + ", Apt# " + AptNum + ", " + City + ", " + State + ", " + Zip;
+                }
+            }
+            else
+            {
+                addressString = "POBOX " + POBox + ", " + City + ", " + State + ", " + Zip;
+            }
+
+            return addressString;
+        }
     }
 }
