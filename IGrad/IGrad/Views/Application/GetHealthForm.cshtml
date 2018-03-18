@@ -3,10 +3,8 @@
     ViewBag.Title = "GetHealthForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 @Scripts.Render("/Scripts/application.js")
 @Styles.Render("/Content/healthform.css")
-
 <script type="text/javascript">
     function loadMedicalInfoForm() {
         hideTarget('add-health-button');
@@ -15,14 +13,39 @@
     }
 
 </script>
+<h3>Personal Information</h3>
+<small class="form-text required-marker-indicator">* required fields.</small>
+<hr>
 
-<h2>Health Information</h2>
-<div class="container">
-    <button class="btn btn-lg btn-primary" id="add-health-button" onclick="loadMedicalInfoForm()"> + Add Medical Conditions</button>
-    <div class="container-fluid" id="add-health">
-
-    </div>
+<div class="description-text">
+    <p>
+        This information is needed to plan an appropriate program for the student and to prepare for any emergency situation if one should arise. Your school nurse will contact you if there are any additional questions.
+    </p>
 </div>
 
+<div class="container">
+    <!-- CATEGORY 1 -->
+    <div id="medical-history">
+        <div class="card">
+            <div class="card-header" id="category-1-heading">
+                <h4 class="mb-0">
+                    <button class="btn btn-link" data-toggle="collapse" data-target="#category-1" aria-expanded="true" aria-controls="category-1">
+                        Health Category #1
+                    </button>
+                </h4>
+            </div>
 
+            <div id="category-1" class="collapse" aria-labelledby="category-1-heading" data-parent="#medical-history">
+                <div class="card-body">
+                    @{Html.RenderPartial("_HealthCategory1", Model.HealthInfo);}
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <!-- CATEGORY 2 -->
+    <div class="" id="category-2">
+        <h4 class="mb-0">Health Category #2</h4>
+        @{Html.RenderPartial("_HealthCategory2", Model.HealthInfo);}
+    </div>
+</div>
