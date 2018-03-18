@@ -241,9 +241,11 @@ namespace IGrad.Controllers
                 return GetHighSchoolInfo(data.SchoolInfo.HighSchoolInformation);
             }
         }
-
-        public void DeleteHighSchool(HighSchoolInfo hsi)
+        [HttpPost]
+        public void DeleteHighSchool(string fieldId)
         {
+            HighSchoolInfo hsi = new HighSchoolInfo();
+            hsi.fieldId = Int32.Parse(fieldId);
             using (UserContext db = new UserContext())
             {
                 db.HighSchoolInfoes.Attach(hsi);
@@ -603,10 +605,23 @@ namespace IGrad.Controllers
             return View();
         }
         [Authorize]
-
         public ActionResult GetHealthForm()
         {
-            return View();
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+
+                var data = db.Users
+                       .Include(u => u.HealthInfo)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+
+                if (data.HealthInfo == null)
+                {
+                    data.HealthInfo = new Health();
+                }
+                return View(data);
+            }
         }
 
         public ActionResult GetAddHealthInfo()

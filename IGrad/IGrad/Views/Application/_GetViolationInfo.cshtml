@@ -10,12 +10,13 @@
             <th>| Edit</th>
         </tr>
         <tr>
-                <td>@Model.isSuspendedOrExpelled</td>
-                <td>@Model.hadWeaponViolation</td>
-                <td>@Model.dateOfWeaponViolation.ToShortDateString()</td>
-                <td>@Html.ActionLink("Delete", "DeleteViolation", Model)</td>
-                
-         </tr>
+            <td>@Model.isSuspendedOrExpelled</td>
+            <td>@Model.hadWeaponViolation</td>
+            <td>@Model.dateOfWeaponViolation.ToShortDateString()</td>
+            <td></td>
+            <td>@Html.ActionLink("Delete", "DeleteViolation", Model)</td>
+
+        </tr>
     </table>
 }
 
