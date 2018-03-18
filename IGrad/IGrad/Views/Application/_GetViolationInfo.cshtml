@@ -9,13 +9,13 @@
             <th>Date</th>
             <th>| Edit</th>
         </tr>
-        <tr>
-                <td>@Model.isSuspendedOrExpelled</td>
-                <td>@Model.hadWeaponViolation</td>
-                <td>@Model.dateOfWeaponViolation.ToShortDateString()</td>
-                <td>@Html.ActionLink("Delete", "DeleteViolation", Model)</td>
-                
-         </tr>
+        <tr id="violation_@Model.fieldId">
+            <td>@Model.isSuspendedOrExpelled</td>
+            <td>@Model.hadWeaponViolation</td>
+            <td>@Model.dateOfWeaponViolation.ToShortDateString()</td>
+            <td></td>
+            <td><input type="submit" value="Delete" onclick="deleteViolation(@Model.fieldId)"></td>
+        </tr>
     </table>
 }
 

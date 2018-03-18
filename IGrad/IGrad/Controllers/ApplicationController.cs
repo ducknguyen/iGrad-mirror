@@ -242,8 +242,11 @@ namespace IGrad.Controllers
             }
         }
 
-        public void DeleteHighSchool(HighSchoolInfo hsi)
+        [HttpPost]
+        public void DeleteHighSchool(string fieldId)
         {
+            HighSchoolInfo hsi = new HighSchoolInfo();
+            hsi.fieldId = Int32.Parse(fieldId);
             using (UserContext db = new UserContext())
             {
                 db.HighSchoolInfoes.Attach(hsi);
@@ -293,8 +296,8 @@ namespace IGrad.Controllers
                 return GetViolationInfo(violation);
             }
         }
-
-        public void DeleteViolation(Violation violation)
+        [HttpPost]
+        public void DeleteViolation()
         {
             Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
             using (UserContext db = new UserContext())
@@ -479,9 +482,11 @@ namespace IGrad.Controllers
             }
             return PartialView("_GetEmergencyContacts", emergencyContactList);
         }
-
-        public void DeleteEmergencyContact(EmergencyContact contact)
+        [HttpPost]
+        public void DeleteEmergencyContact(string fieldId)
         {
+            EmergencyContact contact = new EmergencyContact();
+            contact.fieldId = Int32.Parse(fieldId);
             using (UserContext db = new UserContext())
             {
                 db.EmergencyContacts.Attach(contact);
@@ -534,9 +539,11 @@ namespace IGrad.Controllers
             }
             return PartialView("_GetGuardianInfo", guardianList);
         }
-
-        public void DeleteGuardian(Guardian guardian)
+        [HttpPost]
+        public void DeleteGuardian(string fieldId)
         {
+            Guardian guardian = new Guardian();
+            guardian.fieldId = Int32.Parse(fieldId);
             using(UserContext db = new UserContext())
             {
                 db.Guardians.Attach(guardian);
@@ -587,8 +594,11 @@ namespace IGrad.Controllers
             return PartialView("_GetSiblingInfo", siblingList);
         }
 
-        public void DeleteSibling(Sibling sibling)
+        [HttpPost]
+        public void DeleteSibling(string fieldId)
         {
+            Sibling sibling = new Sibling();
+            sibling.fieldId = Int32.Parse(fieldId);
             using(UserContext db = new UserContext())
             {
                 db.Siblings.Attach(sibling);
@@ -603,10 +613,23 @@ namespace IGrad.Controllers
             return View();
         }
         [Authorize]
-
         public ActionResult GetHealthForm()
         {
-            return View();
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+
+                var data = db.Users
+                       .Include(u => u.HealthInfo)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+
+                if (data.HealthInfo == null)
+                {
+                    data.HealthInfo = new Health();
+                }
+                return View(data);
+            }
         }
 
         public ActionResult GetAddHealthInfo()

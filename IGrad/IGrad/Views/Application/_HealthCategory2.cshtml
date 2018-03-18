@@ -1,0 +1,16 @@
+﻿@model IGrad.Models.User.Health
+@using (Ajax.BeginForm("SubmitHealthInfo", "Application", new AjaxOptions()
+{
+    HttpMethod = "Post",
+    UpdateTargetId = "",
+    InsertionMode = InsertionMode.Replace,
+
+}))
+{
+    @Html.AntiForgeryToken()
+
+    <h1>Temp text</h1>
+
+
+}
+

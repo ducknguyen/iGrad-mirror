@@ -25,6 +25,34 @@
         $("#add-sibling").load('@Url.Action("GetAddSibling", "Application")');
     }
 
+    function deleteEmergencyContact(fieldId) {
+        $.ajax({
+            type: "POST",
+            url: '/Application/DeleteEmergencyContact',
+            data: { 'fieldId': fieldId },
+            success: hideTarget('ec_' + fieldId)
+        });
+    }
+
+    function deleteGuardian(fieldId) {
+        $.ajax({
+            type: "POST",
+            url: '/Application/DeleteGuardian',
+            data: { 'fieldId': fieldId },
+            success: hideTarget('guardian_' + fieldId)
+        });
+    }
+
+    function deleteSibling(fieldId) {
+        $.ajax({
+            type: "POST",
+            url: '/Application/DeleteSibling',
+            data: { 'fieldId': fieldId },
+            success: hideTarget('sibling_' + fieldId)
+        });
+    }
+
+
 </script>
 <h2>GetHouseholdForm</h2>
 <p>* required fields.</p>

@@ -14,15 +14,14 @@
             </tr>
             @foreach (var hsi in Model)
             {
-                <tr>
+                <tr id="highSchool_@hsi.fieldId">
                     <td>@hsi.HighSchoolYear</td>
                     <td>@hsi.HighSchoolName</td>
                     <td>@hsi.HighSchoolCity</td>
                     <td>@hsi.HighSchoolGrade</td>
                     <td>@(hsi.isLastHighSchoolAttended ? "Yes" : "No")</td>
                     <td>@hsi.fieldId</td>
-                    <td>@Html.ActionLink("Delete","DeleteHighSchool",hsi)</td>
-
+                    <td><input type="submit" value="Delete" onclick="deleteHighSchoolRecord(@hsi.fieldId)"></td>
                 </tr>
             }
         </table>
