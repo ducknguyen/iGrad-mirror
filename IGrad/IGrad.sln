@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGrad", "IGrad\IGrad.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IGrad.Tests", "IGrad.Tests\IGrad.Tests.csproj", "{98A75C94-FDD5-473A-A965-60E305104610}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseDropper", "DatabaseDropper\DatabaseDropper.csproj", "{A4C66841-E014-4B76-A9A5-B7F48D155168}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{98A75C94-FDD5-473A-A965-60E305104610}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98A75C94-FDD5-473A-A965-60E305104610}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98A75C94-FDD5-473A-A965-60E305104610}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4C66841-E014-4B76-A9A5-B7F48D155168}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4C66841-E014-4B76-A9A5-B7F48D155168}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4C66841-E014-4B76-A9A5-B7F48D155168}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4C66841-E014-4B76-A9A5-B7F48D155168}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
