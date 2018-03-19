@@ -10,6 +10,7 @@ namespace IGrad.Context
         {
             this.Configuration.LazyLoadingEnabled = true;
         }
+
         public DbSet<UserModel> Users { get; set; }
 
         public DbSet<HighSchoolInfo> HighSchoolInfoes { get; set; }
@@ -23,6 +24,5 @@ namespace IGrad.Context
         public DbSet<Sibling> Siblings { get; set; }
 
         public DbSet<EmergencyContact> EmergencyContacts { get; set; }
-
     }
 }

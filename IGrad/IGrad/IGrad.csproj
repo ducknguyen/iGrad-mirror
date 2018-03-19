@@ -237,6 +237,7 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Income\FamilyIncome.cs" />
+    <Compile Include="Models\Income\IncomeTable.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\User\Address\Address.cs" />
     <Compile Include="Models\User\BirthPlace\BirthPlaceLocation.cs" />

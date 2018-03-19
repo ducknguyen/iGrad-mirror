@@ -64,6 +64,9 @@ GO
 ALTER TABLE [dbo].[PreSchools] DROP CONSTRAINT [FK_dbo.PreSchools_dbo.Addresses_Address_fieldId]
 GO
 
+ALTER TABLE [dbo].[IncomeTables] DROP CONSTRAINT [FK_dbo.IncomeTables_dbo.FamilyIncomes_FamilyIncome_id]
+GO
+
 ALTER TABLE [dbo].[HighSchoolInfoes] DROP CONSTRAINT [FK_dbo.HighSchoolInfoes_dbo.SchoolInfoes_SchoolInfo_fieldId]
 GO
 
@@ -103,120 +106,126 @@ GO
 ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId]
 GO
 
-/****** Object:  Table [dbo].[Violations]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[Violations]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[Violations]
 GO
 
-/****** Object:  Table [dbo].[User]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[User]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[User]
 GO
 
-/****** Object:  Table [dbo].[Siblings]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[Siblings]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[Siblings]
 GO
 
-/****** Object:  Table [dbo].[SchoolInfoes]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[SchoolInfoes]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[SchoolInfoes]
 GO
 
-/****** Object:  Table [dbo].[Retaineds]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[Retaineds]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[Retaineds]
 GO
 
-/****** Object:  Table [dbo].[RaceEthnicities]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[RaceEthnicities]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[RaceEthnicities]
 GO
 
-/****** Object:  Table [dbo].[QualifiedOrEnrolledInPrograms]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[QualifiedOrEnrolledInPrograms]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[QualifiedOrEnrolledInPrograms]
 GO
 
-/****** Object:  Table [dbo].[PriorEducations]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[PriorEducations]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[PriorEducations]
 GO
 
-/****** Object:  Table [dbo].[PreSchools]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[PreSchools]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[PreSchools]
 GO
 
-/****** Object:  Table [dbo].[Phones]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[Phones]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[Phones]
 GO
 
-/****** Object:  Table [dbo].[ParentPlans]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[ParentPlans]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[ParentPlans]
 GO
 
-/****** Object:  Table [dbo].[Names]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[Names]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[Names]
 GO
 
-/****** Object:  Table [dbo].[LivesWiths]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[LivesWiths]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[LivesWiths]
 GO
 
-/****** Object:  Table [dbo].[LifeEvents]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[LifeEvents]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[LifeEvents]
 GO
 
-/****** Object:  Table [dbo].[LanguageHistories]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[LanguageHistories]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[LanguageHistories]
 GO
 
-/****** Object:  Table [dbo].[HighSchoolInfoes]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[IncomeTables]    Script Date: 3/18/2018 6:30:53 PM ******/
+DROP TABLE [dbo].[IncomeTables]
+GO
+
+/****** Object:  Table [dbo].[HighSchoolInfoes]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[HighSchoolInfoes]
 GO
 
-/****** Object:  Table [dbo].[Healths]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[Healths]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[Healths]
 GO
 
-/****** Object:  Table [dbo].[Guardians]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[Guardians]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[Guardians]
 GO
 
-/****** Object:  Table [dbo].[EmergencyContacts]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[FamilyIncomes]    Script Date: 3/18/2018 6:30:53 PM ******/
+DROP TABLE [dbo].[FamilyIncomes]
+GO
+
+/****** Object:  Table [dbo].[EmergencyContacts]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[EmergencyContacts]
 GO
 
-/****** Object:  Table [dbo].[ChildCares]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[ChildCares]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[ChildCares]
 GO
 
-/****** Object:  Table [dbo].[Celebrates]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[Celebrates]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[Celebrates]
 GO
 
-/****** Object:  Table [dbo].[BirthPlaceLocations]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[BirthPlaceLocations]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[BirthPlaceLocations]
 GO
 
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[AspNetUsers]
 GO
 
-/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[AspNetUserRoles]
 GO
 
-/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[AspNetUserLogins]
 GO
 
-/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[AspNetUserClaims]
 GO
 
-/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[AspNetRoles]
 GO
 
-/****** Object:  Table [dbo].[Addresses]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[Addresses]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[Addresses]
 GO
 
-/****** Object:  Table [dbo].[__MigrationHistory]    Script Date: 3/18/2018 3:27:00 PM ******/
+/****** Object:  Table [dbo].[__MigrationHistory]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[__MigrationHistory]
 GO
-
-

@@ -17,5 +17,7 @@ namespace IGrad.Context
             this.Configuration.LazyLoadingEnabled = true;
         }
         public DbSet<FamilyIncome> Income { get; set; }
+        
+
     }
 }
