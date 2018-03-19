@@ -4,50 +4,89 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <script type="text/javascript" src="@Url.Content("~/Scripts/language-form.js")"></script>
-<h2>Preferred Language History</h2>
-
-<p>
-    Indicate your language preference so we can provide an interpreter or translated documents, free of charge, when you need them.
-
-    All parents have the right to information about their student's education in a language they understand.
 
 
-@using(Html.BeginForm("SubmitLanguageInfo", "Application", FormMethod.Post, new { enctype = "multipart/form-data" })){
-    <div class="container col-md-6 ">
-        <div class="row form-group">
-            <strong>In what language(s) would your family prefer to communicate with school? *</strong>
-            @Html.TextBoxFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "form-control" })
+    <h3>Preferred Language History</h3>
+    <small class="form-text required-marker-indicator">* required fields.</small>
+    <hr>
+
+    <div class="description-text">
+        <p>
+            Indicate your language preference so we can provide an interpreter or translated documents, free of charge, when you need them.
+            <br />All parents have the right to information about their student's education in a language they understand.
+        </p>
+    </div>
+
+    @using (Html.BeginForm("SubmitLanguageInfo", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+    <div class="container">
+
+        <!-- RIGHT TO TRANSLATION -->
+        <div class="row">
+            <h4>Right to Translation and Interpretation Services</h4>
+            <div class="form-group">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "control-label required-marker" })
+                    @Html.TextBoxFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "form-control", @placeholder = "Prefer language" })
+                </div>
+            </div>
         </div>
 
-        <div class="row form-group">
-            <strong>What Language did the applicant (student) learn first?</strong>
-            @Html.TextBoxFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "form-control" })
+        <br />
+
+        <!-- EGIBILITY FOR LANGUAGE DEVELOPMENT SUPPORT -->
+        <div class="row">
+            <h4>
+                Eligibility for Language Development Support Information about the student's language helps us identify students
+                who qualify for support to develop the language skills necessary for success in school.
+                Testing may be necessary to detemine if language supports are needed.
+            </h4>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "control-label required-marker" })
+                @Html.TextBoxFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "form-control", @placeholder = "Language" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.LanguageHisory.StudentPrimaryLanguageAtHome, htmlAttributes: new { @class = "control-label required-marker" })
+                @Html.TextBoxFor(model => model.LanguageHisory.StudentPrimaryLanguageAtHome, htmlAttributes: new { @class = "form-control", @placeholder = "Primary language" })
+            </div>
         </div>
 
-        <div class="row form-group ">
-            <strong>What Language does the applicant (student) use the most at home?</strong>
-            @Html.TextBoxFor(model => model.LanguageHisory.StudentPrimaryLanguageAtHome, htmlAttributes: new { @class = "form-control" })
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.LanguageHisory.PrimaryLanguageSpokenAtHome, htmlAttributes: new { @class = "control-label required-marker" })
+                @Html.TextBoxFor(model => model.LanguageHisory.PrimaryLanguageSpokenAtHome, htmlAttributes: new { @class = "form-control", @placeholder = "Primary at home" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, htmlAttributes: new { @class = "control-label required-marker" })
+                <br />
+                @Html.RadioButtonFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, true) Yes
+                @Html.RadioButtonFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, false) No
+            </div>
         </div>
 
-        <div class="row form-group">
-            <strong>Has the applicant (student) ever received English language development support in a previous school?</strong>
-            @Html.TextBoxFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, htmlAttributes: new { @class = "form-control" })
-        </div>
+        <br />
 
-        <div class="row form-group">
-            <strong>What is the primary language spoken at home, regardless of the language spoken by your child?</strong>
-            @Html.TextBoxFor(model => model.LanguageHisory.PrimaryLanguageSpokenAtHome, htmlAttributes: new { @class = "form-control" })
-        </div>
+        <!-- PRIOR EDUCATION -->
+        <div class="row">
+            <h4>Prior Education</h4>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker" })
+                <br /><small> (Kindergarten - 12 grade)</small>
+                <br />
+                @Html.RadioButtonFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, true) Yes
+                @Html.RadioButtonFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, false) No
+            </div>
 
-        <div class="row col-md-4 form-group">
-            <button class="btn btn-lg  btn-success" type="submit">
-                Continue..                
-            </button>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.LanguageHisory.StudentStartingGradeInUS, htmlAttributes: new { @class = "control-label required-marker" })
+                <br /><small> (Kindergarten - 12 grade)</small>
+                @Html.TextBoxFor(model => model.LanguageHisory.StudentStartingGradeInUS, htmlAttributes: new { @class = "form-control", @placeholder = "Grade level" })
+            </div>
         </div>
     </div>
-  }
+    }
 
- 
-    
 
 
