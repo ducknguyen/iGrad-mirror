@@ -13,7 +13,8 @@
     }
 
 </script>
-<h3>Personal Information</h3>
+
+<h3>Health Information</h3>
 <small class="form-text required-marker-indicator">* required fields.</small>
 <hr>
 
@@ -23,29 +24,81 @@
     </p>
 </div>
 
-<div class="container">
-    <!-- CATEGORY 1 -->
-    <div id="medical-history">
-        <div class="card">
-            <div class="card-header" id="category-1-heading">
-                <h4 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#category-1" aria-expanded="true" aria-controls="category-1">
-                        Health Category #1
-                    </button>
-                </h4>
-            </div>
 
-            <div id="category-1" class="collapse" aria-labelledby="category-1-heading" data-parent="#medical-history">
-                <div class="card-body">
-                    @{Html.RenderPartial("_HealthCategory1", Model.HealthInfo);}
-                </div>
+<!-- CATEGORY 1 -->
+<div id="medical-history">
+    <div class="card">
+        <div class="card-header" id="category-1-heading">
+            <h4 class="mb-0">
+                <button class="btn btn-link" data-toggle="collapse" data-target="#category-1" aria-expanded="true" aria-controls="category-1">
+                    Health Category #1
+                </button>
+            </h4>
+        </div>
+
+        <div id="category-1" class="collapse" aria-labelledby="category-1-heading" data-parent="#medical-history">
+            <div class="card-body">
+                @{Html.RenderPartial("_HealthCategory1", Model.HealthInfo);}
             </div>
         </div>
     </div>
 
+
     <!-- CATEGORY 2 -->
-    <div class="" id="category-2">
-        <h4 class="mb-0">Health Category #2</h4>
-        @{Html.RenderPartial("_HealthCategory2", Model.HealthInfo);}
+    <div class="">
+        <h4 class="mb-0" id="category-2-heading">
+            <button class="btn btn-link" data-toggle="collapse" data-target="#category-2" aria-expanded="true" aria-controls="category-2">
+                Health Category #2
+            </button>
+        </h4>
+        <div id="category-2" class="collapse" aria-labelledby="category-2-heading" data-parent="#medical-history">
+            @{Html.RenderPartial("_HealthCategory2", Model.HealthInfo);}
+        </div>
     </div>
 </div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $(".medical-information").hide();
+
+        TrackChanges();
+    });
+
+    function TrackChanges() {
+        $(':checkbox').change(function () {
+            var currentCheckbox = $(this);
+            var isChecked = currentCheckbox.is(':checked');
+
+            var currentCheckboxID = currentCheckbox.attr('id');
+            var currentCheckboxName = currentCheckbox.attr('name');
+
+            if (currentCheckbox.hasClass("to-category-two")) {
+                ProcessCategoryTwo(currentCheckboxID, isChecked);
+            } else {
+                ProcessCategoryOne(currentCheckboxName, isChecked);
+            }
+        });
+    }
+
+    function ProcessCategoryOne(currentCheckboxName, isChecked) {
+        // enable or disable medical input based on checkbox value
+        if (isChecked === true) {
+            $("input[name*='" + currentCheckboxName + "Description']").removeAttr("disabled");
+        } else {
+            ($("input[name*='" + currentCheckboxName + "Description']")).attr("disabled", "disabled");
+        }
+    }
+
+    function ProcessCategoryTwo(currentCheckboxID, isChecked) {
+        var count = 2;
+
+        if (isChecked === true) {
+            $("#" + currentCheckboxID + "-information").show();
+        }
+        else {
+            $("#" + currentCheckboxID + "-information").hide();
+        }
+    }
+</script>

@@ -9,8 +9,83 @@
 {
     @Html.AntiForgeryToken()
 
-    <h1>Temp text</h1>
+    <!-- ANAPHYLAXIS -->
+    <div class="col-md-9 col-md-offset-1">
+        <div id="anaphylaxis-information" class="medical-information">
+            <h4 clas="bg-info">Anaphylaxis</h4>
+            <div class="fornm-group">
+                <label>What is your child allergic to?</label>
+                <input class="form-control" type="text" placeholder="">
+            </div>
+            <div class="fornm-group">
+                <label>What are your student's symtomps?</label>
+                <input class="form-control" type="text" placeholder="">
+            </div>
+            <div class="fornm-group">
+                <label>Has your student been prescribed an Epi-pen?</label>
+                <input class="form-control" type="text" placeholder="">
+            </div>
+        </div>
+    </div>
 
+    <!-- DIABETES -->
+    <div class="col-md-9 col-md-offset-1">
+        <div id="diabetes-information" class="medical-information">
+            <hr>
+            <h4 class="bg-info">Diabetes</h4>
+            <p>
+                There is a state law, which requires all students with diabetes to have an individualized health care plan implemented in the school setting. If the student is diabetic, please contact the school nurse to help write your student's plan.
+            </p>
+        </div>
+    </div>
+    
 
+    <!-- ASTHMA INFORMATION -->
+    <div class="col-md-9 col-md-offset-1">
+        <div id="asthma-information" class="medical-information">
+            <hr>
+            <h4 class="bg-info">Asthma</h4>
+            <div class="form-group">
+                <label>1. How long your child had asthma?</label>
+                <input class="form-control" type="text" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>2. How many days would you estimate he/she missed school last year due to asthma?</label>
+                <input class="form-control" type="text" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>3. How many times in the past year has your child been:</label>
+                <input class="form-control" type="text" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>4. What are your child’s early warning signs of an asthma episode?</label>
+                <input class="form-control" type="text" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>5. If your child’s asthma is monitored with a peak flow meter, write in his/her best peak flow rate. </label>
+                <input class="form-control" type="text" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>6. Does your child have and use a nebulizer machine at home?</label>
+                <input class="form-control" type="text" placeholder="">
+            </div>
+            <div class="form-group">
+                <label>7. If your child takes medication for their asthma at home please provide the name of any medications:</label>
+                <input class="form-control" type="text" placeholder="">
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- THREATENING CONDITIONS -->
+    <div class="col-md-9 col-md-offset-1">
+        <div id="life-threatening-condition">
+            <hr>
+            <h4 class="bg-info">Life Threatening Conditions</h4>
+            <p>
+                RCW 28A.210.320-Children with Life-Threatening Conditions, requires a medication or treatment order as a prerequisite for children with life-threatening conditions to attend public schools. The new law defines “life- threatening condition” as a health condition that will put the child in danger of death during the school day, if a medication or treatment order and a nursing care plan are not in place. Potential life-threatening conditions include, but are not limited to, students with seizure disorders, diabetes, life-threatening allergies, and some students with asthma and heart conditions. If this law applies to your student, please contact the nurse at your child’s school.
+            </p>
+        </div>
+    </div>
 }
 
