@@ -387,6 +387,9 @@
     <Content Include="Views\Application\_GetSiblingInfo.cshtml" />
     <Content Include="Views\Application\_GetHealthInfo.cshtml" />
     <Content Include="Views\Admin\lateapps.cshtml" />
+    <Content Include="Views\Admin\familyincome.cshtml" />
+    <Content Include="Views\Application\_HealthCategory1.cshtml" />
+    <Content Include="Views\Application\_HealthCategory2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

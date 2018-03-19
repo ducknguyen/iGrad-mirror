@@ -18,6 +18,6 @@ namespace IGrad.Context
         }
         public DbSet<FamilyIncome> Income { get; set; }
         
-
+        public DbSet<IncomeTable> IncomeTable { get; set; }
     }
 }

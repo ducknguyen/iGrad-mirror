@@ -1,0 +1,67 @@
+﻿@model IGrad.Models.Income.FamilyIncome
+
+@{
+    ViewBag.Title = "View";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+@using (Html.BeginForm("FamilyIncome", "Admin", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+<div class="container">
+    <div class="pull-left">
+        @Html.EditorFor(model => model.EffectiveDates, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+    </div>
+    <div class="pull-right">
+        @Html.EditorFor(model => model.IncomeTableYears, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+    </div>
+    <div>
+        <table>
+            <tr>
+                <th>
+                    Monthly
+                </th>
+                <th>
+                    Twice Per Month	
+                </th>
+                <th>
+                    Every Two Weeks	
+                </th>
+                <th>
+                    Weekly
+                </th>
+                <th>
+                    Annual
+                </th>
+            </tr>
+            @for (var i = 0; i < Model.incomeTable.Count; i++)
+            {
+                <tr>
+                    <td>
+                        @Html.TextBoxFor(model => model.incomeTable[i].Monthly, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.incomeTable[i].TwiceMonthly, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.incomeTable[i].TwoWeeks, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.incomeTable[i].Weekly, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                    </td>
+                    <td>
+                        @Html.TextBoxFor(model => model.incomeTable[i].Annually, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                    </td>
+                
+                </tr>
+            }
+        </table>
+    </div>
+    <div class="form-row">
+        <div class="pull-right">
+            <button class="btn btn-primary btn-lg btn-success" type="submit">
+                Continue
+                <i class="fas fa-caret-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+}

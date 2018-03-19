@@ -11,6 +11,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.IO;
 using PagedList;
+using IGrad.Models.Income;
 
 namespace IGrad.Controllers
 {
@@ -195,10 +196,39 @@ namespace IGrad.Controllers
         {
             using (IncomeContext ic = new IncomeContext())
             {
-                var data = ic.Income.FirstOrDefault();
+                var data = ic.Income
+                    .Include(m => m.incomeTable)
+                    .FirstOrDefault();
 
                 return View(data);
             }
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult FamilyIncome(FamilyIncome income)
+        {
+            using (IncomeContext ic = new IncomeContext())
+            {
+                var data = ic.Income
+                    .Include(m => m.incomeTable)
+                    .FirstOrDefault();
+                
+                data.EffectiveDates = income.EffectiveDates;
+                data.IncomeTableYears = income.IncomeTableYears;
+
+                for(int i = 0; i < data.incomeTable.Count; i++)
+                {
+                    data.incomeTable[i].Monthly = income.incomeTable[i].Monthly;
+                    data.incomeTable[i].TwiceMonthly = income.incomeTable[i].TwiceMonthly;
+                    data.incomeTable[i].TwoWeeks = income.incomeTable[i].TwoWeeks;
+                    data.incomeTable[i].Weekly = income.incomeTable[i].Weekly;
+                    data.incomeTable[i].Annually = income.incomeTable[i].Annually;
+                }
+
+                ic.SaveChanges();
+            }
+            return RedirectToAction("FamilyIncome", "Admin");
         }
     }
 }
