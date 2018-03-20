@@ -11,6 +11,7 @@ namespace IGrad.Models.User
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int fieldId { get; set; }
         public Guid UserID { get; set; }
+
         [DisplayName("Has the Student Received Education Outside the U.S.?")]
         public bool hasEducationOutsideUS { get; set; }
         [DisplayName("How many months of education received?")]

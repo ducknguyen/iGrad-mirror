@@ -2,27 +2,29 @@
 
 @if (Model != null)
 {
-
-        <table id="highschool-info-table" class="table table-responsive">
-            <tr>
-                <th>Year</th>
-                <th>Name</th>
-                <th>City</th>
-                <th>Grade</th>
-                <th>Last High School Attended?</th>
-                <th>| Edit</th>
+    <table id="highschool-info-table" class="table table-striped table-bordered table-responsive">
+        <tr>
+            <th>Year</th>
+            <th>Name</th>
+            <th>City</th>
+            <th>Grade</th>
+            <th>Last attended</th>
+            <th class="text-center">Edit</th>
+        </tr>
+        @foreach (var hsi in Model)
+        {
+            <tr id="highSchool_@hsi.fieldId">
+                <td>@hsi.HighSchoolYear</td>
+                <td>@hsi.HighSchoolName</td>
+                <td>@hsi.HighSchoolCity</td>
+                <td>@hsi.HighSchoolGrade</td>
+                <td>@(hsi.isLastHighSchoolAttended ? "Yes" : "No")</td>
+                <td class="text-center">
+                    <button class="btn btn-danger" type="submit" onclick="deleteHighSchoolRecord(@hsi.fieldId)">
+                        <i class="fas fa-minus-square"></i>
+                    </button>
+                </td>
             </tr>
-            @foreach (var hsi in Model)
-            {
-                <tr id="highSchool_@hsi.fieldId">
-                    <td>@hsi.HighSchoolYear</td>
-                    <td>@hsi.HighSchoolName</td>
-                    <td>@hsi.HighSchoolCity</td>
-                    <td>@hsi.HighSchoolGrade</td>
-                    <td>@(hsi.isLastHighSchoolAttended ? "Yes" : "No")</td>
-                    <td><input type="submit" value="Delete" onclick="deleteHighSchoolRecord(@hsi.fieldId)"></td>
-                </tr>
-            }
-        </table>
-
+        }
+    </table>
 }

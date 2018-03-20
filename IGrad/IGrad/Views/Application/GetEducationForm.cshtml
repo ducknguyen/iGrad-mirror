@@ -1,5 +1,7 @@
 ﻿@model IGrad.Models.User.UserModel
 @{
+    /**/
+
     ViewBag.Title = "Education | iGrad";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -8,21 +10,25 @@
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 <script type="text/javascript">
     function loadHighSchoolInfoForm() {
+        console.log("loading highschool");
         hideTarget('add-new-highschool-button');
         showTarget('school-information');
         $("#school-information").load('@Url.Action("AddHighSchoolInfoPartial", "Application")');
     }
 
     function loadViolationInfo() {
+        console.log("loading violation");
         showTarget('add-violation-information');
         $("#add-violation-information").load('@Url.Action("GetAddViolation", "Application")');
     }
 
     function hideTarget(targetId) {
+        console.log("hiding sth");
         $('#' + targetId).addClass('hidden');
     }
 
     function showTarget(targetId) {
+        console.log("showing sth");
         $('#' + targetId).removeClass('hidden');
     }
 
@@ -44,66 +50,99 @@
     }
 </script>
 
+    <h3>Previous Education</h3>
+    <small class="form-text required-marker-indicator">* required fields.</small>
+    <hr>
+
+<!-- ADD PREVIOUS HIGH SCHOOL-->
+    <div class="" id="highschool-info">
+        <h4 class="bg-info">High School Information</h4>
+        @{if (Model.SchoolInfo.HighSchoolInformation != null)
+        {
+            Html.RenderPartial("_GetHighSchoolInfo", Model.SchoolInfo.HighSchoolInformation);
+        }}
+    </div>
+    <div class="" id="school-information">
+        <!--Form to add High School Information will be rendered here-->
+    </div>
+    <button class="btn btn-primary" id="add-new-highschool-button" onclick="loadHighSchoolInfoForm()">Add High School</button>
+    
+    <br /><br />
+
+<!-- FORM -->
 @using (Html.BeginForm("GetEducationForm", "Application", FormMethod.Post, new { enctype = "multipart/form-data", @id = "education-form" }))
 {
-    <div class="container">
-        <h1>Previous Education</h1>
-        <div class="well well-lg col-md-6">
-            <h2>General Information</h2>
-            <div class="row">
-                @Html.LabelFor(model => model.SchoolInfo.LastYearAttended, htmlAttributes: new { @class = "control-label required" })
-                @Html.TextBoxFor(model => model.SchoolInfo.LastYearAttended, htmlAttributes: new { @class = "form-control" })
+    <!-- GENERAL INFORMATION -->
+    <div class="wrapper">
+        <h4 class="bg-info">General Information</h4>
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.SchoolInfo.LastYearAttended, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.SchoolInfo.LastYearAttended, htmlAttributes: new { @class = "form-control", @placeholder = "Year attended" })
             </div>
-            <div class="row">
+            <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.SchoolInfo.CurrentGrade, htmlAttributes: new { @class = "control-label" })
-                @Html.TextBoxFor(model => model.SchoolInfo.CurrentGrade, htmlAttributes: new { @class = "form-control" })
-            </div>
-
-            <div class="row">
-                @Html.LabelFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "control-label" })
-                @Html.TextBoxFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "form-control" })
-            </div>
-
-            <div class="row">
-                @Html.LabelFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "control-label" })
-                @Html.TextBoxFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "form-control" })
-            </div>
-
-            <div class="row">
-                @Html.LabelFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "control-label" })
-                @Html.TextAreaFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "form-control" })
-            </div>
-
-            <div class="row">
-                @Html.LabelFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "control-label" })
-                @Html.TextAreaFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.SchoolInfo.CurrentGrade, htmlAttributes: new { @class = "form-control", @placeholder = "Current grade" })
             </div>
         </div>
 
-        <div class="well well-lg col-md-6">
-            <h2>Prior Education</h2>
-            <div class="row">
-                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
-                @Html.CheckBoxFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "chk-box pull-left" })
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "form-control", @rows = 3, @placeholder = "Student opinions..." })
             </div>
-            <div class="row">
-                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "control-label" })
-                @Html.CheckBoxFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "chk-box pull-left" })
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "form-control", @rows = 3, @placeholder = "Student performance..." })
             </div>
-            <div class="row">
-                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
-                @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "form-control" })
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "form-control", @rows = 4, @placeholder = "Strengths and improvements..." })
             </div>
-            <div class="row">
-                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
-                @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "form-control" })
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "form-control", @rows = 4, @placeholder = "Comments..." })
             </div>
         </div>
     </div>
-    <div class="container">
-        <div class="well well-lg col-md-6">
-            <p>Did the student participate in any of the following programs? <br /> (Check all that apply)</p>
 
+    
+    <div class="wrapper row">
+        <!-- PRIOR EDUCATION -->
+        <div class="col-md-6">
+            <h4 class="bg-info">Prior Education</h4>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+                <br />
+                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, true) Yes
+                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, false) No
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "control-label" })
+                <br />
+                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, true) Yes
+                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, false) No
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "form-control", @placeholder = "Month(s)" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "form-control", @placeholder = "Language spoken" })
+            </div>
+
+        </div>
+
+        <!-- SPECIAL PROGRAMS -->
+        <div class="col-md-6">
+            <h4 class="bg-info">Did the student participate in any of the following programs?</h4>
+            <small>(Check all that apply)</small>
+
+            <br />
             @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.SpecialEducation, htmlAttributes: new { @class = "" })
             @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.SpecialEducation, htmlAttributes: new { @class = "" })
             <br />
@@ -121,48 +160,38 @@
             <br />
             @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.EngishAsSecondLanguage, htmlAttributes: new { @class = "" })
             @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.EngishAsSecondLanguage, htmlAttributes: new { @class = "" })
-
         </div>
     </div>
-
 }
-<div class="container">
-    <div class="well well-lg col-md-6">
-        <h2>High School Information</h2>
-        <div class="row col-md-12" id="highschool-info">
-            @{if (Model.SchoolInfo.HighSchoolInformation != null)
+<!-- END FORM -->
+
+    <!-- VIOLATIONS CHECK -->
+    <div class="wrapper">
+        <div id="violation-container">
+            <h4 class="bg-info">Previous Violation</h4>
+            @{if (Model.SchoolInfo.PreviousSchoolViolation == null)
                 {
-                    Html.RenderPartial("_GetHighSchoolInfo", Model.SchoolInfo.HighSchoolInformation);
-                }}
-        </div>
-        <div class="row" id="school-information">
-            <!--Form to add High School Information will be rendered here-->
-        </div>
-        <button class="btn btn-primary btn-lg" id="add-new-highschool-button" onclick="loadHighSchoolInfoForm()">Add High School</button>
-    </div>
-    <div id="violation-container" class="well well-lg col-md-6">
-        <h3>Previous Violation</h3>
-        @{if (Model.SchoolInfo.PreviousSchoolViolation == null)
-            {
-                <div class="row">
-                    <h3>Has the student had a school violation?</h3>
+                <div class="">
+                    <h4>Has the student had a school violation?</h4>
                     <button class="btn btn-lg btn-primary" onclick="loadViolationInfo()">Yes, add violation</button>
                     <button class="btn btn-lg" value="" onclick="hideTarget('violation-container')">No</button>
+                    <br>
+                    <input type="radio" name="confirm-violation" onclick="loadViolationInfo()"> Yes
+                    <input type="radio" name="confirm-violation" onclick="hideTarget('violation-container')"> No<br>
                 </div>
-            }
-            else
-            {
-                <div class="container" id="existing-violation-information">
+                }
+              else
+                {
+                <div class="" id="existing-violation-information">
                     @{Html.RenderPartial("_GetViolationInfo", Model.SchoolInfo.PreviousSchoolViolation);}
                 </div>
-                        }
-        }
-        <div class="container" id="add-violation-information">
-
+                }
+            }
+            <div class="" id="add-violation-information">
+            </div>
         </div>
     </div>
-</div>
-
+    
 
 <div class="container">
     <div class="form-row">

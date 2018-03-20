@@ -1,21 +1,22 @@
 ﻿@model IGrad.Models.User.Violation
-
 @if (Model != null)
 {
-    <table id="highschool-info-table" class="table table-responsive">
+    <table id="highschool-info-table" class="table table-striped table-bordered table-responsive">
         <tr>
             <th>Suspended</th>
             <th>Weapon</th>
             <th>Date</th>
-            <th>| Edit</th>
+            <th class="text-center">Edit</th>
         </tr>
         <tr id="violation_@Model.fieldId">
             <td>@Model.isSuspendedOrExpelled</td>
             <td>@Model.hadWeaponViolation</td>
             <td>@Model.dateOfWeaponViolation.ToShortDateString()</td>
-            <td></td>
-            <td><input type="submit" value="Delete" onclick="deleteViolation(@Model.fieldId)"></td>
+            <td class="text-center">
+                <button class="btn btn-danger" type="submit" onclick="deleteViolation(@Model.fieldId)">
+                    <i class="fas fa-minus-square"></i>
+                </button>
+            </td>
         </tr>
     </table>
 }
-
