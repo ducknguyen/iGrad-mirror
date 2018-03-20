@@ -91,7 +91,7 @@ namespace IGrad.Controllers
 
             if (this.user.Guardians.Count != 0)
             {
-                PdfTextField parentName = (PdfTextField)(document.AcroForm.Fields["parentSignature"]);
+                PdfTextField parentName = (PdfTextField)(document.AcroForm.Fields["ParentGuardianName"]);
                 parentName.Value = new PdfString(this.user.Guardians[0].Name.FName + " " + this.user.Guardians[0].Name.LName);
                 parentName.ReadOnly = true;
 
