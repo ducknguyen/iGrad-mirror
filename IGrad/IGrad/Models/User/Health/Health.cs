@@ -24,15 +24,36 @@ namespace IGrad.Models.User
         public bool Allergies { get; set; }
         public string AllergiesDescription { get; set; }
 
+        // ************* ANAPHYLAXIS *************//
         [DisplayName("Anaphylaxis")]
-        public bool Anaphylaxis { get; set; } //special
+        public bool Anaphylaxis { get; set; }
+        [DisplayName("1. What is the student allergic to?")]
+        public string AnaphylaxisAllerigicTo { get; set; }
+        [DisplayName("2. What are the student's symptoms?")]
+        public string AnaphylaxisSymptoms { get; set; }
+        [DisplayName("3. Has the student been prescribed an Epi-Pen?")]
+        public bool AnaphylaxisEpiPen { get; set; }
 
         [DisplayName("Bee/Insect Allergy")]
         public bool BeeInsectAllergy { get; set; }
         public string BeeInsectAllergyDescription { get; set; }
 
+        // ************* ASTHMA *************//
         [DisplayName("Asthma")]
-        public bool Asthma { get; set; } //special
+        public bool Asthma { get; set; }
+        [DisplayName("1. How long has the student had asthma?")]
+        public string HowLongAsthma { get; set; }
+        [DisplayName("2. How many days would you eastimate the student missed school last year due to asthma?")]
+        public string MissedSchoolAsthma { get; set; }
+        [DisplayName("3. What are your student early warning signs of an asthma episode?")]
+        public string EarlySignsAsthma { get; set; }
+        [DisplayName("4. If your student asthma is monitored with a peak flow meter, write in their best peak flow rate")]
+        public string BestPeakFlowRateAsthma { get; set; }
+        [DisplayName("5. Does your student have and use a nebulizer machine at home?")]
+        public bool HomeNebulizerAsthma { get; set; }
+        [DisplayName("6. If your student takes medication for their asthma at home please provide the name of any medications:")]
+        public string NameOfMedicationAsthma { get; set; }
+
 
         [DisplayName("Birth defects")]
         public bool BirthDefectsOrConcern { get; set; }
@@ -70,8 +91,9 @@ namespace IGrad.Models.User
         public bool HeartCondition { get; set; }
         public string HeartConditionDescription { get; set; }
 
+        // ************* DIABETES *************//
         [DisplayName("Diabetes")]
-        public bool Diabetes { get; set; } //special
+        public bool Diabetes { get; set; } 
 
         [DisplayName("Blood disorder")]
         public bool BloodDisorder { get; set; }
