@@ -5,9 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
-using System.IO;
 using System.Linq;
-using System.Net.Mime;
 using System.Web.Mvc;
 
 namespace IGrad.Controllers
