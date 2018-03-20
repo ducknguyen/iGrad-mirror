@@ -1,13 +1,12 @@
-﻿
+﻿@model IGrad.Models.User.UserModel
 @{
     ViewBag.Title = "GetOtherInfoForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GetOtherInfoForm</h2>
-
+<h2>Other Info</h2>
 <div class="row col-md-4 form-group">
-    <button class="btn btn-lg  btn-success">
-        @Html.ActionLink("Save and Review! at home..", "GetNewApplication", "Application")
+    <button class="btn btn-lg  btn-success" type="submit">
+    @Html.ActionLink("Generate PDF", "getFilledPDF", "Application")
     </button>
 </div>

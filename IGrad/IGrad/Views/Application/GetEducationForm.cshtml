@@ -4,8 +4,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Styles.Render("/Content/educationform.css")
-<script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
-<script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+
 <script type="text/javascript">
     function loadHighSchoolInfoForm() {
         hideTarget('add-new-highschool-button');
@@ -44,91 +43,96 @@
     }
 </script>
 
+@using (Html.BeginForm("GetEducationForm", "Application", FormMethod.Post, new { enctype = "multipart/form-data", @id = "education-form" }))
+{
+    <div class="container">
+        <h1>Previous Education</h1>
+        <div class="well well-lg col-md-6">
+            <h2>General Information</h2>
+            <div class="row">
+                @Html.LabelFor(model => model.SchoolInfo.LastYearAttended, htmlAttributes: new { @class = "control-label required" })
+                @Html.TextBoxFor(model => model.SchoolInfo.LastYearAttended, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="row">
+                @Html.LabelFor(model => model.SchoolInfo.CurrentGrade, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.SchoolInfo.CurrentGrade, htmlAttributes: new { @class = "form-control" })
+            </div>
 
-<div class="container">
-    <h1>Previous Education</h1>
-    <div class="well well-lg col-md-6">
-        <h2>General Information</h2>
-        <div class="row">
-            @Html.LabelFor(model => model.SchoolInfo.LastYearAttended, htmlAttributes: new { @class = "control-label required" })
-            @Html.TextBoxFor(model => model.SchoolInfo.LastYearAttended, htmlAttributes: new { @class = "form-control" })
-        </div>
-        <div class="row">
-            @Html.LabelFor(model => model.SchoolInfo.CurrentGrade, htmlAttributes: new { @class = "control-label" })
-            @Html.TextBoxFor(model => model.SchoolInfo.CurrentGrade, htmlAttributes: new { @class = "form-control" })
+            <div class="row">
+                @Html.LabelFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "form-control" })
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "form-control" })
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "form-control" })
+            </div>
+
+            <div class="row">
+                @Html.LabelFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "form-control" })
+            </div>
         </div>
 
-        <div class="row">
-            @Html.LabelFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "control-label" })
-            @Html.TextBoxFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "form-control" })
+        <div class="well well-lg col-md-6">
+            <h2>Prior Education</h2>
+            <div class="row">
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "chk-box pull-left" })
+            </div>
+            <div class="row">
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "control-label" })
+                @Html.CheckBoxFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "chk-box pull-left" })
+            </div>
+            <div class="row">
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "form-control" })
+            </div>
+            <div class="row">
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "form-control" })
+            </div>
         </div>
+    </div>
+    <div class="container">
+        <div class="well well-lg col-md-6">
+            <p>Did the student participate in any of the following programs? <br /> (Check all that apply)</p>
 
-        <div class="row">
-            @Html.LabelFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "control-label" })
-            @Html.TextBoxFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "form-control" })
-        </div>
+            @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.SpecialEducation, htmlAttributes: new { @class = "" })
+            @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.SpecialEducation, htmlAttributes: new { @class = "" })
+            <br />
+            @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.plan504, htmlAttributes: new { @class = "" })
+            @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.plan504, htmlAttributes: new { @class = "" })
+            <br />
+            @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.Title, htmlAttributes: new { @class = "" })
+            @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.Title, htmlAttributes: new { @class = "" })
+            <br />
+            @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.LAP, htmlAttributes: new { @class = "" })
+            @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.LAP, htmlAttributes: new { @class = "" })
+            <br />
+            @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.HighlyCapable, htmlAttributes: new { @class = "" })
+            @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.HighlyCapable, htmlAttributes: new { @class = "" })
+            <br />
+            @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.EngishAsSecondLanguage, htmlAttributes: new { @class = "" })
+            @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.EngishAsSecondLanguage, htmlAttributes: new { @class = "" })
 
-        <div class="row">
-            @Html.LabelFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "control-label" })
-            @Html.TextAreaFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "form-control" })
-        </div>
-
-        <div class="row">
-            @Html.LabelFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "control-label" })
-            @Html.TextAreaFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "form-control" })
         </div>
     </div>
 
-    <div class="well well-lg col-md-6">
-        <h2>Prior Education</h2>
-        <div class="row">
-            @Html.LabelFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
-            @Html.CheckBoxFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "chk-box pull-left" })
-        </div>
-        <div class="row">
-            @Html.LabelFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "control-label" })
-            @Html.CheckBoxFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "chk-box pull-left" })
-        </div>
-        <div class="row">
-            @Html.LabelFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
-            @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "form-control" })
-        </div>
-        <div class="row">
-            @Html.LabelFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
-            @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "form-control" })
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="well well-lg col-md-6">
-        <p>Did the student participate in any of the following programs? <br /> (Check all that apply)</p>
-
-        @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.SpecialEducation, htmlAttributes: new { @class = "" })
-        @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.SpecialEducation, htmlAttributes: new { @class = "" })
-        <br />
-        @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.plan504, htmlAttributes: new { @class = "" })
-        @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.plan504, htmlAttributes: new { @class = "" })
-        <br />
-        @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.Title, htmlAttributes: new { @class = "" })
-        @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.Title, htmlAttributes: new { @class = "" })
-        <br />
-        @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.LAP, htmlAttributes: new { @class = "" })
-        @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.LAP, htmlAttributes: new { @class = "" })
-        <br />
-        @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.HighlyCapable, htmlAttributes: new { @class = "" })
-        @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.HighlyCapable, htmlAttributes: new { @class = "" })
-        <br />
-        @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.EngishAsSecondLanguage, htmlAttributes: new { @class = "" })
-        @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.EngishAsSecondLanguage, htmlAttributes: new { @class = "" })
-
-    </div>
-</div>
-
+}
 <div class="container">
     <div class="well well-lg col-md-6">
         <h2>High School Information</h2>
         <div class="row col-md-12" id="highschool-info">
-            
+            @{if (Model.SchoolInfo.HighSchoolInformation != null)
+                {
+                    Html.RenderPartial("_GetHighSchoolInfo", Model.SchoolInfo.HighSchoolInformation);
+                }}
         </div>
         <div class="row" id="school-information">
             <!--Form to add High School Information will be rendered here-->
@@ -158,8 +162,14 @@
     </div>
 </div>
 
-<div class="container col-md-12 pull-right">
-    <button class="btn btn-lg btn-success  pull-right">
-        @Html.ActionLink("Continue To Household", "GetHouseholdForm", "Application")
-    </button>
+
+<div class="container">
+    <div class="form-row">
+        <div class="pull-right">
+            <button class="btn btn-primary btn-lg btn-success" type="submit" form="education-form">
+                Continue
+                <i class="fas fa-caret-right"></i>
+            </button>
+        </div>
+    </div>
 </div>

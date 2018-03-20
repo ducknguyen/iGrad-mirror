@@ -182,3 +182,5 @@ C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\de\PdfSharp.Charting.reso
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.pdb
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.csprojResolveAssemblyReference.cache
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\DotNetZip.dll
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\DotNetZip.xml

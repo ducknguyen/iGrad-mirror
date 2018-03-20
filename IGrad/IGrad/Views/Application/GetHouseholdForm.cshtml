@@ -51,113 +51,121 @@
             success: hideTarget('sibling_' + fieldId)
         });
     }
-
-
 </script>
-<h2>GetHouseholdForm</h2>
-<p>* required fields.</p>
-<hr />
-<div class="container" id="living-situation">
-    <p>Student lives with : </p>
-    <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithBothParents, htmlAttributes: new { @class = "" }) Both Parents</p>
-    <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithMotherOnly, htmlAttributes: new { @class = "chk-box " }) Mother Only</p>
-    <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithFatherOnly, htmlAttributes: new { @class = "chk-box" }) Father Only</p>
-    <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithGrandparents, htmlAttributes: new { @class = "chk-box" }) Grandparents</p>
-    <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithSelf, htmlAttributes: new { @class = "chk-box" }) Own Residence</p>
-    <p>@Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "chk-box" }) Homeless / Distressed</p>
 
-    <p>Total Individuals In Residence</p>@Html.TextBoxFor(model => model.LivesWith.TotalPeopleInResidence, htmlAttributes: new { @class = "" })
-
-    @Html.LabelFor(model => model.LivesWith.AnnualHouseHoldIncome, htmlAttributes: new { @class = "" })
-    @Html.TextBoxFor(model => model.LivesWith.AnnualHouseHoldIncome, htmlAttributes: new { @class = "" })
-
+@using (Html.BeginForm("GetHouseholdForm", "Application", FormMethod.Post, new { enctype = "multipart/form-data", @id = "household-form" }))
+{ 
+    <h2>Household Information</h2>
+    <p>* required fields.</p>
     <hr />
-    <h7>Current Residence</h7>
-    @Html.LabelFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
-    @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
+    <div class="container" id="living-situation">
+        <p>Student lives with : </p>
+        <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithBothParents, htmlAttributes: new { @class = "" }) Both Parents</p>
+        <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithMotherOnly, htmlAttributes: new { @class = "chk-box " }) Mother Only</p>
+        <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithFatherOnly, htmlAttributes: new { @class = "chk-box" }) Father Only</p>
+        <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithGrandparents, htmlAttributes: new { @class = "chk-box" }) Grandparents</p>
+        <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithSelf, htmlAttributes: new { @class = "chk-box" }) Own Residence</p>
+        <p>@Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "chk-box" }) Homeless / Distressed</p>
 
-    @Html.LabelFor(model => model.ResidentAddress.City, htmlAttributes: new { @class = "" })
-    @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
+        <p>Total Individuals In Residence</p>@Html.TextBoxFor(model => model.LivesWith.TotalPeopleInResidence, htmlAttributes: new { @class = "" })
 
-    @Html.LabelFor(model => model.ResidentAddress.State, htmlAttributes: new { @class = "" })
-    @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
+        @Html.LabelFor(model => model.LivesWith.AnnualHouseHoldIncome, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.LivesWith.AnnualHouseHoldIncome, htmlAttributes: new { @class = "" })
+
+        <hr />
+        <h7>Current Residence</h7>
+        @Html.LabelFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
+
+        @Html.LabelFor(model => model.ResidentAddress.City, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
+
+        @Html.LabelFor(model => model.ResidentAddress.State, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
 
 
-    @Html.LabelFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "" })
-    @Html.TextBoxFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "" })
-    @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
-
-    <p>Address is mailing address? *</p>
-    @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, true, htmlAttributes: new { @class = "" , @onclick = "hideTarget('mailing-address')" })Yes
-    @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, false, htmlAttributes: new { @class = "", @onclick = "showTarget('mailing-address')" })No
-
-    <div class="container hidden" id="mailing-address">
-        <p>Please Specify Mailing Address * </p>
-        @Html.LabelFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
-        @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
-
-        @Html.LabelFor(model => model.MailingAddress.City, htmlAttributes: new { @class = "" })
-        @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
-
-        @Html.LabelFor(model => model.MailingAddress.State, htmlAttributes: new { @class = "" })
-        @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
-
-        @Html.LabelFor(model => model.MailingAddress.Zip, htmlAttributes: new { @class = "" })
-        @Html.TextBoxFor(model => model.MailingAddress.Zip, htmlAttributes: new { @class = "" })
+        @Html.LabelFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "" })
+        @Html.TextBoxFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "" })
         @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
 
-        @Html.LabelFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = "" })
-        @Html.TextBoxFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = "" })
-    </div>
-    <hr />
-    <div class="container well-lg well" id="add-emergency-contact-container">
-        <div class="container" id="emergency-contacts">
-            <!-- emergency partial view here-->
-            @{if (Model.EmergencyContacts != null)
+        <p>Address is mailing address? *</p>
+        @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, true, htmlAttributes: new { @class = "", @onclick = "hideTarget('mailing-address')" })Yes
+        @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, false, htmlAttributes: new { @class = "", @onclick = "showTarget('mailing-address')" })No
+
+        <div class="container hidden" id="mailing-address">
+            <p>Please Specify Mailing Address * </p>
+            @Html.LabelFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
+            @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
+
+            @Html.LabelFor(model => model.MailingAddress.City, htmlAttributes: new { @class = "" })
+            @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
+
+            @Html.LabelFor(model => model.MailingAddress.State, htmlAttributes: new { @class = "" })
+            @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
+
+            @Html.LabelFor(model => model.MailingAddress.Zip, htmlAttributes: new { @class = "" })
+            @Html.TextBoxFor(model => model.MailingAddress.Zip, htmlAttributes: new { @class = "" })
+            @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
+
+            @Html.LabelFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = "" })
+            @Html.TextBoxFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = "" })
+        </div>
+        </div>
+}
+        <hr />
+        <div class="container well-lg well" id="add-emergency-contact-container">
+            <div class="container" id="emergency-contacts">
+                <!-- emergency partial view here-->
+                @{if (Model.EmergencyContacts != null)
                 {
                     Html.RenderPartial("_GetEmergencyContacts", Model.EmergencyContacts.ToList());
                 }
-            }
+                }
+            </div>
+            <div class="container" id="add-emergency-contact">
+
+            </div>
+            <button class="btn btn-lg btn-primary" id="add-emergency-contact-button" onclick="loadEmergencyContactInfoForm()">+ Add Emergency Contact</button>
         </div>
-        <div class="container" id="add-emergency-contact">
 
-        </div>
-        <button class="btn btn-lg btn-primary" id="add-emergency-contact-button" onclick="loadEmergencyContactInfoForm()">+ Add Emergency Contact</button>
-    </div>
+        <p>Household Information:</p>
 
-    <p>Household Information:</p>
+        <div class="container well-lg well" id="add-guardian-container">
+            <div class="container" id="guardians">
+                <!-- guardians partial view here-->
 
-    <div class="container well-lg well" id="add-guardian-container">
-        <div class="container" id="guardians">
-            <!-- guardians partial view here-->
-
-            @{if (Model.Guardians != null)
+                @{if (Model.Guardians != null)
                 {
                     Html.RenderPartial("_GetGuardianInfo", Model.Guardians.ToList());
                 }
-            }
+                }
+            </div>
+            <button class="btn btn-lg btn-primary" id="add-guardian-button" onclick="loadGuardianInfoForm()">+ Add Parent/Guardian(s)</button>
+            <div class="hidden" id="add-guardian">
+            </div>
         </div>
-        <button class="btn btn-lg btn-primary" id="add-guardian-button" onclick="loadGuardianInfoForm()">+ Add Parent/Guardian(s)</button>
-        <div class="hidden" id="add-guardian">
-        </div>
-    </div>
 
-    <div class="container well-lg well" id="add-sibling-container">
-        <div class="siblings" id="siblings">
-            <!-- sibling partial view here-->
-            @{if (Model.Siblings != null)
+        <div class="container well-lg well" id="add-sibling-container">
+            <div class="siblings" id="siblings">
+                <!-- sibling partial view here-->
+                @{if (Model.Siblings != null)
                 {
                     Html.RenderPartial("_GetSiblingInfo", Model.Siblings.ToList());
-                } 
-             }
-        </div>
-        <button class="btn btn-lg btn-primary" id="add-sibling-button" onclick="loadSiblingInfoForm()">+ Add Sibling(s)</button>
-        <div class="hidden" id="add-sibling">
+                }
+                }
+            </div>
+            <button class="btn btn-lg btn-primary" id="add-sibling-button" onclick="loadSiblingInfoForm()">+ Add Sibling(s)</button>
+            <div class="hidden" id="add-sibling">
+            </div>
         </div>
     </div>
-</div>
-<div class="row col-md-4 form-group">
-    <button class="btn btn-lg btn-success">
-        @Html.ActionLink("Continue To Health", "GetHealthForm", "Application")
-    </button>
-</div>
+    <div class="container">
+        <div class="form-row">
+            <div class="pull-right">
+                <button class="btn btn-primary btn-lg btn-success" type="submit" form="household-form">
+                    Continue
+                    <i class="fas fa-caret-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>

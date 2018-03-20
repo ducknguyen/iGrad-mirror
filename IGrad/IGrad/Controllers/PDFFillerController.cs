@@ -67,6 +67,7 @@ namespace IGrad.Controllers
             }
         }
 
+
         private Byte[] GetLanguageHistoryPDF()
         {
             // Get the blank form to fill out
@@ -117,7 +118,7 @@ namespace IGrad.Controllers
                 homeLanguage.Value = new PdfString(this.user.LanguageHisory.PrimaryLanguageSpokenAtHome);
                 homeLanguage.ReadOnly = true;
 
-                
+
                 // English Support
                 PdfCheckBoxField hadSupport = (PdfCheckBoxField)(document.AcroForm.Fields["hadEnglishSupport"]);
                 PdfCheckBoxField noSupport = (PdfCheckBoxField)(document.AcroForm.Fields["noEnglishSupport"]);
@@ -183,13 +184,14 @@ namespace IGrad.Controllers
             gender.Value = new PdfString(user.Gender);
             gender.ReadOnly = true;
 
-            // TODO: FIX JEFF MATH HERE
-            int age = DateTime.Now.Year - this.user.Birthday.Year;
+            int age = DateTime.Now.Year - user.Birthday.Year;
+            if (DateTime.Now < user.Birthday.AddYears(age))
+            {
+                age--;
+            }
             PdfTextField formAge = (PdfTextField)(document.AcroForm.Fields["Age"]);
             formAge.Value = new PdfString(age.ToString());
             formAge.ReadOnly = true;
-
-            
 
             document.SecuritySettings.PermitFormsFill = false;
             document.SecuritySettings.PermitModifyDocument = false;

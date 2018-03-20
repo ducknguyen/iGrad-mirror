@@ -7,7 +7,7 @@
     UpdateTargetId = "highschool-info",
     InsertionMode = InsertionMode.Replace,
 
-}))
+}, new { @id = "add-hs-form" }))
 {
     @Html.AntiForgeryToken()
     <div class="container form-horizontal" id="add-highschool-form">
@@ -48,7 +48,7 @@
         <div class="container">
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <button id="submitButton" type="submit" class="btn btn-primary" onclick="hideTarget('school-information');showTarget('add-new-highschool-button')">Add Highschool</button>
+                    <button id="submitButton" type="submit" form="add-hs-form" class="btn btn-primary" onclick="hideTarget('school-information');showTarget('add-new-highschool-button')">Add Highschool</button>
                     <button id="cancelButton" type="button" class="btn" onclick="hideTarget('school-information');showTarget('add-new-highschool-button')">Cancel</button>
                 </div>
             </div>

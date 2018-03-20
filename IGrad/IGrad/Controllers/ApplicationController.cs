@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Validation;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Web.Mvc;
 
 namespace IGrad.Controllers
@@ -181,6 +183,7 @@ namespace IGrad.Controllers
                 UserContext db = new UserContext();
                 _user = db.Users.Where(u => u.UserID == UserID)
                     .Include(u => u.SchoolInfo)
+                    .Include(u => u.QualifiedOrEnrolledInProgam)
                     .Include(u => u.SchoolInfo.HighSchoolInformation)
                     .Include(u => u.SchoolInfo.PreviousSchoolViolation)
                     .FirstOrDefault();
@@ -203,7 +206,33 @@ namespace IGrad.Controllers
         [HttpPost]
         public ActionResult GetEducationForm(UserModel user)
         {
-            return View();
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                var data = db.Users
+                       .Include(u => u.SchoolInfo)
+                       .Include(u => u.QualifiedOrEnrolledInProgam)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+                if(data.SchoolInfo == null)
+                {
+                    data.SchoolInfo = new SchoolInfo();
+                }
+                if(data.QualifiedOrEnrolledInProgam == null)
+                {
+                    data.QualifiedOrEnrolledInProgam = new QualifiedOrEnrolledInProgram();
+                }
+                //set IDs for Entities
+                user.UserID = UserID;
+                user.QualifiedOrEnrolledInProgam.UserID = UserID;
+                //Set object reference to entity with UserID
+                data.QualifiedOrEnrolledInProgam = user.QualifiedOrEnrolledInProgam;
+                data.SchoolInfo = user.SchoolInfo;
+
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("GetHouseholdForm","Application");
         }
 
         public ActionResult AddHighSchoolInfoPartial()
@@ -359,7 +388,7 @@ namespace IGrad.Controllers
                 }
                 db.SaveChanges();
             }
-            return RedirectToAction("GetHouseholdForm", "Application");
+            return RedirectToAction("GetEducationForm", "Application");
         }
 
         [Authorize]
@@ -428,14 +457,18 @@ namespace IGrad.Controllers
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
 
-                data.EmergencyContacts = user.EmergencyContacts;
-                data.LivesWith = user.LivesWith;
+                //set userID of objects
+                user.LivesWith.UserID = UserID;
+                user.MailingAddress.UserID = UserID;
+                user.ResidentAddress.UserID = UserID;
+                //assign entity the values submitted by form
                 data.MailingAddress = user.MailingAddress;
                 data.ResidentAddress = user.ResidentAddress;
+                data.LivesWith = user.LivesWith;
 
                 db.SaveChanges();
             }
-            return View();
+            return RedirectToAction("GetHealthForm", "Application");
         }
 
         public ActionResult GetAddEmergencyContact()
@@ -607,11 +640,6 @@ namespace IGrad.Controllers
             }
         }
 
-        [HttpPost]
-        public ActionResult GetHouseHoldForm(UserModel user)
-        {
-            return View();
-        }
         [Authorize]
         public ActionResult GetHealthForm()
         {
@@ -660,18 +688,36 @@ namespace IGrad.Controllers
         [HttpPost]
         public ActionResult GetHealthForm(UserModel user)
         {
-            return View();
+            //TODO SAVE HEALTH TO DB
+            return RedirectToAction("GetOtherInfoForm","Application");
         }
 
+        [Authorize]
         public ActionResult GetOtherInfoForm()
         {
-            return View();
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                //get user
+                var data = db.Users
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+                return View(data);
+            }
+
         }
 
         [HttpPost]
         public ActionResult GetOtherInfoForm(UserModel user)
         {
             return View();
+        }
+
+        public ActionResult GetFilledPDF()
+        {
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            PDFFillerController pdfcontrol = new PDFFillerController();
+            return pdfcontrol.FillPdf(UserID);
         }
 
 
