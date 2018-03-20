@@ -58,6 +58,7 @@ namespace IGrad.Controllers
                 zip.AddEntry("FirstForm.pdf", firstForm());
                 zip.AddEntry("HomeLanguageFile.pdf", GetLanguageHistoryPDF());
                 zip.AddEntry("ParentQuestionaire.pdf", ParentQuestionareForm());
+                zip.AddEntry("RequestForRecords.pdf", RequestForRecordsForm());
 
                 MemoryStream output = new MemoryStream();
                 output.Position = 0;
@@ -160,7 +161,7 @@ namespace IGrad.Controllers
 
         private Byte[] firstForm()
         {
-            
+
             // Get the blank form to fill out
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/StudentEnrollmentChecklistApp.pdf");
             PdfDocument document = PdfReader.Open(filePath);
@@ -274,20 +275,20 @@ namespace IGrad.Controllers
             PdfTextField SiblingGrade2 = (PdfTextField)(document.AcroForm.Fields["SiblingGrade2"]);
             PdfTextField SiblingGrade3 = (PdfTextField)(document.AcroForm.Fields["SiblingGrade3"]);
 
-            if(this.user.Siblings.Count >= 1)
+            if (this.user.Siblings.Count >= 1)
             {
                 Sibling1Name.Value = new PdfString(this.user.Siblings[0].FName + " " + this.user.Siblings[0].LName);
                 Sibling1Age.Value = new PdfString(this.user.Siblings[0].Age.ToString());
                 SiblingGrade1.Value = new PdfString(this.user.Siblings[0].Grade);
             }
-            if(this.user.Siblings.Count >= 2)
+            if (this.user.Siblings.Count >= 2)
             {
                 Sibling2Name.Value = new PdfString(this.user.Siblings[1].FName + " " + this.user.Siblings[1].LName);
                 Sibling2Age.Value = new PdfString(this.user.Siblings[1].Age.ToString());
                 SiblingGrade2.Value = new PdfString(this.user.Siblings[1].Grade);
             }
 
-            if(this.user.Siblings.Count >= 3)
+            if (this.user.Siblings.Count >= 3)
             {
                 Sibling3Name.Value = new PdfString(this.user.Siblings[2].FName + " " + this.user.Siblings[2].LName);
                 Sibling3Age.Value = new PdfString(this.user.Siblings[2].Age.ToString());
@@ -380,5 +381,104 @@ namespace IGrad.Controllers
             }
         }
 
+        private Byte[] RequestForRecordsForm()
+        {
+            // Get the blank form to fill out
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/RequestForRecords1-25-2018.pdf");
+            PdfDocument document = PdfReader.Open(filePath);
+
+            // Set the flag so we can flatten once done.
+            document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
+
+            PdfTextField firstrqst = (PdfTextField)(document.AcroForm.Fields["1st rqst"]);
+            firstrqst.Value = new PdfString("X");
+            firstrqst.ReadOnly = true;
+
+            if (this.user.SchoolInfo.HighSchoolInformation != null)
+            {
+                string prevHighSchool = "";
+                for (int i = 0; i < this.user.SchoolInfo.HighSchoolInformation.Count; i++)
+                {
+                    if (this.user.SchoolInfo.HighSchoolInformation[i].isLastHighSchoolAttended)
+                    {
+                        prevHighSchool = this.user.SchoolInfo.HighSchoolInformation[i].HighSchoolName;
+                    }
+                }
+
+                PdfTextField lastSchool = (PdfTextField)(document.AcroForm.Fields["School Name Previous School"]);
+                lastSchool.Value = new PdfString(prevHighSchool);
+                lastSchool.ReadOnly = true;
+
+                PdfTextField grade = (PdfTextField)(document.AcroForm.Fields["Grade"]);
+                grade.Value = new PdfString(this.user.SchoolInfo.CurrentGrade.ToString());
+                grade.ReadOnly = true;
+            }
+
+            if (this.user.ResidentAddress != null)
+            {
+                PdfTextField address = (PdfTextField)(document.AcroForm.Fields["Address"]);
+                if (string.IsNullOrEmpty(this.user.ResidentAddress.POBox))
+                {
+                    address.Value = new PdfString(this.user.ResidentAddress.Street);
+                }
+                else
+                {
+                    address.Value = new PdfString(this.user.ResidentAddress.POBox);
+                }
+                address.ReadOnly = true;
+
+                PdfTextField city = (PdfTextField)(document.AcroForm.Fields["City"]);
+                city.Value = new PdfString(this.user.ResidentAddress.City);
+                city.ReadOnly = true;
+
+                PdfTextField state = (PdfTextField)(document.AcroForm.Fields["State"]);
+                state.Value = new PdfString(this.user.ResidentAddress.City);
+                state.ReadOnly = true;
+
+                PdfTextField zipcode = (PdfTextField)(document.AcroForm.Fields["Zip Code"]);
+                zipcode.Value = new PdfString(this.user.ResidentAddress.City);
+                zipcode.ReadOnly = true;
+            }
+
+            PdfTextField phone = (PdfTextField)(document.AcroForm.Fields["Phone"]);
+            phone.Value = new PdfString(this.user.PhoneInfo.PhoneNumber);
+            phone.ReadOnly = true;
+
+            PdfTextField lName = (PdfTextField)(document.AcroForm.Fields["Last Name"]);
+            lName.Value = new PdfString(this.user.Name.LName);
+            lName.ReadOnly = true;
+
+            PdfTextField fName = (PdfTextField)(document.AcroForm.Fields["First"]);
+            fName.Value = new PdfString(this.user.Name.FName);
+            fName.ReadOnly = true;
+
+            PdfTextField mi = (PdfTextField)(document.AcroForm.Fields["MI"]);
+            mi.Value = new PdfString(this.user.Name.MName);
+            mi.ReadOnly = true;
+
+            PdfTextField dob = (PdfTextField)(document.AcroForm.Fields["DOB"]);
+            dob.Value = new PdfString(this.user.Birthday.ToString("MM-dd-yyyy"));
+            dob.ReadOnly = true;
+
+            PdfSignatureField parentSignature = (PdfSignatureField)(document.AcroForm.Fields["ParentGuardian Signature"]);
+            parentSignature.Value = new PdfString(this.user.Guardians[0].Name.FName + " " + this.user.Guardians[0].Name.LName);
+            parentSignature.ReadOnly = true;
+            
+
+
+
+            document.SecuritySettings.PermitFormsFill = false;
+            document.SecuritySettings.PermitModifyDocument = false;
+            document.SecuritySettings.PermitFullQualityPrint = true;
+            document.SecuritySettings.PermitPrint = true;
+
+            byte[] fileContents = null;
+            using (MemoryStream stream = new MemoryStream())
+            {
+                document.Save(stream);
+                fileContents = stream.ToArray();
+                return fileContents;
+            }
+        }
     }
 }
