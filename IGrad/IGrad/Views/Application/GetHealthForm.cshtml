@@ -248,20 +248,23 @@
                 @Html.EditorFor(model => model.OtherHealthConcernsDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
             </div>
         </div>
+
+        <!-- ANAPHYLAXIS -->
         <div class="col-md-9 col-md-offset-1">
             <div id="anaphylaxis-information" class="medical-information">
                 <h4 clas="bg-info">Anaphylaxis</h4>
-                <div class="fornm-group">
-                    <label>What is your child allergic to?</label>
-                    <input class="form-control" type="text" placeholder="">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AnaphylaxisAllerigicTo, htmlAttributes: new { @class = "" })
+                    @Html.EditorFor(model => model.AnaphylaxisAllerigicTo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Years and months" } })
                 </div>
-                <div class="fornm-group">
-                    <label>What are your student's symtomps?</label>
-                    <input class="form-control" type="text" placeholder="">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AnaphylaxisSymptoms, htmlAttributes: new { @class = "" })
+                    @Html.EditorFor(model => model.AnaphylaxisSymptoms, new { htmlAttributes = new { @class = "form-control", @placeholder = "Symptoms" } })
                 </div>
-                <div class="fornm-group">
-                    <label>Has your student been prescribed an Epi-pen?</label>
-                    <input class="form-control" type="text" placeholder="">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.AnaphylaxisEpiPen, htmlAttributes: new { @class = "" })
+                    @Html.RadioButtonFor(model => model.AnaphylaxisEpiPen, true) Yes
+                    @Html.RadioButtonFor(model => model.AnaphylaxisEpiPen, false) No
                 </div>
             </div>
         </div>
@@ -284,32 +287,30 @@
                 <hr>
                 <h4 class="bg-info">Asthma</h4>
                 <div class="form-group">
-                    <label>1. How long your child had asthma?</label>
-                    <input class="form-control" type="text" placeholder="">
+                    @Html.LabelFor(model => model.HowLongAsthma, htmlAttributes: new { @class = "" })
+                    @Html.EditorFor(model => model.HowLongAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Years and months" } })
                 </div>
                 <div class="form-group">
-                    <label>2. How many days would you estimate he/she missed school last year due to asthma?</label>
-                    <input class="form-control" type="text" placeholder="">
+                    @Html.LabelFor(model => model.MissedSchoolAsthma, htmlAttributes: new { @class = "" })
+                    @Html.EditorFor(model => model.MissedSchoolAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Days" } })
                 </div>
                 <div class="form-group">
-                    <label>3. How many times in the past year has your child been:</label>
-                    <input class="form-control" type="text" placeholder="">
+                    @Html.LabelFor(model => model.EarlySignsAsthma, htmlAttributes: new { @class = "" })
+                    @Html.EditorFor(model => model.EarlySignsAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Signs of asthma" } })
                 </div>
                 <div class="form-group">
-                    <label>4. What are your child’s early warning signs of an asthma episode?</label>
-                    <input class="form-control" type="text" placeholder="">
+                    @Html.LabelFor(model => model.BestPeakFlowRateAsthma, htmlAttributes: new { @class = "" })
+                    @Html.EditorFor(model => model.BestPeakFlowRateAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Peak rate" } })
                 </div>
                 <div class="form-group">
-                    <label>5. If your child’s asthma is monitored with a peak flow meter, write in his/her best peak flow rate. </label>
-                    <input class="form-control" type="text" placeholder="">
+                    @Html.LabelFor(model => model.HomeNebulizerAsthma, htmlAttributes: new { @class = "" })
+                    @Html.RadioButtonFor(model => model.HomeNebulizerAsthma, true) Yes
+                    @Html.RadioButtonFor(model => model.HomeNebulizerAsthma, false) No
                 </div>
                 <div class="form-group">
-                    <label>6. Does your child have and use a nebulizer machine at home?</label>
-                    <input class="form-control" type="text" placeholder="">
-                </div>
-                <div class="form-group">
-                    <label>7. If your child takes medication for their asthma at home please provide the name of any medications:</label>
-                    <input class="form-control" type="text" placeholder="">
+                    @Html.LabelFor(model => model.NameOfMedicationAsthma, htmlAttributes: new { @class = "" })
+                    <br /><small>Separate by comma</small>
+                    @Html.EditorFor(model => model.NameOfMedicationAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Medications" } })
                 </div>
             </div>
         </div>
@@ -370,7 +371,7 @@
         </div>
     </div>
 </div>
-                }
+}
 
 
 
@@ -407,8 +408,6 @@
     }
 
     function ProcessCategoryTwo(currentCheckboxID, isChecked) {
-        var count = 2;
-
         if (isChecked === true) {
             $("#" + currentCheckboxID + "-information").show();
         }
