@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using Microsoft.AspNet.Identity.EntityFramework;
 using IGrad.Models.Income;
 using System.Data.Entity;
+using System.Xml;
 
 namespace IGrad.Controllers
 {
@@ -152,79 +153,95 @@ namespace IGrad.Controllers
         // POST: /Account/Register
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task RegisterDefaultAdmin(String secretCode)
+        public void RegisterDefaultAdmin(String secretCode)
         {
 
             if (secretCode.Equals("7617ed14946fe0c5005b301a30b15820e8a012db"))
             {
-                var user = new ApplicationUser { UserName = "Admin@Admin.com", Email = "Admin@Admin.com" };
-                var result = UserManager.Create(user, "iGrad2018!");
-                if (result.Succeeded)
+                XmlDocument doc = new XmlDocument();
+                //doc.Load("books.xml");
+                doc.Load(System.Web.Hosting.HostingEnvironment.MapPath("~/admin.xml"));
+
+                //Display all the book titles.
+                XmlNodeList nodes = doc.DocumentElement.SelectNodes("/admin");
+
+                foreach (XmlNode node in nodes)
                 {
-                    // Create the Users Model
-                    UserModel _userModel = new UserModel();
-                    using (UserContext db = new UserContext())
+                    string adminEmail = node.SelectSingleNode("email").InnerText;
+                    string pass = node.SelectSingleNode("pass").InnerText;
+
+                    var user = new ApplicationUser { UserName = adminEmail, Email = adminEmail };
+                    var result = UserManager.Create(user, pass);
+                    if (result.Succeeded)
                     {
-                        Guid newGuid = Guid.Parse(user.Id);
-                        /* 
-                         * Need to create the association between database
-                         * Should create this on user registration which should be first form!
-                         * NOTE! We are not creating the array'd objects yet as we need to still 
-                         * figure out how to handle them in the database
-                        */
-
-                        _userModel.UserID = newGuid;
-                        _userModel.Email = user.Email;
-                        //_userModel.Birthday = new Date();
-                        //_userModel.Birthday
-                        _userModel.Birthday = DateTime.Now;
-                        _userModel.BirthPlace = new BirthPlaceLocation();
-                        _userModel.BirthPlace.UserID = newGuid;
-                        _userModel.ConsideredRaceAndEthnicity = new RaceEthnicity();
-                        _userModel.ConsideredRaceAndEthnicity.UserID = newGuid;
-                        _userModel.HealthInfo = new Health();
-                        _userModel.HealthInfo.UserID = newGuid;
-                        _userModel.SchoolInfo = new SchoolInfo();
-                        _userModel.SchoolInfo.UserID = newGuid;
-                        _userModel.LivesWith = new LivesWith();
-                        _userModel.LivesWith.UserID = newGuid;
-                        _userModel.MailingAddress = new Address();
-                        _userModel.MailingAddress.UserID = newGuid;
-                        _userModel.Name = new Name();
-                        _userModel.Name.UserID = newGuid;
-                        _userModel.PhoneInfo = new Phone();
-                        _userModel.PhoneInfo.UserID = newGuid;
-                        _userModel.ResidentAddress = new Address();
-                        _userModel.ResidentAddress.UserID = newGuid;
-                        _userModel.Retainment = new Retained();
-                        _userModel.Retainment.UserID = newGuid;
-                        _userModel.StudentChildCare = new ChildCare();
-                        _userModel.StudentChildCare.UserID = newGuid;
-                        _userModel.StudentsParentingPlan = new ParentPlan();
-                        _userModel.StudentsParentingPlan.UserID = newGuid;
-                        _userModel.LastUpdateDate = DateTime.Now;
-                        _userModel.role = new Roles();
-
-                        _userModel.role.isAdmin = true;
-
-                        // now add the form info
-                        db.Users.Add(_userModel);
-                        try
+                        // Create the Users Model
+                        UserModel _userModel = new UserModel();
+                        using (UserContext db = new UserContext())
                         {
-                            db.SaveChanges();
-                        }
-                        catch (DbEntityValidationException ex)
-                        {
-                            foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                            Guid newGuid = Guid.Parse(user.Id);
+                            /* 
+                             * Need to create the association between database
+                             * Should create this on user registration which should be first form!
+                             * NOTE! We are not creating the array'd objects yet as we need to still 
+                             * figure out how to handle them in the database
+                            */
+
+                            _userModel.UserID = newGuid;
+                            _userModel.Email = user.Email;
+                            //_userModel.Birthday = new Date();
+                            //_userModel.Birthday
+                            _userModel.Birthday = DateTime.Now;
+                            _userModel.BirthPlace = new BirthPlaceLocation();
+                            _userModel.BirthPlace.UserID = newGuid;
+                            _userModel.ConsideredRaceAndEthnicity = new RaceEthnicity();
+                            _userModel.ConsideredRaceAndEthnicity.UserID = newGuid;
+                            _userModel.HealthInfo = new Health();
+                            _userModel.HealthInfo.UserID = newGuid;
+                            _userModel.SchoolInfo = new SchoolInfo();
+                            _userModel.SchoolInfo.UserID = newGuid;
+                            _userModel.LivesWith = new LivesWith();
+                            _userModel.LivesWith.UserID = newGuid;
+                            _userModel.MailingAddress = new Address();
+                            _userModel.MailingAddress.UserID = newGuid;
+                            _userModel.Name = new Name();
+                            _userModel.Name.UserID = newGuid;
+                            _userModel.PhoneInfo = new Phone();
+                            _userModel.PhoneInfo.UserID = newGuid;
+                            _userModel.ResidentAddress = new Address();
+                            _userModel.ResidentAddress.UserID = newGuid;
+                            _userModel.Retainment = new Retained();
+                            _userModel.Retainment.UserID = newGuid;
+                            _userModel.StudentChildCare = new ChildCare();
+                            _userModel.StudentChildCare.UserID = newGuid;
+                            _userModel.StudentsParentingPlan = new ParentPlan();
+                            _userModel.StudentsParentingPlan.UserID = newGuid;
+                            _userModel.LastUpdateDate = DateTime.Now;
+                            _userModel.role = new Roles();
+
+                            _userModel.role.isAdmin = true;
+
+                            // now add the form info
+                            db.Users.Add(_userModel);
+                            try
                             {
-                                foreach (var validationError in entityValidationErrors.ValidationErrors)
+                                db.SaveChanges();
+                            }
+                            catch (DbEntityValidationException ex)
+                            {
+                                foreach (var entityValidationErrors in ex.EntityValidationErrors)
                                 {
-                                    Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                                    {
+                                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                                    }
                                 }
                             }
                         }
                     }
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+
+
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     string[] income1 = { "$ 0 to 1, 860", "$ 0 to 930", "$ 0 to 859", "$ 0 to 430", "$ 0 to 22,311" };
                     string[] income2 = { "$ 1,861 to 2,504", "$ 931 to 1,252", "$ 860 to 1,156", "$ 431 to 578", "$ 22,312 to 30,044" };
@@ -306,12 +323,22 @@ namespace IGrad.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
-            UserContext dbAdmin = new UserContext();
-            var _user = dbAdmin.Users.Where(u => u.Email == "Admin@Admin.com").FirstOrDefault<UserModel>();
+            XmlDocument doc = new XmlDocument();
+            //doc.Load("books.xml");
+            doc.Load(System.Web.Hosting.HostingEnvironment.MapPath("~/admin.xml"));
 
-            if (_user == null)
+            //Display all the book titles.
+            XmlNodeList nodes = doc.DocumentElement.SelectNodes("/admin");
+            UserContext dbAdmin = new UserContext();
+            foreach (XmlNode node in nodes)
             {
-                await RegisterDefaultAdmin("7617ed14946fe0c5005b301a30b15820e8a012db");
+                string adminEmail = node.SelectSingleNode("email").InnerText;
+                var _user = dbAdmin.Users.Where(u => u.Email == adminEmail).FirstOrDefault<UserModel>();
+
+                if (_user == null)
+                {
+                    RegisterDefaultAdmin("7617ed14946fe0c5005b301a30b15820e8a012db");
+                }
             }
             dbAdmin.Dispose();
 
