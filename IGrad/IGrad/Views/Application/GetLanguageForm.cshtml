@@ -19,28 +19,28 @@
 
     @using (Html.BeginForm("SubmitLanguageInfo", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
-    <div class="container">
+    <div class="">
+        <br />
 
         <!-- RIGHT TO TRANSLATION -->
+        <h4 class="bg-info">Right to Translation and Interpretation Services</h4>
         <div class="row">
-            <h4>Right to Translation and Interpretation Services</h4>
-            <div class="form-group">
-                <div class="col-md-6">
-                    @Html.LabelFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "control-label required-marker" })
-                    @Html.TextBoxFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "form-control", @placeholder = "Prefer language" })
-                </div>
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "control-label required-marker" })
+                @Html.TextBoxFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "form-control", @placeholder = "Prefer language" })
             </div>
         </div>
 
         <br />
 
+
         <!-- EGIBILITY FOR LANGUAGE DEVELOPMENT SUPPORT -->
+        <h4 class="bg-info">
+            Eligibility for Language Development Support Information about the student's language helps us identify students
+            who qualify for support to develop the language skills necessary for success in school.
+            Testing may be necessary to detemine if language supports are needed.
+        </h4>
         <div class="row">
-            <h4>
-                Eligibility for Language Development Support Information about the student's language helps us identify students
-                who qualify for support to develop the language skills necessary for success in school.
-                Testing may be necessary to detemine if language supports are needed.
-            </h4>
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "control-label required-marker" })
                 @Html.TextBoxFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "form-control", @placeholder = "Language" })
@@ -69,8 +69,8 @@
         <br />
 
         <!-- PRIOR EDUCATION -->
+        <h4 class="bg-info">Prior Education</h4>
         <div class="row">
-            <h4>Prior Education</h4>
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker" })
                 <br /><small> (Kindergarten - 12 grade)</small>
@@ -85,14 +85,13 @@
                 @Html.TextBoxFor(model => model.LanguageHisory.StudentStartingGradeInUS, htmlAttributes: new { @class = "form-control", @placeholder = "Grade level" })
             </div>
         </div>
-        <div class="container">
-            <div class="form-row">
-                <div class="pull-right">
-                    <button class="btn btn-primary btn-lg btn-success" type="submit">
-                        Continue
-                        <i class="fas fa-caret-right"></i>
-                    </button>
-                </div>
+
+        <div class="form-row">
+            <div class="pull-right">
+                <button class="btn btn-primary btn-lg btn-success" type="submit">
+                    Continue
+                    <i class="fas fa-caret-right"></i>
+                </button>
             </div>
         </div>
     </div>

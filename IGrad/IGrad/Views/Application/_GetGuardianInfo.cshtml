@@ -1,27 +1,28 @@
 ﻿@using IGrad.Models.User;
 @model List<Guardian>
 
-<div>
-    <h4>Parent / Guardian(s)</h4>
-    <hr />
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Phone Number</th>
-            <th>Email</th>
-            <th>| Edit</th>
-        </tr>
-        @{foreach (Guardian guardian in Model)
-            {
-                <tr id="guardian_@guardian.fieldId">
-                    <td>@guardian.Name.FName @guardian.Name.LName</td>
-                    <td>@guardian.Phone.PhoneNumber</td>
-                    <td>@guardian.Email</td>
-                    <td><input type="submit" value="Delete" onclick="deleteGuardian(@guardian.fieldId)"></td>
-                </tr>
-            }
-        }
-    </table>
 
-</div>
+<table class="table table-striped table-bordered table-responsive">
+    <tr>
+        <th>Name</th>
+        <th>Phone Number</th>
+        <th>Email</th>
+        <th class="text-center">Edit</th>
+    </tr>
+    @{foreach (Guardian guardian in Model)
+        {
+        <tr id="guardian_@guardian.fieldId">
+            <td>@guardian.Name.FName @guardian.Name.LName</td>
+            <td>@guardian.Phone.PhoneNumber</td>
+            <td>@guardian.Email</td>
+            <td class="text-center">
+                <button class="btn btn-danger" type="submit" onclick="deleteGuardian(@guardian.fieldId)">
+                    <i class="fas fa-minus-square"></i>
+                </button>
+            </td>
+        </tr>
+        }
+    }
+</table>
+
 

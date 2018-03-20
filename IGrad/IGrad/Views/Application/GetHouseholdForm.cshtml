@@ -60,7 +60,7 @@
     <small class="form-text required-marker-indicator">* required fields.</small>
     <hr>
 
-    <div class="container" id="living-situation">
+    <div class="" id="living-situation">
         <h4 class="bg-info">Student lives with :</h4>
 
         <div class="row">
@@ -97,7 +97,7 @@
                 @Html.TextBoxFor(model => model.LivesWith.AnnualHouseHoldIncome, htmlAttributes: new { @class = "form-control", @placeholder = "Income" })
             </div>
         </div>
-        
+
         <h4 class="bg-info">Current Residence</h4>
         <div class="row">
             <div class="form-group col-md-3">
@@ -114,23 +114,23 @@
             </div>
             <div class="form-group col-md-3">
                 @Html.LabelFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "" })
-                @Html.TextBoxFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "form-control", @placeholder="Zip" })
+                @Html.TextBoxFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "form-control", @placeholder = "Zip" })
                 @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
             </div>
         </div>
-        
-        
+
+
+        <h4>Address is mailing address? *</h4>
         <div class="row">
-            <h4>Address is mailing address? *</h4>
             <div class="form-group col-md-12">
                 @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, true, htmlAttributes: new { @class = "", @onclick = "hideTarget('mailing-address')" })Yes
                 @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, false, htmlAttributes: new { @class = "", @onclick = "showTarget('mailing-address')" })No
             </div>
         </div>
-        
-       
+
+
         <div class="container hidden" id="mailing-address">
-            <h4>Please Specify Mailing Address * </h4>
+            <h4>Please Specify Mailing Address</h4>
             <div class="row">
                 <div class="form-group col-md-4">
                     @Html.LabelFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
@@ -138,30 +138,33 @@
                 </div>
                 <div class="form-group col-md-4">
                     @Html.LabelFor(model => model.MailingAddress.City, htmlAttributes: new { @class = "" })
-                    @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "" })
+                    @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "City" })
                 </div>
                 <div class="form-group col-md-4">
                     @Html.LabelFor(model => model.MailingAddress.State, htmlAttributes: new { @class = "" })
-                    @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
+                    @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "State" })
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
                     @Html.LabelFor(model => model.MailingAddress.Zip, htmlAttributes: new { @class = "" })
-                    @Html.TextBoxFor(model => model.MailingAddress.Zip, htmlAttributes: new { @class = "" })
+                    @Html.TextBoxFor(model => model.MailingAddress.Zip, htmlAttributes: new { @class = "form-control", @placeholder = "ZIP" })
                 </div>
                 <div class="form-group col-md-4">
-                    @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
                     @Html.LabelFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = "" })
-                    @Html.TextBoxFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = "" })
+                    @Html.TextBoxFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = "form-control", @placeholder = "PO Box" })
+                    @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
                 </div>
             </div>
         </div>
     </div>
 }
 <hr />
-<div class="container well-lg well" id="add-emergency-contact-container">
-    <div class="container" id="emergency-contacts">
+
+<!-- ADD EMERGENCY CONTACT -->
+<div class="wrapper" id="add-emergency-contact-container">
+    <h4 class="bg-info">Emergency Contacts</h4>
+    <div class="" id="emergency-contacts">
         <!-- emergency partial view here-->
         @{if (Model.EmergencyContacts != null)
             {
@@ -169,13 +172,17 @@
             }
         }
     </div>
-    <div class="container" id="add-emergency-contact">
+    <div class="" id="add-emergency-contact">
     </div>
-    <button class="btn btn-lg btn-primary" id="add-emergency-contact-button" onclick="loadEmergencyContactInfoForm()">+ Add Emergency Contact</button>
+    <button class="btn btn-primary" id="add-emergency-contact-button" onclick="loadEmergencyContactInfoForm()">Add Emergency Contact</button>
 </div>
-<p>Household Information:</p>
-<div class="container well-lg well" id="add-guardian-container">
-    <div class="container" id="guardians">
+
+<br /><br />
+
+<!-- ADD GUARDIAN -->
+<div class="wrapper" id="add-guardian-container">
+    <h4 class="bg-info">Guardians</h4>
+    <div class="" id="guardians">
         <!-- guardians partial view here-->
         @{if (Model.Guardians != null)
             {
@@ -183,11 +190,16 @@
             }
         }
     </div>
-    <button class="btn btn-lg btn-primary" id="add-guardian-button" onclick="loadGuardianInfoForm()">+ Add Parent/Guardian(s)</button>
+    <button class="btn btn-primary" id="add-guardian-button" onclick="loadGuardianInfoForm()">Add Parent/Guardian</button>
     <div class="hidden" id="add-guardian">
     </div>
 </div>
-<div class="container well-lg well" id="add-sibling-container">
+
+<br /><br />
+
+<!-- ADD SIBLINGS -->
+<div class="wrapper" id="add-sibling-container">
+    <h4 class="bg-info">Siblings</h4>
     <div class="siblings" id="siblings">
         <!-- sibling partial view here-->
         @{if (Model.Siblings != null)
@@ -196,17 +208,20 @@
             }
         }
     </div>
-    <button class="btn btn-lg btn-primary" id="add-sibling-button" onclick="loadSiblingInfoForm()">+ Add Sibling(s)</button>
+    <button class="btn btn-primary" id="add-sibling-button" onclick="loadSiblingInfoForm()">Add Sibling</button>
     <div class="hidden" id="add-sibling">
     </div>
 </div>
-<div class="container">
-    <div class="form-row">
-        <div class="pull-right">
-            <button class="btn btn-primary btn-lg btn-success" type="submit" form="household-form">
-                Continue
-                <i class="fas fa-caret-right"></i>
-            </button>
-        </div>
+
+
+<div class="form-row">
+    <div class="pull-right">
+        <button class="btn btn-primary btn-lg btn-success" type="submit" form="household-form">
+            Continue
+            <i class="fas fa-caret-right"></i>
+        </button>
     </div>
 </div>
+
+<br /><br />
+

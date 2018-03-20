@@ -9,9 +9,10 @@
 
 @using (Html.BeginForm("GetNewApplication", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <h4>Personal Information</h4>
+    <h3>Personal Information</h3>
     <small class="form-text required-marker-indicator">* required fields.</small>
     <hr>
+
 
     <!-- STUDENT NAME START -->
     <div class="row">
@@ -532,14 +533,12 @@
     </div>
     <!-- **********RACE AND ETHNICITY END********** -->
 
-    <div class="container">
-        <div class="form-row">
-            <div class="pull-right">
-                <button class="btn btn-primary btn-lg btn-success" type="submit">
-                    Continue
-                    <i class="fas fa-caret-right"></i>
-                </button>
-            </div>
+    <div class="form-row">
+        <div class="pull-right">
+            <button class="btn btn-primary btn-lg btn-success" type="submit">
+                Continue
+                <i class="fas fa-caret-right"></i>
+            </button>
         </div>
     </div>
 }

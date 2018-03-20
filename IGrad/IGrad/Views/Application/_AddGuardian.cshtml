@@ -9,52 +9,62 @@
 }))
 {
     @Html.AntiForgeryToken()
-    <div class="container form-horizontal" id="add-guardian-form">
-        <h4>Guardian Info</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="row">
+<div class="" id="add-guardian-form">
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="row">
+        <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "control-label " })
             @Html.EditorFor(model => model.Name.FName, new { htmlAttributes = new { @class = "form-control" } })
-       
+        </div>
+        <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Name.MName, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.Name.MName, new { htmlAttributes = new { @class = "form-control" } })
-       
+        </div>
+        <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Name.LName, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.Name.LName, new { htmlAttributes = new { @class = "form-control" } })
         </div>
-        <div class="row">
+    </div>
+    <div class="row">
+        <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Phone.PhoneNumber, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Phone.PhoneNumber, new { htmlAttributes = new { @class = "" } })
-
+            @Html.EditorFor(model => model.Phone.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Phone.PhoneType, htmlAttributes: new { @class = "control-label" })
-            @Html.DropDownListFor(model => model.Phone.PhoneType, Model.Phone.PhoneTypeSelectList, new { htmlAttributes = new { @class = "" } })
-
+            @Html.DropDownListFor(model => model.Phone.PhoneType, Model.Phone.PhoneTypeSelectList, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
         </div>
-        <div class="row">
+    </div>
+    <div class="row">
+        <div class="form-group col-md-3">
             @Html.LabelFor(model => model.Address.Street, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Address.Street, new { htmlAttributes = new { @class = "" } })
-
-            @Html.LabelFor(model => model.Address.City, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Address.City, new { htmlAttributes = new { @class = "" } })
-        
-            @Html.LabelFor(model => model.Address.State, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Address.State, new { htmlAttributes = new { @class = "" } })
-
-            @Html.LabelFor(model => model.Address.POBox, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Address.POBox, new { htmlAttributes = new { @class = "" } })
-
+            @Html.EditorFor(model => model.Address.Street, new { htmlAttributes = new { @class = "form-control" } })
         </div>
-        <br />
-        <div class="container">
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <button id="submitButton" type="submit" class="btn btn-primary" onclick="hideTarget('add-guardian');showTarget('add-guardian-button')">Add Guardian</button>
-                    <button id="cancelButton" type="button" class="btn" onclick="showTarget('add-guardian-button');hideTarget('add-guardian')">Cancel</button>
-                </div>
-            </div>
+        <div class="form-group col-md-3">
+            @Html.LabelFor(model => model.Address.City, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Address.City, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-3">
+            @Html.LabelFor(model => model.Address.State, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Address.State, new { htmlAttributes = new { @class = "form-control" } })
+        </div>
+        <div class="form-group col-md-3">
+            @Html.LabelFor(model => model.Address.POBox, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Address.POBox, new { htmlAttributes = new { @class = "form-control" } })
         </div>
     </div>
+
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <button id="submitButton" type="submit" class="btn btn-primary" onclick="hideTarget('add-guardian');showTarget('add-guardian-button')">Add Guardian</button>
+            <button id="cancelButton" type="button" class="btn" onclick="showTarget('add-guardian-button');hideTarget('add-guardian')">Cancel</button>
+        </div>
+    </div>
+</div>
 }
