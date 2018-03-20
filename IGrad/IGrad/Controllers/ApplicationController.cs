@@ -654,7 +654,7 @@ namespace IGrad.Controllers
                 {
                     data.HealthInfo = new Health();
                 }
-                return View(data);
+                return View(data.HealthInfo);
             }
         }
 
@@ -684,9 +684,23 @@ namespace IGrad.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetHealthForm(UserModel user)
+        public ActionResult GetHealthForm(Health health)
         {
-            //TODO SAVE HEALTH TO DB
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                var data = db.Users
+                       .Include(u => u.HealthInfo)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+
+                //set userID of objects
+                health.UserID = UserID;
+
+                data.HealthInfo = health;
+
+                db.SaveChanges();
+            }
             return RedirectToAction("GetOtherInfoForm","Application");
         }
 
