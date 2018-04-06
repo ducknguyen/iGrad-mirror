@@ -304,6 +304,14 @@
     <Content Include="media\documents\HomeLanguageSurveyApp.pdf" />
     <Content Include="media\documents\RequestForRecords1-25-2018.pdf" />
     <Content Include="media\documents\FamilyIncomeSurveyApp.pdf" />
+    <Content Include="media\documents\EthnicityAndRaceData.pdf" />
+    <Content Include="media\documents\HealthHistory.pdf" />
+    <Content Include="media\documents\HomelessAssistance.pdf" />
+    <Content Include="media\documents\ImmunizationStatus.pdf" />
+    <Content Include="media\documents\KingCountyLibrarySystem.pdf" />
+    <Content Include="media\documents\masterregistration.pdf" />
+    <Content Include="media\documents\NativeAmericanEducationProgram.pdf" />
+    <Content Include="media\documents\StudentInfoAndEnrollmentForm.pdf" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy.pubxml" />

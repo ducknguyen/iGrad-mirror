@@ -43,6 +43,7 @@ namespace IGrad.Controllers
                        .Include(u => u.LanguageHisory)
                        .Include(u => u.LifeEvent)
                        .Include(u => u.SchoolInfo)
+                       .Include(u => u.SchoolInfo.HighSchoolInformation)
                        .Where(u => u.UserID == userId)
                        .FirstOrDefault<UserModel>();
                 PDFFillerController pdfControl = new PDFFillerController();
@@ -105,15 +106,19 @@ namespace IGrad.Controllers
             PdfTextField firstName = (PdfTextField)(document.AcroForm.Fields["StudentFirstName"]);
             firstName.Value = new PdfString(this.user.Name.FName);
             firstName.ReadOnly = true;
+
             PdfTextField lastName = (PdfTextField)(document.AcroForm.Fields["StudentLastName"]);
             lastName.Value = new PdfString(this.user.Name.LName);
             lastName.ReadOnly = true;
+
             PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MI"]);
             middleInitial.Value = new PdfString(this.user.Name.MName);
             middleInitial.ReadOnly = true;
+
             PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
             birthday.Value = new PdfString(this.user.Birthday.ToString("MM-dd-yyyy"));
             birthday.ReadOnly = true;
+
             PdfTextField gender = (PdfTextField)(document.AcroForm.Fields["Gender"]);
             gender.Value = new PdfString(user.Gender);
             gender.ReadOnly = true;
@@ -123,9 +128,36 @@ namespace IGrad.Controllers
             {
                 age--;
             }
+
             PdfTextField formAge = (PdfTextField)(document.AcroForm.Fields["Age"]);
             formAge.Value = new PdfString(age.ToString());
             formAge.ReadOnly = true;
+
+            //Add Highschools
+            if(user.SchoolInfo.HighSchoolInformation != null)
+            {
+                for(int i = 0; i < user.SchoolInfo.HighSchoolInformation.Count; i++)
+                {
+                    if(i < 5)
+                    {
+                        PdfTextField grade = (PdfTextField)(document.AcroForm.Fields["Grade" + (i + 1)]);
+                        PdfTextField year = (PdfTextField)(document.AcroForm.Fields["Year" + (i + 1)]);
+                        PdfTextField school = (PdfTextField)(document.AcroForm.Fields["School" + (i + 1)]);
+                        PdfTextField cityState = (PdfTextField)(document.AcroForm.Fields["CityState" + (i + 1)]);
+
+                        grade.Value = new PdfString(user.SchoolInfo.HighSchoolInformation[i].HighSchoolGrade.ToString());
+                        year.Value = new PdfString(user.SchoolInfo.HighSchoolInformation[i].HighSchoolYear.ToString());
+                        school.Value = new PdfString(user.SchoolInfo.HighSchoolInformation[i].HighSchoolName.ToString());
+                        cityState.Value = new PdfString(user.SchoolInfo.HighSchoolInformation[i].HighSchoolCity.ToString() + 
+                            "," + user.SchoolInfo.HighSchoolInformation[i].HighSchoolState.ToString());
+                    }
+                }
+            }
+
+            //fill additional programs (Special Ed, 504, English Language Learner)
+
+
+
 
             document.SecuritySettings.PermitFormsFill = false;
             document.SecuritySettings.PermitModifyDocument = false;
@@ -639,7 +671,7 @@ namespace IGrad.Controllers
                 }
                 catch(ArgumentOutOfRangeException e)
                 {
-                    Console.Out.Write("No guardian in guardian list : " + e.Message + " : " + e.StackTrace);
+                    Console.Out.Write("No guardian in guardian ArrayList : " + e.Message + " : " + e.StackTrace);
                 }
             }
             return writeDocument(document);
