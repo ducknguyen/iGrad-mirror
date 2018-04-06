@@ -44,6 +44,7 @@ namespace IGrad.Controllers
                        .Include(u => u.LifeEvent)
                        .Include(u => u.SchoolInfo)
                        .Include(u => u.SchoolInfo.HighSchoolInformation)
+                       .Include(u => u.QualifiedOrEnrolledInProgam)
                        .Where(u => u.UserID == userId)
                        .FirstOrDefault<UserModel>();
                 PDFFillerController pdfControl = new PDFFillerController();
@@ -133,9 +134,10 @@ namespace IGrad.Controllers
             formAge.Value = new PdfString(age.ToString());
             formAge.ReadOnly = true;
 
-            //Add Highschools
+            //fill  Highschools
             if(user.SchoolInfo.HighSchoolInformation != null)
             {
+                user.SchoolInfo.HighSchoolInformation = user.SchoolInfo.HighSchoolInformation.OrderByDescending(d => d.HighSchoolYear).ToList();
                 for(int i = 0; i < user.SchoolInfo.HighSchoolInformation.Count; i++)
                 {
                     if(i < 5)
@@ -155,8 +157,41 @@ namespace IGrad.Controllers
             }
 
             //fill additional programs (Special Ed, 504, English Language Learner)
+            PdfCheckBoxField specialEducation = (PdfCheckBoxField)(document.AcroForm.Fields["SpecialEducation"]);
+            PdfCheckBoxField plan504 = (PdfCheckBoxField)(document.AcroForm.Fields["504"]);
+            PdfCheckBoxField englishLanguageLearner = (PdfCheckBoxField)(document.AcroForm.Fields["EnglishLanguageLearner"]);
 
+            if(user.QualifiedOrEnrolledInProgam != null)
+            {
+                if (user.QualifiedOrEnrolledInProgam.SpecialEducation)
+                {
+                    specialEducation.Checked = true;
+                    specialEducation.ReadOnly = true;
+                }
+                if (user.QualifiedOrEnrolledInProgam.plan504)
+                {
+                    plan504.Checked = true;
+                    plan504.Checked = true;
+                }
+                if (user.QualifiedOrEnrolledInProgam.EngishAsSecondLanguage)
+                {
+                    englishLanguageLearner.Checked = true;
+                    englishLanguageLearner.Checked = true;
+                }
+            }
 
+            if (user.SchoolInfo.IsExpelledOrSuspended)
+            {
+                PdfCheckBoxField studentIsSuspendedOrExpelled = (PdfCheckBoxField)(document.AcroForm.Fields["StudentIsSuspendedOrExpelled"]);
+                studentIsSuspendedOrExpelled.Checked = true;
+                studentIsSuspendedOrExpelled.ReadOnly = true;
+            }
+            else
+            {
+                PdfCheckBoxField studentIsNotSuspendedOrExpelled = (PdfCheckBoxField)(document.AcroForm.Fields["StudentIsNotSuspendedOrExpelled"]);
+                studentIsNotSuspendedOrExpelled.Checked = true;
+                studentIsNotSuspendedOrExpelled.ReadOnly = true;
+            }
 
 
             document.SecuritySettings.PermitFormsFill = false;

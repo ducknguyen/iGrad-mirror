@@ -14,6 +14,8 @@ namespace IGrad.Models.User
         public Guid UserID { get; set; }
         [DisplayName("Last Year of School Attendance")]
         public int LastYearAttended { get; set; }
+        [DisplayName("Is The Student Currently Expelled or Suspended From A School?")]
+        public bool IsExpelledOrSuspended { get; set; }
         [DisplayName("Student's Current Grade")]
         public int CurrentGrade { get; set; }
         [DisplayName("Student's General Opinion of School")]
