@@ -70,8 +70,8 @@ namespace IGrad.Controllers
 
             using (ZipFile zip = new ZipFile())
             {
-                zip.AddEntry("FirstForm.pdf", firstForm());
-                zip.AddEntry("HomeLanguageFile.pdf", GetLanguageHistoryPDF());
+                zip.AddEntry("FirstForm.pdf", StudentEnrollmentChecklistForm());
+                zip.AddEntry("HomeLanguageFile.pdf", HomeLanguageSurveyForm());
                 zip.AddEntry("ParentQuestionaire.pdf", ParentQuestionareForm());
                 zip.AddEntry("RequestForRecords.pdf", RequestForRecordsForm());
                 zip.AddEntry("FamilyIncomeSurvey.pdf", FamilyIncomePDF());
@@ -84,102 +84,86 @@ namespace IGrad.Controllers
             }
         }
 
-        public Byte[] FamilyIncomePDF()
+        //not complete
+        private Byte[] StudentEnrollmentChecklistForm()
         {
             // Get the blank form to fill out
-            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/FamilyIncomeSurveyApp.pdf");
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/StudentEnrollmentChecklistApp.pdf");
             PdfDocument document = PdfReader.Open(filePath);
 
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
-            #region DocumentRequiredData
-            PdfTextField surveyYears1 = (PdfTextField)(document.AcroForm.Fields["SurveyYears1"]);
-            surveyYears1.Value = new PdfString(this.famIncome.IncomeTableYears);
-            surveyYears1.ReadOnly = true;
+            PdfTextField firstName = (PdfTextField)(document.AcroForm.Fields["StudentFirstName"]);
+            firstName.Value = new PdfString(this.user.Name.FName);
+            firstName.ReadOnly = true;
+            PdfTextField lastName = (PdfTextField)(document.AcroForm.Fields["StudentLastName"]);
+            lastName.Value = new PdfString(this.user.Name.LName);
+            lastName.ReadOnly = true;
+            PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MI"]);
+            middleInitial.Value = new PdfString(this.user.Name.MName);
+            middleInitial.ReadOnly = true;
+            PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
+            birthday.Value = new PdfString(this.user.Birthday.ToString("MM-dd-yyyy"));
+            birthday.ReadOnly = true;
+            PdfTextField gender = (PdfTextField)(document.AcroForm.Fields["Gender"]);
+            gender.Value = new PdfString(user.Gender);
+            gender.ReadOnly = true;
 
-            PdfTextField surveyYears2 = (PdfTextField)(document.AcroForm.Fields["SurveyYears2"]);
-            surveyYears2.Value = new PdfString(this.famIncome.IncomeTableYears);
-            surveyYears2.ReadOnly = true;
-
-            PdfTextField effectiveDates = (PdfTextField)(document.AcroForm.Fields["EffectiveDates"]);
-            effectiveDates.Value = new PdfString(this.famIncome.EffectiveDates);
-            effectiveDates.ReadOnly = true;
-            #endregion
-
-
-            string[] monthlyFields = { "Monthly1", "Monthly2",
-                "Monthly3", "Monthly4",
-                "Monthly5", "Monthly6",
-                "Monthly7", "Monthly8",
-                "Monthly9", "Monthly10",
-                "Monthly11", "Monthly12",
-                "Monthly13", "Monthly14",
-                "Monthly15"};
-            string[] twiceMonthlyFields = { "TwiceMonthly1", "TwiceMonthly2",
-                "TwiceMonthly3", "TwiceMonthly4",
-                "TwiceMonthly5", "TwiceMonthly6",
-                "TwiceMonthly7", "TwiceMonthly8",
-                "TwiceMonthly9", "TwiceMonthly10",
-                "TwiceMonthly11", "TwiceMonthly12",
-                "TwiceMonthly13", "TwiceMonthly14",
-                "TwiceMonthly15"};
-            string[] twoWeeksFields = { "twoWeeks1", "twoWeeks2",
-                "twoWeeks3", "twoWeeks4",
-                "twoWeeks5", "twoWeeks6",
-                "twoWeeks7", "twoWeeks8",
-                "twoWeeks9", "twoWeeks10",
-                "twoWeeks11", "twoWeeks12",
-                "twoWeeks13", "twoWeeks14",
-                "twoWeeks15"};
-            string[] weeklyFields = { "Weekly1", "Weekly2",
-                "Weekly3", "Weekly4",
-                "Weekly5", "Weekly6",
-                "Weekly7", "Weekly8",
-                "Weekly9", "Weekly10",
-                "Weekly11", "Weekly12",
-                "Weekly12", "Weekly14",
-                "Weekly15"};
-            string[] annuallyFields = { "Annual1", "Annual2",
-                "Annual3", "Annual5",
-                "Annual5", "Annual6",
-                "Annual7", "Annual8",
-                "Annual9", "Annual10",
-                "Annual11", "Annual12",
-                "Annual12", "Annual14",
-                "Annual15"};
-
-            for(int i = 0; i < this.famIncome.incomeTable.Count; i++)
+            int age = DateTime.Now.Year - user.Birthday.Year;
+            if (DateTime.Now < user.Birthday.AddYears(age))
             {
-                //document.AcroForm.Fields["Monthly" + (i + 1)].Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
-                //document.AcroForm.Fields["TwiceMonthly" + (i + 1)].Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
-                //document.AcroForm.Fields["twoWeeks" + (i + 1)].Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
-                
-                PdfTextField Monthly= (PdfTextField)(document.AcroForm.Fields["Monthly" + (i + 1)]);
-                Monthly.Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
-                Monthly.ReadOnly = true;
-                PdfTextField twiceMonthly = (PdfTextField)(document.AcroForm.Fields["TwiceMonthly" + (i + 1)]);
-                twiceMonthly.Value = new PdfString(this.famIncome.incomeTable[i].TwiceMonthly);
-                twiceMonthly.ReadOnly = true;
-                PdfTextField twoWeeks = (PdfTextField)(document.AcroForm.Fields["twoWeeks" + (i + 1)]);
-                twoWeeks.Value = new PdfString(this.famIncome.incomeTable[i].TwoWeeks);
-                twoWeeks.ReadOnly = true;
-                PdfTextField weekly = (PdfTextField)(document.AcroForm.Fields["Weekly" + (i + 1)]);
-                weekly.Value = new PdfString(this.famIncome.incomeTable[i].Weekly);
-                weekly.ReadOnly = true;
-                PdfTextField annually = (PdfTextField)(document.AcroForm.Fields["Annual" + (i + 1)]);
-                annually.Value = new PdfString(this.famIncome.incomeTable[i].Annually);
-                annually.ReadOnly = true;
-                
-
+                age--;
             }
+            PdfTextField formAge = (PdfTextField)(document.AcroForm.Fields["Age"]);
+            formAge.Value = new PdfString(age.ToString());
+            formAge.ReadOnly = true;
+
+            document.SecuritySettings.PermitFormsFill = false;
+            document.SecuritySettings.PermitModifyDocument = false;
+            document.SecuritySettings.PermitFullQualityPrint = true;
+            document.SecuritySettings.PermitPrint = true;
+
+            return writeDocument(document);
+        }
+
+        //not complete
+        private Byte[] StudentInfoAndEnrollmentForm()
+        {
+            // Get the blank form to fill out
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/StudentInfoAndEnrollmentForm.pdf");
+            PdfDocument document = PdfReader.Open(filePath);
+
+            // Set the flag so we can flatten once done.
+            document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
+
+            //TODO Add logic to fill form.
+
 
 
             return writeDocument(document);
         }
 
+        //not complete
+        private Byte[] EthnicityAndRaceDataForm()
+        {
+            // Get the blank form to fill out
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/EthnicityAndRaceData.pdf");
+            PdfDocument document = PdfReader.Open(filePath);
 
-        private Byte[] GetLanguageHistoryPDF()
+            // Set the flag so we can flatten once done.
+            document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
+
+            //TODO Add logic to fill form.
+
+
+
+            return writeDocument(document);
+
+        }
+
+        //not complete
+        private Byte[] HomeLanguageSurveyForm()
         {
             // Get the blank form to fill out
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/HomeLanguageSurveyApp.pdf");
@@ -257,49 +241,7 @@ namespace IGrad.Controllers
             return writeDocument(document);
         }
 
-        private Byte[] firstForm()
-        {
-
-            // Get the blank form to fill out
-            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/StudentEnrollmentChecklistApp.pdf");
-            PdfDocument document = PdfReader.Open(filePath);
-
-            // Set the flag so we can flatten once done.
-            document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
-
-            PdfTextField firstName = (PdfTextField)(document.AcroForm.Fields["StudentFirstName"]);
-            firstName.Value = new PdfString(this.user.Name.FName);
-            firstName.ReadOnly = true;
-            PdfTextField lastName = (PdfTextField)(document.AcroForm.Fields["StudentLastName"]);
-            lastName.Value = new PdfString(this.user.Name.LName);
-            lastName.ReadOnly = true;
-            PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MI"]);
-            middleInitial.Value = new PdfString(this.user.Name.MName);
-            middleInitial.ReadOnly = true;
-            PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
-            birthday.Value = new PdfString(this.user.Birthday.ToString("MM-dd-yyyy"));
-            birthday.ReadOnly = true;
-            PdfTextField gender = (PdfTextField)(document.AcroForm.Fields["Gender"]);
-            gender.Value = new PdfString(user.Gender);
-            gender.ReadOnly = true;
-
-            int age = DateTime.Now.Year - user.Birthday.Year;
-            if (DateTime.Now < user.Birthday.AddYears(age))
-            {
-                age--;
-            }
-            PdfTextField formAge = (PdfTextField)(document.AcroForm.Fields["Age"]);
-            formAge.Value = new PdfString(age.ToString());
-            formAge.ReadOnly = true;
-
-            document.SecuritySettings.PermitFormsFill = false;
-            document.SecuritySettings.PermitModifyDocument = false;
-            document.SecuritySettings.PermitFullQualityPrint = true;
-            document.SecuritySettings.PermitPrint = true;
-
-            return writeDocument(document);
-        }
-
+        //not complete
         private Byte[] ParentQuestionareForm()
         {
             // Get the blank form to fill out
@@ -466,6 +408,137 @@ namespace IGrad.Controllers
             return writeDocument(document);
         }
 
+        //not complete
+        private Byte[] HealthHistoryForm()
+        {
+            // Get the blank form to fill out
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/HealthHistory.pdf");
+            PdfDocument document = PdfReader.Open(filePath);
+
+            // Set the flag so we can flatten once done.
+            document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
+
+            //TODO Add logic to fill form.
+
+
+
+            return writeDocument(document);
+
+        }
+
+        //not complete
+        private Byte[] ImmunizationStatusForm()
+        {
+            // Get the blank form to fill out
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/ImmunizationStatus.pdf");
+            PdfDocument document = PdfReader.Open(filePath);
+
+            // Set the flag so we can flatten once done.
+            document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
+
+            //TODO Add logic to fill form.
+
+
+
+            return writeDocument(document);
+        }
+
+        //not complete
+        public Byte[] FamilyIncomePDF()
+        {
+            // Get the blank form to fill out
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/FamilyIncomeSurveyApp.pdf");
+            PdfDocument document = PdfReader.Open(filePath);
+
+            // Set the flag so we can flatten once done.
+            document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
+
+            #region DocumentRequiredData
+            PdfTextField surveyYears1 = (PdfTextField)(document.AcroForm.Fields["SurveyYears1"]);
+            surveyYears1.Value = new PdfString(this.famIncome.IncomeTableYears);
+            surveyYears1.ReadOnly = true;
+
+            PdfTextField surveyYears2 = (PdfTextField)(document.AcroForm.Fields["SurveyYears2"]);
+            surveyYears2.Value = new PdfString(this.famIncome.IncomeTableYears);
+            surveyYears2.ReadOnly = true;
+
+            PdfTextField effectiveDates = (PdfTextField)(document.AcroForm.Fields["EffectiveDates"]);
+            effectiveDates.Value = new PdfString(this.famIncome.EffectiveDates);
+            effectiveDates.ReadOnly = true;
+            #endregion
+
+
+            string[] monthlyFields = { "Monthly1", "Monthly2",
+                "Monthly3", "Monthly4",
+                "Monthly5", "Monthly6",
+                "Monthly7", "Monthly8",
+                "Monthly9", "Monthly10",
+                "Monthly11", "Monthly12",
+                "Monthly13", "Monthly14",
+                "Monthly15"};
+            string[] twiceMonthlyFields = { "TwiceMonthly1", "TwiceMonthly2",
+                "TwiceMonthly3", "TwiceMonthly4",
+                "TwiceMonthly5", "TwiceMonthly6",
+                "TwiceMonthly7", "TwiceMonthly8",
+                "TwiceMonthly9", "TwiceMonthly10",
+                "TwiceMonthly11", "TwiceMonthly12",
+                "TwiceMonthly13", "TwiceMonthly14",
+                "TwiceMonthly15"};
+            string[] twoWeeksFields = { "twoWeeks1", "twoWeeks2",
+                "twoWeeks3", "twoWeeks4",
+                "twoWeeks5", "twoWeeks6",
+                "twoWeeks7", "twoWeeks8",
+                "twoWeeks9", "twoWeeks10",
+                "twoWeeks11", "twoWeeks12",
+                "twoWeeks13", "twoWeeks14",
+                "twoWeeks15"};
+            string[] weeklyFields = { "Weekly1", "Weekly2",
+                "Weekly3", "Weekly4",
+                "Weekly5", "Weekly6",
+                "Weekly7", "Weekly8",
+                "Weekly9", "Weekly10",
+                "Weekly11", "Weekly12",
+                "Weekly12", "Weekly14",
+                "Weekly15"};
+            string[] annuallyFields = { "Annual1", "Annual2",
+                "Annual3", "Annual5",
+                "Annual5", "Annual6",
+                "Annual7", "Annual8",
+                "Annual9", "Annual10",
+                "Annual11", "Annual12",
+                "Annual12", "Annual14",
+                "Annual15"};
+
+            for(int i = 0; i < this.famIncome.incomeTable.Count; i++)
+            {
+                //document.AcroForm.Fields["Monthly" + (i + 1)].Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
+                //document.AcroForm.Fields["TwiceMonthly" + (i + 1)].Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
+                //document.AcroForm.Fields["twoWeeks" + (i + 1)].Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
+                
+                PdfTextField Monthly= (PdfTextField)(document.AcroForm.Fields["Monthly" + (i + 1)]);
+                Monthly.Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
+                Monthly.ReadOnly = true;
+                PdfTextField twiceMonthly = (PdfTextField)(document.AcroForm.Fields["TwiceMonthly" + (i + 1)]);
+                twiceMonthly.Value = new PdfString(this.famIncome.incomeTable[i].TwiceMonthly);
+                twiceMonthly.ReadOnly = true;
+                PdfTextField twoWeeks = (PdfTextField)(document.AcroForm.Fields["twoWeeks" + (i + 1)]);
+                twoWeeks.Value = new PdfString(this.famIncome.incomeTable[i].TwoWeeks);
+                twoWeeks.ReadOnly = true;
+                PdfTextField weekly = (PdfTextField)(document.AcroForm.Fields["Weekly" + (i + 1)]);
+                weekly.Value = new PdfString(this.famIncome.incomeTable[i].Weekly);
+                weekly.ReadOnly = true;
+                PdfTextField annually = (PdfTextField)(document.AcroForm.Fields["Annual" + (i + 1)]);
+                annually.Value = new PdfString(this.famIncome.incomeTable[i].Annually);
+                annually.ReadOnly = true;
+                
+
+            }
+
+
+            return writeDocument(document);
+        }
+
+        //not complete
         private Byte[] RequestForRecordsForm()
         {
             // Get the blank form to fill out
@@ -550,6 +623,55 @@ namespace IGrad.Controllers
             parentSignature.ReadOnly = true;
 
             return writeDocument(document);
+        }
+
+        //not complete
+        private Byte[] NativeAmericanEducationProgramForm()
+        {
+            // Get the blank form to fill out
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/NativeAmericanEducationProgram.pdf");
+            PdfDocument document = PdfReader.Open(filePath);
+
+            // Set the flag so we can flatten once done.
+            document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
+
+            //TODO Add logic to fill form.
+
+
+            return writeDocument(document);
+        }
+
+        //not complete
+        private Byte[] HomelessAssistanceForm()
+        {
+            // Get the blank form to fill out
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/HomelessAssistance.pdf");
+            PdfDocument document = PdfReader.Open(filePath);
+
+            // Set the flag so we can flatten once done.
+            document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
+
+            //TODO Add logic to fill form.
+
+
+            return writeDocument(document);
+        }
+
+        //not complete
+        private Byte[] KingCountyLibrarySystemForm()
+        {
+            // Get the blank form to fill out
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/KingCountyLibrarySystem.pdf");
+            PdfDocument document = PdfReader.Open(filePath);
+
+            // Set the flag so we can flatten once done.
+            document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
+
+            //TODO Add logic to fill form.
+
+
+            return writeDocument(document);
+
         }
 
         private static byte[] writeDocument(PdfDocument document)
