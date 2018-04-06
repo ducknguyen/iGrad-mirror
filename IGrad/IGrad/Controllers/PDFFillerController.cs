@@ -70,11 +70,19 @@ namespace IGrad.Controllers
 
             using (ZipFile zip = new ZipFile())
             {
-                zip.AddEntry("FirstForm.pdf", StudentEnrollmentChecklistForm());
-                zip.AddEntry("HomeLanguageFile.pdf", HomeLanguageSurveyForm());
+                zip.AddEntry("StudentEnrollmentChecklist.pdf", StudentEnrollmentChecklistForm());
+                zip.AddEntry("StudentEnrollmentInfo.pdf", StudentInfoAndEnrollmentForm());
+                zip.AddEntry("EthnicityAndRace.pdf", EthnicityAndRaceDataForm());
+                zip.AddEntry("HomeLanguageSurvey.pdf", HomeLanguageSurveyForm());
                 zip.AddEntry("ParentQuestionaire.pdf", ParentQuestionareForm());
+                zip.AddEntry("HealthHistory.pdf", HealthHistoryForm());
+                zip.AddEntry("ImmunizationStatus.pdf", ImmunizationStatusForm());
+                zip.AddEntry("FamilyIncomeSurvey.pdf", FamilyIncomeForm());
                 zip.AddEntry("RequestForRecords.pdf", RequestForRecordsForm());
-                zip.AddEntry("FamilyIncomeSurvey.pdf", FamilyIncomePDF());
+                zip.AddEntry("NativeAmericanEducationProgram.pdf", NativeAmericanEducationProgramForm());
+                zip.AddEntry("HomelessAssistance.pdf", HomelessAssistanceForm());
+                zip.AddEntry("KingCountyLibrarySystem.pdf", KingCountyLibrarySystemForm());
+
 
                 MemoryStream output = new MemoryStream();
                 output.Position = 0;
@@ -444,7 +452,7 @@ namespace IGrad.Controllers
         }
 
         //not complete
-        public Byte[] FamilyIncomePDF()
+        public Byte[] FamilyIncomeForm()
         {
             // Get the blank form to fill out
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/FamilyIncomeSurveyApp.pdf");
@@ -619,9 +627,21 @@ namespace IGrad.Controllers
             dob.ReadOnly = true;
 
             PdfSignatureField parentSignature = (PdfSignatureField)(document.AcroForm.Fields["ParentGuardian Signature"]);
-            parentSignature.Value = new PdfString(this.user.Guardians[0].Name.FName + " " + this.user.Guardians[0].Name.LName);
-            parentSignature.ReadOnly = true;
-
+            if(user.Guardians != null)
+            {
+                try
+                {
+                    if (user.Guardians[0] != null)
+                    {
+                        parentSignature.Value = new PdfString(this.user.Guardians[0].Name.FName + " " + this.user.Guardians[0].Name.LName);
+                        parentSignature.ReadOnly = true;
+                    }
+                }
+                catch(ArgumentOutOfRangeException e)
+                {
+                    Console.Out.Write("No guardian in guardian list : " + e.Message + " : " + e.StackTrace);
+                }
+            }
             return writeDocument(document);
         }
 
