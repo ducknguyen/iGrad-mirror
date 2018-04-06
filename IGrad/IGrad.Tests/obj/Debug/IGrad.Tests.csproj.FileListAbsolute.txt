@@ -119,3 +119,4 @@ C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\PdfSharp.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\DotNetZip.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\PdfSharp.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\de\PdfSharp.resources.dll
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\admin.xml
