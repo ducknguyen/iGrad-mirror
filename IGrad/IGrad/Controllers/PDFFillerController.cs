@@ -94,7 +94,7 @@ namespace IGrad.Controllers
             }
         }
 
-        //not complete
+        //not complete -- need to get the bottom signatures marked after final review
         private Byte[] StudentEnrollmentChecklistForm()
         {
             // Get the blank form to fill out
