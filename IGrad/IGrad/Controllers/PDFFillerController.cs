@@ -113,7 +113,7 @@ namespace IGrad.Controllers
             document.SecuritySettings.PermitPrint = true;
         }
 
-        //not complete -- need to get the bottom signatures marked after final review
+        
         private Byte[] StudentEnrollmentChecklistForm()
         {
             // Get the blank form to fill out
@@ -238,7 +238,6 @@ namespace IGrad.Controllers
             return writeDocument(document);
         }
 
-        //not complete
         private Byte[] EthnicityAndRaceDataForm()
         {
             // Get the blank form to fill out
@@ -248,12 +247,42 @@ namespace IGrad.Controllers
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
-            //TODO Add logic to fill form.
+            PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
+            name.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
+            name.ReadOnly = true;
+
+            Dictionary<string, string> racesDictionary = new Dictionary<string, string>();
+            HashSet<string> isRaceSet = new HashSet<string>();
+            foreach (var prop in user.ConsideredRaceAndEthnicity.GetType().GetProperties())
+            {
+                //determine if property is boolean or string
+                if (prop.PropertyType.Name == "Boolean")
+                {
+                    string propValue = prop.GetValue(user.ConsideredRaceAndEthnicity).ToString();
+                    if (propValue == "True")
+                    {
+                        racesDictionary.Add(prop.Name, prop.GetValue(user.ConsideredRaceAndEthnicity).ToString());
+                        isRaceSet.Add(prop.Name);
+                    }
+                }
+            }
 
 
-
+            //Check all the booleanProperties 
+            foreach (string isRace in isRaceSet)
+            {
+                try
+                {
+                    PdfCheckBoxField checkBox = (PdfCheckBoxField)(document.AcroForm.Fields[isRace]);
+                    checkBox.Checked = true;
+                    checkBox.ReadOnly = true;
+                }
+                catch(NullReferenceException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
             return writeDocument(document);
-
         }
 
         //not complete

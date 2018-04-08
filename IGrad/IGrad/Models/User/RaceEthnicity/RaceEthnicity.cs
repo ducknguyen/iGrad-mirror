@@ -60,8 +60,8 @@ namespace IGrad.Models.User
         public bool isHoh { get; set; }
         [DisplayName("Hames")]
         public bool isHames { get; set; }
-        [DisplayName("Kalispei")]
-        public bool isKalispei { get; set; }
+        [DisplayName("Kalispel")]
+        public bool isKalispel { get; set; }
         [DisplayName("Lower Elwha")]
         public bool isLowerElwha { get; set; }
         [DisplayName("Lummi")]
@@ -109,9 +109,14 @@ namespace IGrad.Models.User
         [DisplayName("Yakama")]
         public bool isYakama { get; set; }
         [DisplayName("Other Indian")]
-        public bool isOtherIndian { get; set; }
+        public bool isOtherWashingtonIndian { get; set; }
+        [DisplayName("Other North, Central, or South American Indian")]
+        public bool isOtherNorthCentralOrSouthAmericanIndian { get; set; }
+
 
         //HISPANIC / LATINO -------------------------------------------------------------
+        [DisplayName("Not Hispanic/Latino")]
+        public bool isNotHispanic { get; set; }
         [DisplayName("Cuban")]
         public bool isCuban { get; set; }
         [DisplayName("Dominican")]
@@ -153,11 +158,13 @@ namespace IGrad.Models.User
         public bool isRussian { get; set; }
         [DisplayName("Middle Eastern")]
         public bool isMiddleEastern { get; set; }
+        [DisplayName("North African")]
+        public bool isNorthAfrican { get; set; }
 
 
         //NATIVE HAWAIIAN / OTHER PACIFIC ISLANDER ------------------------------------------------
-        [DisplayName("Native Haiiwan")]
-        public bool isNativeHaiiwan { get; set; }
+        [DisplayName("Native Hawaiiwan")]
+        public bool isNativeHawaiiwan { get; set; }
         [DisplayName("Fijian")]
         public bool isFijian { get; set; }
         [DisplayName("Guamanian")]
