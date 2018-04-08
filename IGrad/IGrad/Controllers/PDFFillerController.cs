@@ -16,6 +16,7 @@ using System.IO.Compression;
 using Ionic.Zip;
 using IGrad.Models.Income;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace IGrad.Controllers
 {
@@ -680,6 +681,8 @@ namespace IGrad.Controllers
                 "Annual12", "Annual14",
                 "Annual15"};
 
+            bool userMatchedIncome = false;
+
             for (int i = 0; i < this.famIncome.incomeTable.Count; i++)
             {
                 //document.AcroForm.Fields["Monthly" + (i + 1)].Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
@@ -702,8 +705,60 @@ namespace IGrad.Controllers
                 annually.Value = new PdfString(this.famIncome.incomeTable[i].Annually);
                 annually.ReadOnly = true;
 
+                // Compare user input anual income to table income chart
+                #region annual income parser 
+                if (!userMatchedIncome)
+                {
+                    try
+                    {
+                        int value1 = -1;
+                        int value2 = -1;
+                        string income = this.famIncome.incomeTable[i].Annually.ToString();
 
+                        Match match = Regex.Match(income, @"[0-9]+", RegexOptions.IgnoreCase);
+                        if (match.Success)
+                        {
+                            value1 = Convert.ToInt32(match.ToString());
+                            income = income.Remove(match.Index, match.Length);
+                            Match subMatch = Regex.Match(income, @"[0-9]+", RegexOptions.IgnoreCase);
+                            if (subMatch.Success)
+                            {
+                                value2 = Convert.ToInt32(subMatch.ToString());
+                            }
+                        }
+
+                        if(value1 == -1 || value2 == -1)
+                        {
+                            // do not continue doing anything, let it go back 
+                        }
+
+                        if(this.user.LivesWith.AnnualHouseHoldIncome >= value1 || this.user.LivesWith.AnnualHouseHoldIncome <= value2)
+                        {
+                            userMatchedIncome = true;
+                            PdfCheckBoxField incomeBox = (PdfCheckBoxField)(document.AcroForm.Fields["IncomeCheck" + i]);
+                            incomeBox.Checked = true;
+                            incomeBox.ReadOnly = true;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // bruh
+                    }
+                }
+
+                #endregion
             }
+            if(!userMatchedIncome)
+            {
+                PdfCheckBoxField incomeBox = (PdfCheckBoxField)(document.AcroForm.Fields["CustomIncomeCheck"]);
+                PdfTextField annually = (PdfTextField)(document.AcroForm.Fields["fill_32"]); // do custom field in pdf
+                incomeBox.Checked = true;
+                incomeBox.ReadOnly = true;
+                annually.Value = new PdfString(this.user.LivesWith.AnnualHouseHoldIncome.ToString());
+                annually.ReadOnly = true;
+            }
+
+
 
 
             return writeDocument(document);
