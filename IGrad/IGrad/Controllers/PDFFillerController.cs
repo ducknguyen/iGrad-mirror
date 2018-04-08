@@ -15,6 +15,7 @@ using System.Data.Entity;
 using System.IO.Compression;
 using Ionic.Zip;
 using IGrad.Models.Income;
+using System.Reflection;
 
 namespace IGrad.Controllers
 {
@@ -38,6 +39,7 @@ namespace IGrad.Controllers
                        .Include(u => u.BirthPlace)
                        .Include(u => u.ConsideredRaceAndEthnicity)
                        .Include(u => u.PhoneInfo)
+                       .Include(u => u.HealthInfo)
                        .Include(u => u.Guardians.Select(n => n.Name))
                        .Include(u => u.Siblings)
                        .Include(u => u.LanguageHisory)
@@ -94,12 +96,29 @@ namespace IGrad.Controllers
             }
         }
 
+        private void SetPageSizeA4(PdfDocument document)
+        {
+            for (int page = 0; page < document.PageCount; page++)
+            {
+                document.Pages[page].Size = PdfSharp.PageSize.A4;
+            }
+        }
+
+        private void SetFinishedSecuritySettings(PdfDocument document)
+        {
+            document.SecuritySettings.PermitFormsFill = false;
+            document.SecuritySettings.PermitModifyDocument = false;
+            document.SecuritySettings.PermitFullQualityPrint = true;
+            document.SecuritySettings.PermitPrint = true;
+        }
+
         //not complete -- need to get the bottom signatures marked after final review
         private Byte[] StudentEnrollmentChecklistForm()
         {
             // Get the blank form to fill out
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/StudentEnrollmentChecklistApp.pdf");
             PdfDocument document = PdfReader.Open(filePath);
+
 
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
@@ -135,12 +154,12 @@ namespace IGrad.Controllers
             formAge.ReadOnly = true;
 
             //fill  Highschools
-            if(user.SchoolInfo.HighSchoolInformation != null)
+            if (user.SchoolInfo.HighSchoolInformation != null)
             {
                 user.SchoolInfo.HighSchoolInformation = user.SchoolInfo.HighSchoolInformation.OrderByDescending(d => d.HighSchoolYear).ToList();
-                for(int i = 0; i < user.SchoolInfo.HighSchoolInformation.Count; i++)
+                for (int i = 0; i < user.SchoolInfo.HighSchoolInformation.Count; i++)
                 {
-                    if(i < 5)
+                    if (i < 5)
                     {
                         PdfTextField grade = (PdfTextField)(document.AcroForm.Fields["Grade" + (i + 1)]);
                         PdfTextField year = (PdfTextField)(document.AcroForm.Fields["Year" + (i + 1)]);
@@ -150,7 +169,7 @@ namespace IGrad.Controllers
                         grade.Value = new PdfString(user.SchoolInfo.HighSchoolInformation[i].HighSchoolGrade.ToString());
                         year.Value = new PdfString(user.SchoolInfo.HighSchoolInformation[i].HighSchoolYear.ToString());
                         school.Value = new PdfString(user.SchoolInfo.HighSchoolInformation[i].HighSchoolName.ToString());
-                        cityState.Value = new PdfString(user.SchoolInfo.HighSchoolInformation[i].HighSchoolCity.ToString() + 
+                        cityState.Value = new PdfString(user.SchoolInfo.HighSchoolInformation[i].HighSchoolCity.ToString() +
                             "," + user.SchoolInfo.HighSchoolInformation[i].HighSchoolState.ToString());
                     }
                 }
@@ -161,7 +180,7 @@ namespace IGrad.Controllers
             PdfCheckBoxField plan504 = (PdfCheckBoxField)(document.AcroForm.Fields["504"]);
             PdfCheckBoxField englishLanguageLearner = (PdfCheckBoxField)(document.AcroForm.Fields["EnglishLanguageLearner"]);
 
-            if(user.QualifiedOrEnrolledInProgam != null)
+            if (user.QualifiedOrEnrolledInProgam != null)
             {
                 if (user.QualifiedOrEnrolledInProgam.SpecialEducation)
                 {
@@ -193,11 +212,8 @@ namespace IGrad.Controllers
                 studentIsNotSuspendedOrExpelled.ReadOnly = true;
             }
 
-
-            document.SecuritySettings.PermitFormsFill = false;
-            document.SecuritySettings.PermitModifyDocument = false;
-            document.SecuritySettings.PermitFullQualityPrint = true;
-            document.SecuritySettings.PermitPrint = true;
+            //flatten pdf and security settings
+            SetFinishedSecuritySettings(document);
 
             return writeDocument(document);
         }
@@ -213,6 +229,8 @@ namespace IGrad.Controllers
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
             //TODO Add logic to fill form.
+
+
 
 
 
@@ -488,17 +506,95 @@ namespace IGrad.Controllers
         {
             // Get the blank form to fill out
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/HealthHistory.pdf");
+
             PdfDocument document = PdfReader.Open(filePath);
+
+            //set page size A4
+            SetPageSizeA4(document);
 
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
             //TODO Add logic to fill form.
 
+            //Name, Date, Birthday, gender, and School
+            PdfTextField studentName = (PdfTextField)(document.AcroForm.Fields["StudentName"]);
+            studentName.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
+            studentName.ReadOnly = true;
+
+            PdfTextField todayDate = (PdfTextField)(document.AcroForm.Fields["TodayDate"]);
+            todayDate.Value = new PdfString(DateTime.Now.Date.ToShortDateString());
+            todayDate.ReadOnly = true;
+
+            //Birthday
+            PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
+            birthday.Value = new PdfString(user.Birthday.Date.ToShortDateString());
+            birthday.ReadOnly = true;
+
+            //gender
+            if (user.Gender == "Male")
+            {
+                PdfCheckBoxField gender = (PdfCheckBoxField)(document.AcroForm.Fields["GenderMale"]);
+                gender.Checked = true;
+                gender.ReadOnly = true;
+            }
+            else
+            {
+                PdfCheckBoxField gender = (PdfCheckBoxField)(document.AcroForm.Fields["GenderFemale"]);
+                gender.Checked = true;
+                gender.ReadOnly = true;
+            }
+
+            //create lists of string and boolean properties
+            List<string> booleanProperties = new List<string>();
+            Dictionary<string, string> stringProperties = new Dictionary<string, string>();
+            HashSet<string> stringPropertiesSet = new HashSet<string>();
+
+            //Iterate through all types of medical history for booleans and string values, add to collection
+            foreach (var prop in user.HealthInfo.GetType().GetProperties())
+            {
+                //get the type name
+                string propType = prop.PropertyType.Name;
+
+                //determine if property is boolean or string
+                if (propType == "Boolean")
+                {
+                    string propStr = prop.Name + prop.GetValue(user.HealthInfo).ToString();
+                    booleanProperties.Add(propStr);
+                }
+                else if (propType == "String")
+                {
+                    try
+                    {
+                        stringProperties.Add(prop.Name, prop.GetValue(user.HealthInfo).ToString());
+                    }
+                    catch (NullReferenceException e)
+                    {
+                        stringProperties.Add(prop.Name, "");
+                    }
+                    stringPropertiesSet.Add(prop.Name);
+                }
+            }
 
 
+            //Check all the booleanProperties 
+            foreach (string s in booleanProperties)
+            {
+                PdfCheckBoxField checkBox = (PdfCheckBoxField)(document.AcroForm.Fields[s]);
+                checkBox.Checked = true;
+                checkBox.ReadOnly = true;
+            }
+
+            //fill all the string properties with their description
+            foreach (string s in stringPropertiesSet)
+            {
+                PdfTextField text = (PdfTextField)(document.AcroForm.Fields[s]);
+                text.Value = new PdfString(stringProperties[s].ToString());
+                text.ReadOnly = true;
+            }
+
+            SetFinishedSecuritySettings(document);
             return writeDocument(document);
-
         }
 
         //not complete
@@ -584,13 +680,13 @@ namespace IGrad.Controllers
                 "Annual12", "Annual14",
                 "Annual15"};
 
-            for(int i = 0; i < this.famIncome.incomeTable.Count; i++)
+            for (int i = 0; i < this.famIncome.incomeTable.Count; i++)
             {
                 //document.AcroForm.Fields["Monthly" + (i + 1)].Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
                 //document.AcroForm.Fields["TwiceMonthly" + (i + 1)].Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
                 //document.AcroForm.Fields["twoWeeks" + (i + 1)].Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
-                
-                PdfTextField Monthly= (PdfTextField)(document.AcroForm.Fields["Monthly" + (i + 1)]);
+
+                PdfTextField Monthly = (PdfTextField)(document.AcroForm.Fields["Monthly" + (i + 1)]);
                 Monthly.Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
                 Monthly.ReadOnly = true;
                 PdfTextField twiceMonthly = (PdfTextField)(document.AcroForm.Fields["TwiceMonthly" + (i + 1)]);
@@ -605,7 +701,7 @@ namespace IGrad.Controllers
                 PdfTextField annually = (PdfTextField)(document.AcroForm.Fields["Annual" + (i + 1)]);
                 annually.Value = new PdfString(this.famIncome.incomeTable[i].Annually);
                 annually.ReadOnly = true;
-                
+
 
             }
 
@@ -694,7 +790,7 @@ namespace IGrad.Controllers
             dob.ReadOnly = true;
 
             PdfSignatureField parentSignature = (PdfSignatureField)(document.AcroForm.Fields["ParentGuardian Signature"]);
-            if(user.Guardians != null)
+            if (user.Guardians != null)
             {
                 try
                 {
@@ -704,7 +800,7 @@ namespace IGrad.Controllers
                         parentSignature.ReadOnly = true;
                     }
                 }
-                catch(ArgumentOutOfRangeException e)
+                catch (ArgumentOutOfRangeException e)
                 {
                     Console.Out.Write("No guardian in guardian ArrayList : " + e.Message + " : " + e.StackTrace);
                 }
