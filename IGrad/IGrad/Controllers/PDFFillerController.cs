@@ -112,7 +112,6 @@ namespace IGrad.Controllers
             document.SecuritySettings.PermitFullQualityPrint = true;
             document.SecuritySettings.PermitPrint = true;
         }
-
         
         private Byte[] StudentEnrollmentChecklistForm()
         {
@@ -364,7 +363,6 @@ namespace IGrad.Controllers
             return writeDocument(document);
         }
 
-        //not complete
         private Byte[] ParentQuestionareForm()
         {
             // Get the blank form to fill out
@@ -553,22 +551,26 @@ namespace IGrad.Controllers
             #endregion
 
             #region School Fines
-            if(this.user.SchoolInfo.PreviousSchoolViolation.hasUnpaidFine)
+            if(user.SchoolInfo.PreviousSchoolViolation != null)
             {
-                PdfCheckBoxField unpaidFine = (PdfCheckBoxField)(document.AcroForm.Fields["HasUnpaidFines"]);
-                unpaidFine.Checked = true;
-                unpaidFine.ReadOnly = true;
+                if (this.user.SchoolInfo.PreviousSchoolViolation.hasUnpaidFine)
+                {
+                    PdfCheckBoxField unpaidFine = (PdfCheckBoxField)(document.AcroForm.Fields["HasUnpaidFines"]);
+                    unpaidFine.Checked = true;
+                    unpaidFine.ReadOnly = true;
 
-                PdfTextField explainFine = (PdfTextField)(document.AcroForm.Fields["ExplainUnpaidFines"]);
-                explainFine.Value = new PdfString(this.user.SchoolInfo.PreviousSchoolViolation.ExplainUnpaidFine);
-                explainFine.ReadOnly = true;
+                    PdfTextField explainFine = (PdfTextField)(document.AcroForm.Fields["ExplainUnpaidFines"]);
+                    explainFine.Value = new PdfString(this.user.SchoolInfo.PreviousSchoolViolation.ExplainUnpaidFine);
+                    explainFine.ReadOnly = true;
+                }
+                else
+                {
+                    PdfCheckBoxField noUnpaidFine = (PdfCheckBoxField)(document.AcroForm.Fields["NoUnpaidFines"]);
+                    noUnpaidFine.Checked = true;
+                    noUnpaidFine.ReadOnly = true;
+                }
             }
-            else
-            {
-                PdfCheckBoxField noUnpaidFine = (PdfCheckBoxField)(document.AcroForm.Fields["NoUnpaidFines"]);
-                noUnpaidFine.Checked = true;
-                noUnpaidFine.ReadOnly = true;
-            }
+           
             #endregion
 
             #region Special Ed
@@ -642,51 +644,55 @@ namespace IGrad.Controllers
             #endregion
 
             #region Explain Violation / Diciplanary
+            if (user.SchoolInfo.PreviousSchoolViolation != null)
+            {
 
-            if(this.user.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled || 
-                this.user.SchoolInfo.PreviousSchoolViolation.hasOtherViolation || 
-                this.user.SchoolInfo.PreviousSchoolViolation.hasDiciplanaryStatus || 
+
+                if (this.user.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled ||
+                this.user.SchoolInfo.PreviousSchoolViolation.hasOtherViolation ||
+                this.user.SchoolInfo.PreviousSchoolViolation.hasDiciplanaryStatus ||
                 this.user.SchoolInfo.PreviousSchoolViolation.hadWeaponViolation ||
                 this.user.SchoolInfo.IsExpelledOrSuspended)
-            {
-                PdfCheckBoxField hasDisciplinary = (PdfCheckBoxField)(document.AcroForm.Fields["hasDisciplinary"]);
-                hasDisciplinary.Checked = true;
-                hasDisciplinary.ReadOnly = true;
+                {
+                    PdfCheckBoxField hasDisciplinary = (PdfCheckBoxField)(document.AcroForm.Fields["hasDisciplinary"]);
+                    hasDisciplinary.Checked = true;
+                    hasDisciplinary.ReadOnly = true;
 
-                string violationExplanation = "";
-                if(this.user.SchoolInfo.IsExpelledOrSuspended || this.user.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled)
-                {
-                    violationExplanation = violationExplanation + " Expelled / Suspended, ";
-                }
-                if (this.user.SchoolInfo.PreviousSchoolViolation.hasOtherViolation)
-                {
-                    if (!string.IsNullOrEmpty(this.user.SchoolInfo.PreviousSchoolViolation.ExplainOtherViolation))
+                    string violationExplanation = "";
+                    if (this.user.SchoolInfo.IsExpelledOrSuspended || this.user.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled)
                     {
-                        violationExplanation = violationExplanation + string.Format(" {0},", this.user.SchoolInfo.PreviousSchoolViolation.ExplainOtherViolation);
+                        violationExplanation = violationExplanation + " Expelled / Suspended, ";
+                    }
+                    if (this.user.SchoolInfo.PreviousSchoolViolation.hasOtherViolation)
+                    {
+                        if (!string.IsNullOrEmpty(this.user.SchoolInfo.PreviousSchoolViolation.ExplainOtherViolation))
+                        {
+                            violationExplanation = violationExplanation + string.Format(" {0},", this.user.SchoolInfo.PreviousSchoolViolation.ExplainOtherViolation);
+                        }
+                    }
+
+                    if (this.user.SchoolInfo.PreviousSchoolViolation.hasDiciplanaryStatus)
+                    {
+                        if (!string.IsNullOrEmpty(this.user.SchoolInfo.PreviousSchoolViolation.ExplainDiciplanaryStatus))
+                        {
+                            violationExplanation = violationExplanation + string.Format(" {0},", this.user.SchoolInfo.PreviousSchoolViolation.ExplainDiciplanaryStatus);
+                        }
+                    }
+
+                    if (this.user.SchoolInfo.PreviousSchoolViolation.hadWeaponViolation)
+                    {
+                        if (this.user.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation != null)
+                        {
+                            violationExplanation = violationExplanation + string.Format(" Weapon Violation on {0},", this.user.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation);
+                        }
                     }
                 }
-
-                if (this.user.SchoolInfo.PreviousSchoolViolation.hasDiciplanaryStatus)
+                else
                 {
-                    if (!string.IsNullOrEmpty(this.user.SchoolInfo.PreviousSchoolViolation.ExplainDiciplanaryStatus))
-                    {
-                        violationExplanation = violationExplanation + string.Format(" {0},", this.user.SchoolInfo.PreviousSchoolViolation.ExplainDiciplanaryStatus);
-                    }
+                    PdfCheckBoxField hasDisciplinary = (PdfCheckBoxField)(document.AcroForm.Fields["noDisciplinary"]);
+                    hasDisciplinary.Checked = true;
+                    hasDisciplinary.ReadOnly = true;
                 }
-
-                if (this.user.SchoolInfo.PreviousSchoolViolation.hadWeaponViolation)
-                {
-                    if (this.user.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation != null)
-                    {
-                        violationExplanation = violationExplanation + string.Format(" Weapon Violation on {0},", this.user.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation);
-                    }
-                }
-            }
-            else
-            {
-                PdfCheckBoxField hasDisciplinary = (PdfCheckBoxField)(document.AcroForm.Fields["noDisciplinary"]);
-                hasDisciplinary.Checked = true;
-                hasDisciplinary.ReadOnly = true;
             }
 
             #endregion
@@ -820,18 +826,35 @@ namespace IGrad.Controllers
             // Get the blank form to fill out
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/ImmunizationStatus.pdf");
             PdfDocument document = PdfReader.Open(filePath);
-
+            SetPageSizeA4(document);
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
             //TODO Add logic to fill form.
 
+            PdfTextField firstName = (PdfTextField)(document.AcroForm.Fields["FirstName"]);
+            firstName.Value = new PdfString(user.Name.FName);
+            firstName.ReadOnly = true;
 
+            PdfTextField lastName = (PdfTextField)(document.AcroForm.Fields["LastName"]);
+            lastName.Value = new PdfString(user.Name.LName);
+            lastName.ReadOnly = true;
+
+            PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MiddleInitial"]);
+            middleInitial.Value = new PdfString(user.Name.MName[0].ToString());
+            middleInitial.ReadOnly = true;
+
+            PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
+            birthday.Value = new PdfString(user.Birthday.ToShortDateString());
+            birthday.ReadOnly = true;
+
+            PdfTextField gender = (PdfTextField)(document.AcroForm.Fields["Gender"]);
+            gender.Value = new PdfString(user.Gender);
+            gender.ReadOnly = true;
 
             return writeDocument(document);
         }
 
-        //not complete
         public Byte[] FamilyIncomeForm()
         {
             // Get the blank form to fill out
