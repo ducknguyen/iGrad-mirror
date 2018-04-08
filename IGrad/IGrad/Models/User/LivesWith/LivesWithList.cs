@@ -22,6 +22,7 @@ namespace IGrad.Models.User
         public bool LivesWithAgency { get; set; }
         [DisplayName("Homeless / Distressed")]
         public bool HomelessDistressed { get; set; }
+        [DisplayName("Total People In Residence")]
         public int TotalPeopleInResidence { get; set; }
         [DisplayName("Annual Household Income")]
         public int AnnualHouseHoldIncome { get; set; }

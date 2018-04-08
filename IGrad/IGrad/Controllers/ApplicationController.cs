@@ -163,6 +163,8 @@ namespace IGrad.Controllers
                 data.PhoneInfo.UserID = user.UserID;
                 #endregion
 
+                data.Birthday = user.Birthday;
+
                 db.SaveChanges();
             }
 
