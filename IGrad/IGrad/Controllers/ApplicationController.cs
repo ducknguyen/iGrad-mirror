@@ -210,6 +210,7 @@ namespace IGrad.Controllers
                 var data = db.Users
                        .Include(u => u.SchoolInfo)
                        .Include(u => u.QualifiedOrEnrolledInProgam)
+                       .Include(u => u.SchoolInfo.PriorEducation)
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
                 if(data.SchoolInfo == null)
@@ -226,6 +227,10 @@ namespace IGrad.Controllers
                 //Set object reference to entity with UserID
                 data.QualifiedOrEnrolledInProgam = user.QualifiedOrEnrolledInProgam;
                 data.SchoolInfo = user.SchoolInfo;
+
+                user.SchoolInfo.PriorEducation.UserID = UserID;
+                data.SchoolInfo.PriorEducation = user.SchoolInfo.PriorEducation;
+                
 
                 db.SaveChanges();
             }

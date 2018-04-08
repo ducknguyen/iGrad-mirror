@@ -1,6 +1,5 @@
 ﻿using IGrad.Context;
 using IGrad.Models.User;
-using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.AcroForms;
 using PdfSharp.Pdf.IO;
@@ -8,14 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Mime;
-using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
-using System.IO.Compression;
 using Ionic.Zip;
 using IGrad.Models.Income;
-using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace IGrad.Controllers
@@ -47,6 +42,7 @@ namespace IGrad.Controllers
                        .Include(u => u.LifeEvent)
                        .Include(u => u.SchoolInfo)
                        .Include(u => u.SchoolInfo.HighSchoolInformation)
+                       .Include(u => u.SchoolInfo.PriorEducation)
                        .Include(u => u.QualifiedOrEnrolledInProgam)
                        .Where(u => u.UserID == userId)
                        .FirstOrDefault<UserModel>();
@@ -284,7 +280,6 @@ namespace IGrad.Controllers
             return writeDocument(document);
         }
 
-        //not complete
         private Byte[] HomeLanguageSurveyForm()
         {
             // Get the blank form to fill out
@@ -359,6 +354,45 @@ namespace IGrad.Controllers
                 }
             }
             #endregion
+
+            PdfTextField countryBornIn = (PdfTextField)(document.AcroForm.Fields["CountryBornIn"]);
+            countryBornIn.Value = new PdfString(user.BirthPlace.Country.ToString());
+            countryBornIn.ReadOnly = true;
+
+            //this approach will check either the yes or no check box based off property of hasEducationOutsideUS
+            string hadEducation = user.SchoolInfo.PriorEducation.hasEducationOutsideUS.ToString();
+            PdfCheckBoxField hasEducationOutsideUS = (PdfCheckBoxField)(document.AcroForm.Fields["hasEducationOutsideUS" + hadEducation]);
+            hasEducationOutsideUS.Checked = true;
+            hasEducationOutsideUS.ReadOnly = true;
+
+            PdfTextField monthsOfEd = (PdfTextField)(document.AcroForm.Fields["MonthsOfEducationOutsideUS"]);
+            monthsOfEd.Value = new PdfString(user.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS.ToString());
+            monthsOfEd.ReadOnly = true;
+
+            PdfTextField languageOfEducation = (PdfTextField)(document.AcroForm.Fields["LanguageOfEducationOutsideUS"]);
+            languageOfEducation.Value = new PdfString(user.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS.ToString());
+            languageOfEducation.ReadOnly = true;
+
+            PdfTextField firstAttendanceYear = (PdfTextField)(document.AcroForm.Fields["firstAttendanceOfUSEducationYear"]);
+            firstAttendanceYear.Value = new PdfString(user.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation.Year.ToString());
+            firstAttendanceYear.ReadOnly = true;
+
+            PdfTextField firstAttendanceMonth = (PdfTextField)(document.AcroForm.Fields["firstAttendanceOfUSEducationMonth"]);
+            firstAttendanceMonth.Value = new PdfString(user.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation.Month.ToString());
+            firstAttendanceMonth.ReadOnly = true;
+
+            PdfTextField firstAttendanceDay = (PdfTextField)(document.AcroForm.Fields["firstAttendanceOfUSEducationDay"]);
+            firstAttendanceDay.Value = new PdfString(user.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation.Day.ToString());
+            firstAttendanceDay.ReadOnly = true;
+
+
+
+
+
+
+
+
+
 
             return writeDocument(document);
         }
@@ -820,7 +854,6 @@ namespace IGrad.Controllers
             return writeDocument(document);
         }
 
-        //not complete
         private Byte[] ImmunizationStatusForm()
         {
             // Get the blank form to fill out

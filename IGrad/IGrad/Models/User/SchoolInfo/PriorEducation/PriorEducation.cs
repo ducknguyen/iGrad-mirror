@@ -18,6 +18,10 @@ namespace IGrad.Models.User
         public int MonthsOfEducationOutsideUS { get; set; }
         [DisplayName("Language spoken during education received outside U.S.?")]
         public string LanguageOfEducationOutsideUS { get; set; }
+        [DisplayName("When did the student first attend school in the US?")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime firstAttendanceOfUSEducation { get; set; }
         [DisplayName("Has the student previously attended schools in the U.S.?")]
         public bool AttendedSchoolinUS { get; set; }
     }
