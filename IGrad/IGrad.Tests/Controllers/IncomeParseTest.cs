@@ -37,9 +37,12 @@ namespace IGrad.Tests.Controllers
         [TestMethod]
         public void TestIncomeRegExLarger()
         {
-            string income = "$2500 to $19750";
+            string income = "$2500 to $19,750";
             int value1 = -1;
             int value2 = -1;
+
+            // remove any comma's so that the regex gets full number
+            income = income.Replace(",", "");
 
             Match match = Regex.Match(income, @"[0-9]+", RegexOptions.IgnoreCase);
             if (match.Success)

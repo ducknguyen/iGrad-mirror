@@ -826,7 +826,7 @@ namespace IGrad.Controllers
             effectiveDates.ReadOnly = true;
             #endregion
 
-
+            #region income Pdf field arrays
             string[] monthlyFields = { "Monthly1", "Monthly2",
                 "Monthly3", "Monthly4",
                 "Monthly5", "Monthly6",
@@ -867,6 +867,7 @@ namespace IGrad.Controllers
                 "Annual11", "Annual12",
                 "Annual12", "Annual14",
                 "Annual15"};
+            #endregion
 
             bool userMatchedIncome = false;
 
@@ -901,6 +902,9 @@ namespace IGrad.Controllers
                         int value1 = -1;
                         int value2 = -1;
                         string income = this.famIncome.incomeTable[i].Annually.ToString();
+
+                        // remove comma's from numbers to keep regex simple and number conversion simple
+                        income = income.Replace(",", "");
 
                         Match match = Regex.Match(income, @"[0-9]+", RegexOptions.IgnoreCase);
                         if (match.Success)
