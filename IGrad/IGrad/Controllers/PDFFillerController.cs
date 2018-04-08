@@ -473,16 +473,7 @@ namespace IGrad.Controllers
 
             #endregion
 
-            /*
-             * 
-             * 
-             * 
-             *   STOPPED AT SCHOOL INFO = NEED TO FINISSHHHHHHH! 
-             * 
-             * 
-             * 
-             */
-            
+            #region SchoolInfo
             // get schools in last year
             try
             {
@@ -530,7 +521,9 @@ namespace IGrad.Controllers
                     }
                 }
             }
+            #endregion
 
+            #region School Fines
             if(this.user.SchoolInfo.PreviousSchoolViolation.hasUnpaidFine)
             {
                 PdfCheckBoxField unpaidFine = (PdfCheckBoxField)(document.AcroForm.Fields["HasUnpaidFines"]);
@@ -547,8 +540,9 @@ namespace IGrad.Controllers
                 noUnpaidFine.Checked = true;
                 noUnpaidFine.ReadOnly = true;
             }
+            #endregion
 
-
+            #region Special Ed
             if(this.user.QualifiedOrEnrolledInProgam != null)
             {
                 bool hasSpecialEducation = false;
@@ -604,7 +598,9 @@ namespace IGrad.Controllers
                     SpecialProgramsNo.ReadOnly = true;
                 }
             }
+            #endregion
 
+            #region School Opinions
             // childs opinion on school
             PdfTextField HowDoesChildLikeSchool = (PdfTextField)(document.AcroForm.Fields["HowDoesChildLikeSchool"]);
             HowDoesChildLikeSchool.Value = new PdfString(this.user.SchoolInfo.SchoolOpinion);
@@ -614,6 +610,7 @@ namespace IGrad.Controllers
             PdfTextField SchoolFeedback = (PdfTextField)(document.AcroForm.Fields["SchoolFeedback"]);
             SchoolFeedback.Value = new PdfString(this.user.SchoolInfo.HowDoingInSchool);
             SchoolFeedback.ReadOnly = true;
+            #endregion
 
             #region Explain Violation / Diciplanary
 
