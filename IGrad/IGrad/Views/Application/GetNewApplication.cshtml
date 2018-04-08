@@ -80,7 +80,7 @@
         </div>
         <div class="col-md-4 form-group">
             @Html.LabelFor(model => model.PhoneInfo.PhoneNumber, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Phone", required = "required" } })
+            @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "425-867-5309", required = "required" } })
             @Html.ValidationMessageFor(model => model.PhoneInfo.PhoneNumber, "", new { @class = "text-danger" })
         </div>
     </div>

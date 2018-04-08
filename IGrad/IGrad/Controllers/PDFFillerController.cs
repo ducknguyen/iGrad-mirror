@@ -220,7 +220,7 @@ namespace IGrad.Controllers
             // Get the blank form to fill out
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/StudentInfoAndEnrollmentForm.pdf");
             PdfDocument document = PdfReader.Open(filePath);
-
+            SetPageSizeA4(document);
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
