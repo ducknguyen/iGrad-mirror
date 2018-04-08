@@ -993,7 +993,14 @@ namespace IGrad.Controllers
                 PdfTextField annually = (PdfTextField)(document.AcroForm.Fields["fill_32"]); // do custom field in pdf
                 incomeBox.Checked = true;
                 incomeBox.ReadOnly = true;
-                annually.Value = new PdfString(this.user.LivesWith.AnnualHouseHoldIncome.ToString());
+                if(user.LivesWith != null)
+                {
+                    annually.Value = new PdfString(this.user.LivesWith.AnnualHouseHoldIncome.ToString());
+                }
+                else
+                {
+                    annually.Value = new PdfString("No value provided.");
+                }
                 annually.ReadOnly = true;
             }
 
