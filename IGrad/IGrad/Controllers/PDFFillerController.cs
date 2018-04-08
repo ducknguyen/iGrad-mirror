@@ -482,6 +482,196 @@ namespace IGrad.Controllers
              * 
              * 
              */
+            
+            // get schools in last year
+            try
+            {
+                int curYear = Convert.ToInt32(DateTime.Now.Year.ToString());
+                int schoolsInLastYearCount = 0;
+
+                if (user.SchoolInfo.HighSchoolInformation != null)
+                {
+                    user.SchoolInfo.HighSchoolInformation = user.SchoolInfo.HighSchoolInformation.OrderByDescending(d => d.HighSchoolYear).ToList();
+                    for (int i = 0; i < user.SchoolInfo.HighSchoolInformation.Count; i++)
+                    {
+
+                        int year = Convert.ToInt32(user.SchoolInfo.HighSchoolInformation[i].HighSchoolYear.ToString());
+                        if(year >= curYear -1 && year <= curYear)
+                        {
+                            schoolsInLastYearCount++;
+                        }
+                    }
+
+                    PdfTextField numOfSchoolsLastYear = (PdfTextField)(document.AcroForm.Fields["HowManySchoolsLastYear"]);
+                    numOfSchoolsLastYear.Value = new PdfString(schoolsInLastYearCount.ToString());
+                    numOfSchoolsLastYear.ReadOnly = true;
+
+                }
+            }
+            catch(Exception ex)
+            {
+                // Do nothing
+            }
+
+            // show previous hs info
+            if (this.user.SchoolInfo.HighSchoolInformation != null)
+            {
+                string prevHighSchool = "";
+                for (int i = 0; i < this.user.SchoolInfo.HighSchoolInformation.Count; i++)
+                {
+                    if (this.user.SchoolInfo.HighSchoolInformation[i].isLastHighSchoolAttended)
+                    {
+                        // LastYearSchoolInfo
+                        prevHighSchool = this.user.SchoolInfo.HighSchoolInformation[i].HighSchoolName;
+
+                        PdfTextField LastYearSchoolInfo = (PdfTextField)(document.AcroForm.Fields["LastYearSchoolInfo"]);
+                        LastYearSchoolInfo.Value = new PdfString(this.user.SchoolInfo.HighSchoolInformation[i].HighSchoolName + ", " + this.user.SchoolInfo.HighSchoolInformation[i].HighSchoolState);
+                        LastYearSchoolInfo.ReadOnly = true;
+                    }
+                }
+            }
+
+            if(this.user.SchoolInfo.PreviousSchoolViolation.hasUnpaidFine)
+            {
+                PdfCheckBoxField unpaidFine = (PdfCheckBoxField)(document.AcroForm.Fields["HasUnpaidFines"]);
+                unpaidFine.Checked = true;
+                unpaidFine.ReadOnly = true;
+
+                PdfTextField explainFine = (PdfTextField)(document.AcroForm.Fields["ExplainUnpaidFines"]);
+                explainFine.Value = new PdfString(this.user.SchoolInfo.PreviousSchoolViolation.ExplainUnpaidFine);
+                explainFine.ReadOnly = true;
+            }
+            else
+            {
+                PdfCheckBoxField noUnpaidFine = (PdfCheckBoxField)(document.AcroForm.Fields["NoUnpaidFines"]);
+                noUnpaidFine.Checked = true;
+                noUnpaidFine.ReadOnly = true;
+            }
+
+
+            if(this.user.QualifiedOrEnrolledInProgam != null)
+            {
+                bool hasSpecialEducation = false;
+                string specialEdText = "";
+                if(this.user.QualifiedOrEnrolledInProgam.SpecialEducation)
+                {
+                    hasSpecialEducation = true;
+                    specialEdText = specialEdText + " Special Education,";
+                }
+                if(this.user.QualifiedOrEnrolledInProgam.EngishAsSecondLanguage)
+                {
+                    hasSpecialEducation = true;
+                    specialEdText = specialEdText + " English Second Language,";
+                }
+                if(this.user.QualifiedOrEnrolledInProgam.HighlyCapable)
+                {
+                    hasSpecialEducation = true;
+                    specialEdText = specialEdText + " Highly Capable,";
+                }
+                if (this.user.QualifiedOrEnrolledInProgam.LAP)
+                {
+                    hasSpecialEducation = true;
+                    specialEdText = specialEdText + " LAP,";
+                }
+                if (this.user.QualifiedOrEnrolledInProgam.plan504)
+                {
+                    hasSpecialEducation = true;
+                    specialEdText = specialEdText + " Plan 504,";
+                }
+                if (this.user.QualifiedOrEnrolledInProgam.Title)
+                {
+                    hasSpecialEducation = true;
+                    specialEdText = specialEdText + " Title,";
+                }
+
+                // set check box
+                if (hasSpecialEducation)
+                {
+                    PdfCheckBoxField SpecialProgramsYes = (PdfCheckBoxField)(document.AcroForm.Fields["SpecialProgramsYes"]);
+                    SpecialProgramsYes.Checked = true;
+                    SpecialProgramsYes.ReadOnly = true;
+
+                    // set explanation.
+                    
+                    PdfTextField ListSpecialPrograms = (PdfTextField)(document.AcroForm.Fields["ListSpecialPrograms"]);
+                    ListSpecialPrograms.Value = new PdfString(specialEdText);
+                    ListSpecialPrograms.ReadOnly = true;
+                }
+                else
+                {
+                    PdfCheckBoxField SpecialProgramsNo = (PdfCheckBoxField)(document.AcroForm.Fields["SpecialProgramsNo"]);
+                    SpecialProgramsNo.Checked = true;
+                    SpecialProgramsNo.ReadOnly = true;
+                }
+            }
+
+            // childs opinion on school
+            PdfTextField HowDoesChildLikeSchool = (PdfTextField)(document.AcroForm.Fields["HowDoesChildLikeSchool"]);
+            HowDoesChildLikeSchool.Value = new PdfString(this.user.SchoolInfo.SchoolOpinion);
+            HowDoesChildLikeSchool.ReadOnly = true;
+
+            // childs feedback in school
+            PdfTextField SchoolFeedback = (PdfTextField)(document.AcroForm.Fields["SchoolFeedback"]);
+            SchoolFeedback.Value = new PdfString(this.user.SchoolInfo.HowDoingInSchool);
+            SchoolFeedback.ReadOnly = true;
+
+            #region Explain Violation / Diciplanary
+
+            if(this.user.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled || 
+                this.user.SchoolInfo.PreviousSchoolViolation.hasOtherViolation || 
+                this.user.SchoolInfo.PreviousSchoolViolation.hasDiciplanaryStatus || 
+                this.user.SchoolInfo.PreviousSchoolViolation.hadWeaponViolation ||
+                this.user.SchoolInfo.IsExpelledOrSuspended)
+            {
+                PdfCheckBoxField hasDisciplinary = (PdfCheckBoxField)(document.AcroForm.Fields["hasDisciplinary"]);
+                hasDisciplinary.Checked = true;
+                hasDisciplinary.ReadOnly = true;
+
+                string violationExplanation = "";
+                if(this.user.SchoolInfo.IsExpelledOrSuspended || this.user.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled)
+                {
+                    violationExplanation = violationExplanation + " Expelled / Suspended, ";
+                }
+                if (this.user.SchoolInfo.PreviousSchoolViolation.hasOtherViolation)
+                {
+                    if (!string.IsNullOrEmpty(this.user.SchoolInfo.PreviousSchoolViolation.ExplainOtherViolation))
+                    {
+                        violationExplanation = violationExplanation + string.Format(" {0},", this.user.SchoolInfo.PreviousSchoolViolation.ExplainOtherViolation);
+                    }
+                }
+
+                if (this.user.SchoolInfo.PreviousSchoolViolation.hasDiciplanaryStatus)
+                {
+                    if (!string.IsNullOrEmpty(this.user.SchoolInfo.PreviousSchoolViolation.ExplainDiciplanaryStatus))
+                    {
+                        violationExplanation = violationExplanation + string.Format(" {0},", this.user.SchoolInfo.PreviousSchoolViolation.ExplainDiciplanaryStatus);
+                    }
+                }
+
+                if (this.user.SchoolInfo.PreviousSchoolViolation.hadWeaponViolation)
+                {
+                    if (this.user.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation != null)
+                    {
+                        violationExplanation = violationExplanation + string.Format(" Weapon Violation on {0},", this.user.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation);
+                    }
+                }
+            }
+            else
+            {
+                PdfCheckBoxField hasDisciplinary = (PdfCheckBoxField)(document.AcroForm.Fields["noDisciplinary"]);
+                hasDisciplinary.Checked = true;
+                hasDisciplinary.ReadOnly = true;
+            }
+
+            #endregion
+
+            if (!string.IsNullOrEmpty(this.user.SchoolInfo.StrengthAndWeakness))
+            {
+                PdfTextField BriefChildStrengthWeak = (PdfTextField)(document.AcroForm.Fields["BriefChildStrengthWeak"]);
+                BriefChildStrengthWeak.Value = new PdfString(this.user.SchoolInfo.StrengthAndWeakness);
+                BriefChildStrengthWeak.ReadOnly = true;
+            }
+            
 
             if (this.user.Guardians.Count >= 1)
             {
