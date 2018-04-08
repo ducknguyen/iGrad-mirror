@@ -33,7 +33,6 @@ namespace IGrad.Models.User
         public Retained Retainment { get; set; }
         public List<EmergencyContact> EmergencyContacts{ get; set; }
         public RaceEthnicity ConsideredRaceAndEthnicity { get; set; }
-        public string CountryBornIn { get; set; }
         public SchoolInfo SchoolInfo { get; set; }
         public Health HealthInfo { get; set; }
         public LifeEvent LifeEvent { get; set; }

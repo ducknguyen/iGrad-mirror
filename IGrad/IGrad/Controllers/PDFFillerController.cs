@@ -1,6 +1,5 @@
 ﻿using IGrad.Context;
 using IGrad.Models.User;
-using PdfSharp.Drawing;
 using PdfSharp.Pdf;
 using PdfSharp.Pdf.AcroForms;
 using PdfSharp.Pdf.IO;
@@ -8,14 +7,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Net.Mime;
-using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
-using System.IO.Compression;
 using Ionic.Zip;
 using IGrad.Models.Income;
-using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace IGrad.Controllers
@@ -47,6 +42,7 @@ namespace IGrad.Controllers
                        .Include(u => u.LifeEvent)
                        .Include(u => u.SchoolInfo)
                        .Include(u => u.SchoolInfo.HighSchoolInformation)
+                       .Include(u => u.SchoolInfo.PriorEducation)
                        .Include(u => u.QualifiedOrEnrolledInProgam)
                        .Where(u => u.UserID == userId)
                        .FirstOrDefault<UserModel>();
@@ -112,8 +108,7 @@ namespace IGrad.Controllers
             document.SecuritySettings.PermitFullQualityPrint = true;
             document.SecuritySettings.PermitPrint = true;
         }
-
-        //not complete -- need to get the bottom signatures marked after final review
+        
         private Byte[] StudentEnrollmentChecklistForm()
         {
             // Get the blank form to fill out
@@ -238,7 +233,6 @@ namespace IGrad.Controllers
             return writeDocument(document);
         }
 
-        //not complete
         private Byte[] EthnicityAndRaceDataForm()
         {
             // Get the blank form to fill out
@@ -248,15 +242,44 @@ namespace IGrad.Controllers
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
-            //TODO Add logic to fill form.
+            PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
+            name.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
+            name.ReadOnly = true;
+
+            Dictionary<string, string> racesDictionary = new Dictionary<string, string>();
+            HashSet<string> isRaceSet = new HashSet<string>();
+            foreach (var prop in user.ConsideredRaceAndEthnicity.GetType().GetProperties())
+            {
+                //determine if property is boolean or string
+                if (prop.PropertyType.Name == "Boolean")
+                {
+                    string propValue = prop.GetValue(user.ConsideredRaceAndEthnicity).ToString();
+                    if (propValue == "True")
+                    {
+                        racesDictionary.Add(prop.Name, prop.GetValue(user.ConsideredRaceAndEthnicity).ToString());
+                        isRaceSet.Add(prop.Name);
+                    }
+                }
+            }
 
 
-
+            //Check all the booleanProperties 
+            foreach (string isRace in isRaceSet)
+            {
+                try
+                {
+                    PdfCheckBoxField checkBox = (PdfCheckBoxField)(document.AcroForm.Fields[isRace]);
+                    checkBox.Checked = true;
+                    checkBox.ReadOnly = true;
+                }
+                catch(NullReferenceException e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
             return writeDocument(document);
-
         }
 
-        //not complete
         private Byte[] HomeLanguageSurveyForm()
         {
             // Get the blank form to fill out
@@ -332,10 +355,48 @@ namespace IGrad.Controllers
             }
             #endregion
 
+            PdfTextField countryBornIn = (PdfTextField)(document.AcroForm.Fields["CountryBornIn"]);
+            countryBornIn.Value = new PdfString(user.BirthPlace.Country.ToString());
+            countryBornIn.ReadOnly = true;
+
+            //this approach will check either the yes or no check box based off property of hasEducationOutsideUS
+            string hadEducation = user.SchoolInfo.PriorEducation.hasEducationOutsideUS.ToString();
+            PdfCheckBoxField hasEducationOutsideUS = (PdfCheckBoxField)(document.AcroForm.Fields["hasEducationOutsideUS" + hadEducation]);
+            hasEducationOutsideUS.Checked = true;
+            hasEducationOutsideUS.ReadOnly = true;
+
+            PdfTextField monthsOfEd = (PdfTextField)(document.AcroForm.Fields["MonthsOfEducationOutsideUS"]);
+            monthsOfEd.Value = new PdfString(user.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS.ToString());
+            monthsOfEd.ReadOnly = true;
+
+            PdfTextField languageOfEducation = (PdfTextField)(document.AcroForm.Fields["LanguageOfEducationOutsideUS"]);
+            languageOfEducation.Value = new PdfString(user.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS.ToString());
+            languageOfEducation.ReadOnly = true;
+
+            PdfTextField firstAttendanceYear = (PdfTextField)(document.AcroForm.Fields["firstAttendanceOfUSEducationYear"]);
+            firstAttendanceYear.Value = new PdfString(user.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation.Year.ToString());
+            firstAttendanceYear.ReadOnly = true;
+
+            PdfTextField firstAttendanceMonth = (PdfTextField)(document.AcroForm.Fields["firstAttendanceOfUSEducationMonth"]);
+            firstAttendanceMonth.Value = new PdfString(user.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation.Month.ToString());
+            firstAttendanceMonth.ReadOnly = true;
+
+            PdfTextField firstAttendanceDay = (PdfTextField)(document.AcroForm.Fields["firstAttendanceOfUSEducationDay"]);
+            firstAttendanceDay.Value = new PdfString(user.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation.Day.ToString());
+            firstAttendanceDay.ReadOnly = true;
+
+
+
+
+
+
+
+
+
+
             return writeDocument(document);
         }
 
-        //not complete
         private Byte[] ParentQuestionareForm()
         {
             // Get the blank form to fill out
@@ -524,22 +585,26 @@ namespace IGrad.Controllers
             #endregion
 
             #region School Fines
-            if(this.user.SchoolInfo.PreviousSchoolViolation.hasUnpaidFine)
+            if(user.SchoolInfo.PreviousSchoolViolation != null)
             {
-                PdfCheckBoxField unpaidFine = (PdfCheckBoxField)(document.AcroForm.Fields["HasUnpaidFines"]);
-                unpaidFine.Checked = true;
-                unpaidFine.ReadOnly = true;
+                if (this.user.SchoolInfo.PreviousSchoolViolation.hasUnpaidFine)
+                {
+                    PdfCheckBoxField unpaidFine = (PdfCheckBoxField)(document.AcroForm.Fields["HasUnpaidFines"]);
+                    unpaidFine.Checked = true;
+                    unpaidFine.ReadOnly = true;
 
-                PdfTextField explainFine = (PdfTextField)(document.AcroForm.Fields["ExplainUnpaidFines"]);
-                explainFine.Value = new PdfString(this.user.SchoolInfo.PreviousSchoolViolation.ExplainUnpaidFine);
-                explainFine.ReadOnly = true;
+                    PdfTextField explainFine = (PdfTextField)(document.AcroForm.Fields["ExplainUnpaidFines"]);
+                    explainFine.Value = new PdfString(this.user.SchoolInfo.PreviousSchoolViolation.ExplainUnpaidFine);
+                    explainFine.ReadOnly = true;
+                }
+                else
+                {
+                    PdfCheckBoxField noUnpaidFine = (PdfCheckBoxField)(document.AcroForm.Fields["NoUnpaidFines"]);
+                    noUnpaidFine.Checked = true;
+                    noUnpaidFine.ReadOnly = true;
+                }
             }
-            else
-            {
-                PdfCheckBoxField noUnpaidFine = (PdfCheckBoxField)(document.AcroForm.Fields["NoUnpaidFines"]);
-                noUnpaidFine.Checked = true;
-                noUnpaidFine.ReadOnly = true;
-            }
+           
             #endregion
 
             #region Special Ed
@@ -613,51 +678,55 @@ namespace IGrad.Controllers
             #endregion
 
             #region Explain Violation / Diciplanary
+            if (user.SchoolInfo.PreviousSchoolViolation != null)
+            {
 
-            if(this.user.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled || 
-                this.user.SchoolInfo.PreviousSchoolViolation.hasOtherViolation || 
-                this.user.SchoolInfo.PreviousSchoolViolation.hasDiciplanaryStatus || 
+
+                if (this.user.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled ||
+                this.user.SchoolInfo.PreviousSchoolViolation.hasOtherViolation ||
+                this.user.SchoolInfo.PreviousSchoolViolation.hasDiciplanaryStatus ||
                 this.user.SchoolInfo.PreviousSchoolViolation.hadWeaponViolation ||
                 this.user.SchoolInfo.IsExpelledOrSuspended)
-            {
-                PdfCheckBoxField hasDisciplinary = (PdfCheckBoxField)(document.AcroForm.Fields["hasDisciplinary"]);
-                hasDisciplinary.Checked = true;
-                hasDisciplinary.ReadOnly = true;
+                {
+                    PdfCheckBoxField hasDisciplinary = (PdfCheckBoxField)(document.AcroForm.Fields["hasDisciplinary"]);
+                    hasDisciplinary.Checked = true;
+                    hasDisciplinary.ReadOnly = true;
 
-                string violationExplanation = "";
-                if(this.user.SchoolInfo.IsExpelledOrSuspended || this.user.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled)
-                {
-                    violationExplanation = violationExplanation + " Expelled / Suspended, ";
-                }
-                if (this.user.SchoolInfo.PreviousSchoolViolation.hasOtherViolation)
-                {
-                    if (!string.IsNullOrEmpty(this.user.SchoolInfo.PreviousSchoolViolation.ExplainOtherViolation))
+                    string violationExplanation = "";
+                    if (this.user.SchoolInfo.IsExpelledOrSuspended || this.user.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled)
                     {
-                        violationExplanation = violationExplanation + string.Format(" {0},", this.user.SchoolInfo.PreviousSchoolViolation.ExplainOtherViolation);
+                        violationExplanation = violationExplanation + " Expelled / Suspended, ";
+                    }
+                    if (this.user.SchoolInfo.PreviousSchoolViolation.hasOtherViolation)
+                    {
+                        if (!string.IsNullOrEmpty(this.user.SchoolInfo.PreviousSchoolViolation.ExplainOtherViolation))
+                        {
+                            violationExplanation = violationExplanation + string.Format(" {0},", this.user.SchoolInfo.PreviousSchoolViolation.ExplainOtherViolation);
+                        }
+                    }
+
+                    if (this.user.SchoolInfo.PreviousSchoolViolation.hasDiciplanaryStatus)
+                    {
+                        if (!string.IsNullOrEmpty(this.user.SchoolInfo.PreviousSchoolViolation.ExplainDiciplanaryStatus))
+                        {
+                            violationExplanation = violationExplanation + string.Format(" {0},", this.user.SchoolInfo.PreviousSchoolViolation.ExplainDiciplanaryStatus);
+                        }
+                    }
+
+                    if (this.user.SchoolInfo.PreviousSchoolViolation.hadWeaponViolation)
+                    {
+                        if (this.user.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation != null)
+                        {
+                            violationExplanation = violationExplanation + string.Format(" Weapon Violation on {0},", this.user.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation);
+                        }
                     }
                 }
-
-                if (this.user.SchoolInfo.PreviousSchoolViolation.hasDiciplanaryStatus)
+                else
                 {
-                    if (!string.IsNullOrEmpty(this.user.SchoolInfo.PreviousSchoolViolation.ExplainDiciplanaryStatus))
-                    {
-                        violationExplanation = violationExplanation + string.Format(" {0},", this.user.SchoolInfo.PreviousSchoolViolation.ExplainDiciplanaryStatus);
-                    }
+                    PdfCheckBoxField hasDisciplinary = (PdfCheckBoxField)(document.AcroForm.Fields["noDisciplinary"]);
+                    hasDisciplinary.Checked = true;
+                    hasDisciplinary.ReadOnly = true;
                 }
-
-                if (this.user.SchoolInfo.PreviousSchoolViolation.hadWeaponViolation)
-                {
-                    if (this.user.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation != null)
-                    {
-                        violationExplanation = violationExplanation + string.Format(" Weapon Violation on {0},", this.user.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation);
-                    }
-                }
-            }
-            else
-            {
-                PdfCheckBoxField hasDisciplinary = (PdfCheckBoxField)(document.AcroForm.Fields["noDisciplinary"]);
-                hasDisciplinary.Checked = true;
-                hasDisciplinary.ReadOnly = true;
             }
 
             #endregion
@@ -785,24 +854,40 @@ namespace IGrad.Controllers
             return writeDocument(document);
         }
 
-        //not complete
         private Byte[] ImmunizationStatusForm()
         {
             // Get the blank form to fill out
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/ImmunizationStatus.pdf");
             PdfDocument document = PdfReader.Open(filePath);
-
+            SetPageSizeA4(document);
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
             //TODO Add logic to fill form.
 
+            PdfTextField firstName = (PdfTextField)(document.AcroForm.Fields["FirstName"]);
+            firstName.Value = new PdfString(user.Name.FName);
+            firstName.ReadOnly = true;
 
+            PdfTextField lastName = (PdfTextField)(document.AcroForm.Fields["LastName"]);
+            lastName.Value = new PdfString(user.Name.LName);
+            lastName.ReadOnly = true;
+
+            PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MiddleInitial"]);
+            middleInitial.Value = new PdfString(user.Name.MName[0].ToString());
+            middleInitial.ReadOnly = true;
+
+            PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
+            birthday.Value = new PdfString(user.Birthday.ToShortDateString());
+            birthday.ReadOnly = true;
+
+            PdfTextField gender = (PdfTextField)(document.AcroForm.Fields["Gender"]);
+            gender.Value = new PdfString(user.Gender);
+            gender.ReadOnly = true;
 
             return writeDocument(document);
         }
 
-        //not complete
         public Byte[] FamilyIncomeForm()
         {
             // Get the blank form to fill out
@@ -945,7 +1030,14 @@ namespace IGrad.Controllers
                 PdfTextField annually = (PdfTextField)(document.AcroForm.Fields["fill_32"]); // do custom field in pdf
                 incomeBox.Checked = true;
                 incomeBox.ReadOnly = true;
-                annually.Value = new PdfString(this.user.LivesWith.AnnualHouseHoldIncome.ToString());
+                if(user.LivesWith != null)
+                {
+                    annually.Value = new PdfString(this.user.LivesWith.AnnualHouseHoldIncome.ToString());
+                }
+                else
+                {
+                    annually.Value = new PdfString("No value provided.");
+                }
                 annually.ReadOnly = true;
             }
 
