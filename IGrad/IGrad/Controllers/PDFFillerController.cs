@@ -246,22 +246,19 @@ namespace IGrad.Controllers
             name.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
             name.ReadOnly = true;
 
-            Dictionary<string, string> racesDictionary = new Dictionary<string, string>();
             HashSet<string> isRaceSet = new HashSet<string>();
             foreach (var prop in user.ConsideredRaceAndEthnicity.GetType().GetProperties())
             {
-                //determine if property is boolean or string
+                //determine if property is boolean for race
                 if (prop.PropertyType.Name == "Boolean")
                 {
                     string propValue = prop.GetValue(user.ConsideredRaceAndEthnicity).ToString();
                     if (propValue == "True")
                     {
-                        racesDictionary.Add(prop.Name, prop.GetValue(user.ConsideredRaceAndEthnicity).ToString());
                         isRaceSet.Add(prop.Name);
                     }
                 }
             }
-
 
             //Check all the booleanProperties 
             foreach (string isRace in isRaceSet)
@@ -802,9 +799,9 @@ namespace IGrad.Controllers
                 gender.ReadOnly = true;
             }
 
-            //create lists of string and boolean properties
-            List<string> booleanProperties = new List<string>();
-            Dictionary<string, string> stringProperties = new Dictionary<string, string>();
+            //create list of strings and boolean properties
+            List<string> healthInfoList = new List<string>();
+            Dictionary<string, string> healthInfoDescriptions = new Dictionary<string, string>();
             HashSet<string> stringPropertiesSet = new HashSet<string>();
 
             //Iterate through all types of medical history for booleans and string values, add to collection
@@ -817,25 +814,24 @@ namespace IGrad.Controllers
                 if (propType == "Boolean")
                 {
                     string propStr = prop.Name + prop.GetValue(user.HealthInfo).ToString();
-                    booleanProperties.Add(propStr);
+                    healthInfoList.Add(propStr);
                 }
                 else if (propType == "String")
                 {
                     try
                     {
-                        stringProperties.Add(prop.Name, prop.GetValue(user.HealthInfo).ToString());
+                        healthInfoDescriptions.Add(prop.Name, prop.GetValue(user.HealthInfo).ToString());
                     }
                     catch (NullReferenceException e)
                     {
-                        stringProperties.Add(prop.Name, "");
+                        healthInfoDescriptions.Add(prop.Name, "");
                     }
                     stringPropertiesSet.Add(prop.Name);
                 }
             }
 
-
             //Check all the booleanProperties 
-            foreach (string s in booleanProperties)
+            foreach (string s in healthInfoList)
             {
                 PdfCheckBoxField checkBox = (PdfCheckBoxField)(document.AcroForm.Fields[s]);
                 checkBox.Checked = true;
@@ -846,7 +842,7 @@ namespace IGrad.Controllers
             foreach (string s in stringPropertiesSet)
             {
                 PdfTextField text = (PdfTextField)(document.AcroForm.Fields[s]);
-                text.Value = new PdfString(stringProperties[s].ToString());
+                text.Value = new PdfString(healthInfoDescriptions[s].ToString());
                 text.ReadOnly = true;
             }
 
