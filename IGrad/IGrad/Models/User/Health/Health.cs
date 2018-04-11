@@ -53,6 +53,44 @@ namespace IGrad.Models.User
         public bool HomeNebulizerAsthma { get; set; }
         [DisplayName("6. If your student takes medication for their asthma at home please provide the name of any medications:")]
         public string NameOfMedicationAsthma { get; set; }
+        [DisplayName("None")]
+        public bool AsthmaHospitalizedOvernightNone { get; set; }
+        [DisplayName("Once")]
+        public bool AsthmaHospitalizedOvernightOne { get; set; }
+        [DisplayName("Two-Four")]
+        public bool AsthmaHospitalizedOvernightTwoToFour { get; set; }
+        [DisplayName("More Than Four")]
+        public bool AsthmaHospitalizedOvernightMoreThanFour { get; set; }
+        [DisplayName("None")]
+        public bool AsthmaTreatedInEmergencyRoomNone { get; set; }
+        [DisplayName("Once")]
+        public bool AsthmaTreatedInEmergencyRoomOne { get; set; }
+        [DisplayName("Two-Four")]
+        public bool AsthmaTreatedInEmergencyRoomTwoToFour { get; set; }
+        [DisplayName("More Than Four")]
+        public bool AsthmaTreatedInEmergencyRoomMoreThanFour { get; set; }
+        [DisplayName("None")]
+        public bool AsthmaTreatedInDoctorsOfficeNone { get; set; }
+        [DisplayName("Once")]
+        public bool AsthmaTreatedInDoctorsOfficeOne { get; set; }
+        [DisplayName("Two-Four")]
+        public bool AsthmaTreatedInDoctorsOfficeTwoToFour { get; set; }
+        [DisplayName("More Than Four")]
+        public bool AsthmaTreatedInDoctorsOfficeMoreThanFour { get; set; }
+        [DisplayName("Cough")]
+        public bool AsthmaWarningSignCough { get; set; }
+        [DisplayName("Cold Symptoms")]
+        public bool AsthmaWarningSignColdSymptoms { get; set; }
+        [DisplayName("Drop In Peak Flow")]
+        public bool AsthmaWarningSignDropInPeakFlow { get; set; }
+        [DisplayName("Wheezing")]
+        public bool AsthmaWarningSignWheezing { get; set; }
+        [DisplayName("Low Exercise")]
+        public bool AsthmaWarningSignDecreasedExercise { get; set; }
+        [DisplayName("Other")]
+        public bool AsthmaWarningSignOther { get; set; }
+
+
 
 
         [DisplayName("Birth defects")]
