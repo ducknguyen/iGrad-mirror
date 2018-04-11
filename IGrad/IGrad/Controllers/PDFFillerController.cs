@@ -128,23 +128,18 @@ namespace IGrad.Controllers
 
             PdfTextField firstName = (PdfTextField)(document.AcroForm.Fields["StudentFirstName"]);
             firstName.Value = new PdfString(this.user.Name.FName);
-            firstName.ReadOnly = true;
 
             PdfTextField lastName = (PdfTextField)(document.AcroForm.Fields["StudentLastName"]);
             lastName.Value = new PdfString(this.user.Name.LName);
-            lastName.ReadOnly = true;
 
             PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MI"]);
             middleInitial.Value = new PdfString(this.user.Name.MName);
-            middleInitial.ReadOnly = true;
 
             PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
             birthday.Value = new PdfString(this.user.Birthday.ToString("MM-dd-yyyy"));
-            birthday.ReadOnly = true;
 
             PdfTextField gender = (PdfTextField)(document.AcroForm.Fields["Gender"]);
             gender.Value = new PdfString(user.Gender);
-            gender.ReadOnly = true;
 
             int age = DateTime.Now.Year - user.Birthday.Year;
             if (DateTime.Now < user.Birthday.AddYears(age))
@@ -154,7 +149,6 @@ namespace IGrad.Controllers
 
             PdfTextField formAge = (PdfTextField)(document.AcroForm.Fields["Age"]);
             formAge.Value = new PdfString(age.ToString());
-            formAge.ReadOnly = true;
 
             //fill  Highschools
             if (user.SchoolInfo.HighSchoolInformation != null)
@@ -188,16 +182,13 @@ namespace IGrad.Controllers
                 if (user.QualifiedOrEnrolledInProgam.SpecialEducation)
                 {
                     specialEducation.Checked = true;
-                    specialEducation.ReadOnly = true;
                 }
                 if (user.QualifiedOrEnrolledInProgam.plan504)
                 {
                     plan504.Checked = true;
-                    plan504.Checked = true;
                 }
                 if (user.QualifiedOrEnrolledInProgam.EngishAsSecondLanguage)
                 {
-                    englishLanguageLearner.Checked = true;
                     englishLanguageLearner.Checked = true;
                 }
             }
@@ -206,13 +197,11 @@ namespace IGrad.Controllers
             {
                 PdfCheckBoxField studentIsSuspendedOrExpelled = (PdfCheckBoxField)(document.AcroForm.Fields["StudentIsSuspendedOrExpelled"]);
                 studentIsSuspendedOrExpelled.Checked = true;
-                studentIsSuspendedOrExpelled.ReadOnly = true;
             }
             else
             {
                 PdfCheckBoxField studentIsNotSuspendedOrExpelled = (PdfCheckBoxField)(document.AcroForm.Fields["StudentIsNotSuspendedOrExpelled"]);
                 studentIsNotSuspendedOrExpelled.Checked = true;
-                studentIsNotSuspendedOrExpelled.ReadOnly = true;
             }
 
             //flatten pdf and security settings
@@ -256,7 +245,6 @@ namespace IGrad.Controllers
             {
                 PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
                 name.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
-                name.ReadOnly = true;
 
                 HashSet<string> isRaceSet = new HashSet<string>();
                 foreach (var prop in user.ConsideredRaceAndEthnicity.GetType().GetProperties())
@@ -279,7 +267,6 @@ namespace IGrad.Controllers
                     {
                         PdfCheckBoxField checkBox = (PdfCheckBoxField)(document.AcroForm.Fields[isRace]);
                         checkBox.Checked = true;
-                        checkBox.ReadOnly = true;
                     }
                     catch (NullReferenceException e)
                     {
@@ -301,44 +288,35 @@ namespace IGrad.Controllers
 
             PdfTextField studentName = (PdfTextField)(document.AcroForm.Fields["StudentName"]);
             studentName.Value = new PdfString(this.user.Name.FName + " " + this.user.Name.MName + " " + this.user.Name.LName);
-            studentName.ReadOnly = true;
 
             PdfTextField studentGrade = (PdfTextField)(document.AcroForm.Fields["Grade"]);
             studentGrade.Value = new PdfString(Convert.ToString(this.user.SchoolInfo.CurrentGrade));
-            studentGrade.ReadOnly = true;
 
             PdfTextField todayDate = (PdfTextField)(document.AcroForm.Fields["Date"]);
             todayDate.Value = new PdfString(DateTime.Now.ToString("yyyy-MM-dd"));
-            todayDate.ReadOnly = true;
 
             if (this.user.Guardians.Count != 0)
             {
                 PdfTextField parentName = (PdfTextField)(document.AcroForm.Fields["ParentGuardianName"]);
                 parentName.Value = new PdfString(this.user.Guardians[0].Name.FName + " " + this.user.Guardians[0].Name.LName);
-                parentName.ReadOnly = true;
 
                 PdfSignatureField parentSignature = (PdfSignatureField)(document.AcroForm.Fields["ParentGuardian Signature"]);
                 parentSignature.Value = new PdfString(this.user.Guardians[0].Name.FName + " " + this.user.Guardians[0].Name.LName);
-                parentSignature.ReadOnly = true;
             }
             #region LanguageInfo
             if (this.user.LanguageHisory != null)
             {
                 PdfTextField prefSchoolLanguage = (PdfTextField)(document.AcroForm.Fields["preferedSchoolLanguage"]);
                 prefSchoolLanguage.Value = new PdfString(this.user.LanguageHisory.PreferredLanguage);
-                prefSchoolLanguage.ReadOnly = true;
 
                 PdfTextField firstLearnedLanguage = (PdfTextField)(document.AcroForm.Fields["firstLanguage"]);
                 firstLearnedLanguage.Value = new PdfString(this.user.LanguageHisory.UserFirstLanguageLearned);
-                firstLearnedLanguage.ReadOnly = true;
 
                 PdfTextField studenthomeLanguage = (PdfTextField)(document.AcroForm.Fields["homeLanguage"]);
                 studenthomeLanguage.Value = new PdfString(this.user.LanguageHisory.StudentPrimaryLanguageAtHome);
-                studenthomeLanguage.ReadOnly = true;
 
                 PdfTextField homeLanguage = (PdfTextField)(document.AcroForm.Fields["childsPrimaryLanguage"]);
                 homeLanguage.Value = new PdfString(this.user.LanguageHisory.PrimaryLanguageSpokenAtHome);
-                homeLanguage.ReadOnly = true;
 
 
                 // English Support
@@ -349,25 +327,21 @@ namespace IGrad.Controllers
                 if (this.user.LanguageHisory.StudentReceievedEnglishDevelopmentSupport)
                 {
                     hadSupport.Checked = true;
-                    hadSupport.ReadOnly = true;
                 }
                 else if (!this.user.LanguageHisory.StudentReceievedEnglishDevelopmentSupport)
                 {
                     noSupport.Checked = true;
-                    noSupport.ReadOnly = true;
                 }
 
                 else if (this.user.LanguageHisory.unsureOfEnglishSupport)
                 {
                     dunno.Checked = true;
-                    dunno.ReadOnly = true;
                 }
             }
             #endregion
 
             PdfTextField countryBornIn = (PdfTextField)(document.AcroForm.Fields["CountryBornIn"]);
             countryBornIn.Value = new PdfString(user.BirthPlace.Country.ToString());
-            countryBornIn.ReadOnly = true;
 
             if (user.SchoolInfo.PriorEducation != null)
             {
@@ -375,30 +349,23 @@ namespace IGrad.Controllers
                 string hadEducation = user.SchoolInfo.PriorEducation.hasEducationOutsideUS.ToString();
                 PdfCheckBoxField hasEducationOutsideUS = (PdfCheckBoxField)(document.AcroForm.Fields["hasEducationOutsideUS" + hadEducation]);
                 hasEducationOutsideUS.Checked = true;
-                hasEducationOutsideUS.ReadOnly = true;
 
                 PdfTextField monthsOfEd = (PdfTextField)(document.AcroForm.Fields["MonthsOfEducationOutsideUS"]);
                 monthsOfEd.Value = new PdfString(user.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS.ToString());
-                monthsOfEd.ReadOnly = true;
 
                 PdfTextField languageOfEducation = (PdfTextField)(document.AcroForm.Fields["LanguageOfEducationOutsideUS"]);
                 languageOfEducation.Value = new PdfString(user.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS.ToString());
-                languageOfEducation.ReadOnly = true;
 
                 PdfTextField firstAttendanceYear = (PdfTextField)(document.AcroForm.Fields["firstAttendanceOfUSEducationYear"]);
                 firstAttendanceYear.Value = new PdfString(user.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation.Year.ToString());
-                firstAttendanceYear.ReadOnly = true;
 
                 PdfTextField firstAttendanceMonth = (PdfTextField)(document.AcroForm.Fields["firstAttendanceOfUSEducationMonth"]);
                 firstAttendanceMonth.Value = new PdfString(user.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation.Month.ToString());
-                firstAttendanceMonth.ReadOnly = true;
 
                 PdfTextField firstAttendanceDay = (PdfTextField)(document.AcroForm.Fields["firstAttendanceOfUSEducationDay"]);
                 firstAttendanceDay.Value = new PdfString(user.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation.Day.ToString());
-                firstAttendanceDay.ReadOnly = true;
 
             }
-
             return writeDocument(document);
         }
 
@@ -414,22 +381,21 @@ namespace IGrad.Controllers
             // NAME INFO
             PdfTextField firstName = (PdfTextField)(document.AcroForm.Fields["FirstName"]);
             firstName.Value = new PdfString(this.user.Name.FName);
-            firstName.ReadOnly = true;
+
             PdfTextField lastName = (PdfTextField)(document.AcroForm.Fields["LastName"]);
             lastName.Value = new PdfString(this.user.Name.LName);
-            lastName.ReadOnly = true;
+
             PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MiddleName"]);
             middleInitial.Value = new PdfString(this.user.Name.MName);
-            middleInitial.ReadOnly = true;
+
             PdfTextField preferedName = (PdfTextField)(document.AcroForm.Fields["PreferredName"]);
             preferedName.Value = new PdfString(this.user.Name.NickName);
-            preferedName.ReadOnly = true;
+
             // Birthday
             if (this.user.Birthday != null)
             {
                 PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["BirthDate"]);
                 birthday.Value = new PdfString(this.user.Birthday.ToString("MM-dd-yyyy"));
-                birthday.ReadOnly = true;
             }
 
             // Show guardian list of names
@@ -441,20 +407,17 @@ namespace IGrad.Controllers
 
             PdfTextField parentGuardians = (PdfTextField)(document.AcroForm.Fields["ParentGuardians"]);
             parentGuardians.Value = new PdfString(_tempGuardList);
-            parentGuardians.ReadOnly = true;
 
             // Address
             if (this.user.ResidentAddress != null)
             {
                 PdfTextField address = (PdfTextField)(document.AcroForm.Fields["Address"]);
                 address.Value = new PdfString(this.user.ResidentAddress.PrintAddress());
-                address.ReadOnly = true;
             }
 
             // Lives With
             PdfTextField livesWith = (PdfTextField)(document.AcroForm.Fields["LivesWith"]);
             livesWith.Value = new PdfString(_tempGuardList);
-            livesWith.ReadOnly = true;
 
             #region SiblingInfo
             // Sibling Info:
@@ -494,7 +457,6 @@ namespace IGrad.Controllers
             {
                 PdfTextField language = (PdfTextField)(document.AcroForm.Fields["LanguageAtHome"]);
                 language.Value = new PdfString(this.user.LanguageHisory.PrimaryLanguageSpokenAtHome);
-                language.ReadOnly = true;
             }
 
             // Life Event
@@ -509,7 +471,6 @@ namespace IGrad.Controllers
                 {
                     lifeEvent.Value = new PdfString(this.user.LifeEvent.LifeEventExplain);
                 }
-                lifeEvent.ReadOnly = true;
             }
 
             #region Celebrates
@@ -524,15 +485,11 @@ namespace IGrad.Controllers
                 {
                     doesCelebrate.Checked = true;
                     doesNotCelebrate.Checked = false;
-                    doesCelebrate.ReadOnly = true;
-                    doesNotCelebrate.ReadOnly = true;
                 }
                 else
                 {
                     doesCelebrate.Checked = false;
                     doesNotCelebrate.Checked = true;
-                    doesCelebrate.ReadOnly = true;
-                    doesNotCelebrate.ReadOnly = true;
                     celebrateExplain.Value = new PdfString(this.user.Celebrate.explainNotCelebrate);
                 }
             }
@@ -561,8 +518,6 @@ namespace IGrad.Controllers
 
                     PdfTextField numOfSchoolsLastYear = (PdfTextField)(document.AcroForm.Fields["HowManySchoolsLastYear"]);
                     numOfSchoolsLastYear.Value = new PdfString(schoolsInLastYearCount.ToString());
-                    numOfSchoolsLastYear.ReadOnly = true;
-
                 }
             }
             catch (Exception ex)
@@ -583,7 +538,6 @@ namespace IGrad.Controllers
 
                         PdfTextField LastYearSchoolInfo = (PdfTextField)(document.AcroForm.Fields["LastYearSchoolInfo"]);
                         LastYearSchoolInfo.Value = new PdfString(this.user.SchoolInfo.HighSchoolInformation[i].HighSchoolName + ", " + this.user.SchoolInfo.HighSchoolInformation[i].HighSchoolState);
-                        LastYearSchoolInfo.ReadOnly = true;
                     }
                 }
             }
@@ -596,17 +550,14 @@ namespace IGrad.Controllers
                 {
                     PdfCheckBoxField unpaidFine = (PdfCheckBoxField)(document.AcroForm.Fields["HasUnpaidFines"]);
                     unpaidFine.Checked = true;
-                    unpaidFine.ReadOnly = true;
 
                     PdfTextField explainFine = (PdfTextField)(document.AcroForm.Fields["ExplainUnpaidFines"]);
                     explainFine.Value = new PdfString(this.user.SchoolInfo.PreviousSchoolViolation.ExplainUnpaidFine);
-                    explainFine.ReadOnly = true;
                 }
                 else
                 {
                     PdfCheckBoxField noUnpaidFine = (PdfCheckBoxField)(document.AcroForm.Fields["NoUnpaidFines"]);
                     noUnpaidFine.Checked = true;
-                    noUnpaidFine.ReadOnly = true;
                 }
             }
 
@@ -653,19 +604,15 @@ namespace IGrad.Controllers
                 {
                     PdfCheckBoxField SpecialProgramsYes = (PdfCheckBoxField)(document.AcroForm.Fields["SpecialProgramsYes"]);
                     SpecialProgramsYes.Checked = true;
-                    SpecialProgramsYes.ReadOnly = true;
 
                     // set explanation.
-
                     PdfTextField ListSpecialPrograms = (PdfTextField)(document.AcroForm.Fields["ListSpecialPrograms"]);
                     ListSpecialPrograms.Value = new PdfString(specialEdText);
-                    ListSpecialPrograms.ReadOnly = true;
                 }
                 else
                 {
                     PdfCheckBoxField SpecialProgramsNo = (PdfCheckBoxField)(document.AcroForm.Fields["SpecialProgramsNo"]);
                     SpecialProgramsNo.Checked = true;
-                    SpecialProgramsNo.ReadOnly = true;
                 }
             }
             #endregion
@@ -674,12 +621,10 @@ namespace IGrad.Controllers
             // childs opinion on school
             PdfTextField HowDoesChildLikeSchool = (PdfTextField)(document.AcroForm.Fields["HowDoesChildLikeSchool"]);
             HowDoesChildLikeSchool.Value = new PdfString(this.user.SchoolInfo.SchoolOpinion);
-            HowDoesChildLikeSchool.ReadOnly = true;
 
             // childs feedback in school
             PdfTextField SchoolFeedback = (PdfTextField)(document.AcroForm.Fields["SchoolFeedback"]);
             SchoolFeedback.Value = new PdfString(this.user.SchoolInfo.HowDoingInSchool);
-            SchoolFeedback.ReadOnly = true;
             #endregion
 
             #region Explain Violation / Diciplanary
@@ -695,7 +640,6 @@ namespace IGrad.Controllers
                 {
                     PdfCheckBoxField hasDisciplinary = (PdfCheckBoxField)(document.AcroForm.Fields["hasDisciplinary"]);
                     hasDisciplinary.Checked = true;
-                    hasDisciplinary.ReadOnly = true;
 
                     string violationExplanation = "";
                     if (this.user.SchoolInfo.IsExpelledOrSuspended || this.user.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled)
@@ -730,7 +674,6 @@ namespace IGrad.Controllers
                 {
                     PdfCheckBoxField hasDisciplinary = (PdfCheckBoxField)(document.AcroForm.Fields["noDisciplinary"]);
                     hasDisciplinary.Checked = true;
-                    hasDisciplinary.ReadOnly = true;
                 }
             }
 
@@ -740,7 +683,6 @@ namespace IGrad.Controllers
             {
                 PdfTextField BriefChildStrengthWeak = (PdfTextField)(document.AcroForm.Fields["BriefChildStrengthWeak"]);
                 BriefChildStrengthWeak.Value = new PdfString(this.user.SchoolInfo.StrengthAndWeakness);
-                BriefChildStrengthWeak.ReadOnly = true;
             }
 
 
@@ -748,11 +690,9 @@ namespace IGrad.Controllers
             {
                 PdfSignatureField parentSignature = (PdfSignatureField)(document.AcroForm.Fields["parentSignature"]);
                 parentSignature.Value = new PdfString(this.user.Guardians[0].Name.FName + " " + this.user.Guardians[0].Name.LName);
-                parentSignature.ReadOnly = true;
 
                 PdfTextField signDate = (PdfTextField)(document.AcroForm.Fields["signedDate"]);
                 signDate.Value = new PdfString(DateTime.Now.ToString("yyyy-MM-dd"));
-                signDate.ReadOnly = true;
             }
 
             document.SecuritySettings.PermitFormsFill = false;
@@ -777,34 +717,27 @@ namespace IGrad.Controllers
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
-            //TODO Add logic to fill form.
-
             //Name, Date, Birthday, gender, and School
             PdfTextField studentName = (PdfTextField)(document.AcroForm.Fields["StudentName"]);
             studentName.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
-            studentName.ReadOnly = true;
 
             PdfTextField todayDate = (PdfTextField)(document.AcroForm.Fields["TodayDate"]);
             todayDate.Value = new PdfString(DateTime.Now.Date.ToShortDateString());
-            todayDate.ReadOnly = true;
 
             //Birthday
             PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
             birthday.Value = new PdfString(user.Birthday.Date.ToShortDateString());
-            birthday.ReadOnly = true;
 
             //gender
             if (user.Gender == "Male")
             {
                 PdfCheckBoxField gender = (PdfCheckBoxField)(document.AcroForm.Fields["GenderMale"]);
                 gender.Checked = true;
-                gender.ReadOnly = true;
             }
             else
             {
                 PdfCheckBoxField gender = (PdfCheckBoxField)(document.AcroForm.Fields["GenderFemale"]);
                 gender.Checked = true;
-                gender.ReadOnly = true;
             }
 
             //create list of strings and boolean properties
@@ -845,7 +778,6 @@ namespace IGrad.Controllers
                 {
                     PdfCheckBoxField checkBox = (PdfCheckBoxField)(document.AcroForm.Fields[s]);
                     checkBox.Checked = true;
-                    checkBox.ReadOnly = true;
                 }
                 catch(NullReferenceException e)
                 {
@@ -860,7 +792,6 @@ namespace IGrad.Controllers
             {
                 PdfTextField text = (PdfTextField)(document.AcroForm.Fields[s]);
                 text.Value = new PdfString(healthInfoDescriptions[s].ToString());
-                text.ReadOnly = true;
             }
 
             SetFinishedSecuritySettings(document);
@@ -880,23 +811,18 @@ namespace IGrad.Controllers
 
             PdfTextField firstName = (PdfTextField)(document.AcroForm.Fields["FirstName"]);
             firstName.Value = new PdfString(user.Name.FName);
-            firstName.ReadOnly = true;
 
             PdfTextField lastName = (PdfTextField)(document.AcroForm.Fields["LastName"]);
             lastName.Value = new PdfString(user.Name.LName);
-            lastName.ReadOnly = true;
 
             PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MiddleInitial"]);
             middleInitial.Value = new PdfString(user.Name.MName[0].ToString());
-            middleInitial.ReadOnly = true;
 
             PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
             birthday.Value = new PdfString(user.Birthday.ToShortDateString());
-            birthday.ReadOnly = true;
 
             PdfTextField gender = (PdfTextField)(document.AcroForm.Fields["Gender"]);
             gender.Value = new PdfString(user.Gender);
-            gender.ReadOnly = true;
 
             return writeDocument(document);
         }
@@ -913,15 +839,12 @@ namespace IGrad.Controllers
             #region DocumentRequiredData
             PdfTextField surveyYears1 = (PdfTextField)(document.AcroForm.Fields["SurveyYears1"]);
             surveyYears1.Value = new PdfString(this.famIncome.IncomeTableYears);
-            surveyYears1.ReadOnly = true;
 
             PdfTextField surveyYears2 = (PdfTextField)(document.AcroForm.Fields["SurveyYears2"]);
             surveyYears2.Value = new PdfString(this.famIncome.IncomeTableYears);
-            surveyYears2.ReadOnly = true;
 
             PdfTextField effectiveDates = (PdfTextField)(document.AcroForm.Fields["EffectiveDates"]);
             effectiveDates.Value = new PdfString(this.famIncome.EffectiveDates);
-            effectiveDates.ReadOnly = true;
             #endregion
 
             #region income Pdf field arrays
@@ -977,19 +900,18 @@ namespace IGrad.Controllers
 
                 PdfTextField Monthly = (PdfTextField)(document.AcroForm.Fields["Monthly" + (i + 1)]);
                 Monthly.Value = new PdfString(this.famIncome.incomeTable[i].Monthly);
-                Monthly.ReadOnly = true;
+
                 PdfTextField twiceMonthly = (PdfTextField)(document.AcroForm.Fields["TwiceMonthly" + (i + 1)]);
                 twiceMonthly.Value = new PdfString(this.famIncome.incomeTable[i].TwiceMonthly);
-                twiceMonthly.ReadOnly = true;
+
                 PdfTextField twoWeeks = (PdfTextField)(document.AcroForm.Fields["twoWeeks" + (i + 1)]);
                 twoWeeks.Value = new PdfString(this.famIncome.incomeTable[i].TwoWeeks);
-                twoWeeks.ReadOnly = true;
+
                 PdfTextField weekly = (PdfTextField)(document.AcroForm.Fields["Weekly" + (i + 1)]);
                 weekly.Value = new PdfString(this.famIncome.incomeTable[i].Weekly);
-                weekly.ReadOnly = true;
+
                 PdfTextField annually = (PdfTextField)(document.AcroForm.Fields["Annual" + (i + 1)]);
                 annually.Value = new PdfString(this.famIncome.incomeTable[i].Annually);
-                annually.ReadOnly = true;
 
                 // Compare user input anual income to table income chart
                 #region annual income parser 
@@ -1026,7 +948,6 @@ namespace IGrad.Controllers
                             userMatchedIncome = true;
                             PdfCheckBoxField incomeBox = (PdfCheckBoxField)(document.AcroForm.Fields["IncomeCheck" + i]);
                             incomeBox.Checked = true;
-                            incomeBox.ReadOnly = true;
                         }
                     }
                     catch (Exception ex)
@@ -1042,7 +963,6 @@ namespace IGrad.Controllers
                 PdfCheckBoxField incomeBox = (PdfCheckBoxField)(document.AcroForm.Fields["CustomIncomeCheck"]);
                 PdfTextField annually = (PdfTextField)(document.AcroForm.Fields["fill_32"]); // do custom field in pdf
                 incomeBox.Checked = true;
-                incomeBox.ReadOnly = true;
                 if (user.LivesWith != null)
                 {
                     annually.Value = new PdfString(this.user.LivesWith.AnnualHouseHoldIncome.ToString());
@@ -1051,7 +971,6 @@ namespace IGrad.Controllers
                 {
                     annually.Value = new PdfString("No value provided.");
                 }
-                annually.ReadOnly = true;
             }
 
 
@@ -1072,7 +991,6 @@ namespace IGrad.Controllers
 
             PdfTextField firstrqst = (PdfTextField)(document.AcroForm.Fields["1st rqst"]);
             firstrqst.Value = new PdfString("X");
-            firstrqst.ReadOnly = true;
 
             if (this.user.SchoolInfo.HighSchoolInformation != null)
             {
@@ -1087,11 +1005,9 @@ namespace IGrad.Controllers
 
                 PdfTextField lastSchool = (PdfTextField)(document.AcroForm.Fields["School Name Previous School"]);
                 lastSchool.Value = new PdfString(prevHighSchool);
-                lastSchool.ReadOnly = true;
 
                 PdfTextField grade = (PdfTextField)(document.AcroForm.Fields["Grade"]);
                 grade.Value = new PdfString(this.user.SchoolInfo.CurrentGrade.ToString());
-                grade.ReadOnly = true;
             }
 
             if (this.user.ResidentAddress != null)
@@ -1105,40 +1021,31 @@ namespace IGrad.Controllers
                 {
                     address.Value = new PdfString(this.user.ResidentAddress.POBox);
                 }
-                address.ReadOnly = true;
 
                 PdfTextField city = (PdfTextField)(document.AcroForm.Fields["City"]);
                 city.Value = new PdfString(this.user.ResidentAddress.City);
-                city.ReadOnly = true;
 
                 PdfTextField state = (PdfTextField)(document.AcroForm.Fields["State"]);
                 state.Value = new PdfString(this.user.ResidentAddress.City);
-                state.ReadOnly = true;
 
                 PdfTextField zipcode = (PdfTextField)(document.AcroForm.Fields["Zip Code"]);
                 zipcode.Value = new PdfString(this.user.ResidentAddress.City);
-                zipcode.ReadOnly = true;
             }
 
             PdfTextField phone = (PdfTextField)(document.AcroForm.Fields["Phone"]);
             phone.Value = new PdfString(this.user.PhoneInfo.PhoneNumber);
-            phone.ReadOnly = true;
 
             PdfTextField lName = (PdfTextField)(document.AcroForm.Fields["Last Name"]);
             lName.Value = new PdfString(this.user.Name.LName);
-            lName.ReadOnly = true;
 
             PdfTextField fName = (PdfTextField)(document.AcroForm.Fields["First"]);
             fName.Value = new PdfString(this.user.Name.FName);
-            fName.ReadOnly = true;
 
             PdfTextField mi = (PdfTextField)(document.AcroForm.Fields["MI"]);
             mi.Value = new PdfString(this.user.Name.MName);
-            mi.ReadOnly = true;
 
             PdfTextField dob = (PdfTextField)(document.AcroForm.Fields["DOB"]);
             dob.Value = new PdfString(this.user.Birthday.ToString("MM-dd-yyyy"));
-            dob.ReadOnly = true;
 
             PdfSignatureField parentSignature = (PdfSignatureField)(document.AcroForm.Fields["ParentGuardian Signature"]);
             if (user.Guardians != null)
@@ -1148,7 +1055,6 @@ namespace IGrad.Controllers
                     if (user.Guardians[0] != null)
                     {
                         parentSignature.Value = new PdfString(this.user.Guardians[0].Name.FName + " " + this.user.Guardians[0].Name.LName);
-                        parentSignature.ReadOnly = true;
                     }
                 }
                 catch (ArgumentOutOfRangeException e)
