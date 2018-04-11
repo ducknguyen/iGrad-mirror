@@ -111,9 +111,12 @@ namespace IGrad.Controllers
 
         private static void SetAllDocumentFieldsReadOnly(PdfDocument document)
         {
-            for (int i = 0; i < document.AcroForm.Fields.Count(); i++)
+            if(document.AcroForm.Fields.Count() > 0)
             {
-                document.AcroForm.Fields[i].ReadOnly = true;
+                for (int i = 0; i < document.AcroForm.Fields.Count(); i++)
+                {
+                    document.AcroForm.Fields[i].ReadOnly = true;
+                }
             }
         }
         private Byte[] StudentEnrollmentChecklistForm()
