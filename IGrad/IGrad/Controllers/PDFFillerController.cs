@@ -44,6 +44,8 @@ namespace IGrad.Controllers
                        .Include(u => u.SchoolInfo.HighSchoolInformation)
                        .Include(u => u.SchoolInfo.PriorEducation)
                        .Include(u => u.QualifiedOrEnrolledInProgam)
+                       .Include(u => u.NativeAmericanEducation)
+                       .Include(u => u.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment)
                        .Where(u => u.UserID == userId)
                        .FirstOrDefault<UserModel>();
                 PDFFillerController pdfControl = new PDFFillerController();
@@ -1098,15 +1100,87 @@ namespace IGrad.Controllers
         //not complete
         private Byte[] NativeAmericanEducationProgramForm()
         {
+            //name of school should never change as all are applying to Igrad. Not captured in web form.
+            const string NAME_OF_SCHOOL = "iGRAD";
+
             // Get the blank form to fill out
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/NativeAmericanEducationProgram.pdf");
             PdfDocument document = PdfReader.Open(filePath);
 
+            //set page size
+            SetPageSizeA4(document);
+
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
-            //TODO Add logic to fill form.
+            //check for null object
+            if(user.NativeAmericanEducation != null)
+            {
+                PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
+                name.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
 
+                PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
+                birthday.Value = new PdfString(user.Birthday.ToShortDateString());
+
+                PdfTextField grade = (PdfTextField)(document.AcroForm.Fields["Grade"]);
+                grade.Value = new PdfString(user.SchoolInfo.CurrentGrade.ToString());
+
+                PdfTextField nameOfSchool = (PdfTextField)(document.AcroForm.Fields["NameOfSchool"]);
+                nameOfSchool.Value = new PdfString(NAME_OF_SCHOOL);
+
+                PdfTextField nameOfIndividualWithTribalEnrollment = (PdfTextField)(document.AcroForm.Fields["NameOfIndividualWithTribalEnrollment"]);
+                nameOfIndividualWithTribalEnrollment.Value = new PdfString(user.NativeAmericanEducation.NameOfIndividualWithTribalEnrollment.ToString());
+
+                PdfCheckBoxField tribalMembershipIsChilds = (PdfCheckBoxField)(document.AcroForm.Fields["TribalMembershipIsChilds"]);
+                tribalMembershipIsChilds.Checked = user.NativeAmericanEducation.TribalMembershipIsChilds;
+
+                PdfCheckBoxField tribalMembershipIsChildsParent = (PdfCheckBoxField)(document.AcroForm.Fields["TribalMembershipIsChildsParent"]);
+                tribalMembershipIsChildsParent.Checked = user.NativeAmericanEducation.TribalMembershipIsChildsParent;
+
+                PdfCheckBoxField tribalMembershipIsChildsGrandparent = (PdfCheckBoxField)(document.AcroForm.Fields["TribalMembershipIsChildsGrandparent"]);
+                tribalMembershipIsChildsGrandparent.Checked = user.NativeAmericanEducation.TribalMembershipIsChildsGrandparent;
+
+                PdfTextField nameOfTribeOrBandOfMembership = (PdfTextField)(document.AcroForm.Fields["NameOfTribeOrBandOfMembership"]);
+                nameOfTribeOrBandOfMembership.Value = new PdfString(user.NativeAmericanEducation.NameOfTribeOrBandOfMembership.ToString());
+
+                PdfCheckBoxField tribeOrBandIsFederallyRecognized = (PdfCheckBoxField)(document.AcroForm.Fields["TribeOrBandIsFederallyRecognized"]);
+                tribeOrBandIsFederallyRecognized.Checked = user.NativeAmericanEducation.TribeOrBandIsFederallyRecognized;
+
+                PdfCheckBoxField tribeOrBandIsStateRecognized = (PdfCheckBoxField)(document.AcroForm.Fields["TribeOrBandIsStateRecognized"]);
+                tribeOrBandIsStateRecognized.Checked = user.NativeAmericanEducation.TribeOrBandIsStateRecognized;
+
+                PdfCheckBoxField tribeOrBandIsTerminatedTribe = (PdfCheckBoxField)(document.AcroForm.Fields["TribeOrBandIsTerminatedTribe"]);
+                tribeOrBandIsTerminatedTribe.Checked = user.NativeAmericanEducation.TribeOrBandIsTerminatedTribe;
+
+                PdfCheckBoxField tribeOrBandIsOfIndianGroupEducationGrant = (PdfCheckBoxField)(document.AcroForm.Fields["TribeOrBandIsOfIndianGroupEducationGrant"]);
+                tribeOrBandIsOfIndianGroupEducationGrant.Checked = user.NativeAmericanEducation.TribeOrBandIsOfIndianGroupEducationGrant;
+
+                PdfTextField membershipOrEnrollmentNumber = (PdfTextField)(document.AcroForm.Fields["MembershipOrEnrollmentNumber"]);
+                membershipOrEnrollmentNumber.Value = new PdfString(user.NativeAmericanEducation.MembershipOrEnrollmentNumber.ToString());
+
+                PdfTextField descriptionOfEvidenceOfEnrollment = (PdfTextField)(document.AcroForm.Fields["DescriptionOfEvidenceOfEnrollment"]);
+                descriptionOfEvidenceOfEnrollment.Value = new PdfString(user.NativeAmericanEducation.DescriptionOfEvidenceOfEnrollment.ToString());
+
+                PdfTextField nameOfTribeMaintaningEnrollment = (PdfTextField)(document.AcroForm.Fields["NameOfTribeMaintaningEnrollment"]);
+                nameOfTribeMaintaningEnrollment.Value = new PdfString(user.NativeAmericanEducation.NameOfTribeMaintaningEnrollment.ToString());
+
+                //check for null address
+                if(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment != null)
+                {
+                    PdfTextField addressOfTribeMaintainingEnrollmentStreet = (PdfTextField)(document.AcroForm.Fields["AddressOfTribeMaintainingEnrollmentStreet"]);
+                    addressOfTribeMaintainingEnrollmentStreet.Value = new PdfString(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment.Street.ToString());
+
+                    PdfTextField addressOfTribeMaintainingEnrollmentCity = (PdfTextField)(document.AcroForm.Fields["AddressOfTribeMaintainingEnrollmentCity"]);
+                    addressOfTribeMaintainingEnrollmentCity.Value = new PdfString(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment.City.ToString());
+
+                    PdfTextField addressOfTribeMaintainingEnrollmentState = (PdfTextField)(document.AcroForm.Fields["AddressOfTribeMaintainingEnrollmentState"]);
+                    addressOfTribeMaintainingEnrollmentState.Value = new PdfString(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment.State.ToString());
+
+                    PdfTextField addressOfTribeMaintainingEnrollmentZip = (PdfTextField)(document.AcroForm.Fields["AddressOfTribeMaintainingEnrollmentZip"]);
+                    addressOfTribeMaintainingEnrollmentZip.Value = new PdfString(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment.Zip.ToString());
+
+                }
+            }
 
             return writeDocument(document);
         }

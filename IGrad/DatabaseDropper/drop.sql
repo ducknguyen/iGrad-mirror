@@ -1,6 +1,10 @@
 ﻿USE [iGrad]
 GO
 
+
+ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.SchoolInfoes_SchoolInfo_fieldId]
+GO
+
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.SchoolInfoes_SchoolInfo_fieldId]
 GO
 
@@ -107,9 +111,6 @@ ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_dbo.AspNetUserClaims_db
 GO
 
 ALTER TABLE [dbo].[NativeAmericanEducations] DROP CONSTRAINT [FK_dbo.NativeAmericanEducations_dbo.Addresses_AddressOfTribeMaintainingEnrollment_fieldId]
-GO
-
-ALTER TABLE [dbo].[NativeAmericanEducations] DROP CONSTRAINT [PK_dbo.NativeAmericanEducations]
 GO
 
 

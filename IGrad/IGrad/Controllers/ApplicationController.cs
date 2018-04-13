@@ -744,12 +744,12 @@ namespace IGrad.Controllers
         {
             if(user.NativeAmericanEducation != null)
             {
-                return PartialView("_GetNativeAmericanEducation", user.NativeAmericanEducation);
+                return PartialView("_GetNativeAmericanEducationForm", user.NativeAmericanEducation);
             }
             else
             {
                 user.NativeAmericanEducation = new NativeAmericanEducation();
-                return PartialView("_GetNativeAmericanEducation", user.NativeAmericanEducation);
+                return PartialView("_GetNativeAmericanEducationForm", user.NativeAmericanEducation);
             }
         }
 
