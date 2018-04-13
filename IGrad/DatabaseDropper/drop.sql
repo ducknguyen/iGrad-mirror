@@ -238,3 +238,5 @@ GO
 DROP TABLE [dbo].[__MigrationHistory]
 GO
 
+DROP TABLE [dbo].[NativeAmericanEducations]
+GO
