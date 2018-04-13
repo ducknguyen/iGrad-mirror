@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Web.Mvc;
@@ -12,7 +13,10 @@ namespace IGrad.Models.User
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int fieldId { get; set; }
         public Guid UserID { get; set; }
+        [DisplayName("Phone Number")]
+        [RegularExpression(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}")]
         public string PhoneNumber { get; set; }
+        [DisplayName("Phone Type")]
         public string PhoneType { get; set; }
         public IEnumerable<SelectListItem> PhoneTypeSelectList
         {
