@@ -1,4 +1,5 @@
 ﻿using IGrad.Models.User;
+using IGrad.Models.User.NativeAmerican;
 using System.Data.Entity;
 
 
@@ -24,5 +25,7 @@ namespace IGrad.Context
         public DbSet<Sibling> Siblings { get; set; }
 
         public DbSet<EmergencyContact> EmergencyContacts { get; set; }
+
+        public DbSet<NativeAmericanEducation> NativeAmericanEducations { get; set; }
     }
 }

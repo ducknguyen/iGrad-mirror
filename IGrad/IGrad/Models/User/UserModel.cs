@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IGrad.Models.User.NativeAmerican;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -33,6 +34,7 @@ namespace IGrad.Models.User
         public Retained Retainment { get; set; }
         public List<EmergencyContact> EmergencyContacts{ get; set; }
         public RaceEthnicity ConsideredRaceAndEthnicity { get; set; }
+        public NativeAmericanEducation NativeAmericanEducation { get; set; }
         public SchoolInfo SchoolInfo { get; set; }
         public Health HealthInfo { get; set; }
         public LifeEvent LifeEvent { get; set; }
@@ -41,8 +43,7 @@ namespace IGrad.Models.User
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime LastUpdateDate { get; set; }
-        public Boolean isComplete { get; set; }
-
+        public bool isComplete { get; set; }
         public Roles role { get; set; }
     }
 }

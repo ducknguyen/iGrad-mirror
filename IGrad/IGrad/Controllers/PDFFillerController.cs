@@ -80,9 +80,14 @@ namespace IGrad.Controllers
                 zip.AddEntry("ImmunizationStatus.pdf", ImmunizationStatusForm());
                 zip.AddEntry("FamilyIncomeSurvey.pdf", FamilyIncomeForm());
                 zip.AddEntry("RequestForRecords.pdf", RequestForRecordsForm());
-                zip.AddEntry("NativeAmericanEducationProgram.pdf", NativeAmericanEducationProgramForm());
                 zip.AddEntry("HomelessAssistance.pdf", HomelessAssistanceForm());
                 zip.AddEntry("KingCountyLibrarySystem.pdf", KingCountyLibrarySystemForm());
+
+                //optional forms
+                if (UserRequiresNativeAmericanForm(user.ConsideredRaceAndEthnicity))
+                {
+                    zip.AddEntry("NativeAmericanEducationProgram.pdf", NativeAmericanEducationProgramForm());
+                }
 
 
                 MemoryStream output = new MemoryStream();
@@ -98,6 +103,28 @@ namespace IGrad.Controllers
             for (int page = 0; page < document.PageCount; page++)
             {
                 document.Pages[page].Size = PdfSharp.PageSize.A4;
+            }
+        }
+
+        private bool UserRequiresNativeAmericanForm(RaceEthnicity race)
+        {
+            if (race.isAlaskaNative || race.isChehalis || race.isColville ||
+                  race.isCowlitz ||race.isHoh || race.isHames ||
+                  race.isKalispel || race.isLowerElwha || race.isLummi ||
+                  race.isMakah || race.isMuckleshoot || race.isNisqually ||
+                  race.isNooksack || race.isPortGambleClallam || race.isPuyallup ||
+                  race.isQuileute || race.isSamish || race.isSauk_Suiattle ||
+                  race.isShoalwater || race.isSkokomish || race.isSnoqualmie ||
+                  race.isSpokane || race.isSquaxinIsland || race.isStillaguamish ||
+                  race.isSwinomish || race.isTulalip || race.isUpperSkagit ||
+                  race.isYakama || race.isOtherWashingtonIndian ||
+                  race.isOtherNorthCentralOrSouthAmericanIndian)
+            {
+                return true;
+            }
+            else
+            {
+                return false; 
             }
         }
 

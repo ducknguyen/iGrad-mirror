@@ -250,6 +250,7 @@
     <Compile Include="Models\User\LifeEvent\LifeEvent.cs" />
     <Compile Include="Models\User\LivesWith\LivesWithList.cs" />
     <Compile Include="Models\User\Language\Name\Name.cs" />
+    <Compile Include="Models\User\NativeAmerican\NativeAmericanEducation.cs" />
     <Compile Include="Models\User\ParentPlan\ParentPlan.cs" />
     <Compile Include="Models\User\Phone\Phone.cs" />
     <Compile Include="Models\User\PreSchools\PreSchools.cs" />
@@ -402,6 +403,7 @@
     <Content Include="Views\Admin\familyincome.cshtml" />
     <Content Include="Views\Application\_HealthCategory1.cshtml" />
     <Content Include="Views\Application\_HealthCategory2.cshtml" />
+    <Content Include="Views\Application\_GetNativeAmericanEducationForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

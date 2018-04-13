@@ -54,6 +54,8 @@ C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad.Tests\bin\Debug\Microsoft.Owi
 C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad.Tests\obj\Debug\IGrad.Tests.csprojResolveAssemblyReference.cache
 C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad.Tests\obj\Debug\IGrad.Tests.dll
 C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad.Tests\obj\Debug\IGrad.Tests.pdb
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\obj\Debug\IGrad.Tests.csprojResolveAssemblyReference.cache
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\admin.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\ApplicationInsights.config
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\roslyn\csc.exe
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -90,6 +92,8 @@ C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\Owin.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\Microsoft.Owin.Security.Cookies.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\EntityFramework.dll
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\DotNetZip.dll
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\PdfSharp.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\Microsoft.Owin.Host.SystemWeb.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\PagedList.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\IGrad.pdb
@@ -109,14 +113,10 @@ C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\Microsoft.Owi
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\Microsoft.Owin.Security.Cookies.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\EntityFramework.xml
-C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
-C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\PagedList.xml
-C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\obj\Debug\IGrad.Tests.csprojResolveAssemblyReference.cache
-C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\obj\Debug\IGrad.Tests.dll
-C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\obj\Debug\IGrad.Tests.pdb
-C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\DotNetZip.dll
-C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\PdfSharp.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\DotNetZip.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\PdfSharp.xml
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\Microsoft.Owin.Host.SystemWeb.xml
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\PagedList.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\de\PdfSharp.resources.dll
-C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\bin\Debug\admin.xml
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\obj\Debug\IGrad.Tests.dll
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad.Tests\obj\Debug\IGrad.Tests.pdb

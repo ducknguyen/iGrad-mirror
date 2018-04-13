@@ -48,6 +48,7 @@ namespace IGrad.Models.User
         public bool isOtherAsian { get; set; }
 
         //AMERICAN INDIAN & ALASKAN NATIVE -------------------------------------------------------------
+        public bool isAmericanIndian { get; set; }
         [DisplayName("Alaska Native")]
         public bool isAlaskaNative { get; set; }
         [DisplayName("Chehalis")]

@@ -1,5 +1,6 @@
 ﻿using IGrad.Context;
 using IGrad.Models.User;
+using IGrad.Models.User.NativeAmerican;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -739,6 +740,17 @@ namespace IGrad.Controllers
             return pdfcontrol.FillPdf(UserID);
         }
 
-
+        public ActionResult GetNativeAmericanEducationForm(UserModel user)
+        {
+            if(user.NativeAmericanEducation != null)
+            {
+                return PartialView("_GetNativeAmericanEducation", user.NativeAmericanEducation);
+            }
+            else
+            {
+                user.NativeAmericanEducation = new NativeAmericanEducation();
+                return PartialView("_GetNativeAmericanEducation", user.NativeAmericanEducation);
+            }
+        }
     }
 }
