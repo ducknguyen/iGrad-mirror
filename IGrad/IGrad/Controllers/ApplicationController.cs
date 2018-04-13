@@ -752,5 +752,29 @@ namespace IGrad.Controllers
                 return PartialView("_GetNativeAmericanEducation", user.NativeAmericanEducation);
             }
         }
+
+        [HttpPost]
+        public ActionResult SubmitNativeAmericanEducationPartial(NativeAmericanEducation ed)
+        {
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                //get user
+                var data = db.Users
+                       .Include(u => u.NativeAmericanEducation)
+                       //add select for native American address
+                       //.Include(u => u.NativeAmericanEducation.Select(n => n.Address))
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+
+                ed.UserID = UserID;
+                data.NativeAmericanEducation = ed;
+
+                //save
+                db.SaveChanges();
+            }
+
+            return null;
+        }
     }
 }

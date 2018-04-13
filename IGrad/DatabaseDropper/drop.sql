@@ -106,6 +106,14 @@ GO
 ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId]
 GO
 
+ALTER TABLE [dbo].[NativeAmericanEducations] DROP CONSTRAINT [FK_dbo.NativeAmericanEducations_dbo.Addresses_AddressOfTribeMaintainingEnrollment_fieldId]
+GO
+
+ALTER TABLE [dbo].[NativeAmericanEducations] DROP CONSTRAINT [PK_dbo.NativeAmericanEducations]
+GO
+
+
+
 /****** Object:  Table [dbo].[Violations]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[Violations]
 GO
@@ -229,3 +237,4 @@ GO
 /****** Object:  Table [dbo].[__MigrationHistory]    Script Date: 3/18/2018 6:30:53 PM ******/
 DROP TABLE [dbo].[__MigrationHistory]
 GO
+
