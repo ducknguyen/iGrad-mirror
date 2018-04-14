@@ -462,6 +462,7 @@ namespace IGrad.Controllers
                        .Include(u => u.ResidentAddress)
                        .Include(u => u.MailingAddress)
                        .Include(u => u.EmergencyContacts)
+                       .Include(u => u.HomelessAssistance)
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
 
@@ -722,11 +723,11 @@ namespace IGrad.Controllers
             {
                 //get user
                 var data = db.Users
-                       .Where(u => u.UserID == UserID)
-                       .FirstOrDefault<UserModel>();
+                    .Include(u => u.OptionalOpportunities)
+                    .Where(u => u.UserID == UserID)
+                    .FirstOrDefault<UserModel>();
                 return View(data);
             }
-
         }
 
         [HttpPost]
@@ -787,6 +788,7 @@ namespace IGrad.Controllers
             return PartialView("_HomelessAssistanceForm", user.HomelessAssistance);
         }
 
+        [HttpPost]
         public void SubmitHomelessInfo(HomelessAssistancePreferences homelessInfo)
         {
             Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());

@@ -85,6 +85,7 @@ namespace IGrad.Controllers
                 zip.AddEntry("FamilyIncomeSurvey.pdf", FamilyIncomeForm());
                 zip.AddEntry("RequestForRecords.pdf", RequestForRecordsForm());
                 zip.AddEntry("HomelessAssistance.pdf", HomelessAssistanceForm());
+                zip.AddEntry("IGradOptionalAssistance.pdf", IGradOptionalAssistance());
                 zip.AddEntry("KingCountyLibrarySystem.pdf", KingCountyLibrarySystemForm());
 
                 //optional forms
@@ -150,6 +151,7 @@ namespace IGrad.Controllers
                 }
             }
         }
+
         private Byte[] StudentEnrollmentChecklistForm()
         {
             // Get the blank form to fill out
@@ -1198,7 +1200,85 @@ namespace IGrad.Controllers
 
             //TODO Add logic to fill form.
 
+            //FIRST PAGE OF THE HOMELESS ASSISTANCE
 
+            PdfCheckBoxField contactByPhone = (PdfCheckBoxField)(document.AcroForm.Fields["ContactByPhone"]);
+            contactByPhone.Checked = user.HomelessAssistance.ContactByPhone;
+
+            if (user.HomelessAssistance.ContactByPhone)
+            {
+                PdfTextField phoneNumber = (PdfTextField)(document.AcroForm.Fields["PhoneNumber"]);
+                phoneNumber.Value = new PdfString(user.PhoneInfo.PhoneNumber.ToString());
+            }
+
+            PdfCheckBoxField contactByStudentNote = (PdfCheckBoxField)(document.AcroForm.Fields["ContactByStudentNote"]);
+            contactByStudentNote.Checked = user.HomelessAssistance.ContactByStudentNote;
+
+            PdfCheckBoxField contactByEmail = (PdfCheckBoxField)(document.AcroForm.Fields["ContactByEmail"]);
+            contactByEmail.Checked = user.HomelessAssistance.ContactByEmail;
+
+            if (user.HomelessAssistance.ContactByEmail)
+            {
+                PdfTextField email = (PdfTextField)(document.AcroForm.Fields["Email"]);
+                email.Value = new PdfString(user.Email.ToString());
+            }
+
+
+
+            //populate student/sibling fields
+
+            PdfTextField studentName = (PdfTextField)(document.AcroForm.Fields["StudentName"]);
+            studentName.Value = new PdfString(user.Name.FName + " " + user.Name.LName);
+
+            PdfTextField studentGrade = (PdfTextField)(document.AcroForm.Fields["StudentGrade"]);
+            studentGrade.Value = new PdfString(user.SchoolInfo.CurrentGrade.ToString());
+
+
+            //FIND the last school attended for student and set value
+            for(int i = 0; i < user.SchoolInfo.HighSchoolInformation.Count; i++)
+            {
+                //if school is last attended for student
+                if (user.SchoolInfo.HighSchoolInformation[i].isLastHighSchoolAttended)
+                {
+                    PdfTextField studentLastSchoolAttended = (PdfTextField)(document.AcroForm.Fields["StudentLastSchoolAttended"]);
+                    studentLastSchoolAttended.Value = new PdfString(user.SchoolInfo.HighSchoolInformation[i].HighSchoolName.ToString());
+                }
+            }
+
+
+            //Set sibling1 info
+            if(user.Siblings.Count > 0)
+            {
+                if (user.Siblings[0] != null)
+                {
+                    Sibling sibling = user.Siblings[0];
+
+                    PdfTextField firstSiblingName = (PdfTextField)(document.AcroForm.Fields["SiblingName1"]);
+                    firstSiblingName.Value = new PdfString(sibling.FName + " " + sibling.LName);
+
+                    PdfTextField firstSiblingGrade = (PdfTextField)(document.AcroForm.Fields["SiblingGrade1"]);
+                    firstSiblingGrade.Value = new PdfString(sibling.Grade.ToString());
+
+                    PdfTextField firstSiblingSchool = (PdfTextField)(document.AcroForm.Fields["SiblingSchool1"]);
+                    firstSiblingSchool.Value = new PdfString(sibling.School.ToString());
+
+                }
+                if (user.Siblings[1] != null)
+                {
+                    Sibling secondSibling = user.Siblings[1];
+
+                    PdfTextField secondSiblingName = (PdfTextField)(document.AcroForm.Fields["SiblingName2"]);
+                    secondSiblingName.Value = new PdfString(secondSibling.FName + " " + secondSibling.LName);
+
+                    PdfTextField secondSiblingGrade = (PdfTextField)(document.AcroForm.Fields["SiblingGrade2"]);
+                    secondSiblingGrade.Value = new PdfString(secondSibling.Grade.ToString());
+
+                    PdfTextField secondSiblingSchool = (PdfTextField)(document.AcroForm.Fields["SiblingSchool2"]);
+                    secondSiblingSchool.Value = new PdfString(secondSibling.School.ToString());
+                }
+            }
+
+            SetPageSizeA4(document);
             return writeDocument(document);
         }
 
@@ -1217,6 +1297,83 @@ namespace IGrad.Controllers
 
             return writeDocument(document);
 
+        }
+
+        //not complete
+        private Byte[] IGradOptionalAssistance()
+        {
+            // Get the blank form to fill out
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/IGradOptionalAssistance.pdf");
+            PdfDocument document = PdfReader.Open(filePath);
+
+            // Set the flag so we can flatten once done.
+            document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
+
+
+            PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
+            name.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
+
+            PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
+            birthday.Value = new PdfString(user.Birthday.ToShortDateString());
+
+            PdfTextField date = (PdfTextField)(document.AcroForm.Fields["Date"]);
+            date.Value = new PdfString(DateTime.Now.ToShortDateString());
+
+            //create a list of Field Names with the boolean value appended so we know what checkboxes to check
+            List<string> booleansToCheck = new List<string>();
+
+            //get the properties of the OptionalOpportunities object
+            foreach (var prop in user.OptionalOpportunities.GetType().GetProperties())
+            {
+                //get the type name
+                string propType = prop.PropertyType.Name;
+
+                //determine if property is boolean (we want booleans)
+                if (propType == "Boolean")
+                {
+                    //append the property name with the value. i.e, for isHomeless, we would have "isHomelessTrue" as the string to add.
+                    string propStrWithValue = prop.Name + prop.GetValue(user.OptionalOpportunities).ToString();
+                    booleansToCheck.Add(propStrWithValue);
+                }
+            }
+
+            //check all the boxes in the form for boolean fields that we found in the OptionalOpportunities object
+            foreach (string s in booleansToCheck)
+            {
+                try
+                {
+                    PdfCheckBoxField checkBox = (PdfCheckBoxField)(document.AcroForm.Fields[s]);
+                    checkBox.Checked = true;
+                }
+                catch (NullReferenceException e)
+                {
+                    Console.WriteLine("field does not exist: " + e.Message);
+                }
+            }
+
+            if (user.OptionalOpportunities.StudentIsParenting)
+            {
+                PdfTextField agesOfChildren = (PdfTextField)(document.AcroForm.Fields["AgesOfChildren"]);
+                agesOfChildren.Value = new PdfString(user.OptionalOpportunities.AgesOfChilren);
+            }
+
+            if (user.OptionalOpportunities.StudentIsPregnant)
+            {
+                PdfTextField pregnantDueDate = (PdfTextField)(document.AcroForm.Fields["PregnantStudentDueDate"]);
+                pregnantDueDate.Value = new PdfString(user.OptionalOpportunities.PregnantStudentDueDate.ToShortDateString());
+            }
+
+            PdfTextField phoneNumber = (PdfTextField)(document.AcroForm.Fields["PhoneNumber"]);
+            phoneNumber.Value = new PdfString(user.PhoneInfo.PhoneNumber.ToString());
+
+            PdfTextField email = (PdfTextField)(document.AcroForm.Fields["Email"]);
+            email.Value = new PdfString(user.Email);
+
+            PdfTextField howStudentHeardAboutIGrade = (PdfTextField)(document.AcroForm.Fields["HowStudentHeardAboutIGrad"]);
+            howStudentHeardAboutIGrade.Value = new PdfString(user.OptionalOpportunities.HowStudentHeardAboutIGrad);
+
+            SetPageSizeA4(document);
+            return writeDocument(document);
         }
 
         private static byte[] writeDocument(PdfDocument document)
