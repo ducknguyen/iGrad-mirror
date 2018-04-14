@@ -46,6 +46,8 @@ namespace IGrad.Controllers
                        .Include(u => u.QualifiedOrEnrolledInProgam)
                        .Include(u => u.NativeAmericanEducation)
                        .Include(u => u.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment)
+                       .Include(u => u.HomelessAssistance)
+                       .Include(u => u.OptionalOpportunities)
                        .Where(u => u.UserID == userId)
                        .FirstOrDefault<UserModel>();
                 PDFFillerController pdfControl = new PDFFillerController();
@@ -735,7 +737,6 @@ namespace IGrad.Controllers
             return writeDocument(document);
         }
 
-        //not complete
         private Byte[] HealthHistoryForm()
         {
             // Get the blank form to fill out
@@ -1096,8 +1097,7 @@ namespace IGrad.Controllers
             }
             return writeDocument(document);
         }
-
-        //not complete
+        
         private Byte[] NativeAmericanEducationProgramForm()
         {
             //name of school should never change as all are applying to Igrad. Not captured in web form.
@@ -1192,6 +1192,7 @@ namespace IGrad.Controllers
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/HomelessAssistance.pdf");
             PdfDocument document = PdfReader.Open(filePath);
 
+            SetPageSizeA4(document);
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 

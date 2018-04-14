@@ -27,5 +27,9 @@ namespace IGrad.Context
         public DbSet<EmergencyContact> EmergencyContacts { get; set; }
 
         public DbSet<NativeAmericanEducation> NativeAmericanEducations { get; set; }
+
+        public System.Data.Entity.DbSet<IGrad.Models.User.HomelessAssistance.HomelessAssistancePreferences> HomelessAssistancePreferences { get; set; }
+
+        public System.Data.Entity.DbSet<IGrad.Models.User.OptionalOpportunities.OptionalAssistance> IGradOpportunities { get; set; }
     }
 }

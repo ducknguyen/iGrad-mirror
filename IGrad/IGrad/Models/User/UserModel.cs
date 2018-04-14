@@ -1,9 +1,10 @@
 ﻿using IGrad.Models.User.NativeAmerican;
+using IGrad.Models.User.HomelessAssistance;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-
+using IGrad.Models.User.OptionalOpportunities;
 
 namespace IGrad.Models.User
 {
@@ -45,5 +46,7 @@ namespace IGrad.Models.User
         public DateTime LastUpdateDate { get; set; }
         public bool isComplete { get; set; }
         public Roles role { get; set; }
+        public HomelessAssistancePreferences HomelessAssistance { get; set; }
+        public OptionalAssistance OptionalOpportunities { get; set; }
     }
 }

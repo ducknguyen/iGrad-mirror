@@ -27,6 +27,12 @@
         $("#add-sibling").load('@Url.Action("GetAddSibling", "Application")');
     }
 
+    function loadHomelessInfoForm() {
+        showTarget('homeless-container');
+        $("#homeless-information").load('@Url.Action("GetAddHomelessAssistanceForm", "Application")');
+    }
+
+
     function deleteEmergencyContact(fieldId) {
         $.ajax({
             type: "POST",
@@ -53,6 +59,7 @@
             success: hideTarget('sibling_' + fieldId)
         });
     }
+
 </script>
 @using (Html.BeginForm("GetHouseholdForm", "Application", FormMethod.Post, new { enctype = "multipart/form-data", @id = "household-form" }))
 {
@@ -83,7 +90,16 @@
                 <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithSelf, htmlAttributes: new { @class = "" }) Own Residence</p>
             </div>
             <div class="form-group col-md-2">
-                <p>@Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "" }) Homeless / Distressed</p>
+                <p>@Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "", @onclick= "loadHomelessInfoForm()" }) Homeless / Distressed</p>
+            </div>
+        </div>
+
+        <div class="container hidden" id="homeless-container">
+            <h3>Homeless / Distressed Additional Information</h3>
+            <button class="btn btn-default" type="button" onclick="showTarget('homeless-information')">Show</button>
+            <button class="btn btn-default" type="button" onclick="hideTarget('homeless-information')">Hide</button>
+            <div class="container" id="homeless-information">
+             
             </div>
         </div>
 

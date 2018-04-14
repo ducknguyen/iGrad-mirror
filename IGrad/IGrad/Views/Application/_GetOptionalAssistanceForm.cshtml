@@ -1,0 +1,76 @@
+﻿@model IGrad.Models.User.OptionalOpportunities.OptionalAssistance
+
+@using (Ajax.BeginForm("SubmitOptionalAssistanceForm", "Application", new AjaxOptions()
+{
+    HttpMethod = "Post",
+    UpdateTargetId = "",
+    InsertionMode = InsertionMode.Replace,
+
+}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Additional IGrad Assistance</h4>
+        <hr />
+        <div class="form-group">
+            @Html.EditorFor(model => model.StudentIsHomelessOrUnstableLiving)
+            @Html.LabelFor(model => model.StudentIsHomelessOrUnstableLiving, htmlAttributes: new { @class = "control-label" })
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.StudentHasBeenInFosterCare)
+            @Html.LabelFor(model => model.StudentHasBeenInFosterCare, htmlAttributes: new { @class = "control-label" })
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.StudentIsPregnant)
+            @Html.LabelFor(model => model.StudentIsPregnant, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.StudentIsPregnant, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PregnantStudentDueDate, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.PregnantStudentDueDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
+            @Html.ValidationMessageFor(model => model.PregnantStudentDueDate, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.StudentIsParenting)
+            @Html.LabelFor(model => model.StudentIsParenting, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.StudentIsParenting, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AgesOfChilren, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.AgesOfChilren, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.AgesOfChilren, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.StudentHasBeenInvolvedWithCourt)
+            @Html.LabelFor(model => model.StudentHasBeenInvolvedWithCourt, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.StudentHasBeenInvolvedWithCourt, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.WouldLikeCounselorToContact)
+            @Html.LabelFor(model => model.WouldLikeCounselorToContact, htmlAttributes: new { @class = "control-label" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HowStudentHeardAboutIGrad, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.HowStudentHeardAboutIGrad, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.HowStudentHeardAboutIGrad, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" onclick="hideTarget('optional-assistance-form')" />
+                <input type="button" value="Cancel" class="btn btn-default" onclick="hideTarget('optional-assistance-form')" />
+            </div>
+        </div>
+    </div>
+}
+

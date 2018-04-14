@@ -1,6 +1,8 @@
 ﻿using IGrad.Context;
 using IGrad.Models.User;
+using IGrad.Models.User.HomelessAssistance;
 using IGrad.Models.User.NativeAmerican;
+using IGrad.Models.User.OptionalOpportunities;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -216,11 +218,11 @@ namespace IGrad.Controllers
                        .Include(u => u.SchoolInfo.PriorEducation)
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
-                if(data.SchoolInfo == null)
+                if (data.SchoolInfo == null)
                 {
                     data.SchoolInfo = new SchoolInfo();
                 }
-                if(data.QualifiedOrEnrolledInProgam == null)
+                if (data.QualifiedOrEnrolledInProgam == null)
                 {
                     data.QualifiedOrEnrolledInProgam = new QualifiedOrEnrolledInProgram();
                 }
@@ -233,12 +235,12 @@ namespace IGrad.Controllers
 
                 user.SchoolInfo.PriorEducation.UserID = UserID;
                 data.SchoolInfo.PriorEducation = user.SchoolInfo.PriorEducation;
-                
+
 
                 db.SaveChanges();
             }
 
-            return RedirectToAction("GetHouseholdForm","Application");
+            return RedirectToAction("GetHouseholdForm", "Application");
         }
 
         public ActionResult AddHighSchoolInfoPartial()
@@ -541,7 +543,7 @@ namespace IGrad.Controllers
             defaultGuardian.Name = new Name();
             return PartialView("_AddGuardian", defaultGuardian);
         }
-        
+
         [HttpPost]
         public ActionResult SubmitGuardianInfo(Guardian guardian)
         {
@@ -583,7 +585,7 @@ namespace IGrad.Controllers
         {
             Guardian guardian = new Guardian();
             guardian.fieldId = Int32.Parse(fieldId);
-            using(UserContext db = new UserContext())
+            using (UserContext db = new UserContext())
             {
                 db.Guardians.Attach(guardian);
                 db.Guardians.Remove(guardian);
@@ -638,7 +640,7 @@ namespace IGrad.Controllers
         {
             Sibling sibling = new Sibling();
             sibling.fieldId = Int32.Parse(fieldId);
-            using(UserContext db = new UserContext())
+            using (UserContext db = new UserContext())
             {
                 db.Siblings.Attach(sibling);
                 db.Siblings.Remove(sibling);
@@ -709,7 +711,7 @@ namespace IGrad.Controllers
 
                 db.SaveChanges();
             }
-            return RedirectToAction("GetOtherInfoForm","Application");
+            return RedirectToAction("GetOtherInfoForm", "Application");
         }
 
         [Authorize]
@@ -742,7 +744,7 @@ namespace IGrad.Controllers
 
         public ActionResult GetNativeAmericanEducationForm(UserModel user)
         {
-            if(user.NativeAmericanEducation != null)
+            if (user.NativeAmericanEducation != null)
             {
                 return PartialView("_GetNativeAmericanEducationForm", user.NativeAmericanEducation);
             }
@@ -772,7 +774,65 @@ namespace IGrad.Controllers
                 db.SaveChanges();
             }
 
+            //TODO Change route
             return null;
+        }
+
+        public ActionResult GetAddHomelessAssistanceForm(UserModel user)
+        {
+            if (user.HomelessAssistance == null)
+            {
+                user.HomelessAssistance = new HomelessAssistancePreferences();
+            }
+            return PartialView("_HomelessAssistanceForm", user.HomelessAssistance);
+        }
+
+        public void SubmitHomelessInfo(HomelessAssistancePreferences homelessInfo)
+        {
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                //get user
+                var data = db.Users
+                       .Include(u => u.HomelessAssistance)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+
+                homelessInfo.UserID = UserID;
+                data.HomelessAssistance = homelessInfo;
+
+                //save
+                db.SaveChanges();
+            }
+
+        }
+
+        public ActionResult GetOptionalAssistanceForm(UserModel user)
+        {
+            if (user.OptionalOpportunities == null)
+            {
+                user.OptionalOpportunities = new OptionalAssistance();
+            }
+            return PartialView("_GetOptionalAssistanceForm", user.OptionalOpportunities);
+        }
+
+        public void SubmitOptionalAssistanceForm(OptionalAssistance oppor)
+        {
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                //get user
+                var data = db.Users
+                       .Include(u => u.OptionalOpportunities)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+
+                oppor.UserID = UserID;
+                data.OptionalOpportunities = oppor;
+
+                //save
+                db.SaveChanges();
+            }
         }
     }
 }

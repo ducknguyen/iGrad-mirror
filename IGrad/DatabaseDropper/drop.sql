@@ -1,10 +1,6 @@
 ﻿USE [iGrad]
 GO
 
-
-ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.SchoolInfoes_SchoolInfo_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.SchoolInfoes_SchoolInfo_fieldId]
 GO
 
@@ -241,3 +237,13 @@ GO
 
 DROP TABLE [dbo].[NativeAmericanEducations]
 GO
+
+/****** Object:  Table [dbo].[HomelessAssistancePreferences]    Script Date: 4/13/2018 4:18:47 PM ******/
+DROP TABLE [dbo].[HomelessAssistancePreferences]
+GO
+
+/****** Object:  Table [dbo].[IGradOpportunities]    Script Date: 4/13/2018 4:34:00 PM ******/
+DROP TABLE [dbo].[IGradOpportunities]
+GO
+
+

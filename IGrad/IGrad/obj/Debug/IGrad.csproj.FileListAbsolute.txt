@@ -88,7 +88,6 @@ C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\obj\Debug\IGrad.pdb
 C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\bin\WebDriver.dll
 C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\bin\WebDriver.xml
 C:\Users\kevin\Desktop\iGradProj\igrad\IGrad\IGrad\obj\Debug\IGrad.csprojResolveAssemblyReference.cache
-C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.csprojResolveAssemblyReference.cache
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\admin.xml
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\ApplicationInsights.config
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\roslyn\csc.exe
@@ -185,3 +184,4 @@ C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\de\PdfSharp.resources.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\bin\de\PdfSharp.Charting.resources.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.dll
 C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.pdb
+C:\Users\jpratt\Documents\GitHub\igrad\IGrad\IGrad\obj\Debug\IGrad.csprojResolveAssemblyReference.cache
