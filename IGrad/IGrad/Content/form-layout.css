@@ -105,21 +105,21 @@ nav {
     PROGRESS BAR
 ----------------------------------------------------- */
 progress {
-    /* Reset the default appearance */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    /* Get rid of default border in Firefox. */
-    border: none;
-    width: 100%;
-    height: 20px;
+/* Reset the default appearance */
+-webkit-appearance: none;
+-moz-appearance: none;
+appearance: none;
+/* Get rid of default border in Firefox. */
+border: none;
+width: 100%;
+height: 20px;
 }
 
-    progress::-webkit-progress-bar {
-        background-color: #eee;
-        border-radius: 2px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
-    }
+progress::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+}
 
 /* ---------------------------------------------------
     REQUIRED MARKER
@@ -127,6 +127,33 @@ progress {
 .required-marker::after {
     content: " *";
     color: orangered;
+}
+
+/* ---------------------------------------------------
+    TOOLTIP POPUP
+----------------------------------------------------- */
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    /* Position the tooltip text - see examples below! */
+    position: absolute;
+    z-index: 1;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }
 
 /* ---------------------------------------------------
@@ -154,29 +181,29 @@ progress {
     z-index: 1;
 }
 
-    #return-to-top .up-icon {
-        color: #fff;
-        margin: 0;
-        position: relative;
-        left: 23px;
-        top: 18px;
-        font-size: 19px;
-        -webkit-transition: all 0.3s ease;
-        -moz-transition: all 0.3s ease;
-        -ms-transition: all 0.3s ease;
-        -o-transition: all 0.3s ease;
-        transition: all 0.3s ease;
-        z-index: 2;
-    }
+#return-to-top .up-icon {
+    color: #fff;
+    margin: 0;
+    position: relative;
+    left: 23px;
+    top: 18px;
+    font-size: 19px;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
 
-    #return-to-top:hover {
-        background: rgba(0, 0, 0, 0.9);
-    }
+#return-to-top:hover {
+    background: rgba(0, 0, 0, 0.9);
+}
 
-        #return-to-top:hover i {
-            color: #fff;
-            top: 5px;
-        }
+#return-to-top:hover i {
+    color: #fff;
+    top: 5px;
+}
 
 /* ---------------------------------------------------
     FOOTER
@@ -191,45 +218,45 @@ footer {
     bottom: 0;
 }
 
-    footer a, footer a:hover {
-        color: #fff;
-        transition: all .2s ease-in-out;
-    }
+footer a, footer a:hover {
+    color: #fff;
+    transition: all .2s ease-in-out;
+}
 
-    footer h4 {
-        color: #7CB342;
-    }
+footer h4 {
+    color: #7CB342;
+}
 
-    footer ul.list-social {
-        margin-bottom: 0;
-    }
+footer ul.list-social {
+    margin-bottom: 0;
+}
 
-        footer ul.list-social li a {
-            text-align: center;
-            display: block;
-            height: 40px;
-            width: 40px;
-            line-height: 40px;
-            font-size: 22px;
-            color: white;
-        }
+footer ul.list-social li a {
+    text-align: center;
+    display: block;
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    font-size: 22px;
+    color: white;
+}
 
-            footer ul.list-social li a:hover {
-                opacity: 0.7;
-            }
+footer ul.list-social li a:hover {
+    opacity: 0.7;
+}
 
-        footer ul.list-social li.social-facebook a {
-            background-color: #3B5998;
-        }
+footer ul.list-social li.social-facebook a {
+    background-color: #3B5998;
+}
 
-        footer ul.list-social li.social-twitter a {
-            background-color: #55ACEE;
-        }
+footer ul.list-social li.social-twitter a {
+    background-color: #55ACEE;
+}
 
-        footer ul.list-social li.social-linkedin a {
-            background-color: #007bb5;
-        }
+footer ul.list-social li.social-linkedin a {
+    background-color: #007bb5;
+}
 
-        footer ul.list-social li.social-youtube a {
-            background-color: #bb0000;
-        }
+footer ul.list-social li.social-youtube a {
+    background-color: #bb0000;
+}
