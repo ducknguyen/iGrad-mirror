@@ -105,14 +105,14 @@ nav {
     PROGRESS BAR
 ----------------------------------------------------- */
 progress {
-/* Reset the default appearance */
--webkit-appearance: none;
--moz-appearance: none;
-appearance: none;
-/* Get rid of default border in Firefox. */
-border: none;
-width: 100%;
-height: 20px;
+    /* Reset the default appearance */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    /* Get rid of default border in Firefox. */
+    border: none;
+    width: 100%;
+    height: 20px;
 }
 
 progress::-webkit-progress-bar {
@@ -137,25 +137,34 @@ progress::-webkit-progress-bar {
     display: inline-block;
 }
 
-/* Tooltip text */
 .tooltip .tooltiptext {
     visibility: hidden;
     width: 120px;
     background-color: black;
     color: #fff;
     text-align: center;
-    padding: 5px 0;
     border-radius: 6px;
-    /* Position the tooltip text - see examples below! */
+    padding: 5px 0;
     position: absolute;
     z-index: 1;
+    top: -5px;
+    left: 110%;
 }
 
-/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    right: 100%;
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+}
+
 .tooltip:hover .tooltiptext {
     visibility: visible;
 }
-
 /* ---------------------------------------------------
     RETURN TO TOP
 ----------------------------------------------------- */
