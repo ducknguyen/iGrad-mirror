@@ -64,6 +64,7 @@ namespace IGrad.Controllers
                     .Include(u => u.Name)
                     .Include(u => u.BirthPlace)
                     .Include(u => u.ConsideredRaceAndEthnicity)
+                    .Include(u => u.NativeAmericanEducation)
                     .Include(u => u.PhoneInfo)
                     .FirstOrDefault<UserModel>();
             }
@@ -744,8 +745,22 @@ namespace IGrad.Controllers
             return pdfcontrol.FillPdf(UserID);
         }
 
-        public ActionResult GetNativeAmericanEducationForm(UserModel user)
+        public ActionResult GetNativeAmericanEducationForm()
         {
+            UserModel user;
+
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                //get user
+                var data = db.Users
+                    .Include(u => u.NativeAmericanEducation)
+                    .Where(u => u.UserID == UserID)
+                    .FirstOrDefault<UserModel>();
+
+                user = data;
+            }
+
             if (user.NativeAmericanEducation != null)
             {
                 return PartialView("_GetNativeAmericanEducationForm", user.NativeAmericanEducation);

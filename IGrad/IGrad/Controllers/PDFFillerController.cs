@@ -1187,7 +1187,6 @@ namespace IGrad.Controllers
             return writeDocument(document);
         }
 
-        //not complete
         private Byte[] HomelessAssistanceForm()
         {
             // Get the blank form to fill out
@@ -1299,7 +1298,6 @@ namespace IGrad.Controllers
 
         }
 
-        //not complete
         private Byte[] IGradOptionalAssistance()
         {
             // Get the blank form to fill out

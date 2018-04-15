@@ -3,10 +3,12 @@
 {
     HttpMethod = "Post",
     UpdateTargetId = "",
-    InsertionMode = InsertionMode.Replace,
+    InsertionMode = InsertionMode.Replace
 
-}))
+
+},new { @id = "native-education" }))
 {
+
     @Html.AntiForgeryToken()
 
     <div class="row">
@@ -61,7 +63,7 @@
         <div class="col-md-12">
             <p>The Tribe or Band is (select only one):</p>
         </div>
-        
+
         <div class="col-md-3 form-group">
             @Html.LabelFor(model => model.TribeOrBandIsFederallyRecognized, htmlAttributes: new { @class = "control-label" })
             <div class="checkbox">
@@ -139,11 +141,11 @@
             @Html.ValidationMessageFor(model => model.AddressOfTribeMaintainingEnrollment.Zip, "", new { @class = "text-danger" })
         </div>
     </div>
-    
+
 
     <div class="row">
         <div class="col-md-10 form-group">
-            <input type="submit" value="Create" class="btn btn-default" />
+            <input type="submit" form="native-education" value="Create" class="btn btn-default" />
         </div>
     </div>
 }

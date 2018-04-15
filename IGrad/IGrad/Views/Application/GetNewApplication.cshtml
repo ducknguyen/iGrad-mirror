@@ -7,7 +7,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @Styles.Render("/Content/personalform.css")
-
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 <progress max="100" value="0" id="application-progress"></progress>
 
 @using (Html.BeginForm("GetNewApplication", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
@@ -545,8 +545,10 @@
         </div>
     </div>
 
+}
     <!-- TRIBAL ENROLLMENT -->
     <div id="native-tribal-information" class="">
+
     </div>
 
 
@@ -636,4 +638,3 @@
             }
         }
     </script>
-}
