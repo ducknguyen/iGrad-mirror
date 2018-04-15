@@ -1,8 +1,10 @@
 ﻿@model IGrad.Models.User.UserModel
 @{
+                /**/
 
-    ViewBag.Title = "iGrad | Personal Information";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
+                ViewBag.Title = "iGrad | Personal Information";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <progress max="100" value="0" id="application-progress"></progress>
@@ -13,7 +15,6 @@
     <small class="form-text required-marker-indicator">* required fields.</small>
     <hr>
 
-
     <!-- STUDENT NAME START -->
     <div class="row">
         <div class="form-group col-md-3">
@@ -23,7 +24,7 @@
         </div>
         <div class="form-group col-md-1">
             @Html.LabelFor(model => model.Name.MName, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Name.MName, new { htmlAttributes = new { @class = "form-control", @placeholder = "M.I.", required = "required" } })
+            @Html.EditorFor(model => model.Name.MName, new { htmlAttributes = new { @class = "form-control", @placeholder = "M.I."} })
             @Html.ValidationMessageFor(model => model.Name.MName, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-4">
@@ -85,464 +86,469 @@
         </div>
     </div>
     <!-- GENDER, EMAIL AND PHONE END --->
-
     <!-- **********RACE AND ETHNICITY START********** -->
     <div class="row">
 
-            <!-- RACE SELECTOR -->
-            <div class="col-md-3 form-group">
-                @*@Html.LabelFor(model => model.ConsideredRaceAndEthnicity, htmlAttributes: new { @class = "control-label required-marker" })*@
-                @Html.Label("Select your race", htmlAttributes: new { @class = "control-label required-marker" })
-                <br />
-                <button class="btn btn-info" type="button" data-toggle="modal" data-target="#race-modal" id="race-button">
-                    Student Race
-                </button>
+        <!-- RACE SELECTOR -->
+        <div class="col-md-3 form-group">
+            @*@Html.LabelFor(model => model.ConsideredRaceAndEthnicity, htmlAttributes: new { @class = "control-label required-marker" })*@
+            @Html.Label("Select your race", htmlAttributes: new { @class = "control-label required-marker" })
+            <br />
+            <button class="btn btn-info" type="button" data-toggle="modal" data-target="#race-modal" id="race-button">
+                Student Race
+            </button>
 
-                <div class="modal fade" id="race-modal" tabindex="1" role="dialog" aria-labelledby="raceModal" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
+            <div class="modal fade" id="race-modal" tabindex="1" role="dialog" aria-labelledby="raceModal" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
 
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="raceModalLabel">
-                                    Select all that apply
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </h4>
-                            </div>
-
-                            <!-- MODAL BODY START -->
-                            <div class="modal-body">
-                                <div id="accordion" role="tablist" aria-multiselectable="true">
-                                    <!-- ASIAN CARD START -->
-                                    <div class="card">
-                                        <div class="card-header" role="tab" id="asian-heading">
-                                            <h5 class="mb-0">
-                                                <a href="#asian" data-toggle="collapse" data-parent="#accordion" aria-expanded="true">
-                                                    Asian
-                                                </a>
-                                            </h5>
-                                        </div>
-                                        <div id="asian" class="collapse" role="tabpanel" aria-labelledby="asian-heading">
-                                            <div class="card-block">
-                                                <div class="form-row">
-                                                    <ul>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isAsianIndian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isAsianIndian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCambodian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCambodian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isChinese, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isChinese, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isFilipino, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isFilipino, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isHmong, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isHmong, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isIndonesian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isIndonesian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isJapanese, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isJapanese, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isKorean, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isKorean, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isLaotian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isLaotian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMalaysian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMalaysian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isPakistani, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isPakistani, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSingaporean, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSingaporean, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isTaiwanese, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isTaiwanese, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isThai, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isThai, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isVietnamese, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isVietnamese, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isOtherAsian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isOtherAsian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- ASIAN CARD END -->
-                                    <!-- AMERICAN INDIAN & ALASKAN NATIVE CARD START -->
-                                    <div class="card">
-                                        <div class="card-header" role="tab" id="indian-heading">
-                                            <h5 class="mb-0">
-                                                <a href="#american-indian" data-toggle="collapse" data-parent="#accordion" aria-expanded="true">
-                                                    American Indian & Alaskan Native
-                                                </a>
-                                            </h5>
-                                        </div>
-                                        <div id="american-indian" class="collapse" role="tabpanel" aria-labelledby="indian-heading">
-                                            <div class="card-block">
-                                                <div class="form-row">
-                                                    <ul>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isAlaskaNative, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isAlaskaNative, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isChehalis, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isChehalis, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isColville, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isColville, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCowlitz, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCowlitz, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isHoh, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isHoh, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isHames, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isHames, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isKalispel, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isKalispel, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isLowerElwha, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isLowerElwha, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isLummi, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isLummi, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMakah, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMakah, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMuckleshoot, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMuckleshoot, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isNisqually, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isNisqually, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isNooksack, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isNooksack, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isPortGambleClallam, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isPortGambleClallam, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isPuyallup, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isPuyallup, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isQuileute, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isQuileute, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isQuinault, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isQuinault, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSamish, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSamish, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSauk_Suiattle, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSauk_Suiattle, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isShoalwater, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isShoalwater, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSkokomish, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSkokomish, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSnoqualmie, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSnoqualmie, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSpokane, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSpokane, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSquaxinIsland, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSquaxinIsland, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isStillaguamish, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isStillaguamish, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSuquamish, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSuquamish, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSwinomish, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSwinomish, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isTulalip, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isTulalip, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isUpperSkagit, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isUpperSkagit, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isYakama, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isYakama, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isOtherWashingtonIndian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isOtherWashingtonIndian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isOtherNorthCentralOrSouthAmericanIndian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isOtherNorthCentralOrSouthAmericanIndian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- AMERICAN INDIAN & ALASKAN NATIVE CARD END -->
-                                    <!-- HISPANIC/LATINO CARD START -->
-                                    <div class="card">
-                                        <div class="card-header" role="tab" id="hispanic-heading">
-                                            <h5 class="mb-0">
-                                                <a href="#hispanic-latino" data-toggle="collapse" data-parent="#accordion" aria-expanded="true">
-                                                    Hispanic/Latino
-                                                </a>
-                                            </h5>
-                                        </div>
-                                        <div id="hispanic-latino" class="collapse" role="tabpanel" aria-labelledby="hispanic-heading">
-                                            <div class="card-block">
-                                                <div class="form-row">
-                                                    <ul>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isNotHispanic, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isNotHispanic, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCuban, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCuban, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isDominican, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isDominican, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSpaniard, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSpaniard, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isPuertoRican, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isPuertoRican, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMexican, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMexican, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCentralAmerican, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCentralAmerican, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSouthAmerican, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSouthAmerican, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isLatinAmerican, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isLatinAmerican, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isOtherHispanic, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isOtherHispanic, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- HISPANIC/LATINO CARD END -->
-                                    <!-- NON HISPANIC CARD START -->
-                                    <div class="card">
-                                        <div class="card-header" role="tab" id="nonhispanic-heading">
-                                            <h5 class="mb-0">
-                                                <a href="#non-hispanic" data-toggle="collapse" data-parent="#accordion" aria-expanded="true">
-                                                    Non Hispanic
-                                                </a>
-                                            </h5>
-                                        </div>
-                                        <div id="non-hispanic" class="collapse" role="tabpanel" aria-labelledby="nonhispanic-heading">
-                                            <div class="card-block">
-                                                <div class="form-row">
-                                                    <ul>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isAfrican, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isAfrican, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isAfricanAmerican, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isAfricanAmerican, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isBlack, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isBlack, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isHaitian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isHaitian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isEthiopian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isEthiopian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isWhite, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isWhite, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCaucasian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCaucasian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isEuropean, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isEuropean, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isRussian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isRussian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMiddleEastern, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMiddleEastern, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isNorthAfrican, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isNorthAfrican, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- NON HISPANIC CARD END -->
-                                    <!-- NATIVE HAWAIIAN/OTHER PACIFIC ISLANDER CARD START -->
-                                    <div class="card">
-                                        <div class="card-header" role="tab" id="islander-heading">
-                                            <h5 class="mb-0">
-                                                <a href="#hawaiian-islander" data-toggle="collapse" data-parent="#accordion" aria-expanded="true">
-                                                    Native Hawaiian/Other Pacific Islander
-                                                </a>
-                                            </h5>
-                                        </div>
-                                        <div id="hawaiian-islander" class="collapse" role="tabpanel" aria-labelledby="islander-heading">
-                                            <div class="card-block">
-                                                <div class="form-row">
-                                                    <ul>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isNativeHawaiiwan, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isNativeHawaiiwan, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isFijian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isFijian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isGuamanian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isGuamanian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isChamorro, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isChamorro, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMariannaIslander, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMariannaIslander, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMelanesian, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMelanesian, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSamoan, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSamoan, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isTongan, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isTongan, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                        <li>
-                                                            @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isOtherPacificIslander, new { @class = "race-checkbox" })
-                                                            @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isOtherPacificIslander, htmlAttributes: new { @class = "control-label" })
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!-- NATIVE HAWAIIAN/OTHER PACIFIC ISLANDER CARD END -->
-                                </div>
-                            </div>
-                            <!-- MODAL BODY END -->
-
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
-                                    Continue
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="raceModalLabel">
+                                Select all that apply
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
                                 </button>
+                            </h4>
+                        </div>
+
+                        <!-- MODAL BODY START -->
+                        <div class="modal-body">
+                            <div id="accordion" role="tablist" aria-multiselectable="true">
+                                <!-- ASIAN CARD START -->
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="asian-heading">
+                                        <h5 class="mb-0">
+                                            <a href="#asian" data-toggle="collapse" data-parent="#accordion" aria-expanded="true">
+                                                Asian
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="asian" class="collapse" role="tabpanel" aria-labelledby="asian-heading">
+                                        <div class="card-block">
+                                            <div class="form-row">
+                                                <ul>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isAsianIndian, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isAsianIndian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCambodian, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCambodian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isChinese, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isChinese, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isFilipino, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isFilipino, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isHmong, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isHmong, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isIndonesian, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isIndonesian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isJapanese, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isJapanese, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isKorean, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isKorean, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isLaotian, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isLaotian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMalaysian, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMalaysian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isPakistani, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isPakistani, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSingaporean, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSingaporean, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isTaiwanese, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isTaiwanese, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isThai, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isThai, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isVietnamese, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isVietnamese, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isOtherAsian, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isOtherAsian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- ASIAN CARD END -->
+                                <!-- AMERICAN INDIAN & ALASKAN NATIVE CARD START -->
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="indian-heading">
+                                        <h5 class="mb-0">
+                                            <a href="#american-indian" data-toggle="collapse" data-parent="#accordion" aria-expanded="true">
+                                                American Indian & Alaskan Native
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="american-indian" class="collapse" role="tabpanel" aria-labelledby="indian-heading">
+                                        <div class="card-block">
+                                            <div class="form-row">
+                                                <ul>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isAlaskaNative, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isAlaskaNative, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isChehalis, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isChehalis, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isColville, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isColville, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCowlitz, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCowlitz, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isHoh, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isHoh, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isHames, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isHames, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isKalispel, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isKalispel, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isLowerElwha, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isLowerElwha, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isLummi, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isLummi, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMakah, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMakah, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMuckleshoot, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMuckleshoot, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isNisqually, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isNisqually, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isNooksack, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isNooksack, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isPortGambleClallam, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isPortGambleClallam, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isPuyallup, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isPuyallup, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isQuileute, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isQuileute, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isQuinault, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isQuinault, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSamish, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSamish, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSauk_Suiattle, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSauk_Suiattle, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isShoalwater, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isShoalwater, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSkokomish, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSkokomish, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSnoqualmie, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSnoqualmie, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSpokane, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSpokane, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSquaxinIsland, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSquaxinIsland, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isStillaguamish, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isStillaguamish, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSuquamish, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSuquamish, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSwinomish, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSwinomish, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isTulalip, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isTulalip, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isUpperSkagit, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isUpperSkagit, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isYakama, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isYakama, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isOtherWashingtonIndian, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isOtherWashingtonIndian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isOtherNorthCentralOrSouthAmericanIndian, new { @class = "race-checkbox native-tribal" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isOtherNorthCentralOrSouthAmericanIndian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- AMERICAN INDIAN & ALASKAN NATIVE CARD END -->
+                                <!-- HISPANIC/LATINO CARD START -->
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="hispanic-heading">
+                                        <h5 class="mb-0">
+                                            <a href="#hispanic-latino" data-toggle="collapse" data-parent="#accordion" aria-expanded="true">
+                                                Hispanic/Latino
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="hispanic-latino" class="collapse" role="tabpanel" aria-labelledby="hispanic-heading">
+                                        <div class="card-block">
+                                            <div class="form-row">
+                                                <ul>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isNotHispanic, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isNotHispanic, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCuban, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCuban, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isDominican, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isDominican, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSpaniard, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSpaniard, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isPuertoRican, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isPuertoRican, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMexican, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMexican, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCentralAmerican, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCentralAmerican, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSouthAmerican, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSouthAmerican, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isLatinAmerican, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isLatinAmerican, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isOtherHispanic, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isOtherHispanic, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- HISPANIC/LATINO CARD END -->
+                                <!-- NON HISPANIC CARD START -->
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="nonhispanic-heading">
+                                        <h5 class="mb-0">
+                                            <a href="#non-hispanic" data-toggle="collapse" data-parent="#accordion" aria-expanded="true">
+                                                Non Hispanic
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="non-hispanic" class="collapse" role="tabpanel" aria-labelledby="nonhispanic-heading">
+                                        <div class="card-block">
+                                            <div class="form-row">
+                                                <ul>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isAfrican, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isAfrican, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isAfricanAmerican, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isAfricanAmerican, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isBlack, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isBlack, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isHaitian, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isHaitian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isEthiopian, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isEthiopian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isWhite, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isWhite, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isCaucasian, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isCaucasian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isEuropean, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isEuropean, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isRussian, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isRussian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMiddleEastern, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMiddleEastern, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isNorthAfrican, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isNorthAfrican, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- NON HISPANIC CARD END -->
+                                <!-- NATIVE HAWAIIAN/OTHER PACIFIC ISLANDER CARD START -->
+                                <div class="card">
+                                    <div class="card-header" role="tab" id="islander-heading">
+                                        <h5 class="mb-0">
+                                            <a href="#hawaiian-islander" data-toggle="collapse" data-parent="#accordion" aria-expanded="true">
+                                                Native Hawaiian/Other Pacific Islander
+                                            </a>
+                                        </h5>
+                                    </div>
+                                    <div id="hawaiian-islander" class="collapse" role="tabpanel" aria-labelledby="islander-heading">
+                                        <div class="card-block">
+                                            <div class="form-row">
+                                                <ul>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isNativeHawaiiwan, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isNativeHawaiiwan, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isFijian, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isFijian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isGuamanian, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isGuamanian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isChamorro, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isChamorro, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMariannaIslander, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMariannaIslander, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isMelanesian, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isMelanesian, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isSamoan, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isSamoan, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isTongan, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isTongan, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                    <li>
+                                                        @Html.CheckBoxFor(model => model.ConsideredRaceAndEthnicity.isOtherPacificIslander, new { @class = "race-checkbox" })
+                                                        @Html.LabelFor(model => model.ConsideredRaceAndEthnicity.isOtherPacificIslander, htmlAttributes: new { @class = "control-label" })
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- NATIVE HAWAIIAN/OTHER PACIFIC ISLANDER CARD END -->
                             </div>
+                        </div>
+                        <!-- MODAL BODY END -->
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
+                                Continue
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <!-- DISPLAY SELECTED RACE(S) -->
-            <div class="col-md-9 form-group">
-                <p>Student Race:</p>
-                <ul id="studentRaceList">
-                    <!-- This filled out by jquery and race Selection -->
-                </ul>
-            </div>
+        <!-- DISPLAY SELECTED RACE(S) -->
+        <div class="col-md-9 form-group">
+            <p>Student Race:</p>
+            <ul id="studentRaceList">
+                <!-- This filled out by jquery and race Selection -->
+            </ul>
+        </div>
     </div>
+
+    <!-- TRIBAL ENROLLMENT -->
+    <div id="native-tribal-information" class="">
+    </div>
+
+
     <!-- **********RACE AND ETHNICITY END********** -->
 
     <div class="form-row">
@@ -554,10 +560,13 @@
         </div>
     </div>
 
-    <script>
+    <script type="text/javascript">
+
+        var nativeTribalCounter = 0;
+
         $(document).ready(function () {
             DetectChecked();
-            TrackChanges();
+            TrackRaceChanges();
         });
 
         function DetectChecked() {
@@ -569,16 +578,33 @@
 
                 if (current.hasClass("race-checkbox")) {
                     UpdateRaceList(label, isChecked);
+
+                    if (current.hasClass("native-tribal") && isChecked === true) {
+                        nativeTribalCounter++;
+                    }
+                    else if (current.hasClass("native-tribal") && isChecked === true) {
+                        nativeTribalCounter--;
+                    }
                 }
             });
+
+            NativeTribalToggle(nativeTribalCounter);
         }
 
-        function TrackChanges() {
+        function TrackRaceChanges() {
             $(".race-checkbox").change(function () {
-                var value = $(this);
-                var label = $("label[for='" + value.attr("id") + "']").text();
-                var isChecked = value.is(":checked");
-                
+                var current = $(this);
+                var label = $("label[for='" + current.attr("id") + "']").text();
+                var isChecked = current.is(":checked");
+
+                if (current.hasClass("native-tribal") && isChecked === true) {
+                    nativeTribalCounter++;
+                }
+                else if (current.hasClass("native-tribal") && isChecked === false) {
+                    nativeTribalCounter--;
+                }
+                NativeTribalToggle(nativeTribalCounter);
+
                 UpdateRaceList(label, isChecked);
             });
         }
@@ -595,6 +621,15 @@
             }
         }
 
-        
+        function NativeTribalToggle(nativeTribalCounter) {
+            // show/hide native-tribal area 
+            if (nativeTribalCounter > 0) {
+                $("#native-tribal-information").show();
+                $("#native-tribal-information").load('@Url.Action("GetNativeAmericanEducationForm", "Application")');
+            }
+            else {
+                $("#native-tribal-information").hide();
+            }
+        }
     </script>
 }

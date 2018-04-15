@@ -5,7 +5,6 @@
     $(':input[required]:visible').each(function () {
         if ((this.validity.valid) == true) {
             count++;
-            console.log(this);
         }
     });
     var progress = $("#application-progress");
@@ -20,7 +19,6 @@ $(':input').change(function () {
     $(':input[required]:visible').each(function () {
         if ((this.validity.valid) == true) {
             count++;
-            console.log(this);
         }
     });
     var progress = $("#application-progress");
