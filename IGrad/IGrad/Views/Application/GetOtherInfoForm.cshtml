@@ -9,12 +9,14 @@
 <h3>Finishing Up!</h3>
 <hr>
 <div class="container" id="optional-assistance-container">
+    <h4>Additional IGrad Assistance</h4>
     <input type="button" value="Show" class="btn btn-default" onclick="showTarget('optional-assistance-form')" />
     <input type="button" value="Hide" class="btn btn-default" onclick="hideTarget('optional-assistance-form')" />
     <div class="container" id="optional-assistance-form">
         @Html.Action("GetOptionalAssistanceForm", Model.OptionalOpportunities);
     </div>
 </div>
+<hr />
 <div class="row form-group">
     <span class="btn btn-lg  btn-success">
         @Html.ActionLink("Generate PDF", "GetFilledPDF", "Application")

@@ -418,6 +418,7 @@ namespace IGrad.Controllers
                     .Include(u => u.EmergencyContacts)
                     .Include(u => u.EmergencyContacts.Select(n => n.Name))
                     .Include(u => u.EmergencyContacts.Select(p => p.PhoneNumber))
+                    .Include(u => u.HomelessAssistance)
                     .FirstOrDefault();
             }
             catch (Exception ex)

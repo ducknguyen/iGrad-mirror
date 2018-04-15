@@ -11,7 +11,7 @@
 <script type="text/javascript">
     function loadEmergencyContactInfoForm() {
         hideTarget('add-emergency-contact-button');
-        showTarget('add-emergency-contact');110
+        showTarget('add-emergency-contact'); 110
         $("#add-emergency-contact").load('@Url.Action("GetAddEmergencyContact", "Application")');
     }
 
@@ -90,11 +90,11 @@
                 <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithSelf, htmlAttributes: new { @class = "" }) Own Residence</p>
             </div>
             <div class="form-group col-md-2">
-                <p>@Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "", @onclick= "loadHomelessInfoForm()" }) Homeless / Distressed</p>
+                <p>@Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "", @onclick = "showTarget('homeless-container')" }) Homeless / Distressed</p>
             </div>
         </div>
 
-  
+
 
         <div class="row">
             <div class="form-group col-md-4">
@@ -169,15 +169,27 @@
     </div>
 }
 <hr />
+@{ if (Model.LivesWith.HomelessDistressed)
+    {
+        <div class="container" id="homeless-container">
+            <h3>Homeless / Distressed Additional Information</h3>
+            <button class="btn btn-default" type="button" onclick="showTarget('homeless-information')">Show</button>
+            <button class="btn btn-default" type="button" onclick="hideTarget('homeless-information')">Hide</button>
+            <div class="container" id="homeless-information">
+                @{if (Model.HomelessAssistance != null)
+                    {
+                        Html.RenderPartial("_HomelessAssistanceForm", Model.HomelessAssistance);
+                    }
+                    else
+                    {
+                        Html.Action("GetHomelessAssistanceForm", "Application");
+                    }
+                }
+            </div>
+            <hr />
+        </div>
+                    }}
 
-<div class="container hidden" id="homeless-container">
-    <h3>Homeless / Distressed Additional Information</h3>
-    <button class="btn btn-default" type="button" onclick="showTarget('homeless-information')">Show</button>
-    <button class="btn btn-default" type="button" onclick="hideTarget('homeless-information')">Hide</button>
-    <div class="container" id="homeless-information">
-
-    </div>
-</div>
 
 <!-- ADD EMERGENCY CONTACT -->
 <div class="wrapper" id="add-emergency-contact-container">
