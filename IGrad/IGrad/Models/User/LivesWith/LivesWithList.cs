@@ -12,6 +12,7 @@ namespace IGrad.Models.User
         public int fieldId { get; set; }
         public Guid UserID { get; set; }
         public bool LivesWithBothParents { get; set; }
+        public bool LivesWithGuardian { get; set; }
         public bool LivesWithMotherOnly { get; set; }
         public bool LivesWithFatherOnly { get; set; }
         public bool LivesWithGrandparents { get; set; }

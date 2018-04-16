@@ -10,8 +10,9 @@ namespace IGrad.Models.User
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int fieldId { get; set; }
         public Guid UserID { get; set; }
-        public bool isBeforeSchool { get; set; }
-        public bool isAfterSchool { get; set; }
+        public bool IsBeforeSchool { get; set; }
+        public bool IsAfterSchool { get; set; }
+        public bool IsBeforeAndAfterSchool { get; set; }
         public string ProviderName { get; set; }
         public Address ProviderAddress { get; set; }
         public string ProviderPhoneNumber { get; set; }

@@ -28,6 +28,6 @@ namespace IGrad.Models.User
         public bool HighlyCapable { get; set; }
 
         [DisplayName("English Language Learner")]
-        public bool EngishAsSecondLanguage { get; set; }
+        public bool EnglishAsSecondLanguage { get; set; }
     }
 }

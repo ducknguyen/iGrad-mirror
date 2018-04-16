@@ -103,7 +103,7 @@ namespace IGrad.Controllers
             }
         }
 
-        private void SetPageSizeA4(PdfDocument document)
+        private static void SetPageSizeA4(PdfDocument document)
         {
             for (int page = 0; page < document.PageCount; page++)
             {
@@ -114,7 +114,7 @@ namespace IGrad.Controllers
         private bool UserRequiresNativeAmericanForm(RaceEthnicity race)
         {
             if (race.isAlaskaNative || race.isChehalis || race.isColville ||
-                  race.isCowlitz ||race.isHoh || race.isHames ||
+                  race.isCowlitz || race.isHoh || race.isHames ||
                   race.isKalispel || race.isLowerElwha || race.isLummi ||
                   race.isMakah || race.isMuckleshoot || race.isNisqually ||
                   race.isNooksack || race.isPortGambleClallam || race.isPuyallup ||
@@ -129,7 +129,7 @@ namespace IGrad.Controllers
             }
             else
             {
-                return false; 
+                return false;
             }
         }
 
@@ -143,7 +143,7 @@ namespace IGrad.Controllers
 
         private static void SetAllDocumentFieldsReadOnly(PdfDocument document)
         {
-            if(document.AcroForm.Fields.Count() > 0)
+            if (document.AcroForm.Fields.Count() > 0)
             {
                 for (int i = 0; i < document.AcroForm.Fields.Count(); i++)
                 {
@@ -223,7 +223,7 @@ namespace IGrad.Controllers
                 {
                     plan504.Checked = true;
                 }
-                if (user.QualifiedOrEnrolledInProgam.EngishAsSecondLanguage)
+                if (user.QualifiedOrEnrolledInProgam.EnglishAsSecondLanguage)
                 {
                     englishLanguageLearner.Checked = true;
                 }
@@ -252,15 +252,395 @@ namespace IGrad.Controllers
             // Get the blank form to fill out
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/StudentInfoAndEnrollmentForm.pdf");
             PdfDocument document = PdfReader.Open(filePath);
-            SetPageSizeA4(document);
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
             //TODO Add logic to fill form.
 
+            //Student Name
+            PdfTextField studentLastName = (PdfTextField)(document.AcroForm.Fields["StudentLastName"]);
+            studentLastName.Value = new PdfString(user.Name.LName);
+
+            PdfTextField studentFirstName = (PdfTextField)(document.AcroForm.Fields["StudentFirstName"]);
+            studentFirstName.Value = new PdfString(user.Name.FName);
+
+            PdfTextField studentMiddleName = (PdfTextField)(document.AcroForm.Fields["StudentMiddleName"]);
+            studentMiddleName.Value = new PdfString(user.Name.MName);
+
+            PdfTextField studentPrevName = (PdfTextField)(document.AcroForm.Fields["StudentPreviousName"]);
+            studentPrevName.Value = new PdfString(user.Name.PreviousName);
+
+            //Birthday Gender and grade level
+            PdfTextField studentBirthday = (PdfTextField)(document.AcroForm.Fields["StudentBirthday"]);
+            studentBirthday.Value = new PdfString(user.Birthday.ToShortDateString());
+
+            if (user.Gender == "Male")
+            {
+                PdfCheckBoxField studentIsMale = (PdfCheckBoxField)(document.AcroForm.Fields["StudentIsMale"]);
+                studentIsMale.Checked = true;
+            }
+            else
+            {
+                PdfCheckBoxField studentIsFemale = (PdfCheckBoxField)(document.AcroForm.Fields["StudentIsFemale"]);
+                studentIsFemale.Checked = true;
+            }
+
+            PdfTextField studentGrade = (PdfTextField)(document.AcroForm.Fields["StudentGrade"]);
+            studentGrade.Value = new PdfString(user.SchoolInfo.CurrentGrade.ToString());
+
+            //birthplace, student lives with
+            PdfTextField studentBirthplaceCity = (PdfTextField)(document.AcroForm.Fields["BirthplaceCity"]);
+            studentBirthplaceCity.Value = new PdfString(user.BirthPlace.City);
+
+            PdfTextField studentBirthplaceState = (PdfTextField)(document.AcroForm.Fields["BirthplaceState"]);
+            studentBirthplaceState.Value = new PdfString(user.BirthPlace.State);
+
+            PdfTextField studentBirthplaceCountry = (PdfTextField)(document.AcroForm.Fields["BirthplaceCountry"]);
+            studentBirthplaceCountry.Value = new PdfString(user.BirthPlace.Country);
+
+            //Lives with checkboxes
+            PdfCheckBoxField livesWithBothParents = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithBothParents"]);
+            livesWithBothParents.Checked = user.LivesWith.LivesWithBothParents;
+
+            PdfCheckBoxField livesWithMotherOnly = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithMotherOnly"]);
+            livesWithMotherOnly.Checked = user.LivesWith.LivesWithMotherOnly;
+
+            PdfCheckBoxField livesWithFatherAndStepMom = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithFatherAndStepMom"]);
+            livesWithFatherAndStepMom.Checked = user.LivesWith.LivesWithFatherAndStepMom;
+
+            PdfCheckBoxField livesWithGuardian = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithGuardian"]);
+            livesWithGuardian.Checked = user.LivesWith.LivesWithGuardian;
+
+            PdfCheckBoxField livesWithSelf = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithSelf"]);
+            livesWithSelf.Checked = user.LivesWith.LivesWithSelf;
+
+            PdfCheckBoxField livesWithGrandparents = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithGrandparents"]);
+            livesWithGrandparents.Checked = user.LivesWith.LivesWithGrandparents;
+
+            PdfCheckBoxField livesWithFatherOnly = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithFatherOnly"]);
+            livesWithFatherOnly.Checked = user.LivesWith.LivesWithFatherOnly;
+
+            PdfCheckBoxField livesWithMotherAndStepDad = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithMotherAndStepDad"]);
+            livesWithMotherAndStepDad.Checked = user.LivesWith.LivesWithMotherAndStepDad;
+
+            PdfCheckBoxField livesWithFosterParents = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithFosterParents"]);
+            livesWithFosterParents.Checked = user.LivesWith.LivesWithFosterParents;
+
+            PdfCheckBoxField livesWithAgency = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithAgency"]);
+            livesWithAgency.Checked = user.LivesWith.LivesWithAgency;
+
+            //check if they live with other, fill out description and check the checkbox for other as we're not capturing the other checkbox.
+            if (user.LivesWith.Other != "")
+            {
+                PdfTextField livesWithOtherDesc = (PdfTextField)(document.AcroForm.Fields["LivesWithOtherDesc"]);
+                livesWithOtherDesc.Value = new PdfString(user.LivesWith.Other);
+
+                PdfCheckBoxField livesWithOther = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithOther"]);
+                livesWithOther.Checked = true;
+            }
+
+            //Resident address
+            PdfTextField residentAddressStreet = (PdfTextField)(document.AcroForm.Fields["ResidentAddressStreet"]);
+            residentAddressStreet.Value = new PdfString(user.ResidentAddress.Street);
+
+            PdfTextField residentAddressApt = (PdfTextField)(document.AcroForm.Fields["ResidentAddressApt"]);
+            residentAddressApt.Value = new PdfString(user.ResidentAddress.AptNum);
+
+            PdfTextField residentAddressCity = (PdfTextField)(document.AcroForm.Fields["ResidentAddressCity"]);
+            residentAddressCity.Value = new PdfString(user.ResidentAddress.City);
+
+            PdfTextField residentAddressState = (PdfTextField)(document.AcroForm.Fields["ResidentAddressState"]);
+            residentAddressState.Value = new PdfString(user.ResidentAddress.State);
+
+            PdfTextField residentAddressZip = (PdfTextField)(document.AcroForm.Fields["ResidentAddressZip"]);
+            residentAddressZip.Value = new PdfString(user.ResidentAddress.Zip.ToString());
+
+            //Mailing address
+
+            PdfTextField mailingAddressStreet = (PdfTextField)(document.AcroForm.Fields["MailingAddressStreet"]);
+            residentAddressStreet.Value = new PdfString(user.MailingAddress.Street);
+
+            PdfTextField mailingAddressApt = (PdfTextField)(document.AcroForm.Fields["MailingAddressApt"]);
+            mailingAddressApt.Value = new PdfString(user.MailingAddress.AptNum);
+
+            PdfTextField mailingAddressCity = (PdfTextField)(document.AcroForm.Fields["MailingAddressCity"]);
+            mailingAddressCity.Value = new PdfString(user.MailingAddress.City);
+
+            PdfTextField mailingAddressState = (PdfTextField)(document.AcroForm.Fields["MailingAddressState"]);
+            mailingAddressState.Value = new PdfString(user.MailingAddress.State);
+
+            PdfTextField mailingAddressZip = (PdfTextField)(document.AcroForm.Fields["MailingAddressZip"]);
+            mailingAddressZip.Value = new PdfString(user.MailingAddress.Zip.ToString());
+
+            //Resident Home
+            PdfTextField residentPhone = (PdfTextField)(document.AcroForm.Fields["ResidentHomePhone"]);
+            residentPhone.Value = new PdfString(user.PhoneInfo.PhoneNumber + "    " + user.PhoneInfo.PhoneType);
+
+            for (int i = 0; i < user.Guardians.Count; i++)
+            {
+                if (i < 2)
+                {
+                    PdfTextField guardianWorkPhone = (PdfTextField)(document.AcroForm.Fields["GuardianWorkPhone" + i + 1]);
+                    guardianWorkPhone.Value = new PdfString(user.Guardians[i].Phone.ToString());
+
+                    PdfTextField guardianEmail = (PdfTextField)(document.AcroForm.Fields["GuardianEmail" + i + 1]);
+                    guardianEmail.Value = new PdfString(user.Guardians[i].Email);
+                }
+            }
+
+            //Parenting Plan
+            if (user.StudentsParentingPlan.inEffect)
+            {
+                PdfCheckBoxField planInEffect = (PdfCheckBoxField)(document.AcroForm.Fields["InEffectTrue"]);
+                planInEffect.Checked = true;
+            }
+            else
+            {
+                PdfCheckBoxField planNotInEffect = (PdfCheckBoxField)(document.AcroForm.Fields["InEffectFalse"]);
+                planNotInEffect.Checked = true;
+            }
+
+            PdfCheckBoxField motherHasCourtOrder = (PdfCheckBoxField)(document.AcroForm.Fields["MotherHasOrder"]);
+            motherHasCourtOrder.Checked = user.StudentsParentingPlan.MotherHasOrder;
+
+            PdfCheckBoxField fatherHasCourtOrder = (PdfCheckBoxField)(document.AcroForm.Fields["FatherHasOrder"]);
+            fatherHasCourtOrder.Checked = user.StudentsParentingPlan.FatherHasOrder;
+
+            if (user.StudentsParentingPlan.Other != "")
+            {
+                //check other box
+                PdfCheckBoxField otherCourtOrder = (PdfCheckBoxField)(document.AcroForm.Fields["OtherCourtOrderCheckbox"]);
+                otherCourtOrder.Checked = true;
+
+                PdfTextField otherCourtOrderDesc = (PdfTextField)(document.AcroForm.Fields["OtherCourtOrderDesc"]);
+                otherCourtOrderDesc.Value = new PdfString(user.StudentsParentingPlan.Other);
+            }
 
 
+            //list siblings
+            for (int i = 0; i < user.Siblings.Count; i++)
+            {
+                PdfTextField siblingLastName = (PdfTextField)(document.AcroForm.Fields["SiblingLastName" + i + 1]);
+                siblingLastName.Value = new PdfString(user.Siblings[i].LName);
 
+                PdfTextField siblingFirstName = (PdfTextField)(document.AcroForm.Fields["SiblingFirstName" + i + 1]);
+                siblingFirstName.Value = new PdfString(user.Siblings[i].FName);
+
+                PdfTextField siblingSchool = (PdfTextField)(document.AcroForm.Fields["SiblingSchool" + i + 1]);
+                siblingSchool.Value = new PdfString(user.Siblings[i].School);
+
+                PdfTextField siblingGrade = (PdfTextField)(document.AcroForm.Fields["SiblingGrade" + i + 1]);
+                siblingGrade.Value = new PdfString(user.Siblings[i].Grade.ToString());
+            }
+
+            //child care section
+            PdfCheckBoxField childCareBeforeSchool = (PdfCheckBoxField)(document.AcroForm.Fields["ChildCareIsBeforeSchool"]);
+            childCareBeforeSchool.Checked = user.StudentChildCare.IsBeforeSchool;
+
+            PdfCheckBoxField childCareIsAfterSchool = (PdfCheckBoxField)(document.AcroForm.Fields["ChildCareIsAfterSchool"]);
+            childCareIsAfterSchool.Checked = user.StudentChildCare.IsAfterSchool;
+
+            PdfCheckBoxField childCareIsBeforeAndAfterSchool = (PdfCheckBoxField)(document.AcroForm.Fields["ChildCareIsBeforeAndAfterSchool"]);
+            childCareIsBeforeAndAfterSchool.Checked = user.StudentChildCare.IsBeforeAndAfterSchool;
+
+            PdfTextField childCareProviderName = (PdfTextField)(document.AcroForm.Fields["ChildCareProviderName"]);
+            childCareProviderName.Value = new PdfString(user.StudentChildCare.ProviderName);
+
+            PdfTextField childCareProviderAddress = (PdfTextField)(document.AcroForm.Fields["ChildCareProviderAddress"]);
+            childCareProviderAddress.Value = new PdfString(user.StudentChildCare.ProviderAddress.Street + " , "
+               + user.StudentChildCare.ProviderAddress.City + "," + user.StudentChildCare.ProviderAddress.State + " "
+               + user.StudentChildCare.ProviderAddress.Zip.ToString());
+
+            PdfTextField childCareProviderPhoneNumber = (PdfTextField)(document.AcroForm.Fields["ChildCareProviderPhoneNumber"]);
+            childCareProviderPhoneNumber.Value = new PdfString(user.StudentChildCare.ProviderPhoneNumber);
+
+            if (user.PreSchool.Count > 0)
+            {
+                PdfCheckBoxField attendedPreschool = (PdfCheckBoxField)(document.AcroForm.Fields["ChildAttendedPreschoolTrue"]);
+                attendedPreschool.Checked = true;
+
+                for (int i = 0; i < user.PreSchool.Count; i++)
+                {
+                    PdfTextField preschoolName = (PdfTextField)(document.AcroForm.Fields["PreschoolName" + i + 1]);
+                    preschoolName.Value = new PdfString(user.PreSchool[i].Name);
+
+                    PdfTextField preschoolAddress = (PdfTextField)(document.AcroForm.Fields["PreschoolAddress" + i + 1]);
+                    Address address = user.PreSchool[i].Address;
+                    string fullAddress;
+                    if (address.POBox != "")
+                    {
+                        fullAddress = address.Street + " POBOX: " + address.POBox + " " + address.City + ", " + address.State + " "
+                        + address.Zip.ToString();
+                    }
+                    else
+                    {
+                        fullAddress = address.Street + " " + address.City + ", " + address.State + " "
+                        + address.Zip.ToString();
+                    }
+                    preschoolAddress.Value = new PdfString(fullAddress);
+                }
+
+                PdfTextField childCareProviderPhone = (PdfTextField)(document.AcroForm.Fields["ChildCareProviderPhoneNumber"]);
+                childCareProviderPhoneNumber.Value = new PdfString(user.StudentChildCare.ProviderPhoneNumber);
+            }
+
+            //Special Programs
+            //special ed
+            if (user.QualifiedOrEnrolledInProgam.SpecialEducation)
+            {
+                PdfCheckBoxField specEd = (PdfCheckBoxField)(document.AcroForm.Fields["SpecialEducationTrue"]);
+                specEd.Checked = true;
+            }
+            else
+            {
+                PdfCheckBoxField specEd = (PdfCheckBoxField)(document.AcroForm.Fields["SpecialEducationFalse"]);
+                specEd.Checked = true;
+            }
+            //plan504
+            if (user.QualifiedOrEnrolledInProgam.plan504)
+            {
+                PdfCheckBoxField plan504 = (PdfCheckBoxField)(document.AcroForm.Fields["Plan504True"]);
+                plan504.Checked = true;
+            }
+            else
+            {
+                PdfCheckBoxField plan504 = (PdfCheckBoxField)(document.AcroForm.Fields["Plan504False"]);
+                plan504.Checked = true;
+            }
+            //Title program
+            if (user.QualifiedOrEnrolledInProgam.Title)
+            {
+                PdfCheckBoxField title = (PdfCheckBoxField)(document.AcroForm.Fields["TitleTrue"]);
+                title.Checked = true;
+            }
+            else
+            {
+                PdfCheckBoxField title = (PdfCheckBoxField)(document.AcroForm.Fields["TitleFalse"]);
+                title.Checked = true;
+            }
+
+            //LAP
+            if (user.QualifiedOrEnrolledInProgam.LAP)
+            {
+                PdfCheckBoxField lap = (PdfCheckBoxField)(document.AcroForm.Fields["LAPTrue"]);
+                lap.Checked = true;
+            }
+            else
+            {
+                PdfCheckBoxField lap = (PdfCheckBoxField)(document.AcroForm.Fields["LAPFalse"]);
+                lap.Checked = true;
+            }
+
+            //highly capable
+
+            if (user.QualifiedOrEnrolledInProgam.HighlyCapable)
+            {
+                PdfCheckBoxField highlyCapable = (PdfCheckBoxField)(document.AcroForm.Fields["HighlyCapableTrue"]);
+                highlyCapable.Checked = true;
+            }
+            else
+            {
+                PdfCheckBoxField highlyCapable = (PdfCheckBoxField)(document.AcroForm.Fields["HighlyCapableFalse"]);
+                highlyCapable.Checked = true;
+            }
+
+            //English as second language (ESL)
+
+            if (user.QualifiedOrEnrolledInProgam.EnglishAsSecondLanguage)
+            {
+                PdfCheckBoxField esl = (PdfCheckBoxField)(document.AcroForm.Fields["EnglishAsSecondLanguageTrue"]);
+                esl.Checked = true;
+            }
+            else
+            {
+                PdfCheckBoxField esl = (PdfCheckBoxField)(document.AcroForm.Fields["EnglishAsSecondLanguageFalse"]);
+                esl.Checked = true;
+            }
+
+            if (user.Retainment.hasBeenRetained)
+            {
+                PdfCheckBoxField hasBeenRetained = (PdfCheckBoxField)(document.AcroForm.Fields["HasBeenRetainedTrue"]);
+                hasBeenRetained.Checked = true;
+
+                PdfTextField retainedGradeLevel = (PdfTextField)(document.AcroForm.Fields["RetainmentGradeLevel"]);
+                retainedGradeLevel.Value = new PdfString(user.Retainment.GradeLevelsRetained.ToString());
+            }
+            else
+            {
+                PdfCheckBoxField hasBeenRetained = (PdfCheckBoxField)(document.AcroForm.Fields["HasBeenRetainedFalse"]);
+                hasBeenRetained.Checked = true;
+            }
+
+            //last school attended info
+            for (int i = 0; i < user.SchoolInfo.HighSchoolInformation.Count; i++)
+            {
+                HighSchoolInfo highSchool = user.SchoolInfo.HighSchoolInformation[i];
+                if (highSchool.isLastHighSchoolAttended)
+                {
+                    PdfTextField LastHighSchoolAttended = (PdfTextField)(document.AcroForm.Fields["LastHighSchoolAttended"]);
+                    LastHighSchoolAttended.Value = new PdfString(highSchool.HighSchoolName);
+                }
+                //TODO school district
+
+                //TODO school info
+            }
+
+
+            //student suspended for weapons violation
+            if (user.SchoolInfo.PreviousSchoolViolation != null)
+            {
+                //if they were suspended
+                if (user.SchoolInfo.PreviousSchoolViolation.isSuspendedOrExpelled)
+                {
+                    //check the suspended box
+                    PdfCheckBoxField suspended = (PdfCheckBoxField)(document.AcroForm.Fields["StudentSuspendedOrExpelledTrue"]);
+                    suspended.Checked = true;
+                    //fill the suspension date
+                    PdfTextField suspensionDate = (PdfTextField)(document.AcroForm.Fields["StudentSuspendedOrExpelledDate"]);
+                    suspensionDate.Value = new PdfString(user.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation.ToShortDateString());
+                }
+                //otherwise, check the not suspended box
+                else
+                {
+                    PdfCheckBoxField suspended = (PdfCheckBoxField)(document.AcroForm.Fields["StudentSuspendedOrExpelledFalse"]);
+                    suspended.Checked = true;
+                }
+            }
+            //if the weapons violation is null, we still need to check the NO checkbox for was suspended or expelled.
+            else
+            {
+                PdfCheckBoxField suspended = (PdfCheckBoxField)(document.AcroForm.Fields["StudentSuspendedOrExpelledFalse"]);
+                suspended.Checked = true;
+            }
+
+            //EMERGENCY CONTACTS
+
+            for (int i = 0; i < user.EmergencyContacts.Count; i++)
+            {
+                //only want the first 3 Emergency Contact (EC)
+                if (i < 3)
+                {
+                    EmergencyContact ec = user.EmergencyContacts[i];
+
+                    PdfTextField ecLastName = (PdfTextField)(document.AcroForm.Fields["EmergencyContactLastName" + i + 1]);
+                    ecLastName.Value = new PdfString(ec.Name.LName);
+
+                    PdfTextField ecFirstName = (PdfTextField)(document.AcroForm.Fields["EmergencyContactFirstName" + i + 1]);
+                    ecFirstName.Value = new PdfString(ec.Name.FName);
+
+                    PdfTextField ecMiddleInitial = (PdfTextField)(document.AcroForm.Fields["EmergencyContactMiddleName" + i + 1]);
+                    ecMiddleInitial.Value = new PdfString(ec.Name.MName.Substring(0));
+
+                    PdfTextField ecRelationToStudent = (PdfTextField)(document.AcroForm.Fields["EmergencyContactRelationshipToStudent" + i + 1]);
+                    ecRelationToStudent.Value = new PdfString(ec.Relationship);
+
+                    PdfTextField ecPhoneOne = (PdfTextField)(document.AcroForm.Fields["EmergencyContact"+i+1+"Phone1"]);
+                    ecPhoneOne.Value = new PdfString(ec.PhoneNumber.PhoneNumber);
+
+                    PdfTextField ecPhoneOneType = (PdfTextField)(document.AcroForm.Fields["EmergencyContact" + i + 1 + "Type1"]);
+                    ecPhoneOneType.Value = new PdfString(ec.PhoneNumber.PhoneType);
+                }
+            }
 
             return writeDocument(document);
         }
@@ -609,7 +989,7 @@ namespace IGrad.Controllers
                     hasSpecialEducation = true;
                     specialEdText = specialEdText + " Special Education,";
                 }
-                if (this.user.QualifiedOrEnrolledInProgam.EngishAsSecondLanguage)
+                if (this.user.QualifiedOrEnrolledInProgam.EnglishAsSecondLanguage)
                 {
                     hasSpecialEducation = true;
                     specialEdText = specialEdText + " English Second Language,";
@@ -814,9 +1194,9 @@ namespace IGrad.Controllers
                     PdfCheckBoxField checkBox = (PdfCheckBoxField)(document.AcroForm.Fields[s]);
                     checkBox.Checked = true;
                 }
-                catch(NullReferenceException e)
+                catch (NullReferenceException e)
                 {
-                    Console.WriteLine("field does not exist: " + e.Message); 
+                    Console.WriteLine("field does not exist: " + e.Message);
                 }
             }
 
@@ -1099,7 +1479,7 @@ namespace IGrad.Controllers
             }
             return writeDocument(document);
         }
-        
+
         private Byte[] NativeAmericanEducationProgramForm()
         {
             //name of school should never change as all are applying to Igrad. Not captured in web form.
@@ -1116,7 +1496,7 @@ namespace IGrad.Controllers
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
             //check for null object
-            if(user.NativeAmericanEducation != null)
+            if (user.NativeAmericanEducation != null)
             {
                 PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
                 name.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
@@ -1167,7 +1547,7 @@ namespace IGrad.Controllers
                 nameOfTribeMaintaningEnrollment.Value = new PdfString(user.NativeAmericanEducation.NameOfTribeMaintaningEnrollment.ToString());
 
                 //check for null address
-                if(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment != null)
+                if (user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment != null)
                 {
                     PdfTextField addressOfTribeMaintainingEnrollmentStreet = (PdfTextField)(document.AcroForm.Fields["AddressOfTribeMaintainingEnrollmentStreet"]);
                     addressOfTribeMaintainingEnrollmentStreet.Value = new PdfString(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment.Street.ToString());
@@ -1234,7 +1614,7 @@ namespace IGrad.Controllers
 
 
             //FIND the last school attended for student and set value
-            for(int i = 0; i < user.SchoolInfo.HighSchoolInformation.Count; i++)
+            for (int i = 0; i < user.SchoolInfo.HighSchoolInformation.Count; i++)
             {
                 //if school is last attended for student
                 if (user.SchoolInfo.HighSchoolInformation[i].isLastHighSchoolAttended)
@@ -1246,7 +1626,7 @@ namespace IGrad.Controllers
 
 
             //Set sibling1 info
-            if(user.Siblings.Count > 0)
+            if (user.Siblings.Count > 0)
             {
                 if (user.Siblings[0] != null)
                 {
@@ -1378,6 +1758,7 @@ namespace IGrad.Controllers
         {
             SetFinishedSecuritySettings(document);
             SetAllDocumentFieldsReadOnly(document);
+            SetPageSizeA4(document);
 
             byte[] fileContents = null;
             //MemoryStream stream = new MemoryStream();
