@@ -243,7 +243,7 @@ DROP TABLE [dbo].[HomelessAssistancePreferences]
 GO
 
 /****** Object:  Table [dbo].[IGradOpportunities]    Script Date: 4/13/2018 4:34:00 PM ******/
-DROP TABLE [dbo].[IGradOpportunities]
+DROP TABLE [dbo].[OptionalAssistances]
 GO
 
 
