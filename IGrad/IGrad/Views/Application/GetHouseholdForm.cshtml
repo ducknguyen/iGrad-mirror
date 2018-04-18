@@ -12,8 +12,17 @@
 
     $(document).ready(function () {
         homelessToggled();
+        residentIsMailingAddress();
+
     })
 
+    function residentIsMailingAddress() {
+        if ($('input[name=ResidentAddressIsMailingAddress]:checked').val() == 'True') {
+            hideTarget('mailing-address');
+        } else {
+            showTarget('mailing-address');
+        }
+    }
     function loadEmergencyContactInfoForm() {
         hideTarget('add-emergency-contact-button');
         showTarget('add-emergency-contact'); 110
@@ -149,8 +158,8 @@
         <h4>Address is mailing address? *</h4>
         <div class="row">
             <div class="form-group col-md-12">
-                @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, true, htmlAttributes: new { @class = "", @onclick = "hideTarget('mailing-address')" })Yes
-                @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, false, htmlAttributes: new { @class = "", @onclick = "showTarget('mailing-address')" })No
+                @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, true, htmlAttributes: new { @class = "", @onclick = "residentIsMailingAddress()" })Yes
+                @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, false, htmlAttributes: new { @class = "", @onclick = "residentIsMailingAddress()" })No
             </div>
         </div>
 
