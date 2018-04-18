@@ -16,6 +16,8 @@
         @Html.Partial("_ApplicationNavigation")
     </div>
 
+
+
     <div class="container">
         <!-- Return to Top -->
         <a href="javascript:" id="return-to-top">
@@ -60,13 +62,20 @@
 
 
 
-    <!-- FONTAWESOME JS -->
+    <!-- FONTAWESOME JS AND CUSTOM JS -->
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     @RenderSection("scripts", required: false)
 
-    <script type="text/javascript" src="~/Scripts/progress-bar.js"></script>
+    <!-- <script type="text/javascript" src="~/Scripts/progress-bar.js"></script> -->
     <script type="text/javascript" src="~/Scripts/confirmation.js"></script>
     <script type="text/javascript" src="~/Scripts/back-to-top.js"></script>
+
+    <!-- TOOLTIP POPUP -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip({ container: 'body' });
+        });
+    </script>
 
 </body>
 </html>

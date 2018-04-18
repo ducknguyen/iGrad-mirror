@@ -10,7 +10,7 @@
 {
     @Html.AntiForgeryToken()
     <div class="" id="add-highschool-form">
-        <h4>Add A New High School</h4>
+        <h4 class="required-marker">Add A New High School</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">

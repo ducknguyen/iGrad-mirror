@@ -94,7 +94,8 @@
     <hr>
 
     <div class="" id="living-situation">
-        <h4 class="bg-info">Student lives with :</h4>
+        <h4 class="bg-info">Household</h4>
+        <h5 class="required-marker">Household</h5>
 
         <div class="row">
             <div class="form-group col-md-2">
@@ -124,11 +125,11 @@
 
         <div class="row">
             <div class="form-group col-md-4">
-                @Html.LabelFor(model => model.LivesWith.TotalPeopleInResidence, htmlAttributes: new { @class = "" })
+                @Html.LabelFor(model => model.LivesWith.TotalPeopleInResidence, htmlAttributes: new { @class = "required-marker" })
                 @Html.TextBoxFor(model => model.LivesWith.TotalPeopleInResidence, "{0:#.#}", htmlAttributes: new { @class = "form-control", @placeholder = "Number of residence" })
             </div>
             <div class="form-group col-md-4">
-                @Html.LabelFor(model => model.LivesWith.AnnualHouseHoldIncome, htmlAttributes: new { @class = "" })
+                @Html.LabelFor(model => model.LivesWith.AnnualHouseHoldIncome, htmlAttributes: new { @class = "required-marker" })
                 @Html.TextBoxFor(model => model.LivesWith.AnnualHouseHoldIncome, "{0:#.#}", htmlAttributes: new { @class = "form-control", @placeholder = "Income" })
             </div>
         </div>
@@ -136,26 +137,26 @@
         <h4 class="bg-info">Current Residence</h4>
         <div class="row">
             <div class="form-group col-md-3">
-                @Html.LabelFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "" })
+                @Html.LabelFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "required-marker" })
                 @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "Street address" })
             </div>
             <div class="form-group col-md-3">
-                @Html.LabelFor(model => model.ResidentAddress.City, htmlAttributes: new { @class = "" })
+                @Html.LabelFor(model => model.ResidentAddress.City, htmlAttributes: new { @class = "required-marker" })
                 @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "City" })
             </div>
             <div class="form-group col-md-3">
-                @Html.LabelFor(model => model.ResidentAddress.State, htmlAttributes: new { @class = "" })
+                @Html.LabelFor(model => model.ResidentAddress.State, htmlAttributes: new { @class = "required-marker" })
                 @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "State" })
             </div>
             <div class="form-group col-md-3">
-                @Html.LabelFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "" })
+                @Html.LabelFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "required-marker" })
                 @Html.TextBoxFor(model => model.ResidentAddress.Zip, "{0:#.#}", new { @class = "form-control", @placeholder = "Zip" })
                 @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
             </div>
         </div>
 
 
-        <h4>Address is mailing address? *</h4>
+        <h4 class="required-marker">Address is mailing address?</h4>
         <div class="row">
             <div class="form-group col-md-12">
                 @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, true, htmlAttributes: new { @class = "", @onclick = "residentIsMailingAddress()" })Yes
@@ -168,25 +169,25 @@
             <h4>Please Specify Mailing Address</h4>
             <div class="row">
                 <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "" })
+                    @Html.LabelFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "required-marker" })
                     @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "Street address" })
                 </div>
                 <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.MailingAddress.City, htmlAttributes: new { @class = "" })
+                    @Html.LabelFor(model => model.MailingAddress.City, htmlAttributes: new { @class = "required-marker" })
                     @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "City" })
                 </div>
                 <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.MailingAddress.State, htmlAttributes: new { @class = "" })
+                    @Html.LabelFor(model => model.MailingAddress.State, htmlAttributes: new { @class = "required-marker" })
                     @Html.TextBoxFor(model => model.MailingAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "State" })
                 </div>
             </div>
             <div class="row">
                 <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.MailingAddress.Zip, htmlAttributes: new { @class = "" })
+                    @Html.LabelFor(model => model.MailingAddress.Zip, htmlAttributes: new { @class = "required-marker" })
                     @Html.TextBoxFor(model => model.MailingAddress.Zip, "{0:#.#}", new { @class = "form-control", @placeholder = "Zip" })
                 </div>
                 <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = "" })
+                    @Html.LabelFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = "required-marker" })
                     @Html.TextBoxFor(model => model.MailingAddress.POBox, htmlAttributes: new { @class = "form-control", @placeholder = "PO Box" })
                     @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
                 </div>
