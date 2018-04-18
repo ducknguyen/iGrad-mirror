@@ -36,8 +36,11 @@ namespace IGrad.Controllers
                        .Include(u => u.ConsideredRaceAndEthnicity)
                        .Include(u => u.PhoneInfo)
                        .Include(u => u.HealthInfo)
+                       .Include(u => u.Guardians)
                        .Include(u => u.Guardians.Select(n => n.Name))
+                       .Include(u => u.Guardians.Select(p => p.Phone))
                        .Include(u => u.Siblings)
+                       .Include(u => u.LivesWith)
                        .Include(u => u.LanguageHisory)
                        .Include(u => u.LifeEvent)
                        .Include(u => u.SchoolInfo)
@@ -47,6 +50,8 @@ namespace IGrad.Controllers
                        .Include(u => u.NativeAmericanEducation)
                        .Include(u => u.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment)
                        .Include(u => u.HomelessAssistance)
+                       .Include(u => u.ResidentAddress)
+                       .Include(u => u.MailingAddress)
                        .Include(u => u.OptionalOpportunities)
                        .Where(u => u.UserID == userId)
                        .FirstOrDefault<UserModel>();
@@ -76,7 +81,7 @@ namespace IGrad.Controllers
             using (ZipFile zip = new ZipFile())
             {
                 zip.AddEntry("StudentEnrollmentChecklist.pdf", StudentEnrollmentChecklistForm());
-                zip.AddEntry("StudentEnrollmentInfo.pdf", StudentInfoAndEnrollmentForm());
+                //zip.AddEntry("StudentEnrollmentInfo.pdf", StudentInfoAndEnrollmentForm());
                 zip.AddEntry("EthnicityAndRace.pdf", EthnicityAndRaceDataForm());
                 zip.AddEntry("HomeLanguageSurvey.pdf", HomeLanguageSurveyForm());
                 zip.AddEntry("ParentQuestionaire.pdf", ParentQuestionareForm());
@@ -84,14 +89,22 @@ namespace IGrad.Controllers
                 zip.AddEntry("ImmunizationStatus.pdf", ImmunizationStatusForm());
                 zip.AddEntry("FamilyIncomeSurvey.pdf", FamilyIncomeForm());
                 zip.AddEntry("RequestForRecords.pdf", RequestForRecordsForm());
-                zip.AddEntry("HomelessAssistance.pdf", HomelessAssistanceForm());
-                zip.AddEntry("IGradOptionalAssistance.pdf", IGradOptionalAssistance());
                 zip.AddEntry("KingCountyLibrarySystem.pdf", KingCountyLibrarySystemForm());
 
                 //optional forms
                 if (UserRequiresNativeAmericanForm(user.ConsideredRaceAndEthnicity))
                 {
                     zip.AddEntry("NativeAmericanEducationProgram.pdf", NativeAmericanEducationProgramForm());
+                }
+
+                if (UserRequiresHomelessAssistanceForm())
+                {
+                    zip.AddEntry("HomelessAssistance.pdf", HomelessAssistanceForm());
+                }
+
+                if (UserRequiresOptionalAssistanceForm())
+                {
+                    zip.AddEntry("IGradOptionalAssistance.pdf", IGradOptionalAssistance());
                 }
 
 
@@ -124,6 +137,30 @@ namespace IGrad.Controllers
                   race.isSwinomish || race.isTulalip || race.isUpperSkagit ||
                   race.isYakama || race.isOtherWashingtonIndian ||
                   race.isOtherNorthCentralOrSouthAmericanIndian)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool UserRequiresHomelessAssistanceForm()
+        {
+            if(user.HomelessAssistance != null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private bool UserRequiresOptionalAssistanceForm()
+        {
+            if(user.OptionalOpportunities != null)
             {
                 return true;
             }
@@ -711,14 +748,15 @@ namespace IGrad.Controllers
             PdfTextField todayDate = (PdfTextField)(document.AcroForm.Fields["Date"]);
             todayDate.Value = new PdfString(DateTime.Now.ToString("yyyy-MM-dd"));
 
-            if (this.user.Guardians.Count != 0)
-            {
-                PdfTextField parentName = (PdfTextField)(document.AcroForm.Fields["ParentGuardianName"]);
-                parentName.Value = new PdfString(this.user.Guardians[0].Name.FName + " " + this.user.Guardians[0].Name.LName);
+            //Do not need unless we're populating guardian name and signature
+            //if (this.user.Guardians.Count != 0)
+            //{
+            //    PdfTextField parentName = (PdfTextField)(document.AcroForm.Fields["ParentGuardianName"]);
+            //    parentName.Value = new PdfString(user.Guardians[0].Name.FName + " " + user.Guardians[0].Name.LName);
 
-                PdfSignatureField parentSignature = (PdfSignatureField)(document.AcroForm.Fields["ParentGuardian Signature"]);
-                parentSignature.Value = new PdfString(this.user.Guardians[0].Name.FName + " " + this.user.Guardians[0].Name.LName);
-            }
+            //    PdfSignatureField parentSignature = (PdfSignatureField)(document.AcroForm.Fields["ParentGuardian Signature"]);
+            //    parentSignature.Value = new PdfString(this.user.Guardians[0].Name.FName + " " + this.user.Guardians[0].Name.LName);
+            //}
             #region LanguageInfo
             if (this.user.LanguageHisory != null)
             {
@@ -1731,7 +1769,8 @@ namespace IGrad.Controllers
 
             if (user.OptionalOpportunities.StudentIsParenting)
             {
-                PdfTextField agesOfChildren = (PdfTextField)(document.AcroForm.Fields["AgesOfChildren"]);
+                //TODO FIX TYPO and refactor AGESOFCHILREN on OptionalOpportunities model.
+                PdfTextField agesOfChildren = (PdfTextField)(document.AcroForm.Fields["AgesOfChilren"]);
                 agesOfChildren.Value = new PdfString(user.OptionalOpportunities.AgesOfChilren);
             }
 

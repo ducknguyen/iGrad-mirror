@@ -464,7 +464,6 @@ namespace IGrad.Controllers
                        .Include(u => u.ResidentAddress)
                        .Include(u => u.MailingAddress)
                        .Include(u => u.EmergencyContacts)
-                       .Include(u => u.HomelessAssistance)
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
 
@@ -477,6 +476,7 @@ namespace IGrad.Controllers
                 data.ResidentAddress = user.ResidentAddress;
                 data.LivesWith = user.LivesWith;
 
+                
                 db.SaveChanges();
             }
             return RedirectToAction("GetHealthForm", "Application");
@@ -795,13 +795,24 @@ namespace IGrad.Controllers
             return null;
         }
 
-        public ActionResult GetAddHomelessAssistanceForm(UserModel user)
+        public ActionResult GetAddHomelessAssistanceForm()
         {
-            if (user.HomelessAssistance == null)
+            
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
             {
-                user.HomelessAssistance = new HomelessAssistancePreferences();
+                //get user
+                var user = db.Users
+                       .Include(u => u.HomelessAssistance)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+
+                if (user.HomelessAssistance == null)
+                {
+                    user.HomelessAssistance = new HomelessAssistancePreferences();
+                }
+                return PartialView("_HomelessAssistanceForm", user.HomelessAssistance);
             }
-            return PartialView("_HomelessAssistanceForm", user.HomelessAssistance);
         }
 
         [HttpPost]

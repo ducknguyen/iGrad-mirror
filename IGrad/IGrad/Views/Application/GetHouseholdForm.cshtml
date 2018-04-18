@@ -9,6 +9,11 @@
 <script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+
+    $(document).ready(function () {
+        homelessToggled();
+    })
+
     function loadEmergencyContactInfoForm() {
         hideTarget('add-emergency-contact-button');
         showTarget('add-emergency-contact'); 110
@@ -32,6 +37,18 @@
         $("#homeless-information").load('@Url.Action("GetAddHomelessAssistanceForm", "Application")');
     }
 
+    function homelessToggled() {
+        if ($('#isHomelessCheckbox').is(':checked')) {
+            loadHomelessInfoForm();
+            showTarget('homeless-container');
+            showTarget('homeless-information');
+            console.log("ishomeless is checked");
+        }
+        else {
+            hideTarget('homeless-container')
+            console.log("Homeless container is hidden.")
+        }
+    }
 
     function deleteEmergencyContact(fieldId) {
         $.ajax({
@@ -90,7 +107,7 @@
                 <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithSelf, htmlAttributes: new { @class = "" }) Own Residence</p>
             </div>
             <div class="form-group col-md-2">
-                <p>@Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "", @onclick = "showTarget('homeless-container')" }) Homeless / Distressed</p>
+                <p>@Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "", @id = "isHomelessCheckbox", @onclick = "homelessToggled()" }) Homeless / Distressed</p>
             </div>
         </div>
 
@@ -169,26 +186,24 @@
     </div>
 }
 <hr />
-@{ if (Model.LivesWith.HomelessDistressed)
-    {
-        <div class="container" id="homeless-container">
-            <h3>Homeless / Distressed Additional Information</h3>
-            <button class="btn btn-default" type="button" onclick="showTarget('homeless-information')">Show</button>
-            <button class="btn btn-default" type="button" onclick="hideTarget('homeless-information')">Hide</button>
-            <div class="container" id="homeless-information">
-                @{if (Model.HomelessAssistance != null)
-                    {
-                        Html.RenderPartial("_HomelessAssistanceForm", Model.HomelessAssistance);
-                    }
-                    else
-                    {
-                        Html.Action("GetHomelessAssistanceForm", "Application");
-                    }
-                }
-            </div>
-            <hr />
-        </div>
-                    }}
+
+<div class="container" id="homeless-container">
+    <h3>Homeless / Distressed Additional Information</h3>
+    <button class="btn btn-default" type="button" onclick="showTarget('homeless-information')">Show</button>
+    <button class="btn btn-default" type="button" onclick="hideTarget('homeless-information')">Hide</button>
+    <div class="container" id="homeless-information">
+        @{if (Model.HomelessAssistance != null)
+            {
+                Html.RenderPartial("_HomelessAssistanceForm", Model.HomelessAssistance);
+            }
+            else
+            {
+                @Html.Action("GetAddHomelessAssistanceForm", "Application");
+            }
+        }
+    </div>
+    <hr />
+</div>
 
 
 <!-- ADD EMERGENCY CONTACT -->

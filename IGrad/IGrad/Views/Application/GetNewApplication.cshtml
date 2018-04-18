@@ -10,7 +10,7 @@
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 <progress max="100" value="0" id="application-progress"></progress>
 
-@using (Html.BeginForm("GetNewApplication", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
+@using (Html.BeginForm("GetNewApplication", "Application", FormMethod.Post, new { @id = "personal-info" , enctype = "multipart/form-data" }))
 {
     <h3>Personal Information</h3>
     <small class="form-text required-marker-indicator">* required fields.</small>
@@ -527,7 +527,7 @@
                         <!-- MODAL BODY END -->
 
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
+                            <button type="button"  class="btn btn-primary" data-dismiss="modal" aria-label="Close">
                                 Continue
                             </button>
                         </div>
@@ -556,7 +556,7 @@
 
     <div class="form-row">
         <div class="pull-right">
-            <button class="btn btn-primary btn-lg btn-success" type="submit">
+            <button class="btn btn-primary btn-lg btn-success" form="personal-info" type="submit">
                 Continue
                 <i class="fas fa-caret-right"></i>
             </button>

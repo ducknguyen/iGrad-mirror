@@ -286,6 +286,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\site.css" />
+    <Content Include="media\documents\orderofdocs.txt" />
     <Content Include="media\images\existingapp.png" />
     <Content Include="media\images\homePageBackgroundImage.jpg" />
     <Content Include="media\images\homepagetexture.png" />
@@ -315,6 +316,7 @@
     <Content Include="media\documents\masterregistration.pdf" />
     <Content Include="media\documents\NativeAmericanEducationProgram.pdf" />
     <Content Include="media\documents\StudentInfoAndEnrollmentForm.pdf" />
+    <Content Include="media\documents\IGradOptionalAssistance.pdf" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy.pubxml" />

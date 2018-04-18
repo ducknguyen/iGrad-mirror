@@ -39,8 +39,8 @@
             subtitle because they are living in circumstances described in clauses (I) through (iii).
         </p>
             <div class="form-group">
-                @Html.LabelFor(model => model.ContactByPhone, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                @Html.LabelFor(model => model.ContactByPhone, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
                     <div class="checkbox">
                         @Html.EditorFor(model => model.ContactByPhone)
                         @Html.ValidationMessageFor(model => model.ContactByPhone, "", new { @class = "text-danger" })
@@ -49,8 +49,8 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ContactByEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                @Html.LabelFor(model => model.ContactByEmail, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
                     <div class="checkbox">
                         @Html.EditorFor(model => model.ContactByEmail)
                         @Html.ValidationMessageFor(model => model.ContactByEmail, "", new { @class = "text-danger" })
@@ -59,8 +59,8 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.ContactByStudentNote, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-10">
+                @Html.LabelFor(model => model.ContactByStudentNote, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
                     <div class="checkbox">
                         @Html.EditorFor(model => model.ContactByStudentNote)
                         @Html.ValidationMessageFor(model => model.ContactByStudentNote, "", new { @class = "text-danger" })
