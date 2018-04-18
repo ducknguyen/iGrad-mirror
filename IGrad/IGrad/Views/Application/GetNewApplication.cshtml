@@ -20,7 +20,7 @@
     <div class="row">
         <div class="form-group col-md-3">
             @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.Name.FName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First Name", required = "required" } })
+            @Html.EditorFor(model => model.Name.FName, new { htmlAttributes = new { @class = "form-control required-checker", @placeholder = "First Name", required = "required" } })
             @Html.ValidationMessageFor(model => model.Name.FName, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-1">
@@ -30,7 +30,7 @@
         </div>
         <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Name.LName, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.Name.LName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last", required = "required" } })
+            @Html.EditorFor(model => model.Name.LName, new { htmlAttributes = new { @class = "form-control required-checker", @placeholder = "Last", required = "required" } })
             @Html.ValidationMessageFor(model => model.Name.LName, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-4">
@@ -45,22 +45,22 @@
     <div class="row">
         <div class="form-group col-md-3">
             @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control datepicker", required = "required" } })
+            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control datepicker required-checker", required = "required" } })
             @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-3">
             @Html.LabelFor(model => model.BirthPlace.City, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.BirthPlace.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City", required = "required" } })
+            @Html.EditorFor(model => model.BirthPlace.City, new { htmlAttributes = new { @class = "form-control required-checker", @placeholder = "City", required = "required" } })
             @Html.ValidationMessageFor(model => model.BirthPlace.City, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-2">
             @Html.LabelFor(model => model.BirthPlace.State, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.DropDownListFor(model => model.BirthPlace.State, Model.BirthPlace.StateSelectList, "Select", htmlAttributes: new { @class = "form-control", required = "required" })
+            @Html.DropDownListFor(model => model.BirthPlace.State, Model.BirthPlace.StateSelectList, "Select", htmlAttributes: new { @class = "form-control required-checker", required = "required" })
             @Html.ValidationMessageFor(model => model.BirthPlace.State, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-4">
             @Html.LabelFor(model => model.BirthPlace.Country, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.DropDownListFor(model => model.BirthPlace.Country, Model.BirthPlace.CountrySelectList, "Select a country", htmlAttributes: new { @class = "form-control", required = "required" })
+            @Html.DropDownListFor(model => model.BirthPlace.Country, Model.BirthPlace.CountrySelectList, "Select a country", htmlAttributes: new { @class = "form-control required-checker", required = "required" })
             @Html.ValidationMessageFor(model => model.BirthPlace.Country, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -71,18 +71,18 @@
         <div class="col-md-3 form-group">
             @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label required-marker" })
             <br />
-            @Html.RadioButtonFor(model => model.Gender, "Male") Male
-            @Html.RadioButtonFor(model => model.Gender, "Female") Female
+            @Html.RadioButtonFor(model => model.Gender, "Male", new { @class = "" }) Male
+            @Html.RadioButtonFor(model => model.Gender, "Female", new { @class = "" }) Female
             @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-5 form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email", required = "required" } })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control required-checker", @placeholder = "Email", required = "required" } })
             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-4 form-group">
             @Html.LabelFor(model => model.PhoneInfo.PhoneNumber, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "425-867-5309", required = "required" } })
+            @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control required-checker", @placeholder = "425-867-5309", required = "required" } })
             @Html.ValidationMessageFor(model => model.PhoneInfo.PhoneNumber, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -539,31 +539,46 @@
         <!-- DISPLAY SELECTED RACE(S) -->
         <div class="col-md-3 form-group">
             <p><strong>Student Race:</strong></p>
-            <ul id="studentRaceList">
+            <ul id="studentRaceList" class="required-checker">
                 <!-- This filled out by jquery and race Selection -->
             </ul>
         </div>
     </div>
 
 }
-    <!-- TRIBAL ENROLLMENT -->
+
+
+<!-- TRIBAL ENROLLMENT -->
+<div id="native-tribal-wrapper" class="">
+    <h4 class="bg-info">
+        Tribal Enrollment
+        <span data-toggle="tooltip" data-placement="right" title="This form serves as tthe official recrod of the eligibility determination for each individual
+                        child included in the student count. You are not required to complete or submit this form. However, if you choose not to submit this form, your
+                        child cannot be counted for funding under the pgoram." class="user-hint">
+            <i class="fas fa-info-circle"></i>
+        </span>
+    </h4>
     <div id="native-tribal-information" class="">
-
+        <!-- load with jquery -->
     </div>
+</div>
 
 
-    <!-- **********RACE AND ETHNICITY END********** -->
 
-    <div class="form-row">
-        <div class="pull-right">
-            <button class="btn btn-primary btn-lg btn-success" type="submit">
-                Continue
-                <i class="fas fa-caret-right"></i>
-            </button>
-        </div>
+<!-- **********RACE AND ETHNICITY END********** -->
+<div class="form-row">
+    <div class="pull-right">
+        <button class="btn btn-primary btn-lg btn-success" type="submit">
+            Continue
+            <i class="fas fa-caret-right"></i>
+        </button>
     </div>
+</div>
 
-    <script type="text/javascript">
+
+
+<!-- CUSTOM PERSONAL FORM JS -->
+<script type="text/javascript">
 
         var nativeTribalCounter = 0;
 
@@ -637,4 +652,4 @@
                 $("#native-tribal-information").hide();
             }
         }
-    </script>
+</script>

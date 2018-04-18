@@ -78,36 +78,36 @@
         <div class="row">
             <div class="form-group col-md-6">
                 <div class="form-group col-md-6">
-                    @Html.LabelFor(model => model.SchoolInfo.IsExpelledOrSuspended, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.SchoolInfo.IsExpelledOrSuspended, htmlAttributes: new { @class = "control-label required-marker" })
                     <br />
                     @Html.RadioButtonFor(model => model.SchoolInfo.IsExpelledOrSuspended, true) Yes
                     @Html.RadioButtonFor(model => model.SchoolInfo.IsExpelledOrSuspended, false) No
                 </div>
                 <div class="form-group col-md-6">
-                    @Html.LabelFor(model => model.SchoolInfo.LastYearAttended, htmlAttributes: new { @class = "control-label" })
+                    @Html.LabelFor(model => model.SchoolInfo.LastYearAttended, htmlAttributes: new { @class = "control-label required-marker" })
                     @Html.TextBoxFor(model => model.SchoolInfo.LastYearAttended, "{0:#.#}", htmlAttributes: new { @class = "form-control", @placeholder = "Year attended" })
                 </div>
             </div>
             <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.SchoolInfo.CurrentGrade, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.SchoolInfo.CurrentGrade, htmlAttributes: new { @class = "control-label required-marker" })
                 @Html.TextBoxFor(model => model.SchoolInfo.CurrentGrade,"{0:#.#}" ,htmlAttributes: new { @class = "form-control", @placeholder = "Current grade" })
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "control-label required-marker" })
                 @Html.TextAreaFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "form-control", @rows = 3, @placeholder = "Student opinions..." })
             </div>
             <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "control-label required-marker" })
                 @Html.TextAreaFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "form-control", @rows = 3, @placeholder = "Student performance..." })
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "control-label required-marker" })
                 @Html.TextAreaFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "form-control", @rows = 4, @placeholder = "Strengths and improvements..." })
             </div>
             <div class="form-group col-md-6">
@@ -123,27 +123,27 @@
         <div class="col-md-6">
             <h4 class="bg-info">Prior Education</h4>
             <div class="form-group">
-                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker" })
                 <br />
                 @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, true) Yes
                 @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, false) No
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "control-label required-marker" })
                 <br />
                 @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, true) Yes
                 @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, false) No
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker" })
                 @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "form-control", @placeholder = "Month(s)" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker" })
                 @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "form-control", @placeholder = "Language spoken" })
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation, htmlAttributes: new { @class = "control-label required-marker" })
                 @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation, htmlAttributes: new { @class = "form-control", @placeholder = "01/01/2000" })
             </div>
 
@@ -152,7 +152,8 @@
 
         <!-- SPECIAL PROGRAMS -->
         <div class="col-md-6">
-            <h4 class="bg-info">Did the student participate in any of the following programs?</h4>
+            <h4 class="bg-info">Special programs</h4>
+            <h5 class="required-marker">Did the student participate in any of the following programs?</h5>
             <small>(Check all that apply)</small>
 
             <br />
@@ -185,7 +186,7 @@
             @{if (Model.SchoolInfo.PreviousSchoolViolation == null)
                 {
                 <div class="">
-                    <h4>Has the student had a school violation?</h4>
+                    <h4 class="required-marker">Has the student had a school violation?</h4>
                     <button class="btn btn-primary" onclick="loadViolationInfo()">Yes, add violation</button>
                     <button class="btn " value="" onclick="hideTarget('violation-container')">No</button>
                 </div>
