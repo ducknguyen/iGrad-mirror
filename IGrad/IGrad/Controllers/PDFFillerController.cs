@@ -1162,44 +1162,47 @@ namespace IGrad.Controllers
             }
 
             #endregion
-
-            if(user.SchoolInfo.PreviousSchoolViolation.hasSexViolation ||
-                user.SchoolInfo.PreviousSchoolViolation.hasCriminalViolation ||
-                user.SchoolInfo.PreviousSchoolViolation.hasViolentTendicies)
+            if(user.SchoolInfo.PreviousSchoolViolation != null)
             {
-                PdfCheckBoxField hasViolentDrugSexBehavior = (PdfCheckBoxField)(document.AcroForm.Fields["hasViolentDrugSexBehavior"]);
-                hasViolentDrugSexBehavior.Checked = true;
+                if (user.SchoolInfo.PreviousSchoolViolation.hasSexViolation ||
+               user.SchoolInfo.PreviousSchoolViolation.hasCriminalViolation ||
+               user.SchoolInfo.PreviousSchoolViolation.hasViolentTendicies)
+                {
+                    PdfCheckBoxField hasViolentDrugSexBehavior = (PdfCheckBoxField)(document.AcroForm.Fields["hasViolentDrugSexBehavior"]);
+                    hasViolentDrugSexBehavior.Checked = true;
 
-                string explainHistoryOfViolentDrugSexBehavior = "";
-                PdfTextField HistoryOfViolentDrugSexBehavior = (PdfTextField)(document.AcroForm.Fields["HistoryOfViolentDrugSexBehavior"]);
-                if(user.SchoolInfo.PreviousSchoolViolation.hasSexViolation)
-                {
-                    if (!string.IsNullOrEmpty(user.SchoolInfo.PreviousSchoolViolation.explainSexViolation))
+                    string explainHistoryOfViolentDrugSexBehavior = "";
+                    PdfTextField HistoryOfViolentDrugSexBehavior = (PdfTextField)(document.AcroForm.Fields["HistoryOfViolentDrugSexBehavior"]);
+                    if (user.SchoolInfo.PreviousSchoolViolation.hasSexViolation)
                     {
-                        explainHistoryOfViolentDrugSexBehavior = user.SchoolInfo.PreviousSchoolViolation.explainSexViolation + ". ";
+                        if (!string.IsNullOrEmpty(user.SchoolInfo.PreviousSchoolViolation.explainSexViolation))
+                        {
+                            explainHistoryOfViolentDrugSexBehavior = user.SchoolInfo.PreviousSchoolViolation.explainSexViolation + ". ";
+                        }
                     }
-                }
-                if (user.SchoolInfo.PreviousSchoolViolation.hasCriminalViolation)
-                {
-                    if (!string.IsNullOrEmpty(user.SchoolInfo.PreviousSchoolViolation.explainCriminalViolation))
+                    if (user.SchoolInfo.PreviousSchoolViolation.hasCriminalViolation)
                     {
-                        explainHistoryOfViolentDrugSexBehavior = user.SchoolInfo.PreviousSchoolViolation.explainCriminalViolation + ". ";
+                        if (!string.IsNullOrEmpty(user.SchoolInfo.PreviousSchoolViolation.explainCriminalViolation))
+                        {
+                            explainHistoryOfViolentDrugSexBehavior = user.SchoolInfo.PreviousSchoolViolation.explainCriminalViolation + ". ";
+                        }
                     }
-                }
-                if (user.SchoolInfo.PreviousSchoolViolation.hasViolentTendicies)
-                {
-                    if (!string.IsNullOrEmpty(user.SchoolInfo.PreviousSchoolViolation.explainViolence))
+                    if (user.SchoolInfo.PreviousSchoolViolation.hasViolentTendicies)
                     {
-                        explainHistoryOfViolentDrugSexBehavior = user.SchoolInfo.PreviousSchoolViolation.explainViolence + ". ";
+                        if (!string.IsNullOrEmpty(user.SchoolInfo.PreviousSchoolViolation.explainViolence))
+                        {
+                            explainHistoryOfViolentDrugSexBehavior = user.SchoolInfo.PreviousSchoolViolation.explainViolence + ". ";
+                        }
                     }
+                    HistoryOfViolentDrugSexBehavior.Value = new PdfString(explainHistoryOfViolentDrugSexBehavior);
                 }
-                HistoryOfViolentDrugSexBehavior.Value = new PdfString(explainHistoryOfViolentDrugSexBehavior);
+                else
+                {
+                    PdfCheckBoxField noViolentDrugSexBehavior = (PdfCheckBoxField)(document.AcroForm.Fields["noViolentDrugSexBehavior"]);
+                    noViolentDrugSexBehavior.Checked = true;
+                }
             }
-            else
-            {
-                PdfCheckBoxField noViolentDrugSexBehavior = (PdfCheckBoxField)(document.AcroForm.Fields["noViolentDrugSexBehavior"]);
-                noViolentDrugSexBehavior.Checked = true;
-            }
+           
 
             if (!string.IsNullOrEmpty(this.user.SchoolInfo.StrengthAndWeakness))
             {
@@ -1749,7 +1752,7 @@ namespace IGrad.Controllers
                     firstSiblingSchool.Value = new PdfString(sibling.School.ToString());
 
                 }
-                if (user.Siblings[1] != null)
+                if (user.Siblings.Count > 1)
                 {
                     Sibling secondSibling = user.Siblings[1];
 
