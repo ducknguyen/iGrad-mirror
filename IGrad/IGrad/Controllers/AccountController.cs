@@ -321,7 +321,7 @@ namespace IGrad.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, bool isAdmin = false)
         {
             XmlDocument doc = new XmlDocument();
             //doc.Load("books.xml");
@@ -392,7 +392,14 @@ namespace IGrad.Controllers
                         _userModel.LastUpdateDate = DateTime.Now;
                         _userModel.role = new Roles();
 
-                        _userModel.role.isUser = true;
+                        if (!isAdmin)
+                        {
+                            _userModel.role.isUser = true;
+                        }
+                        else
+                        {
+                            _userModel.role.isAdmin = true;
+                        }
 
                         // now add the form info
                         db.Users.Add(_userModel);
@@ -411,7 +418,10 @@ namespace IGrad.Controllers
                             }
                         }
                     }
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    if (!isAdmin)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    }
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -419,7 +429,14 @@ namespace IGrad.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    if (!isAdmin)
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
+                    else if(isAdmin)
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
                 }
                 AddErrors(result);
             }
