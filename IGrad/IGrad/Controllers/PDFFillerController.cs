@@ -1149,6 +1149,10 @@ namespace IGrad.Controllers
                             violationExplanation = violationExplanation + string.Format(" Weapon Violation on {0},", this.user.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation);
                         }
                     }
+                    
+                    PdfTextField ExplainDisciplinary = (PdfTextField)(document.AcroForm.Fields["ExplainDisciplinary"]);
+                    ExplainDisciplinary.Value = new PdfString(violationExplanation);
+
                 }
                 else
                 {
@@ -1159,26 +1163,65 @@ namespace IGrad.Controllers
 
             #endregion
 
+            if(user.SchoolInfo.PreviousSchoolViolation.hasSexViolation ||
+                user.SchoolInfo.PreviousSchoolViolation.hasCriminalViolation ||
+                user.SchoolInfo.PreviousSchoolViolation.hasViolentTendicies)
+            {
+                PdfCheckBoxField hasViolentDrugSexBehavior = (PdfCheckBoxField)(document.AcroForm.Fields["hasViolentDrugSexBehavior"]);
+                hasViolentDrugSexBehavior.Checked = true;
+
+                string explainHistoryOfViolentDrugSexBehavior = "";
+                PdfTextField HistoryOfViolentDrugSexBehavior = (PdfTextField)(document.AcroForm.Fields["HistoryOfViolentDrugSexBehavior"]);
+                if(user.SchoolInfo.PreviousSchoolViolation.hasSexViolation)
+                {
+                    if (!string.IsNullOrEmpty(user.SchoolInfo.PreviousSchoolViolation.explainSexViolation))
+                    {
+                        explainHistoryOfViolentDrugSexBehavior = user.SchoolInfo.PreviousSchoolViolation.explainSexViolation + ". ";
+                    }
+                }
+                if (user.SchoolInfo.PreviousSchoolViolation.hasCriminalViolation)
+                {
+                    if (!string.IsNullOrEmpty(user.SchoolInfo.PreviousSchoolViolation.explainCriminalViolation))
+                    {
+                        explainHistoryOfViolentDrugSexBehavior = user.SchoolInfo.PreviousSchoolViolation.explainCriminalViolation + ". ";
+                    }
+                }
+                if (user.SchoolInfo.PreviousSchoolViolation.hasViolentTendicies)
+                {
+                    if (!string.IsNullOrEmpty(user.SchoolInfo.PreviousSchoolViolation.explainViolence))
+                    {
+                        explainHistoryOfViolentDrugSexBehavior = user.SchoolInfo.PreviousSchoolViolation.explainViolence + ". ";
+                    }
+                }
+                HistoryOfViolentDrugSexBehavior.Value = new PdfString(explainHistoryOfViolentDrugSexBehavior);
+            }
+            else
+            {
+                PdfCheckBoxField noViolentDrugSexBehavior = (PdfCheckBoxField)(document.AcroForm.Fields["noViolentDrugSexBehavior"]);
+                noViolentDrugSexBehavior.Checked = true;
+            }
+
             if (!string.IsNullOrEmpty(this.user.SchoolInfo.StrengthAndWeakness))
             {
                 PdfTextField BriefChildStrengthWeak = (PdfTextField)(document.AcroForm.Fields["BriefChildStrengthWeak"]);
                 BriefChildStrengthWeak.Value = new PdfString(this.user.SchoolInfo.StrengthAndWeakness);
             }
 
-
-            if (this.user.Guardians.Count >= 1)
+            if(!string.IsNullOrEmpty(user.SchoolInfo.ParentAdditionalFeedbackInfo))
             {
-                PdfSignatureField parentSignature = (PdfSignatureField)(document.AcroForm.Fields["parentSignature"]);
-                parentSignature.Value = new PdfString(this.user.Guardians[0].Name.FName + " " + this.user.Guardians[0].Name.LName);
-
-                PdfTextField signDate = (PdfTextField)(document.AcroForm.Fields["signedDate"]);
-                signDate.Value = new PdfString(DateTime.Now.ToString("yyyy-MM-dd"));
+                PdfTextField parentAdditionalInfo = (PdfTextField)(document.AcroForm.Fields["AdditionalInfo"]);
+                parentAdditionalInfo.Value = new PdfString(user.SchoolInfo.ParentAdditionalFeedbackInfo);
             }
 
-            document.SecuritySettings.PermitFormsFill = false;
-            document.SecuritySettings.PermitModifyDocument = false;
-            document.SecuritySettings.PermitFullQualityPrint = true;
-            document.SecuritySettings.PermitPrint = true;
+
+            //if (this.user.Guardians.Count >= 1)
+            //{
+            //    PdfSignatureField parentSignature = (PdfSignatureField)(document.AcroForm.Fields["parentSignature"]);
+            //    parentSignature.Value = new PdfString(this.user.Guardians[0].Name.FName + " " + this.user.Guardians[0].Name.LName);
+
+            //    PdfTextField signDate = (PdfTextField)(document.AcroForm.Fields["signedDate"]);
+            //    signDate.Value = new PdfString(DateTime.Now.ToString("yyyy-MM-dd"));
+            //}
 
             return writeDocument(document);
         }
