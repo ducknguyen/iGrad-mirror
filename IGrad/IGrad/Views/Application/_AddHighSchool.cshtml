@@ -1,6 +1,6 @@
 ﻿@model IGrad.Models.User.HighSchoolInfo
 
-@using (Ajax.BeginForm("SubmitHighSchoolInfoPartial", "Application", new AjaxOptions()
+@using (Ajax.BeginForm("SubmitHighSchoolInfoPartial", "Application",null, new AjaxOptions()
 {
     HttpMethod = "Post",
     UpdateTargetId = "highschool-info",
