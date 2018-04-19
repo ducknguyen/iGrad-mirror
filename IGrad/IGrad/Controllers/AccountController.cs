@@ -418,7 +418,10 @@ namespace IGrad.Controllers
                             }
                         }
                     }
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    if (!isAdmin)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    }
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
