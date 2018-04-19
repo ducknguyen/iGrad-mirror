@@ -24,6 +24,10 @@ ul li {
     background-color: #5bc0de;
     padding: 8px;
 }
+.tooltip-inner {
+    max-width: 400px;
+    width: 400px;
+}
 /* ---------------------------------------------------
     NAVBAR 
 ----------------------------------------------------- */

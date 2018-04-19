@@ -23,5 +23,7 @@ namespace IGrad.Models.User
         public bool isLastHighSchoolAttended { get; set; }
         [DisplayName("Last Grade of Attendance")]
         public int HighSchoolGrade { get; set; }
+        [DisplayName("")]
+        public bool isLastAttendedExist { get; set; }
     }
 }

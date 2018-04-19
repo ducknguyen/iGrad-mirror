@@ -9,22 +9,22 @@
             <th>City</th>
             <th>Grade</th>
             <th>Last attended</th>
-            <th class="text-center">Edit</th>
+            <th class="text-center">Remove</th>
         </tr>
         @foreach (var hsi in Model)
         {
-            <tr id="highSchool_@hsi.fieldId">
-                <td>@hsi.HighSchoolYear</td>
-                <td>@hsi.HighSchoolName</td>
-                <td>@hsi.HighSchoolCity</td>
-                <td>@hsi.HighSchoolGrade</td>
-                <td>@(hsi.isLastHighSchoolAttended ? "Yes" : "No")</td>
-                <td class="text-center">
-                    <button class="btn btn-danger" type="submit" onclick="deleteHighSchoolRecord(@hsi.fieldId)">
-                        <i class="fas fa-minus-square"></i>
-                    </button>
-                </td>
-            </tr>
+        <tr id="highSchool_@hsi.fieldId">
+            <td>@hsi.HighSchoolYear</td>
+            <td>@hsi.HighSchoolName</td>
+            <td>@hsi.HighSchoolCity</td>
+            <td>@hsi.HighSchoolGrade</td>
+            <td id="@(hsi.isLastHighSchoolAttended ? "last-attended" : "\"\"")">@(hsi.isLastHighSchoolAttended ? "Yes" : "No")</td>
+            <td class="text-center">
+                <button class="btn btn-danger" type="submit" onclick="deleteHighSchoolRecord(@hsi.fieldId)">
+                    <i class="fas fa-minus-square"></i>
+                </button>
+            </td>
+        </tr>
         }
     </table>
 }
