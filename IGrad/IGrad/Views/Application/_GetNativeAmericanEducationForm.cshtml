@@ -16,13 +16,13 @@
     <!-- FULL NAME AND NAME OF TRIBE/BAND  -->
     <div class="row">
         <div class="col-md-6 form-group">
-            @Html.LabelFor(model => model.NameOfIndividualWithTribalEnrollment, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.NameOfIndividualWithTribalEnrollment, new { htmlAttributes = new { @class = "form-control", @placeholder = "Full name" } })
+            @Html.LabelFor(model => model.NameOfIndividualWithTribalEnrollment, htmlAttributes: new { @class = "control-label" })
             @Html.ValidationMessageFor(model => model.NameOfIndividualWithTribalEnrollment, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-6 form-group">
-            @Html.LabelFor(model => model.NameOfTribeOrBandOfMembership, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.NameOfTribeOrBandOfMembership, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name of tribe/band" } })
+            @Html.LabelFor(model => model.NameOfTribeOrBandOfMembership, htmlAttributes: new { @class = "control-label" })
             @Html.ValidationMessageFor(model => model.NameOfTribeOrBandOfMembership, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -33,18 +33,18 @@
             <p>The individual with tribal membership is the:</p>
         </div>
         <div class="col-md-2 form-group">
-            @Html.LabelFor(model => model.TribalMembershipIsChilds, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.TribalMembershipIsChilds)
+            @Html.LabelFor(model => model.TribalMembershipIsChilds, htmlAttributes: new { @class = "control-label" })
             @Html.ValidationMessageFor(model => model.TribalMembershipIsChilds, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-2 form-group">
-            @Html.LabelFor(model => model.TribalMembershipIsChildsParent, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.TribalMembershipIsChildsParent)
+            @Html.LabelFor(model => model.TribalMembershipIsChildsParent, htmlAttributes: new { @class = "control-label" })
             @Html.ValidationMessageFor(model => model.TribalMembershipIsChildsParent, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-2 form-group">
-            @Html.LabelFor(model => model.TribalMembershipIsChildsGrandparent, htmlAttributes: new { @class = "control-label" })
             @Html.EditorFor(model => model.TribalMembershipIsChildsGrandparent)
+            @Html.LabelFor(model => model.TribalMembershipIsChildsGrandparent, htmlAttributes: new { @class = "control-label" })
             @Html.ValidationMessageFor(model => model.TribalMembershipIsChildsGrandparent, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -57,32 +57,24 @@
         </div>
 
         <div class="col-md-3 form-group">
+            @Html.EditorFor(model => model.TribeOrBandIsFederallyRecognized)
             @Html.LabelFor(model => model.TribeOrBandIsFederallyRecognized, htmlAttributes: new { @class = "control-label" })
-            <div class="checkbox">
-                @Html.EditorFor(model => model.TribeOrBandIsFederallyRecognized)
-                @Html.ValidationMessageFor(model => model.TribeOrBandIsFederallyRecognized, "", new { @class = "text-danger" })
-            </div>
+            @Html.ValidationMessageFor(model => model.TribeOrBandIsFederallyRecognized, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-3 form-group">
+            @Html.EditorFor(model => model.TribeOrBandIsStateRecognized)
             @Html.LabelFor(model => model.TribeOrBandIsStateRecognized, htmlAttributes: new { @class = "control-label" })
-            <div class="checkbox">
-                @Html.EditorFor(model => model.TribeOrBandIsStateRecognized)
-                @Html.ValidationMessageFor(model => model.TribeOrBandIsStateRecognized, "", new { @class = "text-danger" })
-            </div>
+            @Html.ValidationMessageFor(model => model.TribeOrBandIsStateRecognized, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-3 form-group">
+            @Html.EditorFor(model => model.TribeOrBandIsTerminatedTribe)
             @Html.LabelFor(model => model.TribeOrBandIsTerminatedTribe, htmlAttributes: new { @class = "control-label" })
-            <div class="checkbox">
-                @Html.EditorFor(model => model.TribeOrBandIsTerminatedTribe)
-                @Html.ValidationMessageFor(model => model.TribeOrBandIsTerminatedTribe, "", new { @class = "text-danger" })
-            </div>
+            @Html.ValidationMessageFor(model => model.TribeOrBandIsTerminatedTribe, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-3 form-group">
+            @Html.EditorFor(model => model.TribeOrBandIsOfIndianGroupEducationGrant)
             @Html.LabelFor(model => model.TribeOrBandIsOfIndianGroupEducationGrant, htmlAttributes: new { @class = "control-label" })
-            <div class="checkbox">
-                @Html.EditorFor(model => model.TribeOrBandIsOfIndianGroupEducationGrant)
                 @Html.ValidationMessageFor(model => model.TribeOrBandIsOfIndianGroupEducationGrant, "", new { @class = "text-danger" })
-            </div>
         </div>
     </div>
 

@@ -9,7 +9,7 @@
 <h3>Finishing Up!</h3>
 <hr>
 <div class="container" id="optional-assistance-container">
-    <h4>Additional IGrad Assistance</h4>
+    <h4><strong>(Optional)</strong> Additional IGrad Assistance</h4>
     <input type="button" value="Show" class="btn btn-default" onclick="showTarget('optional-assistance-form')" />
     <input type="button" value="Hide" class="btn btn-default" onclick="hideTarget('optional-assistance-form')" />
     <div class="container" id="optional-assistance-form">
@@ -18,7 +18,11 @@
 </div>
 <hr />
 <div class="row form-group">
+    <span class="danger btn-danger">WARNING:  This button will download all of your personal information on the forms to the computer you're on.</span>
+    <br />
+    <span class="danger btn-danger">Please do not download these files to a public machine.</span>
+    <br />
     <span class="btn btn-lg  btn-success">
-        @Html.ActionLink("Generate PDF", "GetFilledPDF", "Application")
+        @Html.ActionLink("Download Complete Forms To My Computer", "GetFilledPDF", "Application")
     </span>
 </div>

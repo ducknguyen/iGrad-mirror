@@ -144,7 +144,7 @@
             </div>
             <div class="form-group">
                 @Html.LabelFor(model => model.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation, htmlAttributes: new { @class = "form-control", @placeholder = "01/01/2000" })
+                @Html.EditorFor(model => model.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation, new { htmlAttributes = new { @class = "form-control datepicker", @placeholder = "01/01/2000" } } )
             </div>
 
 

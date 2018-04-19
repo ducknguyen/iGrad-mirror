@@ -65,6 +65,7 @@ namespace IGrad.Controllers
                     .Include(u => u.BirthPlace)
                     .Include(u => u.ConsideredRaceAndEthnicity)
                     .Include(u => u.NativeAmericanEducation)
+                    .Include(u => u.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment)
                     .Include(u => u.PhoneInfo)
                     .FirstOrDefault<UserModel>();
             }
@@ -190,6 +191,7 @@ namespace IGrad.Controllers
                     .Include(u => u.QualifiedOrEnrolledInProgam)
                     .Include(u => u.SchoolInfo.HighSchoolInformation)
                     .Include(u => u.SchoolInfo.PreviousSchoolViolation)
+                    .Include(u => u.SchoolInfo.PriorEducation)
                     .FirstOrDefault();
             }
             catch (Exception ex)
@@ -755,6 +757,7 @@ namespace IGrad.Controllers
                 //get user
                 var data = db.Users
                     .Include(u => u.NativeAmericanEducation)
+                    .Include(u => u.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment)
                     .Where(u => u.UserID == UserID)
                     .FirstOrDefault<UserModel>();
 
