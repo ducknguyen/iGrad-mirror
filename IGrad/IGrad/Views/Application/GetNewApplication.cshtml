@@ -644,11 +644,11 @@
         function NativeTribalToggle(nativeTribalCounter) {
             // show/hide native-tribal area
             if (nativeTribalCounter > 0) {
-                $("#native-tribal-information").show();
+                $("#native-tribal-wrapper").show();
                 $("#native-tribal-information").load('@Url.Action("GetNativeAmericanEducationForm", "Application")');
             }
             else {
-                $("#native-tribal-information").hide();
+                $("#native-tribal-wrapper").hide();
             }
         }
 </script>
