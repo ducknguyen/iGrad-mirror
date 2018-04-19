@@ -165,6 +165,12 @@ namespace IGrad.Controllers
         }
 
         [Authorize]
+        public ActionResult AddAdmin()
+        {
+            return View();
+        }
+
+        [Authorize]
         public ActionResult Details(Guid? userID)
         {
             if (userID == null)
