@@ -21,7 +21,7 @@ namespace IGrad.Models.User.OptionalOpportunities
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DisplayName("Due Date of Pregnancy")]
-        public DateTime PregnantStudentDueDate { get; set; }
+        public DateTime ? PregnantStudentDueDate { get; set; }
         [DisplayName("Student has Children")]
         public bool StudentIsParenting { get; set; }
         [DisplayName("Ages of Children")]

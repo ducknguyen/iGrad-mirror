@@ -1,249 +1,227 @@
 ﻿USE [iGrad]
 GO
 
+-- DROP KEYS
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'User')
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.SchoolInfoes_SchoolInfo_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.Retaineds_Retainment_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.RaceEthnicities_ConsideredRaceAndEthnicity_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.QualifiedOrEnrolledInPrograms_QualifiedOrEnrolledInProgam_fieldId]
-GO
-
+ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.HomelessAssistancePreferences_HomelessAssistance_fieldId]
+ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.OptionalAssistances_OptionalOpportunities_fieldId]
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.Phones_PhoneInfo_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.ParentPlans_StudentsParentingPlan_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.Names_Name_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.LivesWiths_LivesWith_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.LifeEvents_LifeEvent_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.LanguageHistories_LanguageHisory_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.Healths_HealthInfo_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.ChildCares_StudentChildCare_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.Celebrates_Celebrate_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.BirthPlaceLocations_BirthPlace_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.Addresses_ResidentAddress_fieldId]
-GO
-
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.Addresses_MailingAddress_fieldId]
 GO
 
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Siblings')
 ALTER TABLE [dbo].[Siblings] DROP CONSTRAINT [FK_dbo.Siblings_dbo.User_UserID]
 GO
 
-ALTER TABLE [dbo].[SchoolInfoes] DROP CONSTRAINT [FK_dbo.SchoolInfoes_dbo.Violations_PreviousSchoolViolation_fieldId]
-GO
 
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'SchoolInfoes')
+ALTER TABLE [dbo].[SchoolInfoes] DROP CONSTRAINT [FK_dbo.SchoolInfoes_dbo.Violations_PreviousSchoolViolation_fieldId]
 ALTER TABLE [dbo].[SchoolInfoes] DROP CONSTRAINT [FK_dbo.SchoolInfoes_dbo.PriorEducations_PriorEducation_fieldId]
 GO
 
-ALTER TABLE [dbo].[PreSchools] DROP CONSTRAINT [FK_dbo.PreSchools_dbo.User_UserID]
-GO
 
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'PreSchools')
+ALTER TABLE [dbo].[PreSchools] DROP CONSTRAINT [FK_dbo.PreSchools_dbo.User_UserID]
 ALTER TABLE [dbo].[PreSchools] DROP CONSTRAINT [FK_dbo.PreSchools_dbo.Addresses_Address_fieldId]
 GO
 
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'IncomeTables')
 ALTER TABLE [dbo].[IncomeTables] DROP CONSTRAINT [FK_dbo.IncomeTables_dbo.FamilyIncomes_FamilyIncome_id]
 GO
 
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'HighSchoolInfoes')
 ALTER TABLE [dbo].[HighSchoolInfoes] DROP CONSTRAINT [FK_dbo.HighSchoolInfoes_dbo.SchoolInfoes_SchoolInfo_fieldId]
 GO
 
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Guardians')
 ALTER TABLE [dbo].[Guardians] DROP CONSTRAINT [FK_dbo.Guardians_dbo.User_UserID]
-GO
-
 ALTER TABLE [dbo].[Guardians] DROP CONSTRAINT [FK_dbo.Guardians_dbo.Phones_Phone_fieldId]
-GO
-
 ALTER TABLE [dbo].[Guardians] DROP CONSTRAINT [FK_dbo.Guardians_dbo.Names_Name_fieldId]
-GO
-
 ALTER TABLE [dbo].[Guardians] DROP CONSTRAINT [FK_dbo.Guardians_dbo.Addresses_Address_fieldId]
 GO
 
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'EmergencyContacts')
 ALTER TABLE [dbo].[EmergencyContacts] DROP CONSTRAINT [FK_dbo.EmergencyContacts_dbo.User_UserID]
-GO
-
 ALTER TABLE [dbo].[EmergencyContacts] DROP CONSTRAINT [FK_dbo.EmergencyContacts_dbo.Phones_PhoneNumber_fieldId]
-GO
-
 ALTER TABLE [dbo].[EmergencyContacts] DROP CONSTRAINT [FK_dbo.EmergencyContacts_dbo.Names_Name_fieldId]
 GO
 
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'ChildCares')
 ALTER TABLE [dbo].[ChildCares] DROP CONSTRAINT [FK_dbo.ChildCares_dbo.Addresses_ProviderAddress_fieldId]
 GO
 
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'AspNetUserRoles')
 ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetUsers_UserId]
-GO
-
 ALTER TABLE [dbo].[AspNetUserRoles] DROP CONSTRAINT [FK_dbo.AspNetUserRoles_dbo.AspNetRoles_RoleId]
 GO
 
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'AspNetUserLogins')
 ALTER TABLE [dbo].[AspNetUserLogins] DROP CONSTRAINT [FK_dbo.AspNetUserLogins_dbo.AspNetUsers_UserId]
 GO
 
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'AspNetUserClaims')
 ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId]
 GO
 
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'NativeAmericanEducations')
 ALTER TABLE [dbo].[NativeAmericanEducations] DROP CONSTRAINT [FK_dbo.NativeAmericanEducations_dbo.Addresses_AddressOfTribeMaintainingEnrollment_fieldId]
 GO
 
-
-
-/****** Object:  Table [dbo].[Violations]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Violations')
 DROP TABLE [dbo].[Violations]
 GO
 
-/****** Object:  Table [dbo].[User]    Script Date: 3/18/2018 6:30:53 PM ******/
-DROP TABLE [dbo].[User]
-GO
-
-/****** Object:  Table [dbo].[Siblings]    Script Date: 3/18/2018 6:30:53 PM ******/
-DROP TABLE [dbo].[Siblings]
-GO
-
-/****** Object:  Table [dbo].[SchoolInfoes]    Script Date: 3/18/2018 6:30:53 PM ******/
-DROP TABLE [dbo].[SchoolInfoes]
-GO
-
-/****** Object:  Table [dbo].[Retaineds]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Retaineds')
 DROP TABLE [dbo].[Retaineds]
 GO
 
-/****** Object:  Table [dbo].[RaceEthnicities]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'RaceEthnicities')
 DROP TABLE [dbo].[RaceEthnicities]
 GO
 
-/****** Object:  Table [dbo].[QualifiedOrEnrolledInPrograms]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'QualifiedOrEnrolledInPrograms')
 DROP TABLE [dbo].[QualifiedOrEnrolledInPrograms]
 GO
 
-/****** Object:  Table [dbo].[PriorEducations]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'PriorEducations')
 DROP TABLE [dbo].[PriorEducations]
 GO
 
-/****** Object:  Table [dbo].[PreSchools]    Script Date: 3/18/2018 6:30:53 PM ******/
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'PreSchools')
 DROP TABLE [dbo].[PreSchools]
 GO
 
-/****** Object:  Table [dbo].[Phones]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Phones')
 DROP TABLE [dbo].[Phones]
 GO
 
-/****** Object:  Table [dbo].[ParentPlans]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'ParentPlans')
 DROP TABLE [dbo].[ParentPlans]
 GO
 
-/****** Object:  Table [dbo].[Names]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Names')
 DROP TABLE [dbo].[Names]
 GO
 
-/****** Object:  Table [dbo].[LivesWiths]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'LivesWiths')
 DROP TABLE [dbo].[LivesWiths]
 GO
 
-/****** Object:  Table [dbo].[LifeEvents]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'LifeEvents')
 DROP TABLE [dbo].[LifeEvents]
 GO
 
-/****** Object:  Table [dbo].[LanguageHistories]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'LanguageHistories')
 DROP TABLE [dbo].[LanguageHistories]
 GO
 
-/****** Object:  Table [dbo].[IncomeTables]    Script Date: 3/18/2018 6:30:53 PM ******/
-DROP TABLE [dbo].[IncomeTables]
-GO
-
-/****** Object:  Table [dbo].[HighSchoolInfoes]    Script Date: 3/18/2018 6:30:53 PM ******/
-DROP TABLE [dbo].[HighSchoolInfoes]
-GO
-
-/****** Object:  Table [dbo].[Healths]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Healths')
 DROP TABLE [dbo].[Healths]
 GO
 
-/****** Object:  Table [dbo].[Guardians]    Script Date: 3/18/2018 6:30:53 PM ******/
-DROP TABLE [dbo].[Guardians]
-GO
-
-/****** Object:  Table [dbo].[FamilyIncomes]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'FamilyIncomes')
 DROP TABLE [dbo].[FamilyIncomes]
 GO
 
-/****** Object:  Table [dbo].[EmergencyContacts]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'EmergencyContacts')
 DROP TABLE [dbo].[EmergencyContacts]
 GO
 
-/****** Object:  Table [dbo].[ChildCares]    Script Date: 3/18/2018 6:30:53 PM ******/
-DROP TABLE [dbo].[ChildCares]
-GO
-
-/****** Object:  Table [dbo].[Celebrates]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Celebrates')
 DROP TABLE [dbo].[Celebrates]
 GO
 
-/****** Object:  Table [dbo].[BirthPlaceLocations]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'BirthPlaceLocations')
 DROP TABLE [dbo].[BirthPlaceLocations]
 GO
 
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'AspNetUsers')
 DROP TABLE [dbo].[AspNetUsers]
 GO
 
-/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 3/18/2018 6:30:53 PM ******/
-DROP TABLE [dbo].[AspNetUserRoles]
-GO
-
-/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 3/18/2018 6:30:53 PM ******/
-DROP TABLE [dbo].[AspNetUserLogins]
-GO
-
-/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 3/18/2018 6:30:53 PM ******/
-DROP TABLE [dbo].[AspNetUserClaims]
-GO
-
-/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'AspNetRoles')
 DROP TABLE [dbo].[AspNetRoles]
 GO
 
-/****** Object:  Table [dbo].[Addresses]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Addresses')
 DROP TABLE [dbo].[Addresses]
 GO
 
-/****** Object:  Table [dbo].[__MigrationHistory]    Script Date: 3/18/2018 6:30:53 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = '__MigrationHistory')
 DROP TABLE [dbo].[__MigrationHistory]
 GO
 
-DROP TABLE [dbo].[NativeAmericanEducations]
-GO
-
-/****** Object:  Table [dbo].[HomelessAssistancePreferences]    Script Date: 4/13/2018 4:18:47 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'HomelessAssistancePreferences')
 DROP TABLE [dbo].[HomelessAssistancePreferences]
 GO
 
-/****** Object:  Table [dbo].[IGradOpportunities]    Script Date: 4/13/2018 4:34:00 PM ******/
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'OptionalAssistances')
 DROP TABLE [dbo].[OptionalAssistances]
 GO
 
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'User')
+DROP TABLE [dbo].[User]
+GO
 
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Siblings')
+DROP TABLE [dbo].[Siblings]
+GO
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'SchoolInfoes')
+DROP TABLE [dbo].[SchoolInfoes]
+GO
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'PreSchools')
+DROP TABLE [dbo].[PreSchools]
+GO
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'IncomeTables')
+DROP TABLE IncomeTables
+GO
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'HighSchoolInfoes')
+DROP TABLE [dbo].[HighSchoolInfoes]
+GO
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Guardians')
+DROP TABLE [dbo].[Guardians]
+GO
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'EmergencyContacts')
+DROP TABLE [dbo].[EmergencyContacts]
+GO
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'ChildCares')
+DROP TABLE [dbo].[ChildCares]
+GO
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'AspNetUserRoles')
+DROP TABLE [dbo].[AspNetUserRoles]
+GO
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'AspNetUserClaims')
+DROP TABLE [dbo].[AspNetUserClaims]
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'AspNetUserLogins')
+DROP TABLE [dbo].[AspNetUserLogins]
+GO
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'NativeAmericanEducations')
+DROP TABLE [dbo].[NativeAmericanEducations]
+GO

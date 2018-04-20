@@ -1849,7 +1849,7 @@ namespace IGrad.Controllers
             if (user.OptionalOpportunities.StudentIsPregnant)
             {
                 PdfTextField pregnantDueDate = (PdfTextField)(document.AcroForm.Fields["PregnantStudentDueDate"]);
-                pregnantDueDate.Value = new PdfString(user.OptionalOpportunities.PregnantStudentDueDate.ToShortDateString());
+                pregnantDueDate.Value = new PdfString(user.OptionalOpportunities.PregnantStudentDueDate.Value.ToShortDateString());
             }
 
             PdfTextField phoneNumber = (PdfTextField)(document.AcroForm.Fields["PhoneNumber"]);
