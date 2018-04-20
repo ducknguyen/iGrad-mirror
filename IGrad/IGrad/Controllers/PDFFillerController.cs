@@ -400,7 +400,7 @@ namespace IGrad.Controllers
             //Mailing address
 
             PdfTextField mailingAddressStreet = (PdfTextField)(document.AcroForm.Fields["MailingAddressStreet"]);
-            residentAddressStreet.Value = new PdfString(user.MailingAddress.Street);
+            mailingAddressStreet.Value = new PdfString(user.MailingAddress.Street);
 
             PdfTextField mailingAddressApt = (PdfTextField)(document.AcroForm.Fields["MailingAddressApt"]);
             mailingAddressApt.Value = new PdfString(user.MailingAddress.AptNum);

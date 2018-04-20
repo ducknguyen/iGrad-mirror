@@ -184,3 +184,4 @@ C:\Users\jpratt\Documents\GitHub\igrad\iGrad\IGrad\bin\de\PdfSharp.resources.dll
 C:\Users\jpratt\Documents\GitHub\igrad\iGrad\IGrad\bin\de\PdfSharp.Charting.resources.dll
 C:\Users\jpratt\Documents\GitHub\igrad\iGrad\IGrad\obj\Debug\IGrad.dll
 C:\Users\jpratt\Documents\GitHub\igrad\iGrad\IGrad\obj\Debug\IGrad.pdb
+C:\Users\jpratt\Documents\GitHub\igrad\iGrad\IGrad\obj\Debug\IGrad.csprojResolveAssemblyReference.cache
