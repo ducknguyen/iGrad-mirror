@@ -413,14 +413,16 @@ namespace IGrad.Controllers
                 _user = db.Users.Where(u => u.UserID == UserID)
                     .Include(u => u.Guardians)
                     .Include(u => u.Guardians.Select(n => n.Name))
-                    .Include(u => u.Guardians.Select(p => p.Phone))
+                    .Include(u => u.Guardians.Select(p => p.PhoneOne))
+                    .Include(u => u.Guardians.Select(p => p.PhoneTwo))
                     .Include(u => u.Siblings)
                     .Include(u => u.LivesWith)
                     .Include(u => u.ResidentAddress)
                     .Include(u => u.MailingAddress)
                     .Include(u => u.EmergencyContacts)
                     .Include(u => u.EmergencyContacts.Select(n => n.Name))
-                    .Include(u => u.EmergencyContacts.Select(p => p.PhoneNumber))
+                    .Include(u => u.EmergencyContacts.Select(p => p.PhoneOne))
+                    .Include(u => u.EmergencyContacts.Select(p => p.PhoneTwo))
                     .Include(u => u.HomelessAssistance)
                     .FirstOrDefault();
             }
@@ -488,7 +490,8 @@ namespace IGrad.Controllers
         {
             EmergencyContact contact = new EmergencyContact();
             contact.Name = new Name();
-            contact.PhoneNumber = new Phone();
+            contact.PhoneOne = new Phone();
+            contact.PhoneTwo = new Phone();
             return PartialView("_AddEmergencyContact", contact);
         }
         [HttpPost]
@@ -500,7 +503,8 @@ namespace IGrad.Controllers
 
                 var data = db.Users
                        .Include(u => u.EmergencyContacts.Select(n => n.Name))
-                       .Include(u => u.EmergencyContacts.Select(p => p.PhoneNumber))
+                       .Include(u => u.EmergencyContacts.Select(p => p.PhoneOne))
+                       .Include(u => u.EmergencyContacts.Select(p => p.PhoneTwo))
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
 
@@ -511,7 +515,8 @@ namespace IGrad.Controllers
 
                 contact.UserID = UserID;
                 contact.Name.UserID = UserID;
-                contact.PhoneNumber.UserID = UserID;
+                contact.PhoneOne.UserID = UserID;
+                contact.PhoneTwo.UserID = UserID;
                 data.EmergencyContacts.Add(contact);
 
                 db.SaveChanges();
@@ -544,7 +549,8 @@ namespace IGrad.Controllers
         public ActionResult GetAddGuardian()
         {
             Guardian defaultGuardian = new Guardian();
-            defaultGuardian.Phone = new Phone();
+            defaultGuardian.PhoneOne = new Phone();
+            defaultGuardian.PhoneTwo = new Phone();
             defaultGuardian.Name = new Name();
             return PartialView("_AddGuardian", defaultGuardian);
         }
@@ -558,7 +564,8 @@ namespace IGrad.Controllers
                 var data = db.Users
                        .Include(u => u.Guardians)
                        .Include(u => u.Guardians.Select(n => n.Name))
-                       .Include(u => u.Guardians.Select(p => p.Phone))
+                       .Include(u => u.Guardians.Select(p => p.PhoneOne))
+                       .Include(u => u.Guardians.Select(p => p.PhoneTwo))
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
 

@@ -49,14 +49,16 @@ GO
 
 IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Guardians')
 ALTER TABLE [dbo].[Guardians] DROP CONSTRAINT [FK_dbo.Guardians_dbo.User_UserID]
-ALTER TABLE [dbo].[Guardians] DROP CONSTRAINT [FK_dbo.Guardians_dbo.Phones_Phone_fieldId]
+ALTER TABLE [dbo].[Guardians] DROP CONSTRAINT [FK_dbo.Guardians_dbo.Phones_PhoneOne_fieldId]
+ALTER TABLE [dbo].[Guardians] DROP CONSTRAINT [FK_dbo.Guardians_dbo.Phones_PhoneTwo_fieldId]
 ALTER TABLE [dbo].[Guardians] DROP CONSTRAINT [FK_dbo.Guardians_dbo.Names_Name_fieldId]
 ALTER TABLE [dbo].[Guardians] DROP CONSTRAINT [FK_dbo.Guardians_dbo.Addresses_Address_fieldId]
 GO
 
 IF EXISTS (SELECT * FROM sys.tables WHERE name = 'EmergencyContacts')
 ALTER TABLE [dbo].[EmergencyContacts] DROP CONSTRAINT [FK_dbo.EmergencyContacts_dbo.User_UserID]
-ALTER TABLE [dbo].[EmergencyContacts] DROP CONSTRAINT [FK_dbo.EmergencyContacts_dbo.Phones_PhoneNumber_fieldId]
+ALTER TABLE [dbo].[EmergencyContacts] DROP CONSTRAINT [FK_dbo.EmergencyContacts_dbo.Phones_PhoneOne_fieldId]
+ALTER TABLE [dbo].[EmergencyContacts] DROP CONSTRAINT [FK_dbo.EmergencyContacts_dbo.Phones_PhoneTwo_fieldId]
 ALTER TABLE [dbo].[EmergencyContacts] DROP CONSTRAINT [FK_dbo.EmergencyContacts_dbo.Names_Name_fieldId]
 GO
 

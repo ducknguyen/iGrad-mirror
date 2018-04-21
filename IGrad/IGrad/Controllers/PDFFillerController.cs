@@ -38,7 +38,8 @@ namespace IGrad.Controllers
                        .Include(u => u.HealthInfo)
                        .Include(u => u.Guardians)
                        .Include(u => u.Guardians.Select(n => n.Name))
-                       .Include(u => u.Guardians.Select(p => p.Phone))
+                       .Include(u => u.Guardians.Select(p => p.PhoneOne))
+                       .Include(u => u.Guardians.Select(p => p.PhoneTwo))
                        .Include(u => u.Siblings)
                        .Include(u => u.LivesWith)
                        .Include(u => u.LanguageHisory)
@@ -57,7 +58,8 @@ namespace IGrad.Controllers
                        .Include(u => u.StudentChildCare)
                        .Include(u => u.EmergencyContacts)
                        .Include(u => u.EmergencyContacts.Select(n => n.Name))
-                       .Include(u => u.EmergencyContacts.Select(p => p.PhoneNumber))
+                       .Include(u => u.EmergencyContacts.Select(p => p.PhoneOne))
+                       .Include(u => u.EmergencyContacts.Select(p => p.PhoneTwo))
                        .Where(u => u.UserID == userId)
                        .FirstOrDefault<UserModel>();
                 PDFFillerController pdfControl = new PDFFillerController();
@@ -423,7 +425,7 @@ namespace IGrad.Controllers
                 if (i < 2)
                 {
                     PdfTextField guardianWorkPhone = (PdfTextField)(document.AcroForm.Fields["GuardianWorkPhone" + (i + 1)]);
-                    guardianWorkPhone.Value = new PdfString(user.Guardians[i].Phone.PhoneNumber);
+                    guardianWorkPhone.Value = new PdfString(user.Guardians[i].PhoneOne.PhoneNumber);
 
                     PdfTextField guardianEmail = (PdfTextField)(document.AcroForm.Fields["GuardianEmail" + (i + 1)]);
                     guardianEmail.Value = new PdfString(user.Guardians[i].Email);
@@ -698,10 +700,10 @@ namespace IGrad.Controllers
                     ecRelationToStudent.Value = new PdfString(ec.Relationship);
 
                     PdfTextField ecPhoneOne = (PdfTextField)(document.AcroForm.Fields["EmergencyContact" + (i + 1) + "Phone1"]);
-                    ecPhoneOne.Value = new PdfString(ec.PhoneNumber.PhoneNumber);
+                    ecPhoneOne.Value = new PdfString(ec.PhoneOne.PhoneNumber);
 
                      PdfTextField ecPhoneOneType = (PdfTextField)(document.AcroForm.Fields["EmergencyContact" + (i + 1) + "Phone1Type"]);
-                    ecPhoneOneType.Value = new PdfString(ec.PhoneNumber.PhoneType);
+                    ecPhoneOneType.Value = new PdfString(ec.PhoneOne.PhoneType);
                 }
             }
 
@@ -1519,20 +1521,30 @@ namespace IGrad.Controllers
 
             if (this.user.SchoolInfo.HighSchoolInformation != null)
             {
-                string prevHighSchool = "";
+                HighSchoolInfo prevHighSchool;
                 for (int i = 0; i < this.user.SchoolInfo.HighSchoolInformation.Count; i++)
                 {
                     if (this.user.SchoolInfo.HighSchoolInformation[i].isLastHighSchoolAttended)
                     {
-                        prevHighSchool = this.user.SchoolInfo.HighSchoolInformation[i].HighSchoolName;
+                        prevHighSchool = user.SchoolInfo.HighSchoolInformation[i];
+
+                        PdfTextField lastSchool = (PdfTextField)(document.AcroForm.Fields["School Name Previous School"]);
+                        lastSchool.Value = new PdfString(prevHighSchool.HighSchoolName);
+
+                        PdfTextField lastSchoolCity = (PdfTextField)(document.AcroForm.Fields["City"]);
+                        lastSchoolCity.Value = new PdfString(prevHighSchool.HighSchoolCity);
+
+                        PdfTextField lastSchoolState = (PdfTextField)(document.AcroForm.Fields["State"]);
+                        lastSchoolState.Value = new PdfString(prevHighSchool.HighSchoolState);
+
                     }
                 }
 
-                PdfTextField lastSchool = (PdfTextField)(document.AcroForm.Fields["School Name Previous School"]);
-                lastSchool.Value = new PdfString(prevHighSchool);
+               
 
                 PdfTextField grade = (PdfTextField)(document.AcroForm.Fields["Grade"]);
                 grade.Value = new PdfString(this.user.SchoolInfo.CurrentGrade.ToString());
+
             }
 
             if (this.user.ResidentAddress != null)

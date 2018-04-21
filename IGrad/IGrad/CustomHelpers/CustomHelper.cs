@@ -29,5 +29,17 @@ namespace IGrad.CustomHelpers
             }
             return dropDownItems;
         }
+
+        //see E.123 telecom standard
+        public static string GetEmailPlaceholder()
+        {
+            return "example@example.com";
+        }
+
+        //see E.123 telecom standard
+        public static string GetPhoneNumberPlaceholder()
+        {
+            return "(607) 123 4567";
+        }
     }
 }

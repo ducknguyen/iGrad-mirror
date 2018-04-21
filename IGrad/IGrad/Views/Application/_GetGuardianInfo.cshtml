@@ -5,7 +5,8 @@
 <table class="table table-striped table-bordered table-responsive">
     <tr>
         <th>Name</th>
-        <th>Phone Number</th>
+        <th>Phone One</th>
+        <th>Phone Two</th>
         <th>Email</th>
         <th class="text-center">Edit</th>
     </tr>
@@ -13,7 +14,8 @@
         {
         <tr id="guardian_@guardian.fieldId">
             <td>@guardian.Name.FName @guardian.Name.LName</td>
-            <td>@guardian.Phone.PhoneNumber</td>
+            <td>@guardian.PhoneOne.PhoneNumber</td>
+            <td>@guardian.PhoneTwo.PhoneNumber</td>
             <td>@guardian.Email</td>
             <td class="text-center">
                 <button class="btn btn-danger" type="submit" onclick="deleteGuardian(@guardian.fieldId)">

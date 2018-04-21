@@ -33,7 +33,9 @@ namespace IGrad.Models.User
         [DisplayName("Email Address")]
         [RegularExpression(@"^[\w!#$%&'*+\-/=?\^_`{|}~]+(\.[\w!#$%&'*+\-/=?\^_`{|}~]+)*" + "@" + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))$")]
         public string EmailAddress { get; set; }
-        public Phone PhoneNumber { get; set; }
-        public object Phone { get; internal set; }
+        [DisplayName("Phone One")]
+        public Phone PhoneOne { get; set; }
+        [DisplayName("Phone Two")]
+        public Phone PhoneTwo { get; set; }
     }
 }

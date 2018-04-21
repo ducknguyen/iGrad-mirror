@@ -6,7 +6,8 @@
         <th>Name</th>
         <th>Relationship</th>
         <th>Email</th>
-        <th>Phone Number</th>
+        <th>Phone One</th>
+        <th>Phone Two</th>
         <th class="text-center">Edit</th>
     </tr>
     @foreach (EmergencyContact contact in Model)
@@ -15,7 +16,8 @@
         <td>@contact.Name.FName @contact.Name.LName</td>
         <td>@contact.Relationship</td>
         <td>@contact.EmailAddress</td>
-        <td>@contact.PhoneNumber.PhoneNumber</td>
+        <td>@contact.PhoneOne.PhoneNumber</td>
+        <td>@contact.PhoneTwo.PhoneNumber</td>
         <td class="text-center">
             <button class="btn btn-danger" type="submit" onclick="deleteEmergencyContact(@contact.fieldId)">
                 <i class="fas fa-minus-square"></i>

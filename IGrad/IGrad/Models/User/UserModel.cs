@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using IGrad.Models.User.OptionalOpportunities;
+using System.ComponentModel;
 
 namespace IGrad.Models.User
 {
@@ -23,8 +24,11 @@ namespace IGrad.Models.User
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Birthday { get; set; }
         public BirthPlaceLocation BirthPlace { get; set; }
+        [DisplayName("Input Resident Address")]
         public Address ResidentAddress { get; set; }
+        [DisplayName("Input Mailing Address")]
         public Address MailingAddress { get; set; }
+        [DisplayName("Resident Address Same As Mailing?")]
         public bool ResidentAddressIsMailingAddress { get; set; }
         public Phone PhoneInfo { get; set; }
         public ParentPlan StudentsParentingPlan { get; set; }

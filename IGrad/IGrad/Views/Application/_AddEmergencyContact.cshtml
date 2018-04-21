@@ -14,7 +14,7 @@
             @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "" })
             @Html.TextBoxFor(model => model.Name.FName, htmlAttributes: new { @class = "form-control", @placeholder = "First" })
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-2">
             @Html.LabelFor(model => model.Name.MName, htmlAttributes: new { @class = "" })
             @Html.TextBoxFor(model => model.Name.MName, htmlAttributes: new { @class = "form-control", @placeholder = "Middle" })
         </div>
@@ -22,7 +22,7 @@
             @Html.LabelFor(model => model.Name.LName, htmlAttributes: new { @class = "" })
             @Html.TextBoxFor(model => model.Name.LName, htmlAttributes: new { @class = "form-control", @placeholder = "Last" })
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-2">
             @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "" })
             @Html.DropDownListFor(model => model.Relationship, Model.RelationshipTypeSelectList, htmlAttributes: new { @class = "form-control dropdown-toggle" })
         </div>
@@ -30,25 +30,40 @@
 
     <div class="row">
         <div class="form-group col-md-4">
-            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "" })
-            @Html.TextBoxFor(model => model.EmailAddress, htmlAttributes: new { @class = "form-control", @placeholder = "Email" })
+            @Html.LabelFor(model => model.PhoneOne, htmlAttributes: new { @class = "" })
+            @Html.TextBoxFor(model => model.PhoneOne.PhoneNumber, htmlAttributes: new { @class = "form-control", @placeholder = CustomHelper.GetPhoneNumberPlaceholder() })
         </div>
-        <div class="form-group col-md-4">
-            @Html.LabelFor(model => model.PhoneNumber.PhoneNumber, htmlAttributes: new { @class = "" })
-            @Html.TextBoxFor(model => model.PhoneNumber.PhoneNumber, htmlAttributes: new { @class = "form-control", @placeholder = "Phone number" })
-        </div>
-        <div class="form-group col-md-4">
-            @Html.LabelFor(model => model.PhoneNumber.PhoneType, htmlAttributes: new { @class = "" })
-            @Html.DropDownListFor(model => model.PhoneNumber.PhoneType, Model.PhoneNumber.PhoneTypeSelectList, htmlAttributes: new { @class = "form-control dropdown-toggle" })
+        <div class="form-group col-md-2">
+            @Html.LabelFor(model => model.PhoneOne.PhoneType, htmlAttributes: new { @class = "" })
+            @Html.DropDownListFor(model => model.PhoneOne.PhoneType, Model.PhoneOne.PhoneTypeSelectList, htmlAttributes: new { @class = "form-control dropdown-toggle" })
         </div>
     </div>
-
-
-    <br />
     <div class="row">
-        <div class="col-md-12">
-            <button id="submitButton" type="submit" class="btn btn-primary" onclick="hideTarget('add-emergency-contact');showTarget('add-emergency-contact-button')">Submit Emergency Contact</button>
-            <button id="cancelButton" type="button" class="btn" onclick="showTarget('add-emergency-contact-button'); hideTarget('add-emergency-contact')">Cancel</button>
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.PhoneTwo, htmlAttributes: new { @class = "" })
+            @Html.TextBoxFor(model => model.PhoneTwo.PhoneNumber, htmlAttributes: new { @class = "form-control", @placeholder = CustomHelper.GetPhoneNumberPlaceholder() })
+        </div>
+        <div class="form-group col-md-2">
+            @Html.LabelFor(model => model.PhoneTwo.PhoneType, htmlAttributes: new { @class = "" })
+            @Html.DropDownListFor(model => model.PhoneTwo.PhoneType, Model.PhoneTwo.PhoneTypeSelectList, htmlAttributes: new { @class = "form-control dropdown-toggle" })
         </div>
     </div>
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "" })
+            @Html.TextBoxFor(model => model.EmailAddress, htmlAttributes: new { @class = "form-control", @placeholder = CustomHelper.GetEmailPlaceholder() })
+        </div>
+    </div>
+
+   
+
+
+            <br />
+            <div class="row">
+                <div class="col-md-12">
+                    <button id="submitButton" type="submit" class="btn btn-primary" onclick="hideTarget('add-emergency-contact');showTarget('add-emergency-contact-button')">Submit Emergency Contact</button>
+                    <button id="cancelButton" type="button" class="btn" onclick="showTarget('add-emergency-contact-button'); hideTarget('add-emergency-contact')">Cancel</button>
+                </div>
+            </div>
 }
