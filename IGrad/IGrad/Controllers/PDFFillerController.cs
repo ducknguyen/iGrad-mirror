@@ -202,7 +202,6 @@ namespace IGrad.Controllers
             string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/StudentEnrollmentChecklistApp.pdf");
             PdfDocument document = PdfReader.Open(filePath);
 
-
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
@@ -1342,8 +1341,11 @@ namespace IGrad.Controllers
             PdfTextField lastName = (PdfTextField)(document.AcroForm.Fields["LastName"]);
             lastName.Value = new PdfString(user.Name.LName);
 
-            PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MiddleInitial"]);
-            middleInitial.Value = new PdfString(user.Name.MName[0].ToString());
+            if (user.Name.MName != null)
+            { 
+                PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MiddleInitial"]);
+                middleInitial.Value = new PdfString(user.Name.MName[0].ToString());
+            }
 
             PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
             birthday.Value = new PdfString(user.Birthday.ToShortDateString());
