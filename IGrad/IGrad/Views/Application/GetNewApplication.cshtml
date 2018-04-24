@@ -10,7 +10,7 @@
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 <progress max="100" value="0" id="application-progress"></progress>
 
-@using (Html.BeginForm("GetNewApplication", "Application", FormMethod.Post, new { @id = "personal-info" , enctype = "multipart/form-data" , @onsubmit = "return validateGetNewApplicationSection()" }))
+@using (Html.BeginForm("GetNewApplication", "Application", FormMethod.Post, new { @id = "personal-info", enctype = "multipart/form-data", @onsubmit = "return validateGetNewApplicationSection()" }))
 {
     <h3>Personal Information</h3>
     <small class="form-text required-marker-indicator">* required fields.</small>
@@ -45,7 +45,7 @@
     <div class="row">
         <div class="form-group col-md-3">
             @Html.LabelFor(model => model.Birthday, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control datepicker required-checker", required = "required", @onblur="validateBirthday()" } })
+            @Html.EditorFor(model => model.Birthday, new { htmlAttributes = new { @class = "form-control datepicker required-checker", required = "required", @onblur = "validateBirthday()" } })
             @Html.ValidationMessageFor(model => model.Birthday, "", new { @class = "text-danger" })
         </div>
         <div class="form-group col-md-3">
@@ -71,18 +71,19 @@
         <div class="col-md-3 form-group">
             @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label required-marker" })
             <br />
-            @Html.RadioButtonFor(model => model.Gender, "Male", new { @class = "" }) Male
-            @Html.RadioButtonFor(model => model.Gender, "Female", new { @class = "" }) Female
+            @Html.RadioButtonFor(model => model.Gender, "Male", new { @class = "radio-checker" }) Male
+            @Html.RadioButtonFor(model => model.Gender, "Female", new { @class = "radio-checker" }) Female
+            @Html.HiddenFor(model => model.Gender, new { @class = "progressbar-checker" })
             @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-5 form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control required-checker", @placeholder = CustomHelper.GetEmailPlaceholder(), required = "required", @onblur="validateEmail()" } })
+            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control required-checker", @placeholder = CustomHelper.GetEmailPlaceholder(), required = "required", @onblur = "validateEmail()" } })
             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-4 form-group">
             @Html.LabelFor(model => model.PhoneInfo.PhoneNumber, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control required-checker", @placeholder = CustomHelper.GetPhoneNumberPlaceholder() , required = "required", @onblur="validatePhoneNumber()" } })
+            @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control required-checker", @placeholder = CustomHelper.GetPhoneNumberPlaceholder(), required = "required", @onblur = "validatePhoneNumber()" } })
             @Html.ValidationMessageFor(model => model.PhoneInfo.PhoneNumber, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -527,7 +528,7 @@
                         <!-- MODAL BODY END -->
 
                         <div class="modal-footer">
-                            <button type="button"  class="btn btn-primary" data-dismiss="modal" aria-label="Close">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" aria-label="Close">
                                 Continue
                             </button>
                         </div>
@@ -540,6 +541,7 @@
         <div class="col-md-3 form-group">
             <p><strong>Student Race:</strong></p>
             <ul id="studentRaceList" class="required-checker">
+                <input type="hidden" name="selectedRaces" class="progressbar-checker" value="">
                 <!-- This filled out by jquery and race Selection -->
             </ul>
         </div>
@@ -566,27 +568,31 @@
 
 <!-- **********RACE AND ETHNICITY END********** -->
 
-    <div class="form-row">
-        <div class="pull-right">
-            <button class="btn btn-primary btn-lg btn-success" form="personal-info" type="submit">
-                Continue
-                <i class="fas fa-caret-right"></i>
-            </button>
-        </div>
+<div class="form-row">
+    <div class="pull-right">
+        <button class="btn btn-primary btn-lg btn-success" form="personal-info" type="submit">
+            Continue
+            <i class="fas fa-caret-right"></i>
+        </button>
     </div>
+</div>
 
 
 <!-- CUSTOM PERSONAL FORM JS -->
 <script type="text/javascript">
 
+        
+
         var nativeTribalCounter = 0;
 
         $(document).ready(function () {
-            DetectChecked();
+            CheckCurrentProgress();
             TrackRaceChanges();
         });
 
-        function DetectChecked() {
+
+
+        function CheckCurrentProgress() {
             //check for checked boxes when page loads
             $('input[type=checkbox]').each(function () {
                 var current = $(this);
@@ -603,6 +609,7 @@
             });
 
             NativeTribalToggle(nativeTribalCounter);
+            //trackProgressBar();
         }
 
         function TrackRaceChanges() {
@@ -651,4 +658,97 @@
                 $("#native-tribal-wrapper").hide();
             }
         }
+</script>
+
+<script>
+    // FIELDS FOR PROGRESS BAR
+    var totalRequiredFields = $('.required-marker').length;
+    var progress = $("#application-progress");
+    var currentProgress = progress.attr("value");
+    var selectedRace = [];
+
+    console.log(totalRequiredFields);
+    // track input field changes
+    $(':input').change(function () {
+        var count = 0;
+
+        // check if current input is a radio button
+        if ($(this).hasClass('radio-checker')) {
+            var toUpdate = $('input[type=hidden][name=' + $(this).attr('name') + ']');
+            toUpdate.val($(this).val());
+        }
+
+        // check if current input is race checkbox
+        if ($(this).hasClass('race-checkbox')) {
+            var toUpdate = $('input[type=hidden][name=selectedRaces]');
+            if ($(this).is(':checked')) {
+                selectedRace.push($(this).val());
+            } else {
+                selectedRace.pop();
+            }
+            toUpdate.val(selectedRace);
+        }
+
+        // check all radio groups
+        $('input.progressbar-checker').each(function () {
+            if (this.validity.valid && ($(this).val()).length != 0) {
+                count++;
+            }
+        });
+
+        // check other required input fields
+        $(':input[required]').each(function () {
+            if (this.validity.valid) {
+                count++;
+            }
+        });
+
+        currentProgress = (count / totalRequiredFields) * 100;
+        progress.attr("value", currentProgress);
+    });
+
+    function trackProgressBar() {
+        var count = 0;
+        console.log($(this).hasClass('.radioChecker') + " -- " + $(this).hasClass("race-checkbox"));
+
+        // check if current input is radio button
+        if ($(this).hasClass('.radio-checker')) {
+            console.log("has radio checker");
+            var toUpdate = $('input[type=hidden][name=' + $(this).attr('name') + ']');
+            toUpdate.val($(this).val());
+        }
+        // check if current input is checkbox
+        if ($(this).hasClass('race-checkbox')) {
+            console.log("has race-checkbox");
+            var toUpdate = $('input[type=hidden][name=selectedRaces]');
+            if ($(this).is(':checked')) {
+                selectedRace.push($(this).val());
+            } else {
+                selectedRace.pop();
+            }
+            toUpdate.val(selectedRace);
+        }
+
+        // check all radio groups
+        $('input.progressbar-checker').each(function () {
+
+            console.log("inside hidden " + $(this).val() + " - " + $(this).val().length + " - " + $(this).attr('name'));
+            if (this.validity.valid && ($(this).val()).length != 0) {
+                console.log("inside hidden " + $(this).val() + " - " + $(this).val().length + " - " + $(this).attr('name'));
+                count++;
+            }
+        });
+
+        // check other required input fields
+        $(':input[required]').each(function () {
+
+            if (this.validity.valid) {
+                //console.log("inside input " + $(this).val() + " - " + $(this).val().length + " - " + $(this).attr('name'));
+                count++;
+            }
+        });
+
+        currentProgress = (count / totalRequiredFields) * 100;
+        progress.attr("value", currentProgress);
+    }
 </script>
