@@ -51,5 +51,6 @@ function trackFormProgress() {
 
     // append value to progressbar
     currentProgress = (count / totalRequiredFields) * 100;
+    console.log(currentProgress + " - " + count + " - " + totalRequiredFields);
     progress.attr("value", currentProgress);
 }
