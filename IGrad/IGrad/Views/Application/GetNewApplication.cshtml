@@ -8,7 +8,7 @@
 }
 @Styles.Render("/Content/personalform.css")
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
-<progress max="100" value="0" id="application-progress"></progress>
+
 
 @using (Html.BeginForm("GetNewApplication", "Application", FormMethod.Post, new { @id = "personal-info", enctype = "multipart/form-data", @onsubmit = "return validateGetNewApplicationSection()" }))
 {
@@ -578,134 +578,6 @@
 </div>
 
 
-<!-- CUSTOM PERSONAL FORM JS -->
-<script type="text/javascript">
-
-    // FIELDS FOR PROGRESS BAR
-    var totalRequiredFields = $('.required-marker').length;
-    var progress = $("#application-progress");
-    var currentProgress = progress.attr("value");
-    var selectedRace = [];
-    var nativeTribalCounter = 0;
-
-    $(document).ready(function () {
-        CheckCurrentProgress();
-        TrackRaceChanges();
-        // track input fields on load
-        $(':input').each(function () {
-            trackProgressBar();
-        });
-    });
-
-    function CheckCurrentProgress() {
-        //check for checked boxes when page loads
-        $('input[type=checkbox]').each(function () {
-            var current = $(this);
-            var label = $("label[for='" + current.attr("id") + "']").text();
-            var isChecked = current.is(":checked");
-
-            if (current.hasClass("race-checkbox")) {
-                UpdateRaceList(label, isChecked);
-
-                if (current.hasClass("native-tribal") && isChecked === true) {
-                    nativeTribalCounter++;
-                }
-            }
-        });
-
-        NativeTribalToggle(nativeTribalCounter);
-        //trackProgressBar();
-    }
-
-    function TrackRaceChanges() {
-        $(".race-checkbox").change(function () {
-            var current = $(this);
-            var label = $("label[for='" + current.attr("id") + "']").text();
-            var isChecked = current.is(":checked");
-
-            if (current.hasClass("native-tribal") && isChecked === true) {
-                nativeTribalCounter++;
-            }
-            else if (current.hasClass("native-tribal") && isChecked === false) {
-                nativeTribalCounter--;
-            }
-            NativeTribalToggle(nativeTribalCounter);
-
-            UpdateRaceList(label, isChecked);
-        });
-    }
-
-    function UpdateRaceList(currentCheckbox, isChecked) {
-        var $list = $("#studentRaceList");
-        if (isChecked === true) {
-            // add to the right
-            $list.append("<li data-value='" + currentCheckbox + "'>" + currentCheckbox + "<input type='hidden' name='studentRace[]' value='" + currentCheckbox + "'/></li>");
-
-            // showcasing selected race
-            $list.addClass("added-race");
-            setTimeout(function () {
-                $list.removeClass("added-race");
-            }, 6000);
-        }
-        else {
-            //hide to the right
-            $list.find('li[data-value="' + currentCheckbox + '"]').remove();
-        }
-    }
-
-    function NativeTribalToggle(nativeTribalCounter) {
-        // show/hide native-tribal area
-        if (nativeTribalCounter > 0) {
-            $("#native-tribal-wrapper").show();
-            $("#native-tribal-information").load('@Url.Action("GetNativeAmericanEducationForm", "Application")');
-        }
-        else {
-            $("#native-tribal-wrapper").hide();
-        }
-    }
-
-    // track input fields changes
-    $(':input').change(function () {
-
-        // check if current input is radio button
-        if ($(this).hasClass('radio-checker')) {
-            var toUpdate = $('input[type=hidden][name=' + $(this).attr('name') + ']');
-            toUpdate.val($(this).val());
-        }
-        // check if current input is checkbox
-        if ($(this).hasClass('race-checkbox')) {
-            var toUpdate = $('input[type=hidden][name=selectedRaces]');
-            if ($(this).is(':checked')) {
-                selectedRace.push($(this).val());
-            } else {
-                selectedRace.pop();
-            }
-            toUpdate.val(selectedRace);
-        }
-        trackProgressBar();
-    });
-
-    function trackProgressBar() {
-        var count = 0;
-        
-        // check all radio groups
-        $('input.progressbar-checker').each(function () {
-            if (this.validity.valid && ($(this).val()).length != 0) {
-                console.log("in radio " + $(this).attr('name'));
-                count++;
-            }
-        });
-
-        // check other required input fields
-        $(':input[required]').each(function () {
-            if (this.validity.valid) {
-                console.log("in input " + $(this).attr('name'));
-                count++;
-            }
-        });
-
-        // append value to progressbar
-        currentProgress = (count / totalRequiredFields) * 100;
-        progress.attr("value", currentProgress);
-    }
-</script>
+<!-- PROGRESSBAR & PERSONAL FORM JS -->
+<script type="text/javascript" src="~/Scripts/progress-bar.js"></script>
+<script type="text/javascript" src="~/Scripts/personal-form.js"></script>

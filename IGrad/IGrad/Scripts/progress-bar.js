@@ -1,82 +1,55 @@
-﻿
-var count = 0;
+﻿// FIELDS FOR PROGRESS BAR
+var totalRequiredFields = $('.required-marker').length;
+var progress = $("#application-progress");
+var currentProgress = progress.attr("value");
 
-$(document).ready(function () {
-    checkProgress();
-    checkRadioButtonProgress();
-});
-
-$('.required-checker').change(function () {
-/*    if ($(this).val().length > 0) {
-        count++;
-    }
-    else if ($(this).children().length > 0) {
-        if ($(this).children(":first").val().length > 0) {
-            count++;
-        }
-    }
-    else {
-        count--;
-    }*/
-    if (this.validity.valid) {
-        count++
-    }
-    console.log("checker " + count);
-    updateProgressBar(count);
-});
-
-$(':input[type="radio"]').change(function () {
-    //checkRadioButtonProgress();
-    //count--;
-    if (this.validity.valid) {
-        count++
-    }
-    updateProgressBar(count);
-    console.log("radio " + count);
-});
-
-// CHECK INITIAL PROGRESS OF ALL REQUIRED-CHECKERS AND RADIO-BUTTONS 
-function checkProgress() {
-    $('.required-checker').each(function () {
-        if ($(this).val().length > 0) {
-            count++;
-        }
-        else if ($(this).children().length > 0) {
-            if ($(this).children(":first").val().length > 0) {
-                count++;
-            }
-        }
-    });
-    updateProgressBar(count);
-}
-
-function checkRadioButtonProgress() {
-    $(':input[type="radio"]').each(function () {
-        if ($(this).is(':checked')) {
-            count++;
-        }
-    });
-    updateProgressBar(count);
-}
-
-
-$(":input").keyup(function () {
+/**
+ * TRACK PROGRESS FOR PERSONAL FORM 
+ */
+function trackPersonalFormProgress() {
     var count = 0;
-    $(":input .required-checker").each(function () {
+
+    // check all radio groups
+    $('input.progressbar-checker').each(function () {
+        if (this.validity.valid && ($(this).val()).length != 0) {
+            count++;
+        }
+    });
+
+    // check other required input fields
+    $(':input[required]').each(function () {
         if (this.validity.valid) {
             count++;
         }
     });
-    updateProgressBar(count);
-});
 
+    // append value to progressbar
+    currentProgress = (count / totalRequiredFields) * 100;
+    console.log(currentProgress + " - " + count + " - " + totalRequiredFields);
+    progress.attr("value", currentProgress);
+}
 
-// calculate and update progress bar base on count
-function updateProgressBar(count) {
-    var totalRequiredFields = ($('.required-marker').length);
-    var progress = $("#application-progress");
-    var calculateProgress = (count / totalRequiredFields) * 100;
+/**
+ * TRACK PROGRESS FOR OTHER FORMS
+ */
+function trackFormProgress() {
+    var count = 0;
 
-    console.log("in progress update " + calculateProgress + " " + totalRequiredFields + " " + count)
-    progress.attr("value", calculateProgress);
+    // check all radio groups
+    $('input.progressbar-checker').each(function () {
+        if (this.validity.valid && ($(this).val()).length != 0) {
+            count++;
+        }
+    });
+
+    // check other required input fields
+    $(':input[required]').each(function () {
+        if (this.validity.valid) {
+            count++;
+        }
+    });
+
+    // append value to progressbar
+    currentProgress = (count / totalRequiredFields) * 100;
+    progress.attr("value", currentProgress);
 }

@@ -11,6 +11,8 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/form-layout.css")
     @Styles.Render("~/Content/bootstrap.css")
+
+   
 </head>
 <body>
 
@@ -18,9 +20,10 @@
         @Html.Partial("_ApplicationNavigation")
     </div>
 
-
-
     <div class="container">
+        <!-- Progress bar -->
+        <progress max="100" value="0" id="application-progress"></progress>
+
         <!-- Return to Top -->
         <a href="javascript:" id="return-to-top">
             <span class="up-icon"><i class="fas fa-chevron-up"></i></span>
