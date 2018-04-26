@@ -21,6 +21,7 @@ ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.Celebrates_Celebrate_f
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.BirthPlaceLocations_BirthPlace_fieldId]
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.Addresses_ResidentAddress_fieldId]
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.Addresses_MailingAddress_fieldId]
+ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.Addresses_SecondaryHouseholdAddress_fieldId]
 GO
 
 IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Siblings')

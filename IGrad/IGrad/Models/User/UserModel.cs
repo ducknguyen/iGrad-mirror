@@ -28,6 +28,7 @@ namespace IGrad.Models.User
         public Address ResidentAddress { get; set; }
         [DisplayName("Input Mailing Address")]
         public Address MailingAddress { get; set; }
+        public Address SecondaryHouseholdAddress { get; set; }
         [DisplayName("Resident Address Same As Mailing?")]
         public bool ResidentAddressIsMailingAddress { get; set; }
         public Phone PhoneInfo { get; set; }
@@ -44,7 +45,6 @@ namespace IGrad.Models.User
         public Health HealthInfo { get; set; }
         public LifeEvent LifeEvent { get; set; }
         public Celebrate Celebrate { get; set; }
-
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime LastUpdateDate { get; set; }

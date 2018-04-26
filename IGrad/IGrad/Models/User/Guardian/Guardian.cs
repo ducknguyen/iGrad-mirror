@@ -20,5 +20,14 @@ namespace IGrad.Models.User
         public string Email { get; set; }
         [DisplayName("Guardian Is Active Military?")]
         public bool IsActiveMilitary { get; set; }
+        [DisplayName("Guardian's Residence Type")]
+        public string GuardianResidenceType { get; set; }
+
+        public enum EGuardianType
+        {
+            Primary,
+            Secondary
+        }
+
     }
 }

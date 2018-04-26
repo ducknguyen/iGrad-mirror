@@ -421,6 +421,8 @@
     <Content Include="Views\Application\_HomelessAssistanceForm.cshtml" />
     <Content Include="Views\Application\_GetOptionalAssistanceForm.cshtml" />
     <Content Include="Views\Admin\addadmin.cshtml" />
+    <Content Include="Views\Application\_AddPrimaryGuardian.cshtml" />
+    <Content Include="Views\Application\_AddSecondaryGuardian.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

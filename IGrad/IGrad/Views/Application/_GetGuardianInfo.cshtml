@@ -8,21 +8,44 @@
         <th>Phone One</th>
         <th>Phone Two</th>
         <th>Email</th>
+        <th>Residence</th>
         <th class="text-center">Edit</th>
     </tr>
     @{foreach (Guardian guardian in Model)
         {
-        <tr id="guardian_@guardian.fieldId">
-            <td>@guardian.Name.FName @guardian.Name.LName</td>
-            <td>@guardian.PhoneOne.PhoneNumber</td>
-            <td>@guardian.PhoneTwo.PhoneNumber</td>
-            <td>@guardian.Email</td>
-            <td class="text-center">
-                <button class="btn btn-danger" type="submit" onclick="deleteGuardian(@guardian.fieldId)">
-                    <i class="fas fa-minus-square"></i>
-                </button>
-            </td>
-        </tr>
+            if (ViewData["ResidenceType"] != null)
+            {
+                if (guardian.GuardianResidenceType.ToString() == (string)ViewData["ResidenceType"])
+                {
+                    <tr id="guardian_@guardian.fieldId">
+                        <td>@guardian.Name.FName @guardian.Name.LName</td>
+                        <td>@guardian.PhoneOne.PhoneNumber</td>
+                        <td>@guardian.PhoneTwo.PhoneNumber</td>
+                        <td>@guardian.Email</td>
+                        <td>@guardian.GuardianResidenceType</td>
+                        <td class="text-center">
+                            <button class="btn btn-danger" type="submit" onclick="deleteGuardian(@guardian.fieldId)">
+                                <i class="fas fa-minus-square"></i>
+                            </button>
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr id="guardian_@guardian.fieldId">
+                    <td>@guardian.Name.FName @guardian.Name.LName</td>
+                    <td>@guardian.PhoneOne.PhoneNumber</td>
+                    <td>@guardian.PhoneTwo.PhoneNumber</td>
+                    <td>@guardian.Email</td>
+                    <td>@guardian.GuardianResidenceType</td>
+                    <td class="text-center">
+                        <button class="btn btn-danger" type="submit" onclick="deleteGuardian(@guardian.fieldId)">
+                            <i class="fas fa-minus-square"></i>
+                        </button>
+                    </td>
+                </tr>
+            }
         }
     }
 </table>

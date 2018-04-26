@@ -34,6 +34,18 @@
         $("#add-guardian").load('@Url.Action("GetAddGuardian", "Application")');
     }
 
+    function loadPrimaryGuardianInfoForm() {
+        hideTarget('add-primary-guardian-button');
+        showTarget('add-primary-guardian');
+        $("#add-primary-guardian").load('@Url.Action("GetAddPrimaryGuardian", "Application")');
+    }
+
+    function loadSecondaryGuardianInfoForm() {
+        hideTarget('add-secondary-guardian-button');
+        showTarget('add-secondary-guardian');
+        $("#add-secondary-guardian").load('@Url.Action("GetAddSecondaryGuardian", "Application")');
+    }
+
     function loadSiblingInfoForm() {
         hideTarget('add-sibling-button');
         showTarget('add-sibling');
@@ -133,7 +145,7 @@
             </div>
         </div>
 
-        <h4 class="bg-info">Current Residence</h4>
+        <h4 class="bg-info">Primary Residence</h4>
         <div class="row">
             <div class="form-group col-md-3">
                 @Html.LabelFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "required-marker" })
@@ -168,6 +180,7 @@
         </div>
 
 
+
         <div class="hidden" id="mailing-address">
             <h4>Please Specify Mailing Address</h4>
             <div class="row">
@@ -194,13 +207,82 @@
             </div>
         </div>
     </div>
+    <hr />
 }
+    <!-- ADD PRIMARY GUARDIAN -->
+    <div class="container" id="add-primary-guardian-container">
+        <h4 class="bg-info">Primary Residence Guardians</h4>
+        <div class="" id="primary-guardians">
+            <!-- guardians partial view here-->
+            @{if (Model.Guardians != null)
+                {
+                    Html.RenderPartial("_GetGuardianInfo", Model.Guardians.ToList(), new ViewDataDictionary { { "ResidenceType", "Primary" } });
+                }
+            }
+        </div>
+        <button class="btn btn-primary" id="add-primary-guardian-button" onclick="loadPrimaryGuardianInfoForm()">Add Parent/Guardian</button>
+        <div class="hidden" id="add-primary-guardian">
+        </div>
+    </div>
+
+
+<div class="" id="prompt-secondary-residence">
+    <hr />
+    <h4 class="bg-info">Secondary Residence</h4>
+    <strong>Does the student have a parent/legal guardian not living at the address above?</strong>
+    <br />
+    <button class="btn btn-primary" type="button" onclick="showTarget('secondary-residence-container')">Yes</button>
+    <button class="btn " value="" type="button" onclick="hideTarget('secondary-residence-container')">No</button>
+    <div class="container" id="secondary-residence-container">
+        <div class="row">
+            <div class="row">
+                <div class="form-group col-md-3">
+                    @Html.LabelFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "required-marker" })
+                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "Street address" })
+                </div>
+                <div class="form-group col-md-3">
+                    @Html.LabelFor(model => model.SecondaryHouseholdAddress.City, htmlAttributes: new { @class = "required-marker" })
+                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "City" })
+                </div>
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.SecondaryHouseholdAddress.State, htmlAttributes: new { @class = "required-marker" })
+                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "State" })
+                </div>
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.SecondaryHouseholdAddress.Zip, htmlAttributes: new { @class = "required-marker" })
+                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Zip, "{0:#.#}", new { @class = "form-control", @placeholder = "Zip" })
+                    @Html.ValidationMessageFor(model => model.SecondaryHouseholdAddress.Zip, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group col-md-2">
+                    @Html.LabelFor(model => model.SecondaryHouseholdAddress.POBox, htmlAttributes: new { @class = "required-marker" })
+                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.POBox, new { @class = "form-control", @placeholder = "PO" })
+                </div>
+            </div>
+        </div>
+
+        <!-- ADD SECONDARY GUARDIAN -->
+        <div class="container" id="add-secondary-guardian-container">
+            <h4 class="bg-info">Secondary Residence Guardians</h4>
+            <div class="" id="secondary-guardians">
+                <!-- guardians partial view here-->
+                @{if (Model.Guardians != null)
+                    {
+                        Html.RenderPartial("_GetGuardianInfo", Model.Guardians.ToList(), new ViewDataDictionary { { "ResidenceType", "Secondary" } });
+                    }
+                }
+            </div>
+            <button class="btn btn-primary" id="add-secondary-guardian-button" onclick="loadSecondaryGuardianInfoForm()">Add Parent/Guardian</button>
+            <div class="hidden" id="add-secondary-guardian">
+            </div>
+        </div>
+    </div>
+</div>
 <hr />
 
 <div class="container" id="homeless-container">
     <h3>Homeless / Distressed Additional Information</h3>
-    <button class="btn btn-default" type="button" onclick="showTarget('homeless-information')">Show</button>
-    <button class="btn btn-default" type="button" onclick="hideTarget('homeless-information')">Hide</button>
+    <button class="btn btn-default" form="" type="button" onclick="showTarget('homeless-information')">Show</button>
+    <button class="btn btn-default" form="" type="button" onclick="hideTarget('homeless-information')">Hide</button>
     <div class="container" id="homeless-information">
         @{if (Model.HomelessAssistance != null)
             {
@@ -234,7 +316,7 @@
 
 <br /><br />
 
-<!-- ADD GUARDIAN -->
+@*<!-- ADD GUARDIAN -->
 <div class="wrapper" id="add-guardian-container">
     <h4 class="bg-info">Guardians</h4>
     <div class="" id="guardians">
@@ -248,7 +330,7 @@
     <button class="btn btn-primary" id="add-guardian-button" onclick="loadGuardianInfoForm()">Add Parent/Guardian</button>
     <div class="hidden" id="add-guardian">
     </div>
-</div>
+</div>*@
 
 <br /><br />
 

@@ -555,6 +555,26 @@ namespace IGrad.Controllers
             return PartialView("_AddGuardian", defaultGuardian);
         }
 
+        public ActionResult GetAddPrimaryGuardian()
+        {
+            Guardian defaultGuardian = new Guardian();
+            defaultGuardian.PhoneOne = new Phone();
+            defaultGuardian.PhoneTwo = new Phone();
+            defaultGuardian.Name = new Name();
+            defaultGuardian.GuardianResidenceType = Guardian.EGuardianType.Primary.ToString();
+            return PartialView("_AddPrimaryGuardian", defaultGuardian);
+        }
+
+        public ActionResult GetAddSecondaryGuardian()
+        {
+            Guardian defaultGuardian = new Guardian();
+            defaultGuardian.PhoneOne = new Phone();
+            defaultGuardian.PhoneTwo = new Phone();
+            defaultGuardian.Name = new Name();
+            defaultGuardian.GuardianResidenceType = Guardian.EGuardianType.Secondary.ToString();
+            return PartialView("_AddSecondaryGuardian", defaultGuardian);
+        }
+
         [HttpPost]
         public ActionResult SubmitGuardianInfo(Guardian guardian)
         {
@@ -579,9 +599,34 @@ namespace IGrad.Controllers
 
                 db.SaveChanges();
 
-                return PartialView("_GetGuardianInfo", data.Guardians);
-            }
+                //create a list to aggregate the types we want to return
+                List<Guardian> guardianListForView = new List<Guardian>();
 
+                //check if submission came from primary
+                if(guardian.GuardianResidenceType == Guardian.EGuardianType.Primary.ToString())
+                {
+                    foreach(Guardian g in data.Guardians)
+                    {
+                        if(g.GuardianResidenceType == Guardian.EGuardianType.Primary.ToString())
+                        {
+                            guardianListForView.Add(g);
+                        }
+                    }
+                }
+                //check if submission came from secondary
+                if(guardian.GuardianResidenceType == Guardian.EGuardianType.Secondary.ToString())
+                {
+                    foreach (Guardian g in data.Guardians)
+                    {
+                        if (g.GuardianResidenceType == Guardian.EGuardianType.Secondary.ToString())
+                        {
+                            guardianListForView.Add(g);
+                        }
+                    }
+                }
+
+                return PartialView("_GetGuardianInfo", guardianListForView);
+            }
         }
 
         public ActionResult GetGuardiansPartial(List<Guardian> guardianList)
