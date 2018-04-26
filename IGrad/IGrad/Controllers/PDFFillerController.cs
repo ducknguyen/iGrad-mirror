@@ -703,6 +703,14 @@ namespace IGrad.Controllers
 
                      PdfTextField ecPhoneOneType = (PdfTextField)(document.AcroForm.Fields["EmergencyContact" + (i + 1) + "Phone1Type"]);
                     ecPhoneOneType.Value = new PdfString(ec.PhoneOne.PhoneType);
+
+                    PdfTextField ecPhoneTwo = (PdfTextField)(document.AcroForm.Fields["EmergencyContact" + (i + 1) + "Phone2"]);
+                    ecPhoneTwo.Value = new PdfString(ec.PhoneTwo.PhoneNumber);
+
+                    PdfTextField ecPhoneTwoType = (PdfTextField)(document.AcroForm.Fields["EmergencyContact" + (i + 1) + "Phone2Type"]);
+                    ecPhoneTwoType.Value = new PdfString(ec.PhoneTwo.PhoneType);
+
+
                 }
             }
 

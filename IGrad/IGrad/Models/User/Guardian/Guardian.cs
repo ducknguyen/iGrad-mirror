@@ -18,5 +18,7 @@ namespace IGrad.Models.User
         public Phone PhoneTwo { get; set; }
         public Address Address { get; set; }
         public string Email { get; set; }
+        [DisplayName("Guardian Is Active Military?")]
+        public bool IsActiveMilitary { get; set; }
     }
 }
