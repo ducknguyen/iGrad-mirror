@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace IGrad.Models.User
 {
@@ -27,6 +29,23 @@ namespace IGrad.Models.User
         {
             Primary,
             Secondary
+        }
+
+        public string Relationship { get; set; }
+        public IEnumerable<SelectListItem> RelationshipTypeSelectList
+        {
+            get
+            {
+                List<SelectListItem> items = new List<SelectListItem>();
+                items.Add(new SelectListItem { Text = "Mother", Value = "Mother" });
+                items.Add(new SelectListItem { Text = "Father", Value = "Father" });
+                items.Add(new SelectListItem { Text = "Grandparent", Value = "Grandparent" });
+                items.Add(new SelectListItem { Text = "Step Mother", Value = "Step Mother" });
+                items.Add(new SelectListItem { Text = "Step Father", Value = "Step Father" });
+                items.Add(new SelectListItem { Text = "Guardian", Value = "Guardian" });
+                items.Add(new SelectListItem { Text = "Other", Value = "Other" });
+                return items;
+            }
         }
 
     }
