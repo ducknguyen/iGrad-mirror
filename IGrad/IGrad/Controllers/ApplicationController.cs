@@ -789,6 +789,7 @@ namespace IGrad.Controllers
                 //get user
                 var data = db.Users
                     .Include(u => u.OptionalOpportunities)
+                    .Include(u => u.StudentsParentingPlan)
                     .Where(u => u.UserID == UserID)
                     .FirstOrDefault<UserModel>();
                 return View(data);
@@ -922,6 +923,35 @@ namespace IGrad.Controllers
 
                 oppor.UserID = UserID;
                 data.OptionalOpportunities = oppor;
+
+                //save
+                db.SaveChanges();
+            }
+        }
+        
+        public ActionResult GetParentPlanForm(UserModel user)
+        {
+            if (user.StudentsParentingPlan == null)
+            {
+                user.StudentsParentingPlan = new ParentPlan();
+            }
+            return PartialView("_AddParentingPlan", user.StudentsParentingPlan);
+        }
+
+        [HttpPost]
+        public void SubmitParentingPlan(ParentPlan plan)
+        {
+            Guid UserID = Guid.Parse(HttpContext.User.Identity.GetUserId());
+            using (UserContext db = new UserContext())
+            {
+                //get user
+                var data = db.Users
+                       .Include(u => u.StudentsParentingPlan)
+                       .Where(u => u.UserID == UserID)
+                       .FirstOrDefault<UserModel>();
+
+                plan.UserID = UserID;
+                data.StudentsParentingPlan = plan;
 
                 //save
                 db.SaveChanges();

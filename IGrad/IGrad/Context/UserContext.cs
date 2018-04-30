@@ -31,5 +31,7 @@ namespace IGrad.Context
         public System.Data.Entity.DbSet<IGrad.Models.User.HomelessAssistance.HomelessAssistancePreferences> HomelessAssistancePreferences { get; set; }
 
         public System.Data.Entity.DbSet<IGrad.Models.User.OptionalOpportunities.OptionalAssistance> IGradOpportunities { get; set; }
+
+        public System.Data.Entity.DbSet<IGrad.Models.User.ParentPlan> ParentPlans { get; set; }
     }
 }

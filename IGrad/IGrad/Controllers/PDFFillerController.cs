@@ -651,7 +651,7 @@ namespace IGrad.Controllers
             PdfCheckBoxField fatherHasCourtOrder = (PdfCheckBoxField)(document.AcroForm.Fields["FatherHasOrder"]);
             fatherHasCourtOrder.Checked = user.StudentsParentingPlan.FatherHasOrder;
 
-            if (user.StudentsParentingPlan.Other != "")
+            if (!(String.IsNullOrEmpty(user.StudentsParentingPlan.Other)))
             {
                 //check other box
                 PdfCheckBoxField otherCourtOrder = (PdfCheckBoxField)(document.AcroForm.Fields["OtherCourtOrderCheckbox"]);

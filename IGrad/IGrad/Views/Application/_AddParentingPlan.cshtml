@@ -1,0 +1,53 @@
+﻿@model IGrad.Models.User.ParentPlan
+
+@using (Ajax.BeginForm("SubmitParentingPlan", "Application", new AjaxOptions()
+{
+    HttpMethod = "Post",
+    UpdateTargetId = "",
+    InsertionMode = InsertionMode.Replace,
+
+}))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.inEffect)
+            @Html.LabelFor(model => model.inEffect, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.inEffect, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.MotherHasOrder)
+            @Html.LabelFor(model => model.MotherHasOrder, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.MotherHasOrder, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.FatherHasOrder)
+            @Html.LabelFor(model => model.FatherHasOrder, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.FatherHasOrder, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Other, htmlAttributes: new { @class = "control-label" })
+            @Html.EditorFor(model => model.Other, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Other, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.EditorFor(model => model.CourtOrderOnEducationDecisions)
+            @Html.LabelFor(model => model.CourtOrderOnEducationDecisions, htmlAttributes: new { @class = "control-label" })
+            @Html.ValidationMessageFor(model => model.CourtOrderOnEducationDecisions, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Submit" class="btn btn-default" onclick="hideTarget('parenting-plan-form')" />
+                <input type="button" value="Cancel" class="btn btn-default" onclick="hideTarget('parenting-plan-form')" />
+            </div>
+        </div>
+    </div>
+}

@@ -423,6 +423,7 @@
     <Content Include="Views\Admin\addadmin.cshtml" />
     <Content Include="Views\Application\_AddPrimaryGuardian.cshtml" />
     <Content Include="Views\Application\_AddSecondaryGuardian.cshtml" />
+    <Content Include="Views\Application\_AddParentingPlan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
