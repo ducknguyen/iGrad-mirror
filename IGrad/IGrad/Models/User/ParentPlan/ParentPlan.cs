@@ -14,5 +14,6 @@ namespace IGrad.Models.User
         public bool MotherHasOrder { get; set; }
         public bool FatherHasOrder { get; set; }
         public string Other { get; set; }
+        public bool CourtOrderOnEducationDecisions { get; set; }
     }
 }

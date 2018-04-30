@@ -631,6 +631,18 @@ namespace IGrad.Controllers
                 planNotInEffect.Checked = true;
             }
 
+            //court order on education decisions
+            if (user.StudentsParentingPlan.CourtOrderOnEducationDecisions)
+            {
+                PdfCheckBoxField courtOrder = (PdfCheckBoxField)document.AcroForm.Fields["CourtOrderOnEducationDecisionsTrue"];
+                courtOrder.Checked = true;
+            }
+            else
+            {
+                PdfCheckBoxField courtOrder = (PdfCheckBoxField)document.AcroForm.Fields["CourtOrderOnEducationDecisionsFalse"];
+                courtOrder.Checked = true;
+            }
+
             PdfCheckBoxField motherHasCourtOrder = (PdfCheckBoxField)(document.AcroForm.Fields["MotherHasOrder"]);
             motherHasCourtOrder.Checked = user.StudentsParentingPlan.MotherHasOrder;
 
