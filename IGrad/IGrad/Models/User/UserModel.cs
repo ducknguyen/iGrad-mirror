@@ -52,5 +52,32 @@ namespace IGrad.Models.User
         public Roles role { get; set; }
         public HomelessAssistancePreferences HomelessAssistance { get; set; }
         public OptionalAssistance OptionalOpportunities { get; set; }
+
+        public List<Guardian> GetPrimaryGuardians()
+        {
+            List<Guardian> primaryGuardians = new List<Guardian>();
+            foreach(Guardian g in Guardians)
+            {
+                if(g.GuardianResidenceType == Guardian.EGuardianType.Primary.ToString())
+                {
+                    primaryGuardians.Add(g);
+                }
+            }
+            return primaryGuardians;
+        }
+
+        public List<Guardian> GetSecondaryGuardians()
+        {
+            List<Guardian> secondaryGuardians = new List<Guardian>();
+            foreach (Guardian g in Guardians)
+            {
+                if (g.GuardianResidenceType == Guardian.EGuardianType.Secondary.ToString())
+                {
+                    secondaryGuardians.Add(g);
+                }
+            }
+            return secondaryGuardians;
+        }
+
     }
 }

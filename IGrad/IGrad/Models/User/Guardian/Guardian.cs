@@ -40,8 +40,8 @@ namespace IGrad.Models.User
                 items.Add(new SelectListItem { Text = "Mother", Value = "Mother" });
                 items.Add(new SelectListItem { Text = "Father", Value = "Father" });
                 items.Add(new SelectListItem { Text = "Grandparent", Value = "Grandparent" });
-                items.Add(new SelectListItem { Text = "Step Mother", Value = "Step Mother" });
-                items.Add(new SelectListItem { Text = "Step Father", Value = "Step Father" });
+                items.Add(new SelectListItem { Text = "Step Mother", Value = "StepMother" });
+                items.Add(new SelectListItem { Text = "Step Father", Value = "StepFather" });
                 items.Add(new SelectListItem { Text = "Guardian", Value = "Guardian" });
                 items.Add(new SelectListItem { Text = "Other", Value = "Other" });
                 return items;

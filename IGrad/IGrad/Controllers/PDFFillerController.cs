@@ -382,6 +382,194 @@ namespace IGrad.Controllers
                 livesWithOther.Checked = true;
             }
 
+            #region primary guardians
+            //Primary guardian information
+            List<Guardian> primaryGuardians = user.GetPrimaryGuardians();
+            if(primaryGuardians.Count > 0)
+            {
+                Guardian guardian1 = primaryGuardians[0];
+                //fill name
+                PdfTextField guardian1Name = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1Name"];
+                guardian1Name.Value = new PdfString(guardian1.Name.LName + " " + guardian1.Name.FName + guardian1.Name.MName.Substring(0, 1));
+
+                string guardianRelationshipCheckBoxName = "PrimaryGuardian1" + guardian1.Relationship;
+
+                PdfCheckBoxField relationshipCheckbox = (PdfCheckBoxField)document.AcroForm.Fields[guardianRelationshipCheckBoxName];
+                relationshipCheckbox.Checked = true;
+
+                //phone 1
+                PdfTextField phoneOne = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1PhoneOne"];
+                phoneOne.Value = new PdfString(guardian1.PhoneOne.ToString());
+                //phone 1 type
+                PdfTextField phoneOneType = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1PhoneOneType"];
+                phoneOneType.Value = new PdfString(guardian1.PhoneOne.PhoneType.ToString());
+
+                //phone 2
+                PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1PhoneTwo"];
+                phoneTwo.Value = new PdfString(guardian1.PhoneTwo.ToString());
+                //phone 2 type
+                PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1PhoneTwoType"];
+                phoneOneType.Value = new PdfString(guardian1.PhoneTwo.PhoneType.ToString());
+
+                //email
+                PdfTextField email = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1Email"];
+                email.Value = new PdfString(guardian1.Email.ToString());
+
+                //active military?
+                if (guardian1.IsActiveMilitary)
+                {
+                    PdfCheckBoxField activeMilitary = (PdfCheckBoxField)document.AcroForm.Fields["PrimaryGuardian1IsActiveMilitaryTrue"];
+                    activeMilitary.Checked = true;
+                }
+                else
+                {
+                    PdfCheckBoxField activeMilitary = (PdfCheckBoxField)document.AcroForm.Fields["PrimaryGuardian1IsActiveMilitaryFalse"];
+                    activeMilitary.Checked = true;
+                }
+             }
+
+            // primary guardian 2 information
+            if(primaryGuardians.Count > 1)
+            {
+                Guardian guardian2 = primaryGuardians[1];
+                //fill name
+                PdfTextField guardian2Name = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2Name"];
+                guardian2Name.Value = new PdfString(guardian2.Name.LName + " " + guardian2.Name.FName + guardian2.Name.MName.Substring(0, 1));
+
+                string guardianRelationshipCheckBoxName = "PrimaryGuardian2" + guardian2.Relationship;
+
+                PdfCheckBoxField relationshipCheckbox = (PdfCheckBoxField)document.AcroForm.Fields[guardianRelationshipCheckBoxName];
+                relationshipCheckbox.Checked = true;
+
+                //phone 1
+                PdfTextField phoneOne = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2PhoneOne"];
+                phoneOne.Value = new PdfString(guardian2.PhoneOne.ToString());
+                //phone 1 type
+                PdfTextField phoneOneType = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2PhoneOneType"];
+                phoneOneType.Value = new PdfString(guardian2.PhoneOne.PhoneType.ToString());
+
+                //phone 2
+                PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2PhoneTwo"];
+                phoneTwo.Value = new PdfString(guardian2.PhoneTwo.ToString());
+                //phone 2 type
+                PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2PhoneTwoType"];
+                phoneOneType.Value = new PdfString(guardian2.PhoneTwo.PhoneType.ToString());
+
+                //email
+                PdfTextField email = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2Email"];
+                email.Value = new PdfString(guardian2.Email.ToString());
+
+                //active military?
+                if (guardian2.IsActiveMilitary)
+                {
+                    PdfCheckBoxField activeMilitary = (PdfCheckBoxField)document.AcroForm.Fields["PrimaryGuardian2IsActiveMilitaryTrue"];
+                    activeMilitary.Checked = true;
+                }
+                else
+                {
+                    PdfCheckBoxField activeMilitary = (PdfCheckBoxField)document.AcroForm.Fields["PrimaryGuardian2IsActiveMilitaryFalse"];
+                    activeMilitary.Checked = true;
+                }
+            }
+            #endregion
+
+
+            #region SecondaryHouseholdAndGuardians
+            if(user.SecondaryHouseholdAddress != null)
+            {
+                List<Guardian> secondaryGuardians = user.GetSecondaryGuardians();
+                if (secondaryGuardians.Count > 0)
+                {
+                    Guardian guardian1 = secondaryGuardians[0];
+                    //fill name
+                    PdfTextField guardian1Name = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1Name"];
+                    guardian1Name.Value = new PdfString(guardian1.Name.LName + " " + guardian1.Name.FName + guardian1.Name.MName.Substring(0, 1));
+
+                    string guardianRelationshipCheckBoxName = "SecondaryGuardian1" + guardian1.Relationship;
+                    if(guardian1.Relationship != "Guardian")
+                    {
+                        PdfCheckBoxField relationshipCheckbox = (PdfCheckBoxField)document.AcroForm.Fields[guardianRelationshipCheckBoxName];
+                        relationshipCheckbox.Checked = true;
+                    }
+                    
+
+                    //phone 1
+                    PdfTextField phoneOne = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1PhoneOne"];
+                    phoneOne.Value = new PdfString(guardian1.PhoneOne.ToString());
+                    //phone 1 type
+                    PdfTextField phoneOneType = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1PhoneOneType"];
+                    phoneOneType.Value = new PdfString(guardian1.PhoneOne.PhoneType.ToString());
+
+                    //phone 2
+                    PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1PhoneTwo"];
+                    phoneTwo.Value = new PdfString(guardian1.PhoneTwo.ToString());
+                    //phone 2 type
+                    PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1PhoneTwoType"];
+                    phoneOneType.Value = new PdfString(guardian1.PhoneTwo.PhoneType.ToString());
+
+                    //email
+                    PdfTextField email = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1Email"];
+                    email.Value = new PdfString(guardian1.Email.ToString());
+
+                }
+
+                // secondary guardian 2 information
+                if (secondaryGuardians.Count > 1)
+                {
+                    Guardian guardian2 = secondaryGuardians[0];
+                    //fill name
+                    PdfTextField guardian1Name = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2Name"];
+                    guardian1Name.Value = new PdfString(guardian2.Name.LName + " " + guardian2.Name.FName + guardian2.Name.MName.Substring(0, 1));
+
+                    string guardianRelationshipCheckBoxName = "SecondaryGuardian2" + guardian2.Relationship;
+                    if (guardian2.Relationship != "Guardian")
+                    {
+                        PdfCheckBoxField relationshipCheckbox = (PdfCheckBoxField)document.AcroForm.Fields[guardianRelationshipCheckBoxName];
+                        relationshipCheckbox.Checked = true;
+                    }
+
+
+                    //phone 1
+                    PdfTextField phoneOne = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2PhoneOne"];
+                    phoneOne.Value = new PdfString(guardian2.PhoneOne.ToString());
+                    //phone 1 type
+                    PdfTextField phoneOneType = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2PhoneOneType"];
+                    phoneOneType.Value = new PdfString(guardian2.PhoneOne.PhoneType.ToString());
+
+                    //phone 2
+                    PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2PhoneTwo"];
+                    phoneTwo.Value = new PdfString(guardian2.PhoneTwo.ToString());
+                    //phone 2 type
+                    PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2PhoneTwoType"];
+                    phoneOneType.Value = new PdfString(guardian2.PhoneTwo.PhoneType.ToString());
+
+                    //email
+                    PdfTextField email = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2Email"];
+                    email.Value = new PdfString(guardian2.Email.ToString());
+                }
+
+                //check active military
+                if(secondaryGuardians[0].IsActiveMilitary || secondaryGuardians[1].IsActiveMilitary)
+                {
+                    PdfCheckBoxField activeMilitary = (PdfCheckBoxField)document.AcroForm.Fields["SecondaryGuardianIsActiveMilitaryTrue"];
+                    activeMilitary.Checked = true;
+                }
+                else
+                {
+                    PdfCheckBoxField activeMilitary = (PdfCheckBoxField)document.AcroForm.Fields["SecondaryGuardianIsActiveMilitaryFalse"];
+                    activeMilitary.Checked = true;
+                }
+
+                //secondary household address
+                Address secAddr = user.SecondaryHouseholdAddress;
+
+                PdfTextField address = (PdfTextField)document.AcroForm.Fields["SecondaryHouseholdAddress"];
+                address.Value = new PdfString(secAddr.Street + " " + secAddr.City + ", " + secAddr.State + " " + secAddr.Zip + " " + secAddr.POBox);
+
+            }
+            #endregion
+
+
             //Resident address
             PdfTextField residentAddressStreet = (PdfTextField)(document.AcroForm.Fields["ResidentAddressStreet"]);
             residentAddressStreet.Value = new PdfString(user.ResidentAddress.Street);
