@@ -846,6 +846,7 @@ namespace IGrad.Controllers
 
                     PdfTextField lastHighSchoolLocationInfo = (PdfTextField)(document.AcroForm.Fields["LastHighSchoolInformation"]);
                     lastHighSchoolLocationInfo.Value = new PdfString(highSchool.HighSchoolCity + ", " + highSchool.HighSchoolState);
+
                 }
             }
 
