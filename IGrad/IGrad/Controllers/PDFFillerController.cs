@@ -12,6 +12,7 @@ using System.Data.Entity;
 using Ionic.Zip;
 using IGrad.Models.Income;
 using System.Text.RegularExpressions;
+using System.Text;
 
 namespace IGrad.Controllers
 {
@@ -53,6 +54,7 @@ namespace IGrad.Controllers
                        .Include(u => u.HomelessAssistance)
                        .Include(u => u.ResidentAddress)
                        .Include(u => u.MailingAddress)
+                       .Include(u => u.SecondaryHouseholdAddress)
                        .Include(u => u.OptionalOpportunities)
                        .Include(u => u.StudentsParentingPlan)
                        .Include(u => u.StudentChildCare)
@@ -399,17 +401,17 @@ namespace IGrad.Controllers
 
                 //phone 1
                 PdfTextField phoneOne = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1PhoneOne"];
-                phoneOne.Value = new PdfString(guardian1.PhoneOne.ToString());
+                phoneOne.Value = new PdfString(guardian1.PhoneOne.PhoneNumber.ToString());
                 //phone 1 type
                 PdfTextField phoneOneType = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1PhoneOneType"];
                 phoneOneType.Value = new PdfString(guardian1.PhoneOne.PhoneType.ToString());
 
                 //phone 2
                 PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1PhoneTwo"];
-                phoneTwo.Value = new PdfString(guardian1.PhoneTwo.ToString());
+                phoneTwo.Value = new PdfString(guardian1.PhoneTwo.PhoneNumber.ToString());
                 //phone 2 type
                 PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1PhoneTwoType"];
-                phoneOneType.Value = new PdfString(guardian1.PhoneTwo.PhoneType.ToString());
+                phoneTwoType.Value = new PdfString(guardian1.PhoneTwo.PhoneType.ToString());
 
                 //email
                 PdfTextField email = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1Email"];
@@ -443,17 +445,17 @@ namespace IGrad.Controllers
 
                 //phone 1
                 PdfTextField phoneOne = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2PhoneOne"];
-                phoneOne.Value = new PdfString(guardian2.PhoneOne.ToString());
+                phoneOne.Value = new PdfString(guardian2.PhoneOne.PhoneNumber.ToString());
                 //phone 1 type
                 PdfTextField phoneOneType = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2PhoneOneType"];
                 phoneOneType.Value = new PdfString(guardian2.PhoneOne.PhoneType.ToString());
 
                 //phone 2
                 PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2PhoneTwo"];
-                phoneTwo.Value = new PdfString(guardian2.PhoneTwo.ToString());
+                phoneTwo.Value = new PdfString(guardian2.PhoneTwo.PhoneNumber.ToString());
                 //phone 2 type
                 PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2PhoneTwoType"];
-                phoneOneType.Value = new PdfString(guardian2.PhoneTwo.PhoneType.ToString());
+                phoneTwoType.Value = new PdfString(guardian2.PhoneTwo.PhoneType.ToString());
 
                 //email
                 PdfTextField email = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2Email"];
@@ -495,17 +497,17 @@ namespace IGrad.Controllers
 
                     //phone 1
                     PdfTextField phoneOne = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1PhoneOne"];
-                    phoneOne.Value = new PdfString(guardian1.PhoneOne.ToString());
+                    phoneOne.Value = new PdfString(guardian1.PhoneOne.PhoneNumber.ToString());
                     //phone 1 type
                     PdfTextField phoneOneType = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1PhoneOneType"];
                     phoneOneType.Value = new PdfString(guardian1.PhoneOne.PhoneType.ToString());
 
                     //phone 2
                     PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1PhoneTwo"];
-                    phoneTwo.Value = new PdfString(guardian1.PhoneTwo.ToString());
+                    phoneTwo.Value = new PdfString(guardian1.PhoneTwo.PhoneNumber.ToString());
                     //phone 2 type
                     PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1PhoneTwoType"];
-                    phoneOneType.Value = new PdfString(guardian1.PhoneTwo.PhoneType.ToString());
+                    phoneTwoType.Value = new PdfString(guardian1.PhoneTwo.PhoneType.ToString());
 
                     //email
                     PdfTextField email = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1Email"];
@@ -531,17 +533,17 @@ namespace IGrad.Controllers
 
                     //phone 1
                     PdfTextField phoneOne = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2PhoneOne"];
-                    phoneOne.Value = new PdfString(guardian2.PhoneOne.ToString());
+                    phoneOne.Value = new PdfString(guardian2.PhoneOne.PhoneNumber.ToString());
                     //phone 1 type
                     PdfTextField phoneOneType = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2PhoneOneType"];
                     phoneOneType.Value = new PdfString(guardian2.PhoneOne.PhoneType.ToString());
 
                     //phone 2
                     PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2PhoneTwo"];
-                    phoneTwo.Value = new PdfString(guardian2.PhoneTwo.ToString());
+                    phoneTwo.Value = new PdfString(guardian2.PhoneTwo.PhoneNumber.ToString());
                     //phone 2 type
                     PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2PhoneTwoType"];
-                    phoneOneType.Value = new PdfString(guardian2.PhoneTwo.PhoneType.ToString());
+                    phoneTwoType.Value = new PdfString(guardian2.PhoneTwo.PhoneType.ToString());
 
                     //email
                     PdfTextField email = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2Email"];
@@ -607,17 +609,17 @@ namespace IGrad.Controllers
             PdfTextField residentPhone = (PdfTextField)(document.AcroForm.Fields["ResidentHomePhone"]);
             residentPhone.Value = new PdfString(user.PhoneInfo.PhoneNumber + "    " + user.PhoneInfo.PhoneType);
 
-            for (int i = 0; i < user.Guardians.Count; i++)
-            {
-                if (i < 2)
-                {
-                    PdfTextField guardianWorkPhone = (PdfTextField)(document.AcroForm.Fields["GuardianWorkPhone" + (i + 1)]);
-                    guardianWorkPhone.Value = new PdfString(user.Guardians[i].PhoneOne.PhoneNumber);
+            //for (int i = 0; i < user.Guardians.Count; i++)
+            //{
+            //    if (i < 2)
+            //    {
+            //        PdfTextField guardianWorkPhone = (PdfTextField)(document.AcroForm.Fields["GuardianWorkPhone" + (i + 1)]);
+            //        guardianWorkPhone.Value = new PdfString(user.Guardians[i].PhoneOne.PhoneNumber);
 
-                    PdfTextField guardianEmail = (PdfTextField)(document.AcroForm.Fields["GuardianEmail" + (i + 1)]);
-                    guardianEmail.Value = new PdfString(user.Guardians[i].Email);
-                }
-            }
+            //        PdfTextField guardianEmail = (PdfTextField)(document.AcroForm.Fields["GuardianEmail" + (i + 1)]);
+            //        guardianEmail.Value = new PdfString(user.Guardians[i].Email);
+            //    }
+            //}
 
             //Parenting Plan
             if (user.StudentsParentingPlan.inEffect)
@@ -847,8 +849,73 @@ namespace IGrad.Controllers
                     PdfTextField lastHighSchoolLocationInfo = (PdfTextField)(document.AcroForm.Fields["LastHighSchoolInformation"]);
                     lastHighSchoolLocationInfo.Value = new PdfString(highSchool.HighSchoolCity + ", " + highSchool.HighSchoolState);
 
+                    PdfTextField lastHighSchoolDistrict = (PdfTextField)(document.AcroForm.Fields["LastHighSchoolDistrict"]);
+                    lastHighSchoolDistrict.Value = new PdfString(highSchool.SchoolDistrict);
                 }
             }
+
+            //WashingtonState  school
+            StringBuilder schoolsInWAStringBuilder = new StringBuilder();
+            StringBuilder schoolsInKentSchoolDistrictStringBuilder = new StringBuilder();
+            int lastWashingtonAttendDate = 0;
+            int lastKentSDAttendDate = 0;
+            for (int i = 0; i < user.SchoolInfo.HighSchoolInformation.Count; i++)
+            {
+                HighSchoolInfo highSchool = user.SchoolInfo.HighSchoolInformation[i];
+                if (Regex.IsMatch(highSchool.HighSchoolState, "WA", RegexOptions.IgnoreCase) ||
+                    Regex.IsMatch(highSchool.HighSchoolState, "Washington", RegexOptions.IgnoreCase))
+                {
+                    if(schoolsInWAStringBuilder.Length > 0)
+                    {
+                        schoolsInWAStringBuilder.Append(", " + highSchool.HighSchoolName);
+                    }
+                    else
+                    {
+                        schoolsInWAStringBuilder.Append(highSchool.HighSchoolName);
+                    }
+                    
+                    
+                    //check year if greater (only keeping greatest)
+                    if(Int16.Parse(highSchool.HighSchoolYear) > lastWashingtonAttendDate)
+                    {
+                        lastWashingtonAttendDate = Int16.Parse(highSchool.HighSchoolYear);
+                    }
+                }
+
+                if(Regex.IsMatch(highSchool.SchoolDistrict, "kent.*", RegexOptions.IgnoreCase))
+                {
+
+                    if(schoolsInKentSchoolDistrictStringBuilder.Length > 0)
+                    {
+                        schoolsInKentSchoolDistrictStringBuilder.Append(", " + highSchool.HighSchoolName);
+                    }
+                    else
+                    {
+                        schoolsInKentSchoolDistrictStringBuilder.Append(highSchool.HighSchoolName);
+                    }
+
+                    if(Int16.Parse(highSchool.HighSchoolYear) > lastKentSDAttendDate)
+                    {
+                        lastKentSDAttendDate = Int16.Parse(highSchool.HighSchoolYear);
+                    }
+                }
+            }
+
+            PdfTextField schoolsAttendedInWashington = (PdfTextField)document.AcroForm.Fields["SchoolsAttendedInWashington"];
+            schoolsAttendedInWashington.Value = new PdfString(schoolsInWAStringBuilder.ToString());
+
+            PdfTextField schoolsAttendedInWashingtonDate = (PdfTextField)document.AcroForm.Fields["SchoolsAttendedInWashingtonDate"];
+            schoolsAttendedInWashingtonDate.Value = new PdfString(lastWashingtonAttendDate.ToString());
+
+            //Attended school in kent school district
+
+            PdfTextField schoolsAttendedInKentSD = (PdfTextField)document.AcroForm.Fields["SchoolsAttendedInKentSchoolDistrict"];
+            schoolsAttendedInKentSD.Value = new PdfString(schoolsInKentSchoolDistrictStringBuilder.ToString());
+
+            PdfTextField schoolsAttendedInKentSDDate = (PdfTextField)document.AcroForm.Fields["SchoolsAttendedInKentSchoolDistrictDate"];
+            schoolsAttendedInKentSDDate.Value = new PdfString(lastKentSDAttendDate.ToString());
+
+
 
 
             //student suspended for weapons violation
@@ -1029,8 +1096,12 @@ namespace IGrad.Controllers
             }
             #endregion
 
-            PdfTextField countryBornIn = (PdfTextField)(document.AcroForm.Fields["CountryBornIn"]);
-            countryBornIn.Value = new PdfString(user.BirthPlace.Country.ToString());
+            if(user.BirthPlace.Country != null)
+            {
+                PdfTextField countryBornIn = (PdfTextField)(document.AcroForm.Fields["CountryBornIn"]);
+                countryBornIn.Value = new PdfString(user.BirthPlace.Country.ToString());
+            }
+           
 
             if (user.SchoolInfo.PriorEducation != null)
             {

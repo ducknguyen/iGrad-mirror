@@ -419,6 +419,7 @@ namespace IGrad.Controllers
                     .Include(u => u.LivesWith)
                     .Include(u => u.ResidentAddress)
                     .Include(u => u.MailingAddress)
+                    .Include(u => u.SecondaryHouseholdAddress)
                     .Include(u => u.EmergencyContacts)
                     .Include(u => u.EmergencyContacts.Select(n => n.Name))
                     .Include(u => u.EmergencyContacts.Select(p => p.PhoneOne))
@@ -447,6 +448,10 @@ namespace IGrad.Controllers
             {
                 _user.MailingAddress = new Address();
             }
+            if (_user.SecondaryHouseholdAddress == null)
+            {
+                _user.SecondaryHouseholdAddress = new Address();
+            }
             if (_user.LivesWith == null)
             {
                 _user.LivesWith = new LivesWith();
@@ -467,6 +472,7 @@ namespace IGrad.Controllers
                        .Include(u => u.LivesWith)
                        .Include(u => u.ResidentAddress)
                        .Include(u => u.MailingAddress)
+                       .Include(u => u.SecondaryHouseholdAddress)
                        .Include(u => u.EmergencyContacts)
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
@@ -475,9 +481,12 @@ namespace IGrad.Controllers
                 user.LivesWith.UserID = UserID;
                 user.MailingAddress.UserID = UserID;
                 user.ResidentAddress.UserID = UserID;
+                user.SecondaryHouseholdAddress.UserID = UserID;
+
                 //assign entity the values submitted by form
                 data.MailingAddress = user.MailingAddress;
                 data.ResidentAddress = user.ResidentAddress;
+                data.SecondaryHouseholdAddress = user.SecondaryHouseholdAddress;
                 data.LivesWith = user.LivesWith;
 
                 

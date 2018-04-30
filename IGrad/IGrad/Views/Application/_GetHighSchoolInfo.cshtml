@@ -8,6 +8,7 @@
             <th>Name</th>
             <th>City</th>
             <th>Grade</th>
+            <th>District</th>
             <th>Last attended</th>
             <th class="text-center">Remove</th>
         </tr>
@@ -18,6 +19,7 @@
             <td>@hsi.HighSchoolName</td>
             <td>@hsi.HighSchoolCity</td>
             <td>@hsi.HighSchoolGrade</td>
+            <td>@hsi.SchoolDistrict</td>
             <td id="@(hsi.isLastHighSchoolAttended ? "last-attended" : "\"\"")">@(hsi.isLastHighSchoolAttended ? "Yes" : "No")</td>
             <td class="text-center">
                 <button class="btn btn-danger" type="submit" onclick="deleteHighSchoolRecord(@hsi.fieldId)">

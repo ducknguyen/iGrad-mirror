@@ -209,9 +209,10 @@
     </div>
     <hr />
 }
+
     <!-- ADD PRIMARY GUARDIAN -->
     <div class="container" id="add-primary-guardian-container">
-        <h4 class="bg-info">Primary Residence Guardians</h4>
+        <h4 class="bg-info">Guardians At Primary Residence (No More Than 2)</h4>
         <div class="" id="primary-guardians">
             <!-- guardians partial view here-->
             @{if (Model.Guardians != null)
@@ -220,7 +221,7 @@
                 }
             }
         </div>
-        <button class="btn btn-primary" id="add-primary-guardian-button" onclick="loadPrimaryGuardianInfoForm()">Add Parent/Guardian</button>
+        <button class="btn btn-primary" id="add-primary-guardian-button" type="button" onclick="loadPrimaryGuardianInfoForm()">Add Parent/Guardian</button>
         <div class="hidden" id="add-primary-guardian">
         </div>
     </div>
@@ -229,40 +230,43 @@
 <div class="" id="prompt-secondary-residence">
     <hr />
     <h4 class="bg-info">Secondary Residence</h4>
-    <strong>Does the student have a parent/legal guardian not living at the address above?</strong>
+        <strong>Does the student have a parent/legal guardian not living at the address above?</strong>
     <br />
-    <button class="btn btn-primary" type="button" onclick="showTarget('secondary-residence-container')">Yes</button>
-    <button class="btn " value="" type="button" onclick="hideTarget('secondary-residence-container')">No</button>
-    <div class="container" id="secondary-residence-container">
+    <div class="container">
+        <button class="btn btn-primary" type="button" onclick="showTarget('secondary-residence-container')">Yes</button>
+        <button class="btn " value="" type="button" onclick="hideTarget('secondary-residence-container')">No</button>
+    </div>
+    <br />
+    <div class="container hidden" id="secondary-residence-container">
         <div class="row">
             <div class="row">
                 <div class="form-group col-md-3">
                     @Html.LabelFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "required-marker" })
-                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "Street address" })
+                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "Street address", @form= "household-form" })
                 </div>
                 <div class="form-group col-md-3">
                     @Html.LabelFor(model => model.SecondaryHouseholdAddress.City, htmlAttributes: new { @class = "required-marker" })
-                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "City" })
+                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "City", @form = "household-form" })
                 </div>
                 <div class="form-group col-md-2">
                     @Html.LabelFor(model => model.SecondaryHouseholdAddress.State, htmlAttributes: new { @class = "required-marker" })
-                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "State" })
+                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "State", @form = "household-form" })
                 </div>
                 <div class="form-group col-md-2">
                     @Html.LabelFor(model => model.SecondaryHouseholdAddress.Zip, htmlAttributes: new { @class = "required-marker" })
-                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Zip, "{0:#.#}", new { @class = "form-control", @placeholder = "Zip" })
+                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Zip, "{0:#.#}", new { @class = "form-control", @placeholder = "Zip", @form = "household-form" })
                     @Html.ValidationMessageFor(model => model.SecondaryHouseholdAddress.Zip, "", new { @class = "text-danger" })
                 </div>
                 <div class="form-group col-md-2">
                     @Html.LabelFor(model => model.SecondaryHouseholdAddress.POBox, htmlAttributes: new { @class = "required-marker" })
-                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.POBox, new { @class = "form-control", @placeholder = "PO" })
+                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.POBox, new { @class = "form-control", @placeholder = "PO", @form = "household-form" })
                 </div>
             </div>
         </div>
 
         <!-- ADD SECONDARY GUARDIAN -->
         <div class="container" id="add-secondary-guardian-container">
-            <h4 class="bg-info">Secondary Residence Guardians</h4>
+            <h4 class="bg-info">Guardians At Secondary Residence (No More Than 2)</h4>
             <div class="" id="secondary-guardians">
                 <!-- guardians partial view here-->
                 @{if (Model.Guardians != null)
@@ -300,7 +304,7 @@
 
 <!-- ADD EMERGENCY CONTACT -->
 <div class="wrapper" id="add-emergency-contact-container">
-    <h4 class="bg-info">Emergency Contacts</h4>
+    <h4 class="bg-info">Emergency Contacts (Provide 3)</h4>
     <div class="" id="emergency-contacts">
         <!-- emergency partial view here-->
         @{if (Model.EmergencyContacts != null)

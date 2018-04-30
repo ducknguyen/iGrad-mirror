@@ -9,11 +9,20 @@
 <h3>Finishing Up!</h3>
 <hr>
 <div class="container" id="optional-assistance-container">
-    <h4><strong>(Optional)</strong> Additional IGrad Assistance</h4>
+    <h4 class="bg-info">(Optional) Additional IGrad Assistance</h4>
     <input type="button" value="Show" class="btn btn-default" onclick="showTarget('optional-assistance-form')" />
     <input type="button" value="Hide" class="btn btn-default" onclick="hideTarget('optional-assistance-form')" />
-    <div class="container" id="optional-assistance-form">
+    <div class="container hidden" id="optional-assistance-form">
         @Html.Action("GetOptionalAssistanceForm", Model);
+    </div>
+</div>
+<hr />
+<div class="container" id="parenting-plan-container">
+    <h4 class="bg-info">(Optional) Student's Parenting Plan</h4>
+    <input type="button" value="Show" class="btn btn-default" onclick="showTarget('parenting-plan-form')" />
+    <input type="button" value="Hide" class="btn btn-default" onclick="hideTarget('parenting-plan-form')" />
+    <div class="container hidden" id="parenting-plan-form">
+        @*@Html.Action("", Model);*@
     </div>
 </div>
 <hr />
