@@ -34,7 +34,6 @@ ALTER TABLE [dbo].[SchoolInfoes] DROP CONSTRAINT [FK_dbo.SchoolInfoes_dbo.Violat
 ALTER TABLE [dbo].[SchoolInfoes] DROP CONSTRAINT [FK_dbo.SchoolInfoes_dbo.PriorEducations_PriorEducation_fieldId]
 GO
 
-
 IF EXISTS (SELECT * FROM sys.tables WHERE name = 'PreSchools')
 ALTER TABLE [dbo].[PreSchools] DROP CONSTRAINT [FK_dbo.PreSchools_dbo.User_UserID]
 ALTER TABLE [dbo].[PreSchools] DROP CONSTRAINT [FK_dbo.PreSchools_dbo.Addresses_Address_fieldId]
@@ -78,6 +77,10 @@ GO
 
 IF EXISTS (SELECT * FROM sys.tables WHERE name = 'AspNetUserClaims')
 ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId]
+GO
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'MilitaryInfoes')
+ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.MillitaryInfoes_MillitaryInfo_fieldId]
 GO
 
 
