@@ -81,6 +81,7 @@ GO
 
 IF EXISTS (SELECT * FROM sys.tables WHERE name = 'MillitaryInfoes')
 ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.MillitaryInfoes_MillitaryInfo_fieldId]
+DROP TABLE [dbo].[MillitaryInfoes]
 GO
 
 
