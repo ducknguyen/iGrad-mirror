@@ -98,6 +98,7 @@ namespace IGrad.Controllers
                 zip.AddEntry("ImmunizationStatus.pdf", ImmunizationStatusForm());
                 zip.AddEntry("FamilyIncomeSurvey.pdf", FamilyIncomeForm());
                 zip.AddEntry("RequestForRecords.pdf", RequestForRecordsForm());
+                zip.AddEntry("MilitaryInfo.pdf", MilitaryInfoForm());
                 zip.AddEntry("KingCountyLibrarySystem.pdf", KingCountyLibrarySystemForm());
 
                 //optional forms
@@ -197,6 +198,57 @@ namespace IGrad.Controllers
                 }
             }
         }
+
+        private Byte[] MilitaryInfoForm()
+        {
+            // Get Blank Form
+            string filePath = System.Web.Hosting.HostingEnvironment.MapPath("~/media/documents/MilitaryForm.pdf");
+            PdfDocument document = PdfReader.Open(filePath);
+
+            // Set the flag so we can flatten once done.
+            document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
+
+            PdfTextField studentName = (PdfTextField)(document.AcroForm.Fields["StudentName"]);
+            studentName.Value = new PdfString(this.user.Name.FName + " " + this.user.Name.LName);
+
+            PdfTextField newSchool = (PdfTextField)(document.AcroForm.Fields["School"]);
+            newSchool.Value = new PdfString("iGrad");
+
+            PdfCheckBoxField activeduty = (PdfCheckBoxField)(document.AcroForm.Fields["ActiveDuty"]);
+            PdfCheckBoxField nationalguard = (PdfCheckBoxField)(document.AcroForm.Fields["NationalGuard"]);
+            PdfCheckBoxField morethanone = (PdfCheckBoxField)(document.AcroForm.Fields["MoreThanOne"]);
+            PdfCheckBoxField none = (PdfCheckBoxField)(document.AcroForm.Fields["None"]);
+            PdfCheckBoxField reserves = (PdfCheckBoxField)(document.AcroForm.Fields["Reserves"]);
+            PdfCheckBoxField refused = (PdfCheckBoxField)(document.AcroForm.Fields["Refused"]);
+
+            if (user.MillitaryInfo.ArmedForcesActiveDuty)
+            {
+                activeduty.Checked = true;
+            }
+            if (user.MillitaryInfo.NationalGuard)
+            {
+                nationalguard.Checked = true;
+            }
+            if (user.MillitaryInfo.MoreThanOne)
+            {
+                morethanone.Checked = true;
+            }
+            if (user.MillitaryInfo.None)
+            {
+                none.Checked = true;
+            }
+            if (user.MillitaryInfo.ArmedForcesReserved)
+            {
+                reserves.Checked = true;
+            }
+            if (user.MillitaryInfo.PreferNotToAnswer)
+            {
+                refused.Checked = true;
+            }
+
+            return writeDocument(document);
+        }
+           
 
         private Byte[] StudentEnrollmentChecklistForm()
         {

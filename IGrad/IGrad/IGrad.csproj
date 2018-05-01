@@ -327,6 +327,7 @@
     <Content Include="media\fonts\courbd.ttf" />
     <Content Include="media\fonts\courbi.ttf" />
     <Content Include="media\fonts\couri.ttf" />
+    <Content Include="media\documents\MilitaryForm.pdf" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy %282%29.pubxml" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy %283%29.pubxml" />
     <None Include="Properties\PublishProfiles\codedot.net - Web Deploy.pubxml" />
