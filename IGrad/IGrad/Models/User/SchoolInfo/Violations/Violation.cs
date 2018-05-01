@@ -30,12 +30,15 @@ namespace IGrad.Models.User
         public string ExplainDiciplanaryStatus { get; set; }
         [DisplayName("Student has Sex violation")]
         public bool hasSexViolation { get; set; }
+        [DisplayName("Explain Sexual Violation")]
         public string explainSexViolation { get; set; }
         [DisplayName("Student has Criminal Violation")]
         public bool hasCriminalViolation { get; set; }
+        [DisplayName("Explain Criminal Violation")]
         public string explainCriminalViolation { get; set; }
         [DisplayName("Student has Violent tendicies")]
         public bool hasViolentTendicies { get; set; }
+        [DisplayName("Explain Violent Behavior")]
         public string explainViolence { get; set; }
         [DisplayName("Student has other violation")]
         public bool hasOtherViolation { get; set; }
