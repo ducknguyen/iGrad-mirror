@@ -87,10 +87,51 @@
             @Html.ValidationMessageFor(model => model.PhoneInfo.PhoneNumber, "", new { @class = "text-danger" })
         </div>
     </div>
+
+    <!-- MILITARY INFO START -->
+    <div class="row">
+        <h4 class="bg-info">
+            Military Information:
+        </h4>
+        <div>
+            <ul style="display:inline-block">
+                <li style="display:inline-block">
+                    @Html.CheckBoxFor(model => model.MillitaryInfo.ArmedForcesActiveDuty, new { @class = "" })
+                    @Html.LabelFor(model => model.MillitaryInfo.ArmedForcesActiveDuty, htmlAttributes: new { @class = "control-label" })
+                </li>
+                <li style="display:inline-block">
+                    @Html.CheckBoxFor(model => model.MillitaryInfo.ArmedForcesReserved, new { @class = "" })
+                    @Html.LabelFor(model => model.MillitaryInfo.ArmedForcesReserved, htmlAttributes: new { @class = "control-label" })
+                </li>
+                <li style="display:inline-block">
+                    @Html.CheckBoxFor(model => model.MillitaryInfo.NationalGuard, new { @class = "" })
+                    @Html.LabelFor(model => model.MillitaryInfo.NationalGuard, htmlAttributes: new { @class = "control-label" })
+                </li>
+                <li style="display:inline-block">
+                    @Html.CheckBoxFor(model => model.MillitaryInfo.MoreThanOne, new { @class = "" })
+                    @Html.LabelFor(model => model.MillitaryInfo.MoreThanOne, htmlAttributes: new { @class = "control-label" })
+                </li>
+                <li style="display:inline-block">
+                    @Html.CheckBoxFor(model => model.MillitaryInfo.None, new { @class = "" })
+                    @Html.LabelFor(model => model.MillitaryInfo.None, htmlAttributes: new { @class = "control-label" })
+                </li>
+                <li style="display:inline-block">
+                    @Html.CheckBoxFor(model => model.MillitaryInfo.PreferNotToAnswer, new { @class = "race-checkbox" })
+                    @Html.LabelFor(model => model.MillitaryInfo.PreferNotToAnswer, htmlAttributes: new { @class = "control-label" })
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- END MILITARY INFORMATION -->
+
     <!-- GENDER, EMAIL AND PHONE END --->
     <!-- **********RACE AND ETHNICITY START********** -->
     <div class="row">
-
+        <h4 class="bg-info">
+            Student Race Info:
+        </h4>
         <!-- RACE SELECTOR -->
         <div class="col-md-3 form-group">
             @*@Html.LabelFor(model => model.ConsideredRaceAndEthnicity, htmlAttributes: new { @class = "control-label required-marker" })*@

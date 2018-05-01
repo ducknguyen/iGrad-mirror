@@ -1651,6 +1651,12 @@ namespace IGrad.Controllers
                 text.Value = new PdfString(healthInfoDescriptions[s].ToString());
             }
 
+            if(user.HealthInfo.SeriousInjuryDate != null)
+            {
+                PdfTextField injuryDate = (PdfTextField)(document.AcroForm.Fields["SeriousInjuryOrSurgeryDate"]);
+                injuryDate.Value = new PdfString(user.HealthInfo.SeriousInjuryDate.ToString());
+            }
+
             SetFinishedSecuritySettings(document);
             return writeDocument(document);
         }
