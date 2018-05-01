@@ -36,7 +36,7 @@ namespace IGrad.Models.User
         public bool hasCriminalViolation { get; set; }
         [DisplayName("Explain Criminal Violation")]
         public string explainCriminalViolation { get; set; }
-        [DisplayName("Student has Violent tendicies")]
+        [DisplayName("Student has Violent Tendencies")]
         public bool hasViolentTendicies { get; set; }
         [DisplayName("Explain Violent Behavior")]
         public string explainViolence { get; set; }

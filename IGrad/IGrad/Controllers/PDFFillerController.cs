@@ -48,6 +48,7 @@ namespace IGrad.Controllers
                        .Include(u => u.SchoolInfo)
                        .Include(u => u.SchoolInfo.HighSchoolInformation)
                        .Include(u => u.SchoolInfo.PriorEducation)
+                       .Include(u => u.SchoolInfo.PreviousSchoolViolation)
                        .Include(u => u.QualifiedOrEnrolledInProgam)
                        .Include(u => u.NativeAmericanEducation)
                        .Include(u => u.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment)
@@ -938,22 +939,24 @@ namespace IGrad.Controllers
                             lastWashingtonAttendDate = Int16.Parse(highSchool.HighSchoolYear);
                         }
                     }
-
-                    if (Regex.IsMatch(highSchool.SchoolDistrict, "kent.*", RegexOptions.IgnoreCase))
+                    if(highSchool.SchoolDistrict != null)
                     {
+                        if (Regex.IsMatch(highSchool.SchoolDistrict, "kent.*", RegexOptions.IgnoreCase))
+                        {
 
-                        if (schoolsInKentSchoolDistrictStringBuilder.Length > 0)
-                        {
-                            schoolsInKentSchoolDistrictStringBuilder.Append(", " + highSchool.HighSchoolName);
-                        }
-                        else
-                        {
-                            schoolsInKentSchoolDistrictStringBuilder.Append(highSchool.HighSchoolName);
-                        }
+                            if (schoolsInKentSchoolDistrictStringBuilder.Length > 0)
+                            {
+                                schoolsInKentSchoolDistrictStringBuilder.Append(", " + highSchool.HighSchoolName);
+                            }
+                            else
+                            {
+                                schoolsInKentSchoolDistrictStringBuilder.Append(highSchool.HighSchoolName);
+                            }
 
-                        if (Int16.Parse(highSchool.HighSchoolYear) > lastKentSDAttendDate)
-                        {
-                            lastKentSDAttendDate = Int16.Parse(highSchool.HighSchoolYear);
+                            if (Int16.Parse(highSchool.HighSchoolYear) > lastKentSDAttendDate)
+                            {
+                                lastKentSDAttendDate = Int16.Parse(highSchool.HighSchoolYear);
+                            }
                         }
                     }
                 }
