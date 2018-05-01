@@ -252,6 +252,7 @@
     <Compile Include="Models\User\LifeEvent\LifeEvent.cs" />
     <Compile Include="Models\User\LivesWith\LivesWithList.cs" />
     <Compile Include="Models\User\Language\Name\Name.cs" />
+    <Compile Include="Models\User\Millitary\MillitaryInfo.cs" />
     <Compile Include="Models\User\NativeAmerican\NativeAmericanEducation.cs" />
     <Compile Include="Models\User\OptionalOpportunities\OptionalAssistance.cs" />
     <Compile Include="Models\User\ParentPlan\ParentPlan.cs" />
