@@ -9,10 +9,17 @@
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 
+    $(document).on('click', '.remove-primary-guardian', function () {
+        showTarget('add-primary-guardian-button');
+    })
+
+    $(document).on('click', '.remove-primary-guardian', function () {
+        showTarget('add-secondary-guardian-button');
+    })
+
     $(document).ready(function () {
         homelessToggled();
         residentIsMailingAddress();
-
     })
 
     function residentIsMailingAddress() {
@@ -28,22 +35,30 @@
         $("#add-emergency-contact").load('@Url.Action("GetAddEmergencyContact", "Application")');
     }
 
-    function loadGuardianInfoForm() {
-        hideTarget('add-guardian-button');
-        showTarget('add-guardian');
-        $("#add-guardian").load('@Url.Action("GetAddGuardian", "Application")');
-    }
-
     function loadPrimaryGuardianInfoForm() {
-        hideTarget('add-primary-guardian-button');
-        showTarget('add-primary-guardian');
-        $("#add-primary-guardian").load('@Url.Action("GetAddPrimaryGuardian", "Application")');
+        var rowCount = $('#primary-guardians table tbody tr').length;
+        if (rowCount < 2) {
+            hideTarget('primary-guardian-count-warning');
+            showTarget('add-primary-guardian');
+            $("#add-primary-guardian").load('@Url.Action("GetAddPrimaryGuardian", "Application")');
+        }
+        else {
+            hideTarget('add-primary-guardian-button');
+            showTarget('primary-guardian-count-warning')
+        }
     }
 
     function loadSecondaryGuardianInfoForm() {
-        hideTarget('add-secondary-guardian-button');
-        showTarget('add-secondary-guardian');
-        $("#add-secondary-guardian").load('@Url.Action("GetAddSecondaryGuardian", "Application")');
+        var rowCount = $('#secondary-guardians table tbody tr').length;
+        if (rowCount < 2) {
+            hideTarget('secondary-guardian-count-warning');
+            showTarget('add-secondary-guardian');
+            $("#add-secondary-guardian").load('@Url.Action("GetAddSecondaryGuardian", "Application")');
+        }
+        else {
+            hideTarget('add-secondary-guardian-button');
+            showTarget('secondary-guardian-count-warning');
+        }
     }
 
     function loadSiblingInfoForm() {
@@ -66,7 +81,6 @@
         }
         else {
             hideTarget('homeless-container')
-            console.log("Homeless container is hidden.")
         }
     }
 
@@ -75,7 +89,7 @@
             type: "POST",
             url: '/Application/DeleteEmergencyContact',
             data: { 'fieldId': fieldId },
-            success: hideTarget('ec_' + fieldId)
+            success: $('#ec_' + fieldId).remove()
         });
     }
 
@@ -84,7 +98,7 @@
             type: "POST",
             url: '/Application/DeleteGuardian',
             data: { 'fieldId': fieldId },
-            success: hideTarget('guardian_' + fieldId)
+            success: $('#guardian_'+fieldId).remove()
         });
     }
 
@@ -93,7 +107,7 @@
             type: "POST",
             url: '/Application/DeleteSibling',
             data: { 'fieldId': fieldId },
-            success: hideTarget('sibling_' + fieldId)
+            success: $('#sibling_' + fieldId).remove()
         });
     }
 
@@ -210,27 +224,28 @@
     <hr />
 }
 
-    <!-- ADD PRIMARY GUARDIAN -->
-    <div class="container" id="add-primary-guardian-container">
-        <h4 class="bg-info">Guardians At Primary Residence (No More Than 2)</h4>
-        <div class="" id="primary-guardians">
-            <!-- guardians partial view here-->
-            @{if (Model.Guardians != null)
-                {
-                    Html.RenderPartial("_GetGuardianInfo", Model.Guardians.ToList(), new ViewDataDictionary { { "ResidenceType", "Primary" } });
-                }
+<!-- ADD PRIMARY GUARDIAN -->
+<div class="container" id="add-primary-guardian-container">
+    <h4 class="bg-info">Guardians At Primary Residence (No More Than 2)</h4>
+    <div class="" id="primary-guardians">
+        <!-- guardians partial view here-->
+        @{if (Model.Guardians != null)
+            {
+                Html.RenderPartial("_GetGuardianInfo", Model.Guardians.ToList(), new ViewDataDictionary { { "ResidenceType", "Primary" } });
             }
-        </div>
-        <button class="btn btn-primary" id="add-primary-guardian-button" type="button" onclick="loadPrimaryGuardianInfoForm()">Add Parent/Guardian</button>
-        <div class="hidden" id="add-primary-guardian">
-        </div>
+        }
     </div>
+    <span class="text-warning hidden" id="primary-guardian-count-warning">Cannot have more than 2 guardians. Please delete a guardian to add a different one.</span>
+    <button class="btn btn-primary" id="add-primary-guardian-button" type="button" onclick="loadPrimaryGuardianInfoForm()">Add Parent/Guardian</button>
+    <div class="hidden" id="add-primary-guardian">
+    </div>
+</div>
 
 
 <div class="" id="prompt-secondary-residence">
     <hr />
     <h4 class="bg-info">Secondary Residence</h4>
-        <strong>Does the student have a parent/legal guardian not living at the address above?</strong>
+    <strong>Does the student have a parent/legal guardian not living at the address above?</strong>
     <br />
     <div class="container">
         <button class="btn btn-primary" type="button" onclick="showTarget('secondary-residence-container')">Yes</button>
@@ -242,7 +257,7 @@
             <div class="row">
                 <div class="form-group col-md-3">
                     @Html.LabelFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "required-marker" })
-                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "Street address", @form= "household-form" })
+                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "Street address", @form = "household-form" })
                 </div>
                 <div class="form-group col-md-3">
                     @Html.LabelFor(model => model.SecondaryHouseholdAddress.City, htmlAttributes: new { @class = "required-marker" })
@@ -275,6 +290,7 @@
                     }
                 }
             </div>
+            <span class="text-warning hidden" id="secondary-guardian-count-warning">Cannot have more than 2 guardians. Please delete a guardian to add a different one.</span>
             <button class="btn btn-primary" id="add-secondary-guardian-button" onclick="loadSecondaryGuardianInfoForm()">Add Parent/Guardian</button>
             <div class="hidden" id="add-secondary-guardian">
             </div>
@@ -321,20 +337,20 @@
 <br /><br />
 
 @*<!-- ADD GUARDIAN -->
-<div class="wrapper" id="add-guardian-container">
-    <h4 class="bg-info">Guardians</h4>
-    <div class="" id="guardians">
-        <!-- guardians partial view here-->
-        @{if (Model.Guardians != null)
+    <div class="wrapper" id="add-guardian-container">
+        <h4 class="bg-info">Guardians</h4>
+        <div class="" id="guardians">
+            <!-- guardians partial view here-->
+            @{if (Model.Guardians != null)
             {
-                Html.RenderPartial("_GetGuardianInfo", Model.Guardians.ToList());
+            Html.RenderPartial("_GetGuardianInfo", Model.Guardians.ToList());
             }
-        }
-    </div>
-    <button class="btn btn-primary" id="add-guardian-button" onclick="loadGuardianInfoForm()">Add Parent/Guardian</button>
-    <div class="hidden" id="add-guardian">
-    </div>
-</div>*@
+            }
+        </div>
+        <button class="btn btn-primary" id="add-guardian-button" onclick="loadGuardianInfoForm()">Add Parent/Guardian</button>
+        <div class="hidden" id="add-guardian">
+        </div>
+    </div>*@
 
 <br /><br />
 

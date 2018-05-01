@@ -79,5 +79,18 @@ namespace IGrad.Models.User
             return secondaryGuardians;
         }
 
+        public int GetPrimaryGuardiansCount()
+        {
+            List<Guardian> list = GetPrimaryGuardians();
+            return list.Count;
+        }
+
+        public int GetSecondaryGuardiansCount()
+        {
+            List<Guardian> list = GetSecondaryGuardians();
+            return list.Count;
+        }
+
+        
     }
 }
