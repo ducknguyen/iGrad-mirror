@@ -11,9 +11,7 @@ using IGrad.Context;
 using IGrad.Models.User;
 using System.Data.Entity.Validation;
 using System.Collections.Generic;
-using Microsoft.AspNet.Identity.EntityFramework;
 using IGrad.Models.Income;
-using System.Data.Entity;
 using System.Xml;
 
 namespace IGrad.Controllers

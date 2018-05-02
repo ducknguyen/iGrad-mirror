@@ -58,6 +58,7 @@ namespace IGrad.Controllers
                        .Include(u => u.SecondaryHouseholdAddress)
                        .Include(u => u.OptionalOpportunities)
                        .Include(u => u.StudentsParentingPlan)
+                       .Include(u => u.MillitaryInfo)
                        .Include(u => u.StudentChildCare)
                        .Include(u => u.EmergencyContacts)
                        .Include(u => u.EmergencyContacts.Select(n => n.Name))
@@ -604,19 +605,21 @@ namespace IGrad.Controllers
                     //email
                     PdfTextField email = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2Email"];
                     email.Value = new PdfString(guardian2.Email.ToString());
+
+                    //check active military
+                    if (secondaryGuardians[0].IsActiveMilitary || secondaryGuardians[1].IsActiveMilitary)
+                    {
+                        PdfCheckBoxField activeMilitary = (PdfCheckBoxField)document.AcroForm.Fields["SecondaryGuardianIsActiveMilitaryTrue"];
+                        activeMilitary.Checked = true;
+                    }
+                    else
+                    {
+                        PdfCheckBoxField activeMilitary = (PdfCheckBoxField)document.AcroForm.Fields["SecondaryGuardianIsActiveMilitaryFalse"];
+                        activeMilitary.Checked = true;
+                    }
                 }
 
-                //check active military
-                if (secondaryGuardians[0].IsActiveMilitary || secondaryGuardians[1].IsActiveMilitary)
-                {
-                    PdfCheckBoxField activeMilitary = (PdfCheckBoxField)document.AcroForm.Fields["SecondaryGuardianIsActiveMilitaryTrue"];
-                    activeMilitary.Checked = true;
-                }
-                else
-                {
-                    PdfCheckBoxField activeMilitary = (PdfCheckBoxField)document.AcroForm.Fields["SecondaryGuardianIsActiveMilitaryFalse"];
-                    activeMilitary.Checked = true;
-                }
+                
 
                 //secondary household address
                 Address secAddr = user.SecondaryHouseholdAddress;

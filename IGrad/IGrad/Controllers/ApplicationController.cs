@@ -64,6 +64,7 @@ namespace IGrad.Controllers
                     .Include(u => u.Name)
                     .Include(u => u.BirthPlace)
                     .Include(u => u.ConsideredRaceAndEthnicity)
+                    .Include(u => u.MillitaryInfo)
                     .Include(u => u.NativeAmericanEducation)
                     .Include(u => u.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment)
                     .Include(u => u.PhoneInfo)
@@ -92,6 +93,7 @@ namespace IGrad.Controllers
                        .Include(u => u.BirthPlace)
                        .Include(u => u.ConsideredRaceAndEthnicity)
                        .Include(u => u.PhoneInfo)
+                       .Include(u => u.MillitaryInfo)
                        .Where(u => u.UserID == user.UserID)
                        .FirstOrDefault<UserModel>();
 
