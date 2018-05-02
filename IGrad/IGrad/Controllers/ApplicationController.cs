@@ -560,15 +560,6 @@ namespace IGrad.Controllers
             }
         }
 
-        public ActionResult GetAddGuardian()
-        {
-            Guardian defaultGuardian = new Guardian();
-            defaultGuardian.PhoneOne = new Phone();
-            defaultGuardian.PhoneTwo = new Phone();
-            defaultGuardian.Name = new Name();
-            return PartialView("_AddGuardian", defaultGuardian);
-        }
-
         public ActionResult GetAddPrimaryGuardian()
         {
             Guardian defaultGuardian = new Guardian();
@@ -616,8 +607,8 @@ namespace IGrad.Controllers
                 //create a list to aggregate the types we want to return
                 List<Guardian> guardianListForView = new List<Guardian>();
 
-                //check if submission came from primary
-                if(guardian.GuardianResidenceType == Guardian.EGuardianType.Primary.ToString())
+                //check if submission came from primary so we can set the residence type correctly
+                if (guardian.GuardianResidenceType == Guardian.EGuardianType.Primary.ToString())
                 {
                     foreach(Guardian g in data.Guardians)
                     {
@@ -627,7 +618,8 @@ namespace IGrad.Controllers
                         }
                     }
                 }
-                //check if submission came from secondary
+
+                //check if submission came from secondary so we can set the residence type correctly
                 if(guardian.GuardianResidenceType == Guardian.EGuardianType.Secondary.ToString())
                 {
                     foreach (Guardian g in data.Guardians)
@@ -651,6 +643,7 @@ namespace IGrad.Controllers
             }
             return PartialView("_GetGuardianInfo", guardianList);
         }
+
         [HttpPost]
         public void DeleteGuardian(string fieldId)
         {
