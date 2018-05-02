@@ -1,5 +1,14 @@
 ﻿@model IGrad.Models.User.HighSchoolInfo
 
+<script type="text/javascript">
+    $("#submitButton").click(function (e) {
+        if ($("#last-attended:contains('Yes')") && $('#lastAttendedTrue').is(':checked')) {
+            e.preventDefault();
+            alert("Cannot add another last attended highschool.");
+        }
+    })
+</script>
+
 @using (Ajax.BeginForm("SubmitHighSchoolInfoPartial", "Application",null, new AjaxOptions()
 {
     HttpMethod = "Post",
@@ -50,7 +59,7 @@
             <div class="form-group col-md-4">
                 @Html.LabelFor(model => model.isLastHighSchoolAttended, htmlAttributes: new { @class = "control-label required-marker" })
                 <br />
-                @Html.RadioButtonFor(model => model.isLastHighSchoolAttended, true) Yes
+                @Html.RadioButtonFor(model => model.isLastHighSchoolAttended, true, htmlAttributes: new { @id = "lastAttendedTrue" } ) Yes
                 @Html.RadioButtonFor(model => model.isLastHighSchoolAttended, false) No
                 @Html.ValidationMessageFor(model => model.isLastHighSchoolAttended, "", new { @class = "text-danger" })
             </div>

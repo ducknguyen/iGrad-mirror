@@ -48,6 +48,7 @@ namespace IGrad.Controllers
                        .Include(u => u.SchoolInfo)
                        .Include(u => u.SchoolInfo.HighSchoolInformation)
                        .Include(u => u.SchoolInfo.PriorEducation)
+                       .Include(u => u.SchoolInfo.PreviousSchoolViolation)
                        .Include(u => u.QualifiedOrEnrolledInProgam)
                        .Include(u => u.NativeAmericanEducation)
                        .Include(u => u.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment)
@@ -221,34 +222,37 @@ namespace IGrad.Controllers
             PdfCheckBoxField reserves = (PdfCheckBoxField)(document.AcroForm.Fields["Reserves"]);
             PdfCheckBoxField refused = (PdfCheckBoxField)(document.AcroForm.Fields["Refused"]);
 
-            if (user.MillitaryInfo.ArmedForcesActiveDuty)
+            if (user.MillitaryInfo != null)
             {
-                activeduty.Checked = true;
-            }
-            if (user.MillitaryInfo.NationalGuard)
-            {
-                nationalguard.Checked = true;
-            }
-            if (user.MillitaryInfo.MoreThanOne)
-            {
-                morethanone.Checked = true;
-            }
-            if (user.MillitaryInfo.None)
-            {
-                none.Checked = true;
-            }
-            if (user.MillitaryInfo.ArmedForcesReserved)
-            {
-                reserves.Checked = true;
-            }
-            if (user.MillitaryInfo.PreferNotToAnswer)
-            {
-                refused.Checked = true;
+                if (user.MillitaryInfo.ArmedForcesActiveDuty)
+                {
+                    activeduty.Checked = true;
+                }
+                if (user.MillitaryInfo.NationalGuard)
+                {
+                    nationalguard.Checked = true;
+                }
+                if (user.MillitaryInfo.MoreThanOne)
+                {
+                    morethanone.Checked = true;
+                }
+                if (user.MillitaryInfo.None)
+                {
+                    none.Checked = true;
+                }
+                if (user.MillitaryInfo.ArmedForcesReserved)
+                {
+                    reserves.Checked = true;
+                }
+                if (user.MillitaryInfo.PreferNotToAnswer)
+                {
+                    refused.Checked = true;
+                }
             }
 
             return writeDocument(document);
         }
-           
+
 
         private Byte[] StudentEnrollmentChecklistForm()
         {
@@ -439,7 +443,7 @@ namespace IGrad.Controllers
             #region primary guardians
             //Primary guardian information
             List<Guardian> primaryGuardians = user.GetPrimaryGuardians();
-            if(primaryGuardians.Count > 0)
+            if (primaryGuardians.Count > 0)
             {
                 Guardian guardian1 = primaryGuardians[0];
                 //fill name
@@ -480,10 +484,10 @@ namespace IGrad.Controllers
                     PdfCheckBoxField activeMilitary = (PdfCheckBoxField)document.AcroForm.Fields["PrimaryGuardian1IsActiveMilitaryFalse"];
                     activeMilitary.Checked = true;
                 }
-             }
+            }
 
             // primary guardian 2 information
-            if(primaryGuardians.Count > 1)
+            if (primaryGuardians.Count > 1)
             {
                 Guardian guardian2 = primaryGuardians[1];
                 //fill name
@@ -529,7 +533,7 @@ namespace IGrad.Controllers
 
 
             #region SecondaryHouseholdAndGuardians
-            if(user.SecondaryHouseholdAddress != null)
+            if (user.SecondaryHouseholdAddress != null)
             {
                 List<Guardian> secondaryGuardians = user.GetSecondaryGuardians();
                 if (secondaryGuardians.Count > 0)
@@ -540,12 +544,12 @@ namespace IGrad.Controllers
                     guardian1Name.Value = new PdfString(guardian1.Name.LName + " " + guardian1.Name.FName + guardian1.Name.MName.Substring(0, 1));
 
                     string guardianRelationshipCheckBoxName = "SecondaryGuardian1" + guardian1.Relationship;
-                    if(guardian1.Relationship != "Guardian")
+                    if (guardian1.Relationship != "Guardian")
                     {
                         PdfCheckBoxField relationshipCheckbox = (PdfCheckBoxField)document.AcroForm.Fields[guardianRelationshipCheckBoxName];
                         relationshipCheckbox.Checked = true;
                     }
-                    
+
 
                     //phone 1
                     PdfTextField phoneOne = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1PhoneOne"];
@@ -603,7 +607,7 @@ namespace IGrad.Controllers
                 }
 
                 //check active military
-                if(secondaryGuardians[0].IsActiveMilitary || secondaryGuardians[1].IsActiveMilitary)
+                if (secondaryGuardians[0].IsActiveMilitary || secondaryGuardians[1].IsActiveMilitary)
                 {
                     PdfCheckBoxField activeMilitary = (PdfCheckBoxField)document.AcroForm.Fields["SecondaryGuardianIsActiveMilitaryTrue"];
                     activeMilitary.Checked = true;
@@ -911,48 +915,52 @@ namespace IGrad.Controllers
             StringBuilder schoolsInKentSchoolDistrictStringBuilder = new StringBuilder();
             int lastWashingtonAttendDate = 0;
             int lastKentSDAttendDate = 0;
-            for (int i = 0; i < user.SchoolInfo.HighSchoolInformation.Count; i++)
+            if (user.SchoolInfo.HighSchoolInformation.Count > 0)
             {
-                HighSchoolInfo highSchool = user.SchoolInfo.HighSchoolInformation[i];
-                if (Regex.IsMatch(highSchool.HighSchoolState, "WA", RegexOptions.IgnoreCase) ||
-                    Regex.IsMatch(highSchool.HighSchoolState, "Washington", RegexOptions.IgnoreCase))
+                for (int i = 0; i < user.SchoolInfo.HighSchoolInformation.Count; i++)
                 {
-                    if(schoolsInWAStringBuilder.Length > 0)
+                    HighSchoolInfo highSchool = user.SchoolInfo.HighSchoolInformation[i];
+                    if (Regex.IsMatch(highSchool.HighSchoolState, "WA", RegexOptions.IgnoreCase) ||
+                        Regex.IsMatch(highSchool.HighSchoolState, "Washington", RegexOptions.IgnoreCase))
                     {
-                        schoolsInWAStringBuilder.Append(", " + highSchool.HighSchoolName);
-                    }
-                    else
-                    {
-                        schoolsInWAStringBuilder.Append(highSchool.HighSchoolName);
-                    }
-                    
-                    
-                    //check year if greater (only keeping greatest)
-                    if(Int16.Parse(highSchool.HighSchoolYear) > lastWashingtonAttendDate)
-                    {
-                        lastWashingtonAttendDate = Int16.Parse(highSchool.HighSchoolYear);
-                    }
-                }
+                        if (schoolsInWAStringBuilder.Length > 0)
+                        {
+                            schoolsInWAStringBuilder.Append(", " + highSchool.HighSchoolName);
+                        }
+                        else
+                        {
+                            schoolsInWAStringBuilder.Append(highSchool.HighSchoolName);
+                        }
 
-                if(Regex.IsMatch(highSchool.SchoolDistrict, "kent.*", RegexOptions.IgnoreCase))
-                {
 
-                    if(schoolsInKentSchoolDistrictStringBuilder.Length > 0)
-                    {
-                        schoolsInKentSchoolDistrictStringBuilder.Append(", " + highSchool.HighSchoolName);
+                        //check year if greater (only keeping greatest)
+                        if (Int16.Parse(highSchool.HighSchoolYear) > lastWashingtonAttendDate)
+                        {
+                            lastWashingtonAttendDate = Int16.Parse(highSchool.HighSchoolYear);
+                        }
                     }
-                    else
+                    if(highSchool.SchoolDistrict != null)
                     {
-                        schoolsInKentSchoolDistrictStringBuilder.Append(highSchool.HighSchoolName);
-                    }
+                        if (Regex.IsMatch(highSchool.SchoolDistrict, "kent.*", RegexOptions.IgnoreCase))
+                        {
 
-                    if(Int16.Parse(highSchool.HighSchoolYear) > lastKentSDAttendDate)
-                    {
-                        lastKentSDAttendDate = Int16.Parse(highSchool.HighSchoolYear);
+                            if (schoolsInKentSchoolDistrictStringBuilder.Length > 0)
+                            {
+                                schoolsInKentSchoolDistrictStringBuilder.Append(", " + highSchool.HighSchoolName);
+                            }
+                            else
+                            {
+                                schoolsInKentSchoolDistrictStringBuilder.Append(highSchool.HighSchoolName);
+                            }
+
+                            if (Int16.Parse(highSchool.HighSchoolYear) > lastKentSDAttendDate)
+                            {
+                                lastKentSDAttendDate = Int16.Parse(highSchool.HighSchoolYear);
+                            }
+                        }
                     }
                 }
             }
-
             PdfTextField schoolsAttendedInWashington = (PdfTextField)document.AcroForm.Fields["SchoolsAttendedInWashington"];
             schoolsAttendedInWashington.Value = new PdfString(schoolsInWAStringBuilder.ToString());
 
@@ -1021,7 +1029,7 @@ namespace IGrad.Controllers
                     PdfTextField ecPhoneOne = (PdfTextField)(document.AcroForm.Fields["EmergencyContact" + (i + 1) + "Phone1"]);
                     ecPhoneOne.Value = new PdfString(ec.PhoneOne.PhoneNumber);
 
-                     PdfTextField ecPhoneOneType = (PdfTextField)(document.AcroForm.Fields["EmergencyContact" + (i + 1) + "Phone1Type"]);
+                    PdfTextField ecPhoneOneType = (PdfTextField)(document.AcroForm.Fields["EmergencyContact" + (i + 1) + "Phone1Type"]);
                     ecPhoneOneType.Value = new PdfString(ec.PhoneOne.PhoneType);
 
                     PdfTextField ecPhoneTwo = (PdfTextField)(document.AcroForm.Fields["EmergencyContact" + (i + 1) + "Phone2"]);
@@ -1148,12 +1156,12 @@ namespace IGrad.Controllers
             }
             #endregion
 
-            if(user.BirthPlace.Country != null)
+            if (user.BirthPlace.Country != null)
             {
                 PdfTextField countryBornIn = (PdfTextField)(document.AcroForm.Fields["CountryBornIn"]);
                 countryBornIn.Value = new PdfString(user.BirthPlace.Country.ToString());
             }
-           
+
 
             if (user.SchoolInfo.PriorEducation != null)
             {
@@ -1481,7 +1489,7 @@ namespace IGrad.Controllers
                             violationExplanation = violationExplanation + string.Format(" Weapon Violation on {0},", this.user.SchoolInfo.PreviousSchoolViolation.dateOfWeaponViolation);
                         }
                     }
-                    
+
                     PdfTextField ExplainDisciplinary = (PdfTextField)(document.AcroForm.Fields["ExplainDisciplinary"]);
                     ExplainDisciplinary.Value = new PdfString(violationExplanation);
 
@@ -1494,7 +1502,7 @@ namespace IGrad.Controllers
             }
 
             #endregion
-            if(user.SchoolInfo.PreviousSchoolViolation != null)
+            if (user.SchoolInfo.PreviousSchoolViolation != null)
             {
                 if (user.SchoolInfo.PreviousSchoolViolation.hasSexViolation ||
                user.SchoolInfo.PreviousSchoolViolation.hasCriminalViolation ||
@@ -1534,7 +1542,7 @@ namespace IGrad.Controllers
                     noViolentDrugSexBehavior.Checked = true;
                 }
             }
-           
+
 
             if (!string.IsNullOrEmpty(this.user.SchoolInfo.StrengthAndWeakness))
             {
@@ -1542,7 +1550,7 @@ namespace IGrad.Controllers
                 BriefChildStrengthWeak.Value = new PdfString(this.user.SchoolInfo.StrengthAndWeakness);
             }
 
-            if(!string.IsNullOrEmpty(user.SchoolInfo.ParentAdditionalFeedbackInfo))
+            if (!string.IsNullOrEmpty(user.SchoolInfo.ParentAdditionalFeedbackInfo))
             {
                 PdfTextField parentAdditionalInfo = (PdfTextField)(document.AcroForm.Fields["AdditionalInfo"]);
                 parentAdditionalInfo.Value = new PdfString(user.SchoolInfo.ParentAdditionalFeedbackInfo);
@@ -1651,6 +1659,12 @@ namespace IGrad.Controllers
                 text.Value = new PdfString(healthInfoDescriptions[s].ToString());
             }
 
+            if (user.HealthInfo.SeriousInjuryDate != null)
+            {
+                PdfTextField injuryDate = (PdfTextField)(document.AcroForm.Fields["SeriousInjuryOrSurgeryDate"]);
+                injuryDate.Value = new PdfString(user.HealthInfo.SeriousInjuryDate.ToString());
+            }
+
             SetFinishedSecuritySettings(document);
             return writeDocument(document);
         }
@@ -1673,7 +1687,7 @@ namespace IGrad.Controllers
             lastName.Value = new PdfString(user.Name.LName);
 
             if (user.Name.MName != null)
-            { 
+            {
                 PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MiddleInitial"]);
                 middleInitial.Value = new PdfString(user.Name.MName[0].ToString());
             }
@@ -1873,7 +1887,7 @@ namespace IGrad.Controllers
                     }
                 }
 
-               
+
 
                 PdfTextField grade = (PdfTextField)(document.AcroForm.Fields["Grade"]);
                 grade.Value = new PdfString(this.user.SchoolInfo.CurrentGrade.ToString());

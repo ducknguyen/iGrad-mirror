@@ -153,6 +153,10 @@ namespace IGrad.Models.User
         public bool SeriousInjuryOrSurgery { get; set; }
         public string SeriousInjuryOrSurgeryDescription { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        public DateTime SeriousInjuryDate { get; set; }
+
         [DisplayName("Emotional health concerns")]
         public bool EmotionalHealthConcerns { get; set; }
         public string EmotionalHealthConcernsDescription { get; set; }

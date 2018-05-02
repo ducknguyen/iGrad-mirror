@@ -41,6 +41,7 @@
         </div>
     </div>
 
+    <h2>Other Violation Types</h2>
     <div class="row">
         <div class="form-group col-md-4">
             @Html.CheckBoxFor(model => model.hasOtherViolation, htmlAttributes: new { @class = "" })
@@ -49,6 +50,39 @@
         <div class="form-group col-md-8">
             @Html.LabelFor(model => model.ExplainOtherViolation, htmlAttributes: new { @class = "control-label" })
             @Html.TextBoxFor(model => model.ExplainOtherViolation, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            @Html.CheckBoxFor(model => model.hasSexViolation, htmlAttributes: new { @class = "" })
+            @Html.LabelFor(model => model.hasSexViolation, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="form-group col-md-8">
+            @Html.LabelFor(model => model.explainSexViolation, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.explainSexViolation, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            @Html.CheckBoxFor(model => model.hasCriminalViolation, htmlAttributes: new { @class = "" })
+            @Html.LabelFor(model => model.hasCriminalViolation, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="form-group col-md-8">
+            @Html.LabelFor(model => model.explainCriminalViolation, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.explainCriminalViolation, htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-4">
+            @Html.CheckBoxFor(model => model.hasViolentTendicies, htmlAttributes: new { @class = "" })
+            @Html.LabelFor(model => model.hasViolentTendicies, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="form-group col-md-8">
+            @Html.LabelFor(model => model.explainViolence, htmlAttributes: new { @class = "control-label" })
+            @Html.TextBoxFor(model => model.explainViolence, htmlAttributes: new { @class = "form-control" })
         </div>
     </div>
 
