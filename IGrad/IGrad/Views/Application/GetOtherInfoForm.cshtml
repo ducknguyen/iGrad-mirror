@@ -6,12 +6,39 @@
 <script type="text/javascript" src="~/Scripts/application.js"></script>
 <script type="text/javascript" src="~/Scripts/jquery-1.10.2.js"></script>
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(document).on('click', '#showOptionalAssistance', function () {
+        showTarget('optional-assistance-form');
+        showTarget('hideOptionalAssistance');
+        hideTarget('showOptionalAssistance');
+    });
+
+    $(document).on('click', '#hideOptionalAssistance', function () {
+        hideTarget('optional-assistance-form');
+        hideTarget('hideOptionalAssistance');
+        showTarget('showOptionalAssistance');
+    });
+
+    $(document).on('click', '#showParentPlan', function () {
+        showTarget('parenting-plan-form');
+        showTarget('hideParentPlan');
+        hideTarget('showParentPlan');
+    });
+
+    $(document).on('click', '#hideParentPlan', function () {
+        hideTarget('parenting-plan-form');
+        hideTarget('hideParentPlan');
+        showTarget('showParentPlan');
+    });
+
+
+</script>
 <h3>Finishing Up!</h3>
 <hr>
 <div class="container" id="optional-assistance-container">
     <h4 class="bg-info">(Optional) Additional IGrad Assistance</h4>
-    <input type="button" value="Show" class="btn btn-default" onclick="showTarget('optional-assistance-form')" />
-    <input type="button" value="Hide" class="btn btn-default" onclick="hideTarget('optional-assistance-form')" />
+    <input type="button" value="I would like to take advantage of additional assistance" class="btn btn-default" id="showOptionalAssistance" />
+    <input type="button" value="Hide" class="btn btn-default hidden" id="hideOptionalAssistance" />
     <div class="container hidden" id="optional-assistance-form">
         @Html.Action("GetOptionalAssistanceForm", Model);
     </div>
@@ -19,8 +46,8 @@
 <hr />
 <div class="container" id="parenting-plan-container">
     <h4 class="bg-info">(Optional) Student's Parenting Plan</h4>
-    <input type="button" value="Show" class="btn btn-default" onclick="showTarget('parenting-plan-form')" />
-    <input type="button" value="Hide" class="btn btn-default" onclick="hideTarget('parenting-plan-form')" />
+    <input type="button" value="I have a parenting plan in effect" class="btn btn-default" id="showParentPlan" onclick="showTarget('parenting-plan-form')" />
+    <input type="button" value="Hide" class="btn btn-default hidden" id="hideParentPlan" onclick="hideTarget('parenting-plan-form')" />
     <div class="container hidden" id="parenting-plan-form">
         @Html.Action("GetParentPlanForm", Model);
     </div>

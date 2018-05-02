@@ -15,450 +15,448 @@
 </script>
 @using (Html.BeginForm("GetHealthForm", "Application", FormMethod.Post, new { enctype = "multipart/form-data", @id = "health-form" }))
 {
-    <h3>Health Information</h3>
-    <small class="form-text required-marker-indicator">* required fields.</small>
-    <hr>
+<h3>Health Information</h3>
+<small class="form-text required-marker-indicator">* required fields.</small>
+<hr>
 
-    <div class="description-text">
-        <p>
-            This information is needed to plan an appropriate program for the student and to prepare for any emergency situation if one should arise. Your school nurse will contact you if there are any additional questions.
-        </p>
+<div class="description-text">
+    <p>
+        This information is needed to plan an appropriate program for the student and to prepare for any emergency situation if one should arise. Your school nurse will contact you if there are any additional questions.
+    </p>
+</div>
+<div class="container">
+    <!-- CATEGORY 1 START -->
+    <div class="row">
+        <div class="col-md-3 col-md-offset-1">
+            Check all that apply
+        </div>
+        <div class="col-md-6">
+            Please explain any yes answers
+        </div>
     </div>
-    <div class="container">
-        <!-- CATEGORY 1 START -->
-        <div class="row">
-            <div class="col-md-3 col-md-offset-1">
-                Check all that apply
+    <br>
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.ADDorADHD, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.ADDorADHD, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.ADDorADHDDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.Allergies, new { @class = "category-one" })
+            @Html.LabelFor(model => model.Allergies, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.AllergiesDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+    <!-- ANAPHYLAXIS -->
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.Anaphylaxis, new { @class = "to-category-two", @id = "anaphylaxis" })
+            @Html.LabelFor(model => model.Anaphylaxis, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            <a href="" class="btn disabled">Complete information in Health Category #2</a>
+        </div>
+    </div>
+
+    <!-- ASTHMA -->
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.Asthma, new { @class = "to-category-two", @id = "asthma" })
+            @Html.LabelFor(model => model.Asthma, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            <a href="" class="btn disabled">Complete information in Health Category #2</a>
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.BeeInsectAllergy, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.BeeInsectAllergy, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.BeeInsectAllergyDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.BirthDefectsOrConcern, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.BirthDefectsOrConcern, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.BirthDefectsOrConcernDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.BloodDisorder, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.BloodDisorder, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.BloodDisorderDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.ChronicConditionOrDisability, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.ChronicConditionOrDisability, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.ChronicConditionOrDisabilityDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+    <!-- DIABETES -->
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.Diabetes, new { @class = "to-category-two", @id = "diabetes" })
+            @Html.LabelFor(model => model.Diabetes, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            <a href="" class="btn disabled">Complete information in Health Category #2</a>
+        </div>
+    </div>
+
+    <!--Emotional Health Concerns-->
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.EmotionalHealthConcerns, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.EmotionalHealthConcerns, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.EmotionalHealthConcernsDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.FrequentEarInfections, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.FrequentEarInfections, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.FrequentEarInfectionsDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.HearingLoss, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.HearingLoss, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.HearingLossDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.HeartCondition, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.HeartCondition, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.HeartConditionDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.NeurologicalConditions, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.NeurologicalConditions, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.NeurologicalConditionsDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.OrthopedicCondition, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.OrthopedicCondition, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.OrthopedicConditionDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.OtherHealthConcerns, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.OtherHealthConcerns, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.OtherHealthConcernsDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.Seizures, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.Seizures, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.SeizuresDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.SeriousInjuryOrSurgery, new { htmlAttributes = new { @class = ""  } })
+            @Html.LabelFor(model => model.SeriousInjuryOrSurgery, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.SeriousInjuryOrSurgeryDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+        <div class="col-md-2">
+                @Html.EditorFor(model => model.SeriousInjuryOrSurgeryDate, new { htmlAttributes = new { @class = "form-control datepicker", @disabled = "disabled" } })
+        </div>
+    </div>
+
+
+
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.SevereHeadaches, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.SevereHeadaches, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.SevereHeadachesDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.SpeechDifficulties, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.SpeechDifficulties, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.SpeechDifficultiesDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        <div class="col-md-3 col-md-offset-1  col-form-label">
+            @Html.CheckBoxFor(model => model.VisionConcerns, new { htmlAttributes = new { @class = "" } })
+            @Html.LabelFor(model => model.VisionConcerns, htmlAttributes: new { @class = "" })
+        </div>
+        <div class="col-md-6">
+            @Html.EditorFor(model => model.VisionConcernsDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+        </div>
+    </div>
+
+
+    <!-- CATEGORY 2 START -->
+    <!-- ANAPHYLAXIS -->
+    <div class="col-md-9 col-md-offset-1">
+        <div id="anaphylaxis-information" class="medical-information">
+            <h4 clas="bg-info">Anaphylaxis</h4>
+            <div class="form-group">
+                @Html.LabelFor(model => model.AnaphylaxisAllerigicTo, htmlAttributes: new { @class = "" })
+                @Html.EditorFor(model => model.AnaphylaxisAllerigicTo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tree nuts, fish, wheat, etc.." } })
             </div>
-            <div class="col-md-6">
-                Please explain any yes answers
+            <div class="form-group">
+                @Html.LabelFor(model => model.AnaphylaxisSymptoms, htmlAttributes: new { @class = "" })
+                @Html.EditorFor(model => model.AnaphylaxisSymptoms, new { htmlAttributes = new { @class = "form-control", @placeholder = "Symptoms" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.AnaphylaxisEpiPen, htmlAttributes: new { @class = "" })
+                @Html.RadioButtonFor(model => model.AnaphylaxisEpiPen, true) Yes
+                @Html.RadioButtonFor(model => model.AnaphylaxisEpiPen, false) No
             </div>
         </div>
-        <br>
+    </div>
 
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.ADDorADHD, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.ADDorADHD, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.ADDorADHDDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
+    <!-- DIABETES -->
+    <div class="col-md-9 col-md-offset-1">
+        <div id="diabetes-information" class="medical-information">
+            <hr>
+            <h4 class="bg-info">Diabetes</h4>
+            <p>
+                There is a state law, which requires all students with diabetes to have an individualized health care plan implemented in the school setting. If the student is diabetic, please contact the school nurse to help write your student's plan.
+            </p>
         </div>
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.Allergies, new { @class = "category-one" })
-                @Html.LabelFor(model => model.Allergies, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.AllergiesDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-        <!-- ANAPHYLAXIS -->
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.Anaphylaxis, new { @class = "to-category-two", @id = "anaphylaxis" })
-                @Html.LabelFor(model => model.Anaphylaxis, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                <a href="" class="btn disabled">Complete information in Health Category #2</a>
-            </div>
-        </div>
-
-        <!-- ASTHMA -->
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.Asthma, new { @class = "to-category-two", @id = "asthma" })
-                @Html.LabelFor(model => model.Asthma, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                <a href="" class="btn disabled">Complete information in Health Category #2</a>
-            </div>
-        </div>
+    </div>
 
 
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.BeeInsectAllergy, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.BeeInsectAllergy, htmlAttributes: new { @class = "" })
+    <!-- ASTHMA INFORMATION -->
+    <div class="col-md-9 col-md-offset-1">
+        <div id="asthma-information" class="medical-information">
+            <hr>
+            <h4 class="bg-info">Asthma</h4>
+            <div class="form-group">
+                @Html.LabelFor(model => model.HowLongAsthma, htmlAttributes: new { @class = "" })
+                @Html.EditorFor(model => model.HowLongAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Years and months" } })
             </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.BeeInsectAllergyDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
+            <div class="form-group">
+                @Html.LabelFor(model => model.MissedSchoolAsthma, htmlAttributes: new { @class = "" })
+                @Html.EditorFor(model => model.MissedSchoolAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Days" } })
             </div>
-        </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.EarlySignsAsthma, htmlAttributes: new { @class = "" })
+                @Html.EditorFor(model => model.EarlySignsAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Signs of asthma" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.BestPeakFlowRateAsthma, htmlAttributes: new { @class = "" })
+                @Html.EditorFor(model => model.BestPeakFlowRateAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Peak rate" } })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.HomeNebulizerAsthma, htmlAttributes: new { @class = "" })
+                @Html.RadioButtonFor(model => model.HomeNebulizerAsthma, true) Yes
+                @Html.RadioButtonFor(model => model.HomeNebulizerAsthma, false) No
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.NameOfMedicationAsthma, htmlAttributes: new { @class = "" })
+                <br /><small>Separate by comma</small>
+                @Html.EditorFor(model => model.NameOfMedicationAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Medications" } })
+            </div>
 
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.BirthDefectsOrConcern, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.BirthDefectsOrConcern, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.BirthDefectsOrConcernDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.BloodDisorder, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.BloodDisorder, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.BloodDisorderDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.ChronicConditionOrDisability, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.ChronicConditionOrDisability, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.ChronicConditionOrDisabilityDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-        <!-- DIABETES -->
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.Diabetes, new { @class = "to-category-two", @id = "diabetes" })
-                @Html.LabelFor(model => model.Diabetes, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                <a href="" class="btn disabled">Complete information in Health Category #2</a>
-            </div>
-        </div>
-
-        <!--Emotional Health Concerns-->
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.EmotionalHealthConcerns, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.EmotionalHealthConcerns, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.EmotionalHealthConcernsDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.FrequentEarInfections, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.FrequentEarInfections, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.FrequentEarInfectionsDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.HearingLoss, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.HearingLoss, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.HearingLossDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.HeartCondition, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.HeartCondition, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.HeartConditionDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.NeurologicalConditions, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.NeurologicalConditions, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.NeurologicalConditionsDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.OrthopedicCondition, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.OrthopedicCondition, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.OrthopedicConditionDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.OtherHealthConcerns, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.OtherHealthConcerns, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.OtherHealthConcernsDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.Seizures, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.Seizures, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.SeizuresDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.SeriousInjuryOrSurgery, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.SeriousInjuryOrSurgery, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.SeriousInjuryOrSurgeryDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                Date of Serious Injury:
+            <div class="form-group">
+                <div class="row">
+                    <strong>How many times in the past year has your child been : </strong>
                 </div>
-                <div class="col-md-3">
-                    @Html.EditorFor(model => model.SeriousInjuryDate, new { htmlAttributes = new { @class = "form-control datepicker" } })
-                </div>
-            </div>
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.SevereHeadaches, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.SevereHeadaches, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.SevereHeadachesDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.SpeechDifficulties, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.SpeechDifficulties, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.SpeechDifficultiesDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-        <div class="form-group row">
-            <div class="col-md-3 col-md-offset-1  col-form-label">
-                @Html.CheckBoxFor(model => model.VisionConcerns, new { htmlAttributes = new { @class = "" } })
-                @Html.LabelFor(model => model.VisionConcerns, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="col-md-6">
-                @Html.EditorFor(model => model.VisionConcernsDescription, new { htmlAttributes = new { @class = "form-control", @disabled = "disabled" } })
-            </div>
-        </div>
-
-
-        <!-- CATEGORY 2 START -->
-        <!-- ANAPHYLAXIS -->
-        <div class="col-md-9 col-md-offset-1">
-            <div id="anaphylaxis-information" class="medical-information">
-                <h4 clas="bg-info">Anaphylaxis</h4>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.AnaphylaxisAllerigicTo, htmlAttributes: new { @class = "" })
-                    @Html.EditorFor(model => model.AnaphylaxisAllerigicTo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tree nuts, fish, wheat, etc.." } })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.AnaphylaxisSymptoms, htmlAttributes: new { @class = "" })
-                    @Html.EditorFor(model => model.AnaphylaxisSymptoms, new { htmlAttributes = new { @class = "form-control", @placeholder = "Symptoms" } })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.AnaphylaxisEpiPen, htmlAttributes: new { @class = "" })
-                    @Html.RadioButtonFor(model => model.AnaphylaxisEpiPen, true) Yes
-                    @Html.RadioButtonFor(model => model.AnaphylaxisEpiPen, false) No
-                </div>
-            </div>
-        </div>
-
-        <!-- DIABETES -->
-        <div class="col-md-9 col-md-offset-1">
-            <div id="diabetes-information" class="medical-information">
-                <hr>
-                <h4 class="bg-info">Diabetes</h4>
-                <p>
-                    There is a state law, which requires all students with diabetes to have an individualized health care plan implemented in the school setting. If the student is diabetic, please contact the school nurse to help write your student's plan.
-                </p>
-            </div>
-        </div>
-
-
-        <!-- ASTHMA INFORMATION -->
-        <div class="col-md-9 col-md-offset-1">
-            <div id="asthma-information" class="medical-information">
-                <hr>
-                <h4 class="bg-info">Asthma</h4>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.HowLongAsthma, htmlAttributes: new { @class = "" })
-                    @Html.EditorFor(model => model.HowLongAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Years and months" } })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.MissedSchoolAsthma, htmlAttributes: new { @class = "" })
-                    @Html.EditorFor(model => model.MissedSchoolAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Days" } })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.EarlySignsAsthma, htmlAttributes: new { @class = "" })
-                    @Html.EditorFor(model => model.EarlySignsAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Signs of asthma" } })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.BestPeakFlowRateAsthma, htmlAttributes: new { @class = "" })
-                    @Html.EditorFor(model => model.BestPeakFlowRateAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Peak rate" } })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.HomeNebulizerAsthma, htmlAttributes: new { @class = "" })
-                    @Html.RadioButtonFor(model => model.HomeNebulizerAsthma, true) Yes
-                    @Html.RadioButtonFor(model => model.HomeNebulizerAsthma, false) No
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.NameOfMedicationAsthma, htmlAttributes: new { @class = "" })
-                    <br /><small>Separate by comma</small>
-                    @Html.EditorFor(model => model.NameOfMedicationAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Medications" } })
-                </div>
-
-                <div class="form-group">
+                <div class="col-md-8  col-form-label">
                     <div class="row">
-                        <strong>How many times in the past year has your child been : </strong>
+                        <h5>Hospitalized overnight or longer for asthma?</h5>
                     </div>
-                    <div class="col-md-8  col-form-label">
-                        <div class="row">
-                            <h5>Hospitalized overnight or longer for asthma?</h5>
+                    <div class="row">
+                        <div class="col-md-2">
+                            @Html.CheckBoxFor(model => model.AsthmaHospitalizedOvernightNone, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaHospitalizedOvernightNone, htmlAttributes: new { @class = "" })
                         </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                @Html.CheckBoxFor(model => model.AsthmaHospitalizedOvernightNone, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaHospitalizedOvernightNone, htmlAttributes: new { @class = "" })
-                            </div>
-                            <div class="col-md-2">
-                                @Html.CheckBoxFor(model => model.AsthmaHospitalizedOvernightOne, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaHospitalizedOvernightOne, htmlAttributes: new { @class = "" })
-                            </div>
-                            <div class="col-md-3">
+                        <div class="col-md-2">
+                            @Html.CheckBoxFor(model => model.AsthmaHospitalizedOvernightOne, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaHospitalizedOvernightOne, htmlAttributes: new { @class = "" })
+                        </div>
+                        <div class="col-md-3">
 
-                                @Html.CheckBoxFor(model => model.AsthmaHospitalizedOvernightTwoToFour, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaHospitalizedOvernightTwoToFour, htmlAttributes: new { @class = "" })
-                            </div>
-                            <div class="col-md-5">
-                                @Html.CheckBoxFor(model => model.AsthmaHospitalizedOvernightMoreThanFour, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaHospitalizedOvernightMoreThanFour, htmlAttributes: new { @class = "" })
-                            </div>
+                            @Html.CheckBoxFor(model => model.AsthmaHospitalizedOvernightTwoToFour, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaHospitalizedOvernightTwoToFour, htmlAttributes: new { @class = "" })
                         </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-8  col-form-label">
-                        <div class="row">
-                            <h5>Treated in an emergency room?</h5>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                @Html.CheckBoxFor(model => model.AsthmaTreatedInEmergencyRoomNone, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaTreatedInEmergencyRoomNone, htmlAttributes: new { @class = "" })
-                            </div>
-                            <div class="col-md-2">
-                                @Html.CheckBoxFor(model => model.AsthmaTreatedInEmergencyRoomOne, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaTreatedInEmergencyRoomOne, htmlAttributes: new { @class = "" })
-                            </div>
-                            <div class="col-md-3">
-
-                                @Html.CheckBoxFor(model => model.AsthmaTreatedInEmergencyRoomTwoToFour, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaTreatedInEmergencyRoomTwoToFour, htmlAttributes: new { @class = "" })
-                            </div>
-                            <div class="col-md-5">
-                                @Html.CheckBoxFor(model => model.AsthmaTreatedInEmergencyRoomMoreThanFour, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaTreatedInEmergencyRoomMoreThanFour, htmlAttributes: new { @class = "" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-8  col-form-label">
-                        <div class="row">
-                            <h5>Treated in a Doctor's office for non-routine asthma?</h5>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2">
-                                @Html.CheckBoxFor(model => model.AsthmaTreatedInDoctorsOfficeNone, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaTreatedInDoctorsOfficeNone, htmlAttributes: new { @class = "" })
-                            </div>
-                            <div class="col-md-2">
-                                @Html.CheckBoxFor(model => model.AsthmaTreatedInDoctorsOfficeOne, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaTreatedInDoctorsOfficeOne, htmlAttributes: new { @class = "" })
-                            </div>
-                            <div class="col-md-3">
-                                @Html.CheckBoxFor(model => model.AsthmaTreatedInDoctorsOfficeTwoToFour, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaTreatedInDoctorsOfficeTwoToFour, htmlAttributes: new { @class = "" })
-                            </div>
-                            <div class="col-md-5">
-                                @Html.CheckBoxFor(model => model.AsthmaTreatedInDoctorsOfficeMoreThanFour, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaTreatedInDoctorsOfficeMoreThanFour, htmlAttributes: new { @class = "" })
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-md-8   col-form-label">
-                        <div class="row">
-                            <h5>What are your child's early warning signs of an asthma episode</h5>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                @Html.CheckBoxFor(model => model.AsthmaWarningSignCough, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaWarningSignCough, htmlAttributes: new { @class = "" })
-                            </div>
-                            <div class="col-md-4">
-                                @Html.CheckBoxFor(model => model.AsthmaWarningSignColdSymptoms, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaWarningSignColdSymptoms, htmlAttributes: new { @class = "" })
-                            </div>
-                            <div class="col-md-4">
-                                @Html.CheckBoxFor(model => model.AsthmaWarningSignDropInPeakFlow, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaWarningSignDropInPeakFlow, htmlAttributes: new { @class = "" })
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4">
-                                @Html.CheckBoxFor(model => model.AsthmaWarningSignWheezing, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaWarningSignWheezing, htmlAttributes: new { @class = "" })
-                            </div>
-                            <div class="col-md-4">
-                                @Html.CheckBoxFor(model => model.AsthmaWarningSignDecreasedExercise, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaWarningSignDecreasedExercise, htmlAttributes: new { @class = "" })
-                            </div>
-                            <div class="col-md-4">
-                                @Html.CheckBoxFor(model => model.AsthmaWarningSignOther, new { @class = "" })
-                                @Html.LabelFor(model => model.AsthmaWarningSignOther, htmlAttributes: new { @class = "" })
-                            </div>
+                        <div class="col-md-5">
+                            @Html.CheckBoxFor(model => model.AsthmaHospitalizedOvernightMoreThanFour, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaHospitalizedOvernightMoreThanFour, htmlAttributes: new { @class = "" })
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <div class="form-group">
+                <div class="col-md-8  col-form-label">
+                    <div class="row">
+                        <h5>Treated in an emergency room?</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            @Html.CheckBoxFor(model => model.AsthmaTreatedInEmergencyRoomNone, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaTreatedInEmergencyRoomNone, htmlAttributes: new { @class = "" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.CheckBoxFor(model => model.AsthmaTreatedInEmergencyRoomOne, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaTreatedInEmergencyRoomOne, htmlAttributes: new { @class = "" })
+                        </div>
+                        <div class="col-md-3">
 
+                            @Html.CheckBoxFor(model => model.AsthmaTreatedInEmergencyRoomTwoToFour, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaTreatedInEmergencyRoomTwoToFour, htmlAttributes: new { @class = "" })
+                        </div>
+                        <div class="col-md-5">
+                            @Html.CheckBoxFor(model => model.AsthmaTreatedInEmergencyRoomMoreThanFour, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaTreatedInEmergencyRoomMoreThanFour, htmlAttributes: new { @class = "" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-8  col-form-label">
+                    <div class="row">
+                        <h5>Treated in a Doctor's office for non-routine asthma?</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            @Html.CheckBoxFor(model => model.AsthmaTreatedInDoctorsOfficeNone, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaTreatedInDoctorsOfficeNone, htmlAttributes: new { @class = "" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.CheckBoxFor(model => model.AsthmaTreatedInDoctorsOfficeOne, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaTreatedInDoctorsOfficeOne, htmlAttributes: new { @class = "" })
+                        </div>
+                        <div class="col-md-3">
+                            @Html.CheckBoxFor(model => model.AsthmaTreatedInDoctorsOfficeTwoToFour, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaTreatedInDoctorsOfficeTwoToFour, htmlAttributes: new { @class = "" })
+                        </div>
+                        <div class="col-md-5">
+                            @Html.CheckBoxFor(model => model.AsthmaTreatedInDoctorsOfficeMoreThanFour, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaTreatedInDoctorsOfficeMoreThanFour, htmlAttributes: new { @class = "" })
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <!-- THREATENING CONDITIONS -->
-        <div class="col-md-9 col-md-offset-1">
-            <div id="life-threatening-condition">
-                <hr>
-                <h4 class="bg-info">Life Threatening Conditions</h4>
-                <p>
-                    RCW 28A.210.320-Children with Life-Threatening Conditions, requires a medication or treatment order as a prerequisite for children with life-threatening conditions to attend public schools. The new law defines “life- threatening condition” as a health condition that will put the child in danger of death during the school day, if a medication or treatment order and a nursing care plan are not in place. Potential life-threatening conditions include, but are not limited to, students with seizure disorders, diabetes, life-threatening allergies, and some students with asthma and heart conditions. If this law applies to your student, please contact the nurse at your child’s school.
-                </p>
+            <div class="form-group">
+                <div class="col-md-8   col-form-label">
+                    <div class="row">
+                        <h5>What are your child's early warning signs of an asthma episode</h5>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.CheckBoxFor(model => model.AsthmaWarningSignCough, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaWarningSignCough, htmlAttributes: new { @class = "" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.CheckBoxFor(model => model.AsthmaWarningSignColdSymptoms, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaWarningSignColdSymptoms, htmlAttributes: new { @class = "" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.CheckBoxFor(model => model.AsthmaWarningSignDropInPeakFlow, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaWarningSignDropInPeakFlow, htmlAttributes: new { @class = "" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            @Html.CheckBoxFor(model => model.AsthmaWarningSignWheezing, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaWarningSignWheezing, htmlAttributes: new { @class = "" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.CheckBoxFor(model => model.AsthmaWarningSignDecreasedExercise, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaWarningSignDecreasedExercise, htmlAttributes: new { @class = "" })
+                        </div>
+                        <div class="col-md-4">
+                            @Html.CheckBoxFor(model => model.AsthmaWarningSignOther, new { @class = "" })
+                            @Html.LabelFor(model => model.AsthmaWarningSignOther, htmlAttributes: new { @class = "" })
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
+
+
+    <!-- THREATENING CONDITIONS -->
+    <div class="col-md-9 col-md-offset-1">
+        <div id="life-threatening-condition">
+            <hr>
+            <h4 class="bg-info">Life Threatening Conditions</h4>
+            <p>
+                RCW 28A.210.320-Children with Life-Threatening Conditions, requires a medication or treatment order as a prerequisite for children with life-threatening conditions to attend public schools. The new law defines “life- threatening condition” as a health condition that will put the child in danger of death during the school day, if a medication or treatment order and a nursing care plan are not in place. Potential life-threatening conditions include, but are not limited to, students with seizure disorders, diabetes, life-threatening allergies, and some students with asthma and heart conditions. If this law applies to your student, please contact the nurse at your child’s school.
+            </p>
+        </div>
+    </div>
+</div>
 
 
     @*<!-- CATEGORY 1 -->
@@ -493,14 +491,14 @@
             </div>
         </div>*@
 
-    <div class="form-row">
-        <div class="pull-right">
-            <button class="btn btn-primary btn-lg btn-success" type="submit" form="health-form">
-                Continue
-                <i class="fas fa-caret-right"></i>
-            </button>
-        </div>
+<div class="form-row">
+    <div class="pull-right">
+        <button class="btn btn-primary btn-lg btn-success" type="submit" form="health-form">
+            Continue
+            <i class="fas fa-caret-right"></i>
+        </button>
     </div>
+</div>
 
 }
 
@@ -548,8 +546,10 @@
         // enable or disable medical input based on checkbox value
         if (isChecked === true) {
             $("input[name*='" + currentCheckboxName + "Description']").removeAttr("disabled");
+            $("input[name*='" + currentCheckboxName + "Date']").removeAttr("disabled");
         } else {
             ($("input[name*='" + currentCheckboxName + "Description']")).attr("disabled", "disabled");
+            ($("input[name*='" + currentCheckboxName + "Date']")).attr("disabled", "disabled");
         }
     }
 

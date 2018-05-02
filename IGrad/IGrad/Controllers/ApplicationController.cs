@@ -171,6 +171,7 @@ namespace IGrad.Controllers
                 #endregion
 
                 data.Birthday = user.Birthday;
+                data.MillitaryInfo = user.MillitaryInfo;
 
                 db.SaveChanges();
             }
@@ -234,9 +235,11 @@ namespace IGrad.Controllers
                 //set IDs for Entities
                 user.UserID = UserID;
                 user.QualifiedOrEnrolledInProgam.UserID = UserID;
+
                 //Set object reference to entity with UserID
                 data.QualifiedOrEnrolledInProgam = user.QualifiedOrEnrolledInProgam;
                 data.SchoolInfo = user.SchoolInfo;
+
 
                 user.SchoolInfo.PriorEducation.UserID = UserID;
                 data.SchoolInfo.PriorEducation = user.SchoolInfo.PriorEducation;
@@ -731,6 +734,7 @@ namespace IGrad.Controllers
                 if (data.HealthInfo == null)
                 {
                     data.HealthInfo = new Health();
+                    data.HealthInfo.SeriousInjuryOrSurgeryDate = DateTime.Now;
                 }
                 return View(data.HealthInfo);
             }
@@ -739,6 +743,7 @@ namespace IGrad.Controllers
         public ActionResult GetAddHealthInfo()
         {
             Health defaultHealth = new Health();
+            defaultHealth.SeriousInjuryOrSurgeryDate = DateTime.Now;
             return PartialView("_AddHealthInfo", defaultHealth);
         }
 

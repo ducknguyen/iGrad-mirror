@@ -195,7 +195,7 @@ namespace IGrad.Controllers
                             _userModel.ConsideredRaceAndEthnicity.UserID = newGuid;
                             _userModel.HealthInfo = new Health();
                             _userModel.HealthInfo.UserID = newGuid;
-                            _userModel.HealthInfo.SeriousInjuryDate = DateTime.Now;
+                            _userModel.HealthInfo.SeriousInjuryOrSurgeryDate = DateTime.Now;
                             _userModel.SchoolInfo = new SchoolInfo();
                             _userModel.SchoolInfo.UserID = newGuid;
                             _userModel.LivesWith = new LivesWith();
@@ -370,7 +370,7 @@ namespace IGrad.Controllers
                         _userModel.ConsideredRaceAndEthnicity.UserID = newGuid;
                         _userModel.HealthInfo = new Health();
                         _userModel.HealthInfo.UserID = newGuid;
-                        _userModel.HealthInfo.SeriousInjuryDate = DateTime.Now;
+                        _userModel.HealthInfo.SeriousInjuryOrSurgeryDate = DateTime.Now;
                         _userModel.SchoolInfo = new SchoolInfo();
                         _userModel.SchoolInfo.UserID = newGuid;
                         _userModel.LivesWith = new LivesWith();

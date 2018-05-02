@@ -155,7 +155,8 @@ namespace IGrad.Models.User
 
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime SeriousInjuryDate { get; set; }
+        [DisplayName("Date of injury or surgery")]
+        public DateTime SeriousInjuryOrSurgeryDate { get; set; }
 
         [DisplayName("Emotional health concerns")]
         public bool EmotionalHealthConcerns { get; set; }

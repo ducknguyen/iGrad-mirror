@@ -236,7 +236,7 @@
         }
     </div>
     <span class="text-warning hidden" id="primary-guardian-count-warning">Cannot have more than 2 guardians. Please delete a guardian to add a different one.</span>
-    <button class="btn btn-primary" id="add-primary-guardian-button" type="button" onclick="loadPrimaryGuardianInfoForm()">Add Parent/Guardian</button>
+    <button class="btn btn-success" id="add-primary-guardian-button" type="button" onclick="loadPrimaryGuardianInfoForm()">Add Parent/Guardian</button>
     <div class="hidden" id="add-primary-guardian">
     </div>
 </div>
@@ -291,7 +291,7 @@
                 }
             </div>
             <span class="text-warning hidden" id="secondary-guardian-count-warning">Cannot have more than 2 guardians. Please delete a guardian to add a different one.</span>
-            <button class="btn btn-primary" id="add-secondary-guardian-button" onclick="loadSecondaryGuardianInfoForm()">Add Parent/Guardian</button>
+            <button class="btn btn-success" id="add-secondary-guardian-button" onclick="loadSecondaryGuardianInfoForm()">Add Parent/Guardian</button>
             <div class="hidden" id="add-secondary-guardian">
             </div>
         </div>
@@ -331,26 +331,10 @@
     </div>
     <div class="" id="add-emergency-contact">
     </div>
-    <button class="btn btn-primary" id="add-emergency-contact-button" onclick="loadEmergencyContactInfoForm()">Add Emergency Contact</button>
+    <button class="btn btn-success" id="add-emergency-contact-button" onclick="loadEmergencyContactInfoForm()">Add Emergency Contact</button>
 </div>
 
 <br /><br />
-
-@*<!-- ADD GUARDIAN -->
-    <div class="wrapper" id="add-guardian-container">
-        <h4 class="bg-info">Guardians</h4>
-        <div class="" id="guardians">
-            <!-- guardians partial view here-->
-            @{if (Model.Guardians != null)
-            {
-            Html.RenderPartial("_GetGuardianInfo", Model.Guardians.ToList());
-            }
-            }
-        </div>
-        <button class="btn btn-primary" id="add-guardian-button" onclick="loadGuardianInfoForm()">Add Parent/Guardian</button>
-        <div class="hidden" id="add-guardian">
-        </div>
-    </div>*@
 
 <br /><br />
 
@@ -365,7 +349,7 @@
             }
         }
     </div>
-    <button class="btn btn-primary" id="add-sibling-button" onclick="loadSiblingInfoForm()">Add Sibling</button>
+    <button class="btn btn-success" id="add-sibling-button" onclick="loadSiblingInfoForm()">Add Sibling</button>
     <div class="hidden" id="add-sibling">
     </div>
 </div>
