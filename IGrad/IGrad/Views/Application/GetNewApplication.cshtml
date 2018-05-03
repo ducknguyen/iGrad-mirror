@@ -89,37 +89,33 @@
     </div>
 
     <!-- MILITARY INFO START -->
-    <div class="container">
-        <h4 class="bg-info">
-            Parent / Guardian's Military Affiliation:
-        </h4>
-        <div class="row">
-            <div class="col-md-4">
-                @Html.CheckBoxFor(model => model.MillitaryInfo.None, new { @class = "" })
-                @Html.LabelFor(model => model.MillitaryInfo.None, htmlAttributes: new { @class = "control-label" })
-            </div>
-            <div class="col-md-4">
-                @Html.CheckBoxFor(model => model.MillitaryInfo.ArmedForcesReserved, new { @class = "" })
-                @Html.LabelFor(model => model.MillitaryInfo.ArmedForcesReserved, htmlAttributes: new { @class = "control-label" })
-            </div>
-            <div class="col-md-4">
-                @Html.CheckBoxFor(model => model.MillitaryInfo.NationalGuard, new { @class = "" })
-                @Html.LabelFor(model => model.MillitaryInfo.NationalGuard, htmlAttributes: new { @class = "control-label" })
-            </div>
+    <h4 class="bg-info">Parent / Guardian's Military Affiliation</h4>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.CheckBoxFor(model => model.MillitaryInfo.None, new { @class = "" })
+            @Html.LabelFor(model => model.MillitaryInfo.None, htmlAttributes: new { @class = "control-label" })
         </div>
-        <div class="row">
-            <div class="col-md-4">
-                @Html.CheckBoxFor(model => model.MillitaryInfo.MoreThanOne, new { @class = "" })
-                @Html.LabelFor(model => model.MillitaryInfo.MoreThanOne, htmlAttributes: new { @class = "control-label" })
-            </div>
-            <div class="col-md-4">
-                @Html.CheckBoxFor(model => model.MillitaryInfo.ArmedForcesActiveDuty, new { @class = "" })
-                @Html.LabelFor(model => model.MillitaryInfo.ArmedForcesActiveDuty, htmlAttributes: new { @class = "control-label" })
-            </div>
-            <div class="col-md-4">
-                @Html.CheckBoxFor(model => model.MillitaryInfo.PreferNotToAnswer, new { @class = "race-checkbox" })
-                @Html.LabelFor(model => model.MillitaryInfo.PreferNotToAnswer, htmlAttributes: new { @class = "control-label" })
-            </div>
+        <div class="col-md-4">
+            @Html.CheckBoxFor(model => model.MillitaryInfo.ArmedForcesReserved, new { @class = "" })
+            @Html.LabelFor(model => model.MillitaryInfo.ArmedForcesReserved, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-md-4">
+            @Html.CheckBoxFor(model => model.MillitaryInfo.NationalGuard, new { @class = "" })
+            @Html.LabelFor(model => model.MillitaryInfo.NationalGuard, htmlAttributes: new { @class = "control-label" })
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            @Html.CheckBoxFor(model => model.MillitaryInfo.MoreThanOne, new { @class = "" })
+            @Html.LabelFor(model => model.MillitaryInfo.MoreThanOne, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-md-4">
+            @Html.CheckBoxFor(model => model.MillitaryInfo.ArmedForcesActiveDuty, new { @class = "" })
+            @Html.LabelFor(model => model.MillitaryInfo.ArmedForcesActiveDuty, htmlAttributes: new { @class = "control-label" })
+        </div>
+        <div class="col-md-4">
+            @Html.CheckBoxFor(model => model.MillitaryInfo.PreferNotToAnswer, new { @class = "race-checkbox" })
+            @Html.LabelFor(model => model.MillitaryInfo.PreferNotToAnswer, htmlAttributes: new { @class = "control-label" })
         </div>
     </div>
 
@@ -127,9 +123,9 @@
         <!-- GENDER, EMAIL AND PHONE END --->
         <!-- **********RACE AND ETHNICITY START********** -->
         <div class="row">
-            <h4 class="bg-info">
-                Student Race Info:
-            </h4>
+            <div class="col-md-12">
+                <h4 class="bg-info">Student Race Info</h4>
+            </div>
             <!-- RACE SELECTOR -->
             <div class="col-md-3 form-group">
                 @*@Html.LabelFor(model => model.ConsideredRaceAndEthnicity, htmlAttributes: new { @class = "control-label required-marker" })*@
@@ -619,4 +615,15 @@
 
 <!-- PROGRESSBAR & PERSONAL FORM JS -->
 <script type="text/javascript" src="~/Scripts/progress-bar.js"></script>
+<script type="text/javascript">
+    function NativeTribalToggle(nativeTribalCounter) {
+    if (nativeTribalCounter > 0) {
+        $("#native-tribal-wrapper").show();
+        $("#native-tribal-information").load('@Url.Action("GetNativeAmericanEducationForm", "Application")');
+    }
+    else {
+        $("#native-tribal-wrapper").hide();
+    }
+}
+</script>
 <script type="text/javascript" src="~/Scripts/personal-form.js"></script>

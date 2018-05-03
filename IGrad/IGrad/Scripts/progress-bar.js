@@ -34,9 +34,9 @@ function trackPersonalFormProgress() {
  */
 function trackFormProgress() {
     var count = 0;
-
+    
     // check all radio groups
-    $('input.progressbar-checker').each(function () {
+    $(':input.progressbar-checker').each(function () {
         if (this.validity.valid && ($(this).val()).length != 0) {
             count++;
         }

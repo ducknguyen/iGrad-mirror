@@ -51,7 +51,6 @@ function TrackRaceChanges() {
 function UpdateRaceList(currentCheckbox, isChecked) {
     var $list = $("#studentRaceList");
     if (isChecked === true) {
-
         $list.append("<li data-value='" + currentCheckbox + "'>" + currentCheckbox + "<input type='hidden' name='studentRace[]' value='" + currentCheckbox + "'/></li>");
 
         // showcasing selected race
@@ -65,21 +64,13 @@ function UpdateRaceList(currentCheckbox, isChecked) {
     }
 }
 
-function NativeTribalToggle(nativeTribalCounter) {
-    if (nativeTribalCounter > 0) {
-        $("#native-tribal-wrapper").show();
-        $("#native-tribal-information").load('@Url.Action("GetNativeAmericanEducationForm", "Application")');
-    }
-    else {
-        $("#native-tribal-wrapper").hide();
-    }
-}
+
 
 
 $(':input').change(function () {
     // check if current input is radio button
     if ($(this).hasClass('required-checker')) {
-        var toUpdate = $('input[type=hidden][name=' + $(this).attr('name') + ']');
+        var toUpdate = $('input[type=hidden][name="' + $(this).attr("name") + '"]');
         toUpdate.val($(this).val());
     }
 

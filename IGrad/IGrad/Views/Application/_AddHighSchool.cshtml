@@ -2,7 +2,7 @@
 
 <script type="text/javascript">
     $("#submitButton").click(function (e) {
-        if ($("#last-attended:contains('Yes')") && $('#lastAttendedTrue').is(':checked')) {
+        if ($('#last-attended').length > 0 && $('#lastAttendedTrue').is(':checked')) {
             e.preventDefault();
             alert("Cannot add another last attended highschool.");
         }
@@ -19,18 +19,17 @@
 {
     @Html.AntiForgeryToken()
     <div class="" id="add-highschool-form">
-        <h4 class="">Add A New High School</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">
             <div class="form-group col-md-4">
                 @Html.LabelFor(model => model.HighSchoolName, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.EditorFor(model => model.HighSchoolName, new { htmlAttributes = new { @class = "form-control", @placeholder = "School name" } })
+                @Html.EditorFor(model => model.HighSchoolName, new { htmlAttributes = new { @class = "form-control hs-info", @placeholder = "School name" } })
                 @Html.ValidationMessageFor(model => model.HighSchoolName, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-2">
                 @Html.LabelFor(model => model.HighSchoolYear, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.EditorFor(model => model.HighSchoolYear, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last year attended" } })
+                @Html.EditorFor(model => model.HighSchoolYear, new { htmlAttributes = new { @class = "form-control hs-info", @placeholder = "Last year attended" } })
                 @Html.ValidationMessageFor(model => model.HighSchoolYear, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-4">

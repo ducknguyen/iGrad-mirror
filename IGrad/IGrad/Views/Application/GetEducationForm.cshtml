@@ -7,85 +7,15 @@
 }
 @Styles.Render("/Content/educationform.css")
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-
-    // LOAD FUNCTIONS
-    function loadHighSchoolInfoForm() {
-        // check if last attended exist, yes/no update model
-        // access model from add hs form, and enable/disable accordingly
-        hideTarget('add-new-highschool-button');
-        showTarget('school-information');
-        $("#school-information").load('@Url.Action("AddHighSchoolInfoPartial", "Application")');
-    }
-
-    function isLastAttendedExist() {
-        if ($("#last-attended").length == 0) {
-            console.log("nothing");
-            return false;
-        }
-        console.log("something");
-        return true;
-    }
-
-    function loadViolationInfo() {
-        showTarget('add-violation-information');
-        $("#add-violation-information").load('@Url.Action("GetAddViolation", "Application")');
-    }
-
-     //PROCESS ADD HIGH SCHOOL
-    function processAddHighSchool() {
-        isLastAttendedSelected();
-        hideTarget('school-information');
-        showTarget('add-new-highschool-button');
-    }
-
-    function isLastAttendedSelected() {
-        var lastYearAttendedInput = $('input:text[name="HighSchoolYear"]').val();
-        var isLastAttended = $('input:radio[name="isLastHighSchoolAttended"]').val();
-
-        if (isLastAttended == "True" || isLastAttended === true) {  // need to recheck this
-            $('input:text[name="SchoolInfo.LastYearAttended"]').val(lastYearAttendedInput); // set the year in general information
-        }
-    }
-
-    // DELETE FUNCTIONS
-    function deleteHighSchoolRecord(fieldId) {
-
-        $.ajax({
-            type: "POST",
-            url: '/Application/DeleteHighSchool',
-            data: { "fieldId": fieldId },
-            success: hideTarget('highSchool_' + fieldId)
-        });
-    }
-
-    function deleteViolation(fieldId) {
-        $.ajax({
-            type: "POST",
-            url: '/Application/DeleteViolation',
-            success: hideTarget('violation_' + fieldId)
-        });
-    }
-
-    // HELPER FUNCTIONS
-    function hideTarget(targetId) {
-        $('#' + targetId).addClass('hidden');
-    }
-
-    function showTarget(targetId) {
-        $('#' + targetId).removeClass('hidden');
-    }
-
-
-</script>
 
 <h3>Previous Education</h3>
 <small class="form-text required-marker-indicator">* required fields.</small>
 <hr>
 
 <!-- ADD PREVIOUS HIGH SCHOOL-->
+<h4 class="bg-info">High School Information</h4>
+<h4 class="required-marker">Add A Previous High School</h4>
 <div class="" id="highschool-info">
-    <h4 class="bg-info">High School Information</h4>
     @{if (Model.SchoolInfo.HighSchoolInformation != null)
         {
             Html.RenderPartial("_GetHighSchoolInfo", Model.SchoolInfo.HighSchoolInformation);
@@ -94,6 +24,8 @@
 <div class="" id="school-information">
     <!--Form to add High School Information will be rendered here-->
 </div>
+
+<input type="hidden" name="highschool-history" class="progressbar-checker" value="">
 <button class="btn btn-success" id="add-new-highschool-button" onclick="loadHighSchoolInfoForm()">Add High School</button>
 
 <br /><br />
@@ -108,34 +40,35 @@
             <div class="form-group col-md-3">
                 @Html.LabelFor(model => model.SchoolInfo.IsExpelledOrSuspended, htmlAttributes: new { @class = "control-label required-marker" })
                 <br />
-                @Html.RadioButtonFor(model => model.SchoolInfo.IsExpelledOrSuspended, true) Yes
-                @Html.RadioButtonFor(model => model.SchoolInfo.IsExpelledOrSuspended, false) No
+                @Html.RadioButtonFor(model => model.SchoolInfo.IsExpelledOrSuspended, true, new { @class = "radio-checker" }) Yes
+                @Html.RadioButtonFor(model => model.SchoolInfo.IsExpelledOrSuspended, false, new { @class = "radio-checker" }) No
+                @Html.HiddenFor(model => model.SchoolInfo.IsExpelledOrSuspended, new { @class = "progressbar-checker" })
             </div>
             <div class="form-group col-md-3">
                 @Html.LabelFor(model => model.SchoolInfo.LastYearAttended, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.TextBoxFor(model => model.SchoolInfo.LastYearAttended, "{0:#.#}", htmlAttributes: new { @class = "form-control", @placeholder = "Year attended" })
+                @Html.TextBoxFor(model => model.SchoolInfo.LastYearAttended, "{0:#.#}", htmlAttributes: new { @class = "form-control", @placeholder = "Year attended", required = "required" })
             </div>
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.SchoolInfo.CurrentGrade, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.TextBoxFor(model => model.SchoolInfo.CurrentGrade, "{0:#.#}", htmlAttributes: new { @class = "form-control", @placeholder = "Current grade" })
+                @Html.TextBoxFor(model => model.SchoolInfo.CurrentGrade, "{0:#.#}", htmlAttributes: new { @class = "form-control", @placeholder = "Current grade", required = "required" })
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.TextAreaFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "form-control", @rows = 3, @placeholder = "Student opinions..." })
+                @Html.TextAreaFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "form-control", @rows = 3, @placeholder = "Student opinions...", required = "required" })
             </div>
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.TextAreaFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "form-control", @rows = 3, @placeholder = "Student performance..." })
+                @Html.TextAreaFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "form-control", @rows = 3, @placeholder = "Student performance...", required = "required" })
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.TextAreaFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "form-control", @rows = 4, @placeholder = "Strengths and improvements..." })
+                @Html.TextAreaFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "form-control", @rows = 4, @placeholder = "Strengths and improvements...", required = "required" })
             </div>
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "control-label" })
@@ -158,30 +91,32 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "control-label required-marker" })
                 <br />
-                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, true) Yes
-                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, false) No
+                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, true, new { @class = "radio-checker" }) Yes
+                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, false, new { @class = "radio-checker" }) No
+                @Html.HiddenFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, new { @class = "progressbar-checker" })
             </div>
 
             <!-- OUTSIDE THE U.S. -->
             <div class="form-group">
                 @Html.LabelFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker" })
                 <br />
-                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, true) Yes
-                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, false) No
+                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, true, new { @class = "radio-checker had-outside" }) Yes
+                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, false, new { @class = "radio-checker" }) No
+                @Html.HiddenFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, new { @class = "progressbar-checker" })
             </div>
 
             <div id="education-outside-us">
                 <div class="form-group">
                     @Html.LabelFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker" })
-                    @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "form-control", @placeholder = "Month(s)" })
+                    @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "form-control", @placeholder = "Month(s)", required = "required" })
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker" })
-                    @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "form-control", @placeholder = "Language spoken" })
+                    @Html.LabelFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker", required = "required" })
+                    @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "form-control", @placeholder = "Language spoken", required = "required" })
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation, htmlAttributes: new { @class = "control-label required-marker" })
-                    @Html.EditorFor(model => model.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation, new { htmlAttributes = new { @class = "form-control datepicker", @placeholder = "01/01/2000" } })
+                    @Html.EditorFor(model => model.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation, new { htmlAttributes = new { @class = "form-control datepicker", @placeholder = "01/01/2000", required = "required" } })
                 </div>
             </div>
         </div>
@@ -215,12 +150,12 @@
 <!-- END FORM -->
 <!-- VIOLATIONS CHECK -->
 <div class="wrapper">
+    <h4 class="bg-info">Previous Violation</h4>
+    <h4 class="required-marker">Has the student had a school violation?</h4>
     <div id="violation-container">
-        <h4 class="bg-info">Previous Violation</h4>
         @{if (Model.SchoolInfo.PreviousSchoolViolation == null)
             {
                 <div class="">
-                    <h4 class="required-marker">Has the student had a school violation?</h4>
                     <button class="btn btn-success" onclick="loadViolationInfo()">Yes, add violation</button>
                     <button class="btn " value="" onclick="hideTarget('violation-container')">No</button>
                 </div>
@@ -230,13 +165,13 @@
                 <div class="" id="existing-violation-information">
                     @{Html.RenderPartial("_GetViolationInfo", Model.SchoolInfo.PreviousSchoolViolation);}
                 </div>
-                        }
+            }
         }
         <div class="" id="add-violation-information">
         </div>
     </div>
+    <input type="hidden" name="violation-history" class="progressbar-checker" value="">
 </div>
-
 
 
 <div class="form-row">
@@ -248,24 +183,79 @@
     </div>
 </div>
 
+<script src="~/Scripts/progress-bar.js" type="text/javascript"></script>
+<script src="~/Scripts/education-form.js" type="text/javascript"></script>
+
 <script type="text/javascript">
-    $(document).ready(function () {
-        var radioCurrentValue = $('input:radio[name="SchoolInfo.PriorEducation.hasEducationOutsideUS"]').is(":checked");
-        radioButtonChecker(radioCurrentValue);
-    });
+    // LOAD FUNCTIONS
+    function loadHighSchoolInfoForm() {
+        hideTarget('add-new-highschool-button');
+        showTarget('school-information');
+        $("#school-information").load('@Url.Action("AddHighSchoolInfoPartial", "Application")');
+    }
+
+    function loadViolationInfo() {
+        showTarget('add-violation-information');
+        $("#add-violation-information").load('@Url.Action("GetAddViolation", "Application")');
+    }
+
+     //PROCESS ADD HIGH SCHOOL
+    function processAddHighSchool() {
+        recordSchoolInfo();
+        hideTarget('school-information');
+        showTarget('add-new-highschool-button');
+    }
+
+    function recordSchoolInfo() {
+        var schoolInfo = [];
+
+        // add name, year and last attended status to school info
+        $("form#add-hs-form input.hs-info").each(function () {
+            var current = $(this);
+            schoolInfo.push(current.val());
+        });
+
+        var isLastAttended = $('form#add-hs-form input:radio[name="isLastHighSchoolAttended"]:checked').val();
+        schoolInfo.push(isLastAttended);
+
+        //create object and add to highschool list according to last attended status
+        var newHighSchool = new HighSchoolObject(schoolInfo[0], schoolInfo[1], schoolInfo[2]);
+
+        addToHighSchoolList(newHighSchool);
+        updateHighSchoolHistory(highSchoolList);
+        trackFormProgress();
+    }
 
 
-    $('input:radio[name="SchoolInfo.PriorEducation.hasEducationOutsideUS"]').click(function () {
-        var currentValue = $(this).val();
-        radioButtonChecker(currentValue);
-    });
+    // DELETE FUNCTIONS
+    function deleteHighSchoolRecord(fieldId) {
+        processDeleteHighSchool('highSchool_' + fieldId);
+        $.ajax({
+            type: "POST",
+            url: '/Application/DeleteHighSchool',
+            data: { "fieldId": fieldId },
+            success: removeTargert('highSchool_' + fieldId)
+        });
+    }
 
-    function radioButtonChecker(currentValue) {
-        if (currentValue == "True" || currentValue === true) { // need to recheck this
-            showTarget("education-outside-us");
-        }
-        else {
-            hideTarget("education-outside-us");
-        }
+    function deleteViolation(fieldId) {
+        $.ajax({
+            type: "POST",
+            url: '/Application/DeleteViolation',
+            success: hideTarget('violation_' + fieldId)
+        });
+    }
+
+    // HELPER FUNCTIONS
+    function hideTarget(targetId) {
+        $('#' + targetId).addClass('hidden');
+    }
+
+    function showTarget(targetId) {
+        $('#' + targetId).removeClass('hidden');
+    }
+
+    function removeTargert(targetId) {
+        $('#' + targetId).remove();
     }
 </script>
