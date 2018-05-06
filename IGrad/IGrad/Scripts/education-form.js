@@ -3,24 +3,12 @@ var violationList = [];
 
 $(document).ready(function () {
     checkCurrentHighSchoolHistory();
-    radioButtonChecker();
     checkCurrentViolationHistory();
 
     $(':input').each(function () {
         trackFormProgress();
     })
 });
-
-
-
-// show/hide education outside us according to current selection
-function radioButtonChecker() {
-    if ($('.had-outside').is(":checked")) {
-        showTarget("education-outside-us");
-    } else {
-        hideTarget("education-outside-us");
-    }
-}
 
 
 /* HIGH SCHOOL RELATED FUNCTIONS */
@@ -71,6 +59,7 @@ function processDeleteHighSchool(fieldId) {
     updateHighSchoolHistory(highSchoolList);
     trackFormProgress();
 }
+/* HIGH SCHOOL RELATED FUNCTIONS END*/
 
 /* VIOLATIONS RELATED FUNCTIONS */
 // check current violations in table
@@ -95,13 +84,14 @@ function updateViolationHistory(violationList) {
     var toUpdate = $('input[type=hidden][name=violation-history]');
     toUpdate.val(violationList);
 }
+/* VIOLATIONS RELATED FUNCTIONS END */
 
+// track input changes
 $(':input').change(function () {
     // check if current input is radio button
     if ($(this).hasClass('radio-checker')) {
         var toUpdate = $('input[type=hidden][name="' + $(this).attr("name") + '"]');
         toUpdate.val($(this).val());
     }
-    radioButtonChecker();
     trackFormProgress();
 });

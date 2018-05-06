@@ -1,102 +1,129 @@
 ﻿@model IGrad.Models.User.UserModel
 @{
-    ViewBag.Title = "iGrad - Language";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+                /**/
+
+                ViewBag.Title = "iGrad - Language";
+                Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h3>Preferred Language History</h3>
+<h2>Preferred Language History</h2>
 <small class="form-text required-marker-indicator">* required fields.</small>
 <hr>
 
-<div class="description-text">
-    <p>
-        Indicate your language preference so we can provide an interpreter or translated documents, free of charge, when you need them.
-        <br />All parents have the right to information about their student's education in a language they understand.
-    </p>
-</div>
-
 @using (Html.BeginForm("SubmitLanguageInfo", "Application", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
+<div class="">
+
+    <!-- RIGHT TO TRANSLATION -->
+    <h3 class="bg-info">
+        Right to Translation and Interpretation Services
+        <span data-toggle="tooltip" data-placement="right" title="Indicate your language preference so we can provide an interpreter or
+                  translated documents, free of charge, when you need them" class="user-hint">
+            <i class="fas fa-info-circle"></i>
+        </span>
+    </h3>
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "control-label required-marker" })
+            @Html.TextBoxFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "form-control", @placeholder = "Prefer language", required = "required" })
+        </div>
+    </div>
+
+    <br />
+
+
+    <!-- EGIBILITY FOR LANGUAGE DEVELOPMENT SUPPORT -->
+    <h3 class="bg-info">
+        Eligibility for Language Development Support
+        <span data-toggle="tooltip" data-placement="right" title="Information about the student's language helps us identify students
+            who qualify for support to develop the language skills necessary for success in school. Testing may be necessary to detemine
+                  if language supports are needed." class="user-hint">
+            <i class="fas fa-info-circle"></i>
+        </span>
+    </h3>
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "control-label required-marker" })
+            @Html.TextBoxFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "form-control", @placeholder = "Language", required = "required" })
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.LanguageHisory.StudentPrimaryLanguageAtHome, htmlAttributes: new { @class = "control-label required-marker" })
+            @Html.TextBoxFor(model => model.LanguageHisory.StudentPrimaryLanguageAtHome, htmlAttributes: new { @class = "form-control", @placeholder = "Primary language", required = "required" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.LanguageHisory.PrimaryLanguageSpokenAtHome, htmlAttributes: new { @class = "control-label required-marker" })
+            @Html.TextBoxFor(model => model.LanguageHisory.PrimaryLanguageSpokenAtHome, htmlAttributes: new { @class = "form-control", @placeholder = "Primary at home", required = "required" })
+        </div>
+
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, htmlAttributes: new { @class = "control-label required-marker" })
+            <br />
+            @Html.RadioButtonFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, true) Yes
+            @Html.RadioButtonFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, false) No
+            @Html.HiddenFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, new { @class = "progressbar-checker" })
+        </div>
+    </div>
+
+    <br />
+
+    <!-- PRIOR EDUCATION -->
     <div class="">
-        <br />
-
-        <!-- RIGHT TO TRANSLATION -->
-        <h4 class="bg-info">Right to Translation and Interpretation Services</h4>
-        <div class="row">
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.TextBoxFor(model => model.LanguageHisory.PreferredLanguage, htmlAttributes: new { @class = "form-control", @placeholder = "Prefer language", required = "required" })
-            </div>
+        <h3 class="bg-info">
+            Prior Education
+            <span data-toggle="tooltip" data-placement="right" title="Your answer give us information about the knowledge and skills your child is
+                          bringing to school. It may also enable the school district to receive addition federal funding to provide support to your child." class="user-hint">
+                <i class="fas fa-info-circle"></i>
+            </span>
+        </h3>
+        <div class="form-group">
+            @Html.LabelFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "control-label required-marker" })
+            <br />
+            @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, true, new { @class = "radio-checker" }) Yes
+            @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, false, new { @class = "radio-checker" }) No
+            @Html.HiddenFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, new { @class = "progressbar-checker" })
         </div>
 
-        <br />
-
-
-        <!-- EGIBILITY FOR LANGUAGE DEVELOPMENT SUPPORT -->
-        <h4 class="bg-info">
-            Eligibility for Language Development Support Information about the student's language helps us identify students
-            who qualify for support to develop the language skills necessary for success in school.
-            Testing may be necessary to detemine if language supports are needed.
-        </h4>
-        <div class="row">
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.TextBoxFor(model => model.LanguageHisory.UserFirstLanguageLearned, htmlAttributes: new { @class = "form-control", @placeholder = "Language", required = "required" })
-            </div>
-
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.LanguageHisory.StudentPrimaryLanguageAtHome, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.TextBoxFor(model => model.LanguageHisory.StudentPrimaryLanguageAtHome, htmlAttributes: new { @class = "form-control", @placeholder = "Primary language", required = "required" })
-            </div>
+        <!-- OUTSIDE THE U.S. -->
+        <div class="form-group">
+            @Html.LabelFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker" })
+            <br />
+            @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, true, new { @class = "radio-checker had-outside" }) Yes
+            @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, false, new { @class = "radio-checker" }) No
+            @Html.HiddenFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, new { @class = "progressbar-checker" })
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.LanguageHisory.PrimaryLanguageSpokenAtHome, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.TextBoxFor(model => model.LanguageHisory.PrimaryLanguageSpokenAtHome, htmlAttributes: new { @class = "form-control", @placeholder = "Primary at home", required = "required" })
+        <div id="education-outside-us">
+            <div class="form-group">
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker" })
+                @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "form-control", @placeholder = "Month(s)", required = "required" })
             </div>
-
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, htmlAttributes: new { @class = "control-label required-marker" })
-                <br />
-                @Html.RadioButtonFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, true) Yes
-                @Html.RadioButtonFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, false) No
-                @Html.HiddenFor(model => model.LanguageHisory.StudentReceievedEnglishDevelopmentSupport, new { @class = "progressbar-checker" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker", required = "required" })
+                @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "form-control", @placeholder = "Language spoken", required = "required" })
             </div>
-        </div>
-
-        <br />
-
-        <!-- PRIOR EDUCATION -->
-        <h4 class="bg-info">Prior Education</h4>
-        <div class="row">
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker" })
-                <br /><small> (Kindergarten - 12 grade)</small>
-                <br />
-                @Html.RadioButtonFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, true) Yes
-                @Html.RadioButtonFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, false) No
-                @Html.HiddenFor(model => model.LanguageHisory.StudentHasReceivedFormalEducationOutsideUS, new { @class = "progressbar-checker" })
-            </div>
-
-            <div class="form-group col-md-6">
-                @Html.LabelFor(model => model.LanguageHisory.StudentStartingGradeInUS, htmlAttributes: new { @class = "control-label required-marker" })
-                <br /><small> (Kindergarten - 12 grade)</small>
-                @Html.TextBoxFor(model => model.LanguageHisory.StudentStartingGradeInUS, htmlAttributes: new { @class = "form-control", @placeholder = "Grade level", required = "required" })
-            </div>
-        </div>
-
-        <div class="form-row">
-            <div class="pull-right">
-                <button class="btn btn-primary btn-lg btn-success" type="submit">
-                    Continue
-                    <i class="fas fa-caret-right"></i>
-                </button>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation, htmlAttributes: new { @class = "control-label required-marker" })
+                <br /><small>(Kindergarten - 12th grade)</small>
+                @Html.EditorFor(model => model.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation, new { htmlAttributes = new { @class = "form-control datepicker", @placeholder = "01/01/2000", required = "required" } })
             </div>
         </div>
     </div>
+
+    <div class="form-row">
+        <div class="pull-right">
+            <button class="btn btn-primary btn-lg btn-success" type="submit">
+                Continue
+                <i class="fas fa-caret-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
 }
 
-    <!-- PROGRESSBAR & LANGUAGE FORM JS -->
-    <script type="text/javascript" src="~/Scripts/progress-bar.js"></script>
-    <script type="text/javascript" src="~/Scripts/language-form.js"></script>
+<!-- PROGRESSBAR & LANGUAGE FORM JS -->
+<script type="text/javascript" src="~/Scripts/progress-bar.js"></script>
+<script type="text/javascript" src="~/Scripts/language-form.js"></script>
