@@ -14,17 +14,17 @@ namespace IGrad.Models.User
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int fieldId { get; set; }
 
-        [DisplayName("Armed Forces Active Duty")]
+        [DisplayName("U.S. Armed Forces active duty")]
         public bool ArmedForcesActiveDuty { get; set; }
-        [DisplayName("Armed Forces Reserved")]
+        [DisplayName("U.S. Armed Forces reserves")]
         public bool ArmedForcesReserved { get; set; }
-        [DisplayName("National Guard")]
+        [DisplayName("National Guard member")]
         public bool NationalGuard { get; set; }
-        [DisplayName("More Than one Military")]
+        [DisplayName("More than one member of Armed Forces/Nat")]
         public bool MoreThanOne { get; set; }
-        [DisplayName("None or Not Applicable")]
+        [DisplayName("No Affiliation")]
         public bool None { get; set; }
-        [DisplayName("Prefer Not To Answer")]
+        [DisplayName("No response/refused to state")]
         public bool PreferNotToAnswer { get; set; }
     }
 }

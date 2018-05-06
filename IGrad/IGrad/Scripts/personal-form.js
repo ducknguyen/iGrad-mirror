@@ -1,4 +1,5 @@
 ﻿var selectedRace = [];
+var selectedMilitary = [];
 var nativeTribalCounter = 0;
 
 $(document).ready(function () {
@@ -7,9 +8,24 @@ $(document).ready(function () {
 
     // track input fields on load
     $(':input').each(function () {
+        if ($(this).hasClass('race-checkbox')) {
+            var toUpdate = $('input[type=hidden][name=selectedRaces]');
+            if ($(this).is(':checked')) {
+                selectedRace.push($(this).val());
+            }
+            toUpdate.val(selectedRace);
+        }
+        if ($(this).hasClass('miltary-checkbox')) {
+            var toUpdate = $('input[type=hidden][name=selectedMilitary]');
+            if ($(this).is(':checked')) {
+                selectedMilitary.push($(this).val());
+            }
+            toUpdate.val(selectedMilitary);
+        }
         trackPersonalFormProgress();
     });
 
+    $('.fa-minus-circle').hide();
 });
 
 function CheckCurrentProgress() {
@@ -65,8 +81,6 @@ function UpdateRaceList(currentCheckbox, isChecked) {
 }
 
 
-
-
 $(':input').change(function () {
     // check if current input is radio button
     if ($(this).hasClass('required-checker')) {
@@ -74,7 +88,7 @@ $(':input').change(function () {
         toUpdate.val($(this).val());
     }
 
-    // check if current input is checkbox
+    // check if current input is race checkbox
     if ($(this).hasClass('race-checkbox')) {
         var toUpdate = $('input[type=hidden][name=selectedRaces]');
         if ($(this).is(':checked')) {
@@ -84,5 +98,28 @@ $(':input').change(function () {
         }
         toUpdate.val(selectedRace);
     }
+
+    // check if current input is military checkbox
+    if ($(this).hasClass('miltary-checkbox')) {
+        var toUpdate = $('input[type=hidden][name=selectedMilitary]');
+        if ($(this).is(':checked')) {
+            selectedMilitary.push($(this).val());
+        } else {
+            selectedMilitary.pop();
+        }
+        toUpdate.val(selectedMilitary);
+    }
     trackPersonalFormProgress();
+});
+
+$('a[data-parent="#accordion"]').click(function () {
+    console.log("test");
+    var current = $(this);
+    if (current.hasClass('collapsed')) {
+        $(this).find(".fa-plus-circle").hide();
+        $(this).find(".fa-minus-circle").show();
+    } else {
+        $(this).find(".fa-minus-circle").hide();
+        $(this).find(".fa-plus-circle").show();
+    }
 });
