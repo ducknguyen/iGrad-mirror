@@ -15,7 +15,7 @@
 </script>
 @using (Html.BeginForm("GetHealthForm", "Application", FormMethod.Post, new { enctype = "multipart/form-data", @id = "health-form" }))
 {
-<h3>Health Information</h3>
+<h2>Health Information</h2>
 <small class="form-text required-marker-indicator">* required fields.</small>
 <hr>
 
@@ -265,7 +265,7 @@
     <!-- ANAPHYLAXIS -->
     <div class="col-md-9 col-md-offset-1">
         <div id="anaphylaxis-information" class="medical-information">
-            <h4 clas="bg-info">Anaphylaxis</h4>
+            <h3 clas="bg-info">Anaphylaxis</h3>
             <div class="form-group">
                 @Html.LabelFor(model => model.AnaphylaxisAllerigicTo, htmlAttributes: new { @class = "" })
                 @Html.EditorFor(model => model.AnaphylaxisAllerigicTo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tree nuts, fish, wheat, etc.." } })
@@ -286,7 +286,7 @@
     <div class="col-md-9 col-md-offset-1">
         <div id="diabetes-information" class="medical-information">
             <hr>
-            <h4 class="bg-info">Diabetes</h4>
+            <h3 class="bg-info">Diabetes</h3>
             <p>
                 There is a state law, which requires all students with diabetes to have an individualized health care plan implemented in the school setting. If the student is diabetic, please contact the school nurse to help write your student's plan.
             </p>
@@ -298,7 +298,7 @@
     <div class="col-md-9 col-md-offset-1">
         <div id="asthma-information" class="medical-information">
             <hr>
-            <h4 class="bg-info">Asthma</h4>
+            <h3 class="bg-info">Asthma</h3>
             <div class="form-group">
                 @Html.LabelFor(model => model.HowLongAsthma, htmlAttributes: new { @class = "" })
                 @Html.EditorFor(model => model.HowLongAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Years and months" } })
@@ -450,7 +450,7 @@
     <div class="col-md-9 col-md-offset-1">
         <div id="life-threatening-condition">
             <hr>
-            <h4 class="bg-info">Life Threatening Conditions</h4>
+            <h3 class="bg-info">Life Threatening Conditions</h3>
             <p>
                 RCW 28A.210.320-Children with Life-Threatening Conditions, requires a medication or treatment order as a prerequisite for children with life-threatening conditions to attend public schools. The new law defines “life- threatening condition” as a health condition that will put the child in danger of death during the school day, if a medication or treatment order and a nursing care plan are not in place. Potential life-threatening conditions include, but are not limited to, students with seizure disorders, diabetes, life-threatening allergies, and some students with asthma and heart conditions. If this law applies to your student, please contact the nurse at your child’s school.
             </p>

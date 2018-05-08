@@ -33,32 +33,43 @@
 
 
 </script>
-<h3>Finishing Up!</h3>
+<h2>Finishing Up!</h2>
 <hr>
-<div class="container" id="optional-assistance-container">
-    <h4 class="bg-info">(Optional) Additional IGrad Assistance</h4>
-    <input type="button" value="I would like to take advantage of additional assistance" class="btn btn-default" id="showOptionalAssistance" />
-    <input type="button" value="Hide" class="btn btn-default hidden" id="hideOptionalAssistance" />
-    <div class="container hidden" id="optional-assistance-form">
-        @Html.Action("GetOptionalAssistanceForm", Model);
+
+<div class="row">
+    <div class="col-md-12" id="optional-assistance-container">
+        <h3 class="bg-info">(Optional) Additional iGrad Assistance</h3>
+        <input type="button" value="I would like to take advantage of additional assistance" class="btn btn-default" id="showOptionalAssistance" />
+        <input type="button" value="Hide" class="btn btn-default hidden" id="hideOptionalAssistance" />
+        <div class="container hidden" id="optional-assistance-form">
+            @Html.Action("GetOptionalAssistanceForm", Model);
+        </div>
     </div>
 </div>
+
 <hr />
-<div class="container" id="parenting-plan-container">
-    <h4 class="bg-info">(Optional) Student's Parenting Plan</h4>
-    <input type="button" value="I have a parenting plan in effect" class="btn btn-default" id="showParentPlan" onclick="showTarget('parenting-plan-form')" />
-    <input type="button" value="Hide" class="btn btn-default hidden" id="hideParentPlan" onclick="hideTarget('parenting-plan-form')" />
-    <div class="container hidden" id="parenting-plan-form">
-        @Html.Action("GetParentPlanForm", Model);
+
+<div class="row">
+    <div class="col-md-12" id="parenting-plan-container">
+        <h3 class="bg-info">(Optional) Student's Parenting Plan</h3>
+        <input type="button" value="I have a parenting plan in effect" class="btn btn-default" id="showParentPlan" onclick="showTarget('parenting-plan-form')" />
+        <input type="button" value="Hide" class="btn btn-default hidden" id="hideParentPlan" onclick="hideTarget('parenting-plan-form')" />
+        <div class="container hidden" id="parenting-plan-form">
+            @Html.Action("GetParentPlanForm", Model);
+        </div>
     </div>
 </div>
+
+
 <hr />
-<div class="row form-group">
-    <span class="danger btn-danger">WARNING:  This button will download all of your personal information on the forms to the computer you're on.</span>
-    <br />
-    <span class="danger btn-danger">Please do not download these files to a public machine.</span>
-    <br />
-    <span class="btn btn-lg  btn-success">
-        @Html.ActionLink("Download Complete Forms To My Computer", "GetFilledPDF", "Application")
-    </span>
+
+<div class="row">
+    <div class="col-md-12">
+        <h4 class="danger btn-danger">WARNING: This button will download all of your personal information on the forms to the computer you're on.</h4>
+        <h4 class="danger btn-danger">Please do not download these files to a public machine.</h4>
+        <br />
+        <button class="btn btn-lg  btn-success">
+            @Html.ActionLink("Download Complete Forms To My Computer", "GetFilledPDF", "Application")
+        </button>
+    </div>
 </div>
