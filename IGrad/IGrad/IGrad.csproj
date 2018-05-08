@@ -284,6 +284,7 @@
     <Content Include="Content\homepage.css" />
     <Content Include="Content\Login.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\personalform.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -300,6 +301,7 @@
     <Content Include="media\images\newappplaceholder.png" />
     <Content Include="media\images\penpaper.png" />
     <Content Include="Scripts\application.js" />
+    <Content Include="Scripts\back-to-top.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -338,6 +340,7 @@
     <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Properties\PublishProfiles\testftp.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\confirmation.js" />
     <Content Include="Scripts\education-form.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -350,9 +353,11 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\language-form.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\personal-form.js" />
     <Content Include="Scripts\progress-bar.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\validation.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
