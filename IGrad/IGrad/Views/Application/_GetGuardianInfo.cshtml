@@ -10,7 +10,7 @@
             <th>Phone Two</th>
             <th>Email</th>
             <th>Residence</th>
-            <th class="text-center">Edit</th>
+            <th class="text-center">Remove</th>
         </tr>
     </thead>
     @{foreach (Guardian guardian in Model)
@@ -26,7 +26,7 @@
                         <td>@guardian.Email</td>
                         <td>@guardian.GuardianResidenceType</td>
                         <td class="text-center">
-                            <button class="btn btn-danger remove-primary-guardian" type="submit" onclick="deleteGuardian(@guardian.fieldId)">
+                            <button class="btn btn-danger remove-primary-guardian" type="submit" onclick="deleteGuardian(@guardian.fieldId,'primary')">
                                 <i class="fas fa-minus-square"></i>
                             </button>
                         </td>
@@ -42,7 +42,7 @@
                     <td>@guardian.Email</td>
                     <td>@guardian.GuardianResidenceType</td>
                     <td class="text-center">
-                        <button class="btn btn-danger remove-secondary-guardian" type="submit" onclick="deleteGuardian(@guardian.fieldId)">
+                        <button class="btn btn-danger remove-secondary-guardian" type="submit" onclick="deleteGuardian(@guardian.fieldId,'secondary')">
                             <i class="fas fa-minus-square"></i>
                         </button>
                     </td>

@@ -13,7 +13,7 @@
 <hr>
 
 <!-- ADD PREVIOUS HIGH SCHOOL-->
-<h4 class="bg-info">High School Information</h4>
+<h3 class="bg-info">High School Information</h3>
 <h4 class="required-marker">Add A Previous High School</h4>
 <div class="" id="highschool-info">
     @{if (Model.SchoolInfo.HighSchoolInformation != null)
@@ -35,7 +35,7 @@
 {
     <!-- GENERAL INFORMATION -->
     <div class="wrapper">
-        <h4 class="bg-info">General Information</h4>
+        <h3 class="bg-info">General Information</h3>
         <div class="row">
             <div class="form-group col-md-3">
                 @Html.LabelFor(model => model.SchoolInfo.IsExpelledOrSuspended, htmlAttributes: new { @class = "control-label required-marker" })
@@ -79,51 +79,9 @@
 
 
     <div class="wrapper row">
-        <!-- PRIOR EDUCATION -->
-        <div class="col-md-6">
-            <h4 class="bg-info">
-                Prior Education
-                <span data-toggle="tooltip" data-placement="right" title="Your answer give us information about the knowledge and skills your child is
-                      bringing to school. It may also enable the school district to receive addition federal funding to provide support to your child." class="user-hint">
-                    <i class="fas fa-info-circle"></i>
-                </span>
-            </h4>
-            <div class="form-group">
-                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, htmlAttributes: new { @class = "control-label required-marker" })
-                <br />
-                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, true, new { @class = "radio-checker" }) Yes
-                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, false, new { @class = "radio-checker" }) No
-                @Html.HiddenFor(model => model.SchoolInfo.PriorEducation.AttendedSchoolinUS, new { @class = "progressbar-checker" })
-            </div>
-
-            <!-- OUTSIDE THE U.S. -->
-            <div class="form-group">
-                @Html.LabelFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker" })
-                <br />
-                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, true, new { @class = "radio-checker had-outside" }) Yes
-                @Html.RadioButtonFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, false, new { @class = "radio-checker" }) No
-                @Html.HiddenFor(model => model.SchoolInfo.PriorEducation.hasEducationOutsideUS, new { @class = "progressbar-checker" })
-            </div>
-
-            <div id="education-outside-us">
-                <div class="form-group">
-                    @Html.LabelFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker" })
-                    @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.MonthsOfEducationOutsideUS, htmlAttributes: new { @class = "form-control", @placeholder = "Month(s)", required = "required" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "control-label required-marker", required = "required" })
-                    @Html.TextBoxFor(model => model.SchoolInfo.PriorEducation.LanguageOfEducationOutsideUS, htmlAttributes: new { @class = "form-control", @placeholder = "Language spoken", required = "required" })
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation, htmlAttributes: new { @class = "control-label required-marker" })
-                    @Html.EditorFor(model => model.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation, new { htmlAttributes = new { @class = "form-control datepicker", @placeholder = "01/01/2000", required = "required" } })
-                </div>
-            </div>
-        </div>
-
         <!-- SPECIAL PROGRAMS -->
         <div class="col-md-6">
-            <h4 class="bg-info">Special programs</h4>
+            <h3 class="bg-info">Special programs</h3>
             <p class="">Did the student participate in any of the following programs? <small>(Check all that apply)</small></p>
 
             <br />
@@ -150,7 +108,7 @@
 <!-- END FORM -->
 <!-- VIOLATIONS CHECK -->
 <div class="wrapper">
-    <h4 class="bg-info">Previous Violation</h4>
+    <h3 class="bg-info">Previous Violation</h3>
     <h4 class="required-marker">Has the student had a school violation?</h4>
     <div id="violation-container">
         @{if (Model.SchoolInfo.PreviousSchoolViolation == null)

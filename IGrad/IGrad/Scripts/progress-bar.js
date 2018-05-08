@@ -9,7 +9,7 @@ var currentProgress = progress.attr("value");
 function trackPersonalFormProgress() {
     var count = 0;
 
-    // check all radio groups
+    // check all hidden fields
     $('input.progressbar-checker').each(function () {
         if (this.validity.valid && ($(this).val()).length != 0) {
             count++;
@@ -35,7 +35,7 @@ function trackPersonalFormProgress() {
 function trackFormProgress() {
     var count = 0;
     
-    // check all radio groups
+    // check all hidden fields
     $(':input.progressbar-checker').each(function () {
         if (this.validity.valid && ($(this).val()).length != 0) {
             count++;

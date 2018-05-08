@@ -3,6 +3,7 @@ var violationList = [];
 
 $(document).ready(function () {
     checkCurrentHighSchoolHistory();
+    totalRequiredFields = $('.required-marker:visible').length;
     checkCurrentViolationHistory();
 
     $(':input').each(function () {

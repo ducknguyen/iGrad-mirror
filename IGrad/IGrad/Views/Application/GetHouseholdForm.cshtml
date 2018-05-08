@@ -5,196 +5,146 @@
     ViewBag.Title = "GetHouseholdForm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<script type="text/javascript" src="~/Scripts/application.js"></script>
+
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
-<script type="text/javascript">
 
-    $(document).on('click', '.remove-primary-guardian', function () {
-        showTarget('add-primary-guardian-button');
-    })
-
-    $(document).on('click', '.remove-primary-guardian', function () {
-        showTarget('add-secondary-guardian-button');
-    })
-
-    $(document).ready(function () {
-        homelessToggled();
-        residentIsMailingAddress();
-    })
-
-    function residentIsMailingAddress() {
-        if ($('input[name=ResidentAddressIsMailingAddress]:checked').val() == 'True') {
-            hideTarget('mailing-address');
-        } else {
-            showTarget('mailing-address');
-        }
-    }
-    function loadEmergencyContactInfoForm() {
-        hideTarget('add-emergency-contact-button');
-        showTarget('add-emergency-contact'); 110
-        $("#add-emergency-contact").load('@Url.Action("GetAddEmergencyContact", "Application")');
-    }
-
-    function loadPrimaryGuardianInfoForm() {
-        var rowCount = $('#primary-guardians table tbody tr').length;
-        if (rowCount < 2) {
-            hideTarget('primary-guardian-count-warning');
-            showTarget('add-primary-guardian');
-            $("#add-primary-guardian").load('@Url.Action("GetAddPrimaryGuardian", "Application")');
-        }
-        else {
-            hideTarget('add-primary-guardian-button');
-            showTarget('primary-guardian-count-warning')
-        }
-    }
-
-    function loadSecondaryGuardianInfoForm() {
-        var rowCount = $('#secondary-guardians table tbody tr').length;
-        if (rowCount < 2) {
-            hideTarget('secondary-guardian-count-warning');
-            showTarget('add-secondary-guardian');
-            $("#add-secondary-guardian").load('@Url.Action("GetAddSecondaryGuardian", "Application")');
-        }
-        else {
-            hideTarget('add-secondary-guardian-button');
-            showTarget('secondary-guardian-count-warning');
-        }
-    }
-
-    function loadSiblingInfoForm() {
-        hideTarget('add-sibling-button');
-        showTarget('add-sibling');
-        $("#add-sibling").load('@Url.Action("GetAddSibling", "Application")');
-    }
-
-    function loadHomelessInfoForm() {
-        showTarget('homeless-container');
-        $("#homeless-information").load('@Url.Action("GetAddHomelessAssistanceForm", "Application")');
-    }
-
-    function homelessToggled() {
-        if ($('#isHomelessCheckbox').is(':checked')) {
-            loadHomelessInfoForm();
-            showTarget('homeless-container');
-            showTarget('homeless-information');
-            console.log("ishomeless is checked");
-        }
-        else {
-            hideTarget('homeless-container')
-        }
-    }
-
-    function deleteEmergencyContact(fieldId) {
-        $.ajax({
-            type: "POST",
-            url: '/Application/DeleteEmergencyContact',
-            data: { 'fieldId': fieldId },
-            success: $('#ec_' + fieldId).remove()
-        });
-    }
-
-    function deleteGuardian(fieldId) {
-        $.ajax({
-            type: "POST",
-            url: '/Application/DeleteGuardian',
-            data: { 'fieldId': fieldId },
-            success: $('#guardian_'+fieldId).remove()
-        });
-    }
-
-    function deleteSibling(fieldId) {
-        $.ajax({
-            type: "POST",
-            url: '/Application/DeleteSibling',
-            data: { 'fieldId': fieldId },
-            success: $('#sibling_' + fieldId).remove()
-        });
-    }
-
-</script>
 @using (Html.BeginForm("GetHouseholdForm", "Application", FormMethod.Post, new { enctype = "multipart/form-data", @id = "household-form" }))
 {
-    <h3>Household Information</h3>
+    <h2>Household Information</h2>
     <small class="form-text required-marker-indicator">* required fields.</small>
     <hr>
 
     <div class="" id="living-situation">
-        <h4 class="bg-info">Household</h4>
-        <h5 class="required-marker">Household</h5>
+        <h3 class="bg-info">Household</h3>
 
+        <!-- STUDENT LIVES WITH -->
+        <h4 class="required-marker">Student lives with</h4>
         <div class="row">
             <div class="form-group col-md-2">
-                <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithBothParents, htmlAttributes: new { @class = "" }) Both Parents</p>
+                @Html.CheckBoxFor(model => model.LivesWith.LivesWithBothParents, htmlAttributes: new { @class = "live-with" })
+                @Html.LabelFor(model => model.LivesWith.LivesWithBothParents, htmlAttributes: new { @class = "" })
             </div>
             <div class="form-group col-md-2">
-                <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithMotherOnly, htmlAttributes: new { @class = "" }) Mother Only</p>
+                @Html.CheckBoxFor(model => model.LivesWith.LivesWithMotherOnly, htmlAttributes: new { @class = "live-with" })
+                @Html.LabelFor(model => model.LivesWith.LivesWithMotherOnly, htmlAttributes: new { @class = "" })
             </div>
             <div class="form-group col-md-2">
-                <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithFatherOnly, htmlAttributes: new { @class = "" }) Father Only</p>
+                @Html.CheckBoxFor(model => model.LivesWith.LivesWithFatherAndStepMom, htmlAttributes: new { @class = "live-with" })
+                @Html.LabelFor(model => model.LivesWith.LivesWithFatherAndStepMom, htmlAttributes: new { @class = "" })
+            </div>
+            <div class="form-group col-md-2">
+                @Html.CheckBoxFor(model => model.LivesWith.LivesWithGuardian, htmlAttributes: new { @class = "live-with" })
+                @Html.LabelFor(model => model.LivesWith.LivesWithGuardian, htmlAttributes: new { @class = "" })
+            </div>
+            <div class="form-group col-md-2">
+                @Html.CheckBoxFor(model => model.LivesWith.LivesWithSelf, htmlAttributes: new { @class = "live-with" })
+                @Html.LabelFor(model => model.LivesWith.LivesWithSelf, htmlAttributes: new { @class = "" })
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-2">
-                <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithGrandparents, htmlAttributes: new { @class = "" }) Grandparents</p>
+                @Html.CheckBoxFor(model => model.LivesWith.LivesWithGrandparents, htmlAttributes: new { @class = "live-with" })
+                @Html.LabelFor(model => model.LivesWith.LivesWithGrandparents, htmlAttributes: new { @class = "" })
             </div>
             <div class="form-group col-md-2">
-                <p>@Html.CheckBoxFor(model => model.LivesWith.LivesWithSelf, htmlAttributes: new { @class = "" }) Own Residence</p>
+                @Html.CheckBoxFor(model => model.LivesWith.LivesWithFatherOnly, htmlAttributes: new { @class = "live-with" })
+                @Html.LabelFor(model => model.LivesWith.LivesWithFatherOnly, htmlAttributes: new { @class = "" })
             </div>
             <div class="form-group col-md-2">
-                <p>@Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "", @id = "isHomelessCheckbox", @onclick = "homelessToggled()" }) Homeless / Distressed</p>
+                @Html.CheckBoxFor(model => model.LivesWith.LivesWithMotherAndStepDad, htmlAttributes: new { @class = "live-with" })
+                @Html.LabelFor(model => model.LivesWith.LivesWithMotherAndStepDad, htmlAttributes: new { @class = "" })
+            </div>
+            <div class="form-group col-md-2">
+                @Html.CheckBoxFor(model => model.LivesWith.LivesWithFosterParents, htmlAttributes: new { @class = "live-with" })
+                @Html.LabelFor(model => model.LivesWith.LivesWithFosterParents, htmlAttributes: new { @class = "" })
+            </div>
+            <div class="form-group col-md-2">
+                @Html.CheckBoxFor(model => model.LivesWith.LivesWithAgency, htmlAttributes: new { @class = "live-with" })
+                @Html.LabelFor(model => model.LivesWith.LivesWithAgency, htmlAttributes: new { @class = "" })
+            </div>
+            <div class="form-group col-md-2">
+                @Html.CheckBoxFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "live-with", @id = "isHomelessCheckbox", @onclick = "homelessToggled()" })
+                @Html.LabelFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "" })
             </div>
         </div>
 
+        <input type="hidden" name="student-live-with" class="progressbar-checker" value="" />
+        <!-- STUDENT LIVES WITH END -->
 
 
+        <!-- HOMELESS SECTION -->
+        <div class="container" id="homeless-container">
+            <h3 class="bg-info">Homeless / Distressed Additional Information</h3>
+            <button class="btn btn-default" form="" type="button" onclick="showTarget('homeless-information')">Show</button>
+            <button class="btn btn-default" form="" type="button" onclick="hideTarget('homeless-information')">Hide</button>
+            <div class="container" id="homeless-information">
+                @{if (Model.HomelessAssistance != null)
+                {
+                    Html.RenderPartial("_HomelessAssistanceForm", Model.HomelessAssistance);
+                }
+                else
+                {
+                    @Html.Action("GetAddHomelessAssistanceForm", "Application");
+            }
+                }
+            </div>
+            <hr />
+        </div>
+        <!-- HOMELESS SECTION END -->
+
+
+        <!-- TOTAL RESIDENCE AND INCOME -->
         <div class="row">
             <div class="form-group col-md-4">
                 @Html.LabelFor(model => model.LivesWith.TotalPeopleInResidence, htmlAttributes: new { @class = "required-marker" })
-                @Html.TextBoxFor(model => model.LivesWith.TotalPeopleInResidence, "{0:#.#}", htmlAttributes: new { @class = "form-control", @placeholder = "Number of residence" })
+                @Html.TextBoxFor(model => model.LivesWith.TotalPeopleInResidence, "{0:#.#}", htmlAttributes: new { @class = "form-control", @placeholder = "Number of residence", required = "required" })
             </div>
             <div class="form-group col-md-4">
                 @Html.LabelFor(model => model.LivesWith.AnnualHouseHoldIncome, htmlAttributes: new { @class = "required-marker" })
-                @Html.TextBoxFor(model => model.LivesWith.AnnualHouseHoldIncome, "{0:#.#}", htmlAttributes: new { @class = "form-control", @placeholder = "Income" })
+                @Html.TextBoxFor(model => model.LivesWith.AnnualHouseHoldIncome, "{0:#.#}", htmlAttributes: new { @class = "form-control", @placeholder = "Income", required = "required" })
             </div>
         </div>
+        <!-- TOTAL RESIDENCE AND INCOME END -->
 
-        <h4 class="bg-info">Primary Residence</h4>
+
+        <!-- PRIMARY ADDRESS -->
+        <h3 class="bg-info">Residence Address</h3>
         <div class="row">
             <div class="form-group col-md-3">
                 @Html.LabelFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "required-marker" })
-                @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "Street address" })
+                @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "Street address", required = "required" })
             </div>
             <div class="form-group col-md-3">
                 @Html.LabelFor(model => model.ResidentAddress.City, htmlAttributes: new { @class = "required-marker" })
-                @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "City" })
+                @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "City", required = "required" })
             </div>
             <div class="form-group col-md-2">
                 @Html.LabelFor(model => model.ResidentAddress.State, htmlAttributes: new { @class = "required-marker" })
-                @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "State" })
+                @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "State", required = "required" })
             </div>
             <div class="form-group col-md-2">
                 @Html.LabelFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "required-marker" })
-                @Html.TextBoxFor(model => model.ResidentAddress.Zip, "{0:#.#}", new { @class = "form-control", @placeholder = "Zip" })
+                @Html.TextBoxFor(model => model.ResidentAddress.Zip, "{0:#.#}", new { @class = "form-control", @placeholder = "Zip", required = "required" })
                 @Html.ValidationMessageFor(model => model.ResidentAddress.Zip, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-2">
                 @Html.LabelFor(model => model.ResidentAddress.POBox, htmlAttributes: new { @class = "required-marker" })
-                @Html.TextBoxFor(model => model.ResidentAddress.POBox, new { @class = "form-control", @placeholder = "PO" })
+                @Html.TextBoxFor(model => model.ResidentAddress.POBox, new { @class = "form-control", @placeholder = "PO", required = "required" })
             </div>
         </div>
 
-
+        <!-- IS SAME ADDRESS -->
         @Html.LabelFor(model => model.ResidentAddressIsMailingAddress, htmlAttributes: new { @class = "required-marker" })
         <div class="row">
             <div class="form-group col-md-12">
-                @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, true, htmlAttributes: new { @class = "", @onclick = "residentIsMailingAddress()" })Yes
-                @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, false, htmlAttributes: new { @class = "", @onclick = "residentIsMailingAddress()" })No
+                @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, true, htmlAttributes: new { @class = "radio-checker", @onclick = "residentIsMailingAddress()" })Yes
+                @Html.RadioButtonFor(model => model.ResidentAddressIsMailingAddress, false, htmlAttributes: new { @class = "radio-checker", @onclick = "residentIsMailingAddress()" })No
+                @Html.HiddenFor(model => model.ResidentAddressIsMailingAddress, new { @class = "progressbar-checker" })
             </div>
         </div>
 
-
-
+        <!-- MAILING ADDRESS -->
         <div class="hidden" id="mailing-address">
             <h4>Please Specify Mailing Address</h4>
             <div class="row">
@@ -221,12 +171,15 @@
             </div>
         </div>
     </div>
-    <hr />
+    <!-- PRIMARY ADDRESS END -->
 }
 
-<!-- ADD PRIMARY GUARDIAN -->
-<div class="container" id="add-primary-guardian-container">
-    <h4 class="bg-info">Guardians At Primary Residence (No More Than 2)</h4>
+<!-- ADDING GUARDIAN -->
+<div id="add-primary-guardian-container">
+    <h3 class="bg-info">Primary Household</h3>
+    <h4 class="required-marker">Parent/guardian where student reside</h4>
+
+    <!-- PRIMARY GUARDIAN -->
     <div class="" id="primary-guardians">
         <!-- guardians partial view here-->
         @{if (Model.Guardians != null)
@@ -235,53 +188,36 @@
             }
         }
     </div>
-    <span class="text-warning hidden" id="primary-guardian-count-warning">Cannot have more than 2 guardians. Please delete a guardian to add a different one.</span>
+
+    <span class="text-warning hidden" id="primary-guardian-count-warning">Student may not have more than two primary guardians. Please remove a guardian to add a different one.</span>
     <button class="btn btn-success" id="add-primary-guardian-button" type="button" onclick="loadPrimaryGuardianInfoForm()">Add Parent/Guardian</button>
+
     <div class="hidden" id="add-primary-guardian">
+        <!-- render by jquery -->
     </div>
+
+    <input type="hidden" name="primary-guardian-selection" class="progressbar-checker" value="" />
 </div>
 
+<br />
 
 <div class="" id="prompt-secondary-residence">
-    <hr />
-    <h4 class="bg-info">Secondary Residence</h4>
-    <strong>Does the student have a parent/legal guardian not living at the address above?</strong>
     <br />
+    <!-- PROMPT FOR SECONDARY GUARDIAN -->
     <div class="container">
+        <strong>Does the student have a parent/legal guardian not living at the address above?</strong>
         <button class="btn btn-primary" type="button" onclick="showTarget('secondary-residence-container')">Yes</button>
-        <button class="btn " value="" type="button" onclick="hideTarget('secondary-residence-container')">No</button>
+        <button class="btn" value="" type="button" onclick="hideTarget('secondary-residence-container')">No</button>
     </div>
     <br />
-    <div class="container hidden" id="secondary-residence-container">
-        <div class="row">
-            <div class="row">
-                <div class="form-group col-md-3">
-                    @Html.LabelFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "required-marker" })
-                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "Street address", @form = "household-form" })
-                </div>
-                <div class="form-group col-md-3">
-                    @Html.LabelFor(model => model.SecondaryHouseholdAddress.City, htmlAttributes: new { @class = "required-marker" })
-                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "City", @form = "household-form" })
-                </div>
-                <div class="form-group col-md-2">
-                    @Html.LabelFor(model => model.SecondaryHouseholdAddress.State, htmlAttributes: new { @class = "required-marker" })
-                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "State", @form = "household-form" })
-                </div>
-                <div class="form-group col-md-2">
-                    @Html.LabelFor(model => model.SecondaryHouseholdAddress.Zip, htmlAttributes: new { @class = "required-marker" })
-                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Zip, "{0:#.#}", new { @class = "form-control", @placeholder = "Zip", @form = "household-form" })
-                    @Html.ValidationMessageFor(model => model.SecondaryHouseholdAddress.Zip, "", new { @class = "text-danger" })
-                </div>
-                <div class="form-group col-md-2">
-                    @Html.LabelFor(model => model.SecondaryHouseholdAddress.POBox, htmlAttributes: new { @class = "required-marker" })
-                    @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.POBox, new { @class = "form-control", @placeholder = "PO", @form = "household-form" })
-                </div>
-            </div>
-        </div>
+
+    <!-- SEONDARY GUARDIAN -->
+    <div class="hidden secondary-section" id="secondary-residence-container">
+        <h3 class="bg-info">Secondary Household</h3>
 
         <!-- ADD SECONDARY GUARDIAN -->
-        <div class="container" id="add-secondary-guardian-container">
-            <h4 class="bg-info">Guardians At Secondary Residence (No More Than 2)</h4>
+        <div class="" id="add-secondary-guardian-container">
+            <h4 class="required-marker">Parent/guardian not living at the address above</h4>
             <div class="" id="secondary-guardians">
                 <!-- guardians partial view here-->
                 @{if (Model.Guardians != null)
@@ -290,37 +226,60 @@
                     }
                 }
             </div>
-            <span class="text-warning hidden" id="secondary-guardian-count-warning">Cannot have more than 2 guardians. Please delete a guardian to add a different one.</span>
+
+            <span class="text-warning hidden" id="secondary-guardian-count-warning"> Student may not have more than two secondary guardians. Please remove a guardian to add a different one.</span>
             <button class="btn btn-success" id="add-secondary-guardian-button" onclick="loadSecondaryGuardianInfoForm()">Add Parent/Guardian</button>
+
             <div class="hidden" id="add-secondary-guardian">
+                <!-- form render by jquery -->
+            </div>
+
+            <input type="hidden" name="secondary-guardian-selection" class="progressbar-checker" value="" />
+        </div>
+
+        <!-- SECONDARY GUARDIAN ADDRESS -->
+        <div class="row">
+            <div class="col-md-12">
+                <h4>Please specify secondary guardian(s) address</h4>
+            </div>
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "required-marker" })
+                @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "Street address", @form = "household-form" })
+            </div>
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.SecondaryHouseholdAddress.City, htmlAttributes: new { @class = "required-marker" })
+                @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "City", @form = "household-form" })
+            </div>
+            <div class="form-group col-md-2">
+                @Html.LabelFor(model => model.SecondaryHouseholdAddress.State, htmlAttributes: new { @class = "required-marker" })
+                @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "State", @form = "household-form" })
+            </div>
+            <div class="form-group col-md-2">
+                @Html.LabelFor(model => model.SecondaryHouseholdAddress.Zip, htmlAttributes: new { @class = "required-marker" })
+                @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Zip, "{0:#.#}", new { @class = "form-control", @placeholder = "Zip", @form = "household-form" })
+                @Html.ValidationMessageFor(model => model.SecondaryHouseholdAddress.Zip, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-2">
+                @Html.LabelFor(model => model.SecondaryHouseholdAddress.POBox, htmlAttributes: new { @class = "required-marker" })
+                @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.POBox, new { @class = "form-control", @placeholder = "PO", @form = "household-form" })
             </div>
         </div>
     </div>
 </div>
-<hr />
-
-<div class="container" id="homeless-container">
-    <h3>Homeless / Distressed Additional Information</h3>
-    <button class="btn btn-default" form="" type="button" onclick="showTarget('homeless-information')">Show</button>
-    <button class="btn btn-default" form="" type="button" onclick="hideTarget('homeless-information')">Hide</button>
-    <div class="container" id="homeless-information">
-        @{if (Model.HomelessAssistance != null)
-            {
-                Html.RenderPartial("_HomelessAssistanceForm", Model.HomelessAssistance);
-            }
-            else
-            {
-                @Html.Action("GetAddHomelessAssistanceForm", "Application");
-            }
-        }
-    </div>
-    <hr />
-</div>
+<!-- ADD GUARDIANS END -->
 
 
 <!-- ADD EMERGENCY CONTACT -->
 <div class="wrapper" id="add-emergency-contact-container">
-    <h4 class="bg-info">Emergency Contacts (Provide 3)</h4>
+    <h3 class="bg-info">
+        Emergency Contact Information
+        <span data-toggle="tooltip" data-placement="right" title="When an emergency situation occurs involving your child, we want to be able
+              to quickly reach responsible adults. In the event we cannot reach a parent/guardian, please list persons you trust who are available
+              during the day to provide care for your child" class="user-hint">
+            <i class="fas fa-info-circle"></i>
+        </span>
+    </h3>
+    <h4 class="required-marker">List your emergency contacts</h4>
     <div class="" id="emergency-contacts">
         <!-- emergency partial view here-->
         @{if (Model.EmergencyContacts != null)
@@ -329,18 +288,24 @@
             }
         }
     </div>
-    <div class="" id="add-emergency-contact">
-    </div>
-    <button class="btn btn-success" id="add-emergency-contact-button" onclick="loadEmergencyContactInfoForm()">Add Emergency Contact</button>
-</div>
 
-<br /><br />
+    <span class="text-warning hidden" id="emergency-count-warning"> Please list only three contacts maximum</span>
+    <button class="btn btn-success" id="add-emergency-contact-button" onclick="loadEmergencyContactInfoForm()">Add Emergency Contact</button>
+
+    <div class="hidden" id="add-emergency-contact">
+        <!-- form render by jquery -->
+    </div>
+
+    <input type="hidden" name="emergency-section" class="progressbar-checker" />
+</div>
+<!-- ADD EMERGENCY CONTACT END -->
 
 <br /><br />
 
 <!-- ADD SIBLINGS -->
 <div class="wrapper" id="add-sibling-container">
-    <h4 class="bg-info">Siblings</h4>
+    <h3 class="bg-info">Siblings</h3>
+    <h4>List of siblings</h4>
     <div class="siblings" id="siblings">
         <!-- sibling partial view here-->
         @{if (Model.Siblings != null)
@@ -349,10 +314,15 @@
             }
         }
     </div>
+
+    <span class="text-warning hidden" id="sibling-count-warning"> Please list only five siblings maximum</span>
     <button class="btn btn-success" id="add-sibling-button" onclick="loadSiblingInfoForm()">Add Sibling</button>
+
     <div class="hidden" id="add-sibling">
+        <!-- form render by jquery -->
     </div>
 </div>
+<!-- ADD SIBLINGS END -->
 
 
 <div class="form-row">
@@ -364,5 +334,122 @@
     </div>
 </div>
 
-<br /><br />
+<!-- CUSTOM JS -->
+<script type="text/javascript" src="~/Scripts/progress-bar.js"></script>
+<script type="text/javascript" src="~/Scripts/household-form.js"></script>
 
+<script type="text/javascript">
+    /* LOAD FUNCTIONS */
+    function loadPrimaryGuardianInfoForm() {
+        var rowCount = $('#primary-guardians table tbody tr').length;
+        if (rowCount < 2) {
+            hideTarget('primary-guardian-count-warning');
+            showTarget('add-primary-guardian');
+            $("#add-primary-guardian").load('@Url.Action("GetAddPrimaryGuardian", "Application")');
+            hideTarget('add-primary-guardian-button');
+        }
+        else {
+            hideTarget('add-primary-guardian-button');
+            showTarget('primary-guardian-count-warning');
+        }
+    }
+
+    function loadSecondaryGuardianInfoForm() {
+        var rowCount = $('#secondary-guardians table tbody tr').length;
+        if (rowCount < 2) {
+            hideTarget('secondary-guardian-count-warning');
+            showTarget('add-secondary-guardian');
+            $("#add-secondary-guardian").load('@Url.Action("GetAddSecondaryGuardian", "Application")');
+        }
+        else {
+            hideTarget('add-secondary-guardian-button');
+            showTarget('secondary-guardian-count-warning');
+        }
+    }
+
+    function loadEmergencyContactInfoForm() {
+        var rowCount = $('#emergency-contacts-table tbody tr').length;
+        if (rowCount < 4) {
+            hideTarget('emergency-count-warning');
+            showTarget('add-emergency-contact');
+            $("#add-emergency-contact").load('@Url.Action("GetAddEmergencyContact", "Application")');
+            hideTarget('add-emergency-contact-button');
+        }
+        else {
+            hideTarget('add-emergency-contact-button');
+            showTarget('emergency-count-warning');
+        }
+    }
+
+    function loadSiblingInfoForm() {
+        var rowCount = $('#siblings-table tbody tr').length;
+        if (rowCount < 6) {
+            hideTarget('sibling-count-warning');
+            showTarget('add-sibling');
+            $("#add-sibling").load('@Url.Action("GetAddSibling", "Application")');
+            hideTarget('add-sibling-button');
+        }
+        else {
+            hideTarget('add-sibling');
+            showTarget('sibling-count-warning');
+        }
+
+    }
+
+    function loadHomelessInfoForm() {
+        showTarget('homeless-container');
+        $("#homeless-information").load('@Url.Action("GetAddHomelessAssistanceForm", "Application")');
+    }
+
+    function homelessToggled() {
+        if ($('#isHomelessCheckbox').is(':checked')) {
+            loadHomelessInfoForm();
+            showTarget('homeless-container');
+            showTarget('homeless-information');
+            console.log("ishomeless is checked");
+        }
+        else {
+            hideTarget('homeless-container')
+        }
+    }
+
+    /* DELETE FUNCTIONS */
+    function deleteEmergencyContact(fieldId) {
+        $.ajax({
+            type: "POST",
+            url: '/Application/DeleteEmergencyContact',
+            data: { 'fieldId': fieldId },
+            success: $('#ec_' + fieldId).remove()
+        });
+    }
+
+    function deleteGuardian(fieldId, type) {
+        $.ajax({
+            type: "POST",
+            url: '/Application/DeleteGuardian',
+            data: { 'fieldId': fieldId },
+            success: $('#guardian_'+fieldId).remove()
+        });
+
+        var toUpdate = $('input[type=hidden][name="' + type + '-guardian-selection"]');
+        if (type == "primary") {
+            primaryGuardian.pop();
+            toUpdate.val(primaryGuardian);
+        } else {
+            secondaryGuardian.pop();
+            toUpdate.val(secondaryGuardian);
+        }
+
+        trackFormProgress();
+    }
+
+    function deleteSibling(fieldId) {
+        $.ajax({
+            type: "POST",
+            url: '/Application/DeleteSibling',
+            data: { 'fieldId': fieldId },
+            success: $('#sibling_' + fieldId).remove()
+        });
+    }
+
+</script>
