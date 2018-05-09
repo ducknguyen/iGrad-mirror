@@ -240,11 +240,6 @@ namespace IGrad.Controllers
                 data.QualifiedOrEnrolledInProgam = user.QualifiedOrEnrolledInProgam;
                 data.SchoolInfo = user.SchoolInfo;
 
-
-                user.SchoolInfo.PriorEducation.UserID = UserID;
-                data.SchoolInfo.PriorEducation = user.SchoolInfo.PriorEducation;
-
-
                 db.SaveChanges();
             }
 

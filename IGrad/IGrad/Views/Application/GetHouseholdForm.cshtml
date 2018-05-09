@@ -260,7 +260,7 @@
                 @Html.ValidationMessageFor(model => model.SecondaryHouseholdAddress.Zip, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-2">
-                @Html.LabelFor(model => model.SecondaryHouseholdAddress.POBox, htmlAttributes: new { @class = "required-marker" })
+                @Html.LabelFor(model => model.SecondaryHouseholdAddress.POBox, htmlAttributes: new { @class = "" })
                 @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.POBox, new { @class = "form-control", @placeholder = "PO", @form = "household-form" })
             </div>
         </div>

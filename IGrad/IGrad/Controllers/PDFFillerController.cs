@@ -1898,14 +1898,11 @@ namespace IGrad.Controllers
                         PdfTextField lastSchoolState = (PdfTextField)(document.AcroForm.Fields["State"]);
                         lastSchoolState.Value = new PdfString(prevHighSchool.HighSchoolState);
 
+                        PdfTextField grade = (PdfTextField)(document.AcroForm.Fields["Grade"]);
+                        grade.Value = new PdfString(this.user.SchoolInfo.CurrentGrade.ToString());
+
                     }
                 }
-
-
-
-                PdfTextField grade = (PdfTextField)(document.AcroForm.Fields["Grade"]);
-                grade.Value = new PdfString(this.user.SchoolInfo.CurrentGrade.ToString());
-
             }
 
             if (this.user.ResidentAddress != null)
