@@ -59,6 +59,7 @@ namespace IGrad.Controllers
                        .Include(u => u.OptionalOpportunities)
                        .Include(u => u.StudentsParentingPlan)
                        .Include(u => u.MillitaryInfo)
+                       .Include(u => u.Guardians.Select(k=>k.Address))
                        .Include(u => u.StudentChildCare)
                        .Include(u => u.EmergencyContacts)
                        .Include(u => u.EmergencyContacts.Select(n => n.Name))
@@ -449,7 +450,13 @@ namespace IGrad.Controllers
                 Guardian guardian1 = primaryGuardians[0];
                 //fill name
                 PdfTextField guardian1Name = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1Name"];
-                guardian1Name.Value = new PdfString(guardian1.Name.LName + " " + guardian1.Name.FName + guardian1.Name.MName.Substring(0, 1));
+                if(guardian1.Name.MName != null)
+                {
+                    guardian1Name.Value = new PdfString(guardian1.Name.LName + " " + guardian1.Name.FName + guardian1.Name.MName.Substring(0, 1));
+                }else
+                {
+                    guardian1Name.Value = new PdfString(guardian1.Name.LName + " " + guardian1.Name.FName );
+                }
 
                 string guardianRelationshipCheckBoxName = "PrimaryGuardian1" + guardian1.Relationship;
 
@@ -464,11 +471,15 @@ namespace IGrad.Controllers
                 phoneOneType.Value = new PdfString(guardian1.PhoneOne.PhoneType.ToString());
 
                 //phone 2
-                PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1PhoneTwo"];
-                phoneTwo.Value = new PdfString(guardian1.PhoneTwo.PhoneNumber.ToString());
-                //phone 2 type
-                PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1PhoneTwoType"];
-                phoneTwoType.Value = new PdfString(guardian1.PhoneTwo.PhoneType.ToString());
+                if(guardian1.PhoneTwo.PhoneNumber != null)
+                {
+                    PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1PhoneTwo"];
+                    phoneTwo.Value = new PdfString(guardian1.PhoneTwo.PhoneNumber.ToString());
+                    //phone 2 type
+                    PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1PhoneTwoType"];
+                    phoneTwoType.Value = new PdfString(guardian1.PhoneTwo.PhoneType.ToString());
+                }
+                
 
                 //email
                 PdfTextField email = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian1Email"];
@@ -1983,7 +1994,7 @@ namespace IGrad.Controllers
                 nameOfSchool.Value = new PdfString(NAME_OF_SCHOOL);
 
                 PdfTextField nameOfIndividualWithTribalEnrollment = (PdfTextField)(document.AcroForm.Fields["NameOfIndividualWithTribalEnrollment"]);
-                nameOfIndividualWithTribalEnrollment.Value = new PdfString(user.NativeAmericanEducation.NameOfIndividualWithTribalEnrollment.ToString());
+                nameOfIndividualWithTribalEnrollment.Value = new PdfString(user.NativeAmericanEducation.NameOfIndividualWithTribalEnrollment);
 
                 PdfCheckBoxField tribalMembershipIsChilds = (PdfCheckBoxField)(document.AcroForm.Fields["TribalMembershipIsChilds"]);
                 tribalMembershipIsChilds.Checked = user.NativeAmericanEducation.TribalMembershipIsChilds;
@@ -2010,29 +2021,28 @@ namespace IGrad.Controllers
                 tribeOrBandIsOfIndianGroupEducationGrant.Checked = user.NativeAmericanEducation.TribeOrBandIsOfIndianGroupEducationGrant;
 
                 PdfTextField membershipOrEnrollmentNumber = (PdfTextField)(document.AcroForm.Fields["MembershipOrEnrollmentNumber"]);
-                membershipOrEnrollmentNumber.Value = new PdfString(user.NativeAmericanEducation.MembershipOrEnrollmentNumber.ToString());
+                membershipOrEnrollmentNumber.Value = new PdfString(user.NativeAmericanEducation.MembershipOrEnrollmentNumber);
 
                 PdfTextField descriptionOfEvidenceOfEnrollment = (PdfTextField)(document.AcroForm.Fields["DescriptionOfEvidenceOfEnrollment"]);
-                descriptionOfEvidenceOfEnrollment.Value = new PdfString(user.NativeAmericanEducation.DescriptionOfEvidenceOfEnrollment.ToString());
+                descriptionOfEvidenceOfEnrollment.Value = new PdfString(user.NativeAmericanEducation.DescriptionOfEvidenceOfEnrollment);
 
                 PdfTextField nameOfTribeMaintaningEnrollment = (PdfTextField)(document.AcroForm.Fields["NameOfTribeMaintaningEnrollment"]);
-                nameOfTribeMaintaningEnrollment.Value = new PdfString(user.NativeAmericanEducation.NameOfTribeMaintaningEnrollment.ToString());
+                nameOfTribeMaintaningEnrollment.Value = new PdfString(user.NativeAmericanEducation.NameOfTribeMaintaningEnrollment);
 
                 //check for null address
                 if (user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment != null)
                 {
                     PdfTextField addressOfTribeMaintainingEnrollmentStreet = (PdfTextField)(document.AcroForm.Fields["AddressOfTribeMaintainingEnrollmentStreet"]);
-                    addressOfTribeMaintainingEnrollmentStreet.Value = new PdfString(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment.Street.ToString());
+                    addressOfTribeMaintainingEnrollmentStreet.Value = new PdfString(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment.Street);
 
                     PdfTextField addressOfTribeMaintainingEnrollmentCity = (PdfTextField)(document.AcroForm.Fields["AddressOfTribeMaintainingEnrollmentCity"]);
-                    addressOfTribeMaintainingEnrollmentCity.Value = new PdfString(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment.City.ToString());
+                    addressOfTribeMaintainingEnrollmentCity.Value = new PdfString(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment.City);
 
                     PdfTextField addressOfTribeMaintainingEnrollmentState = (PdfTextField)(document.AcroForm.Fields["AddressOfTribeMaintainingEnrollmentState"]);
-                    addressOfTribeMaintainingEnrollmentState.Value = new PdfString(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment.State.ToString());
+                    addressOfTribeMaintainingEnrollmentState.Value = new PdfString(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment.State);
 
                     PdfTextField addressOfTribeMaintainingEnrollmentZip = (PdfTextField)(document.AcroForm.Fields["AddressOfTribeMaintainingEnrollmentZip"]);
                     addressOfTribeMaintainingEnrollmentZip.Value = new PdfString(user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment.Zip.ToString());
-
                 }
             }
 

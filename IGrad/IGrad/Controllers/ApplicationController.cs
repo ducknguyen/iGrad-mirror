@@ -752,8 +752,8 @@ namespace IGrad.Controllers
                        .FirstOrDefault<UserModel>();
 
                 //set health info
+                health.UserID = UserID;
                 data.HealthInfo = health;
-                data.HealthInfo.UserID = UserID;
                 //save
                 db.SaveChanges();
             }
@@ -771,8 +771,12 @@ namespace IGrad.Controllers
                        .FirstOrDefault<UserModel>();
 
                 //set userID of objects
-                health.UserID = UserID;
+                if(health.SeriousInjuryOrSurgeryDate == DateTime.MinValue)
+                {
+                    health.SeriousInjuryOrSurgeryDate =  DateTime.Parse("01/01/1900");
+                }
 
+                health.UserID = UserID;
                 data.HealthInfo = health;
 
                 db.SaveChanges();
