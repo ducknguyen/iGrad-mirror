@@ -1034,8 +1034,12 @@ namespace IGrad.Controllers
                     PdfTextField ecFirstName = (PdfTextField)(document.AcroForm.Fields["EmergencyContactFirstName" + (i + 1)]);
                     ecFirstName.Value = new PdfString(ec.Name.FName);
 
-                    PdfTextField ecMiddleInitial = (PdfTextField)(document.AcroForm.Fields["EmergencyContactMiddleName" + (i + 1)]);
-                    ecMiddleInitial.Value = new PdfString(ec.Name.MName.Substring(0));
+                    if(ec.Name.MName != null)
+                    {
+                        PdfTextField ecMiddleInitial = (PdfTextField)(document.AcroForm.Fields["EmergencyContactMiddleName" + (i + 1)]);
+                        ecMiddleInitial.Value = new PdfString(ec.Name.MName.Substring(0));
+                    }
+                    
 
                     PdfTextField ecRelationToStudent = (PdfTextField)(document.AcroForm.Fields["EmergencyContactRelationshipToStudent" + (i + 1)]);
                     ecRelationToStudent.Value = new PdfString(ec.Relationship);
@@ -1903,28 +1907,6 @@ namespace IGrad.Controllers
 
                     }
                 }
-            }
-
-            if (this.user.ResidentAddress != null)
-            {
-                PdfTextField address = (PdfTextField)(document.AcroForm.Fields["Address"]);
-                if (string.IsNullOrEmpty(this.user.ResidentAddress.POBox))
-                {
-                    address.Value = new PdfString(this.user.ResidentAddress.Street);
-                }
-                else
-                {
-                    address.Value = new PdfString(this.user.ResidentAddress.POBox);
-                }
-
-                PdfTextField city = (PdfTextField)(document.AcroForm.Fields["City"]);
-                city.Value = new PdfString(this.user.ResidentAddress.City);
-
-                PdfTextField state = (PdfTextField)(document.AcroForm.Fields["State"]);
-                state.Value = new PdfString(this.user.ResidentAddress.City);
-
-                PdfTextField zipcode = (PdfTextField)(document.AcroForm.Fields["Zip Code"]);
-                zipcode.Value = new PdfString(this.user.ResidentAddress.City);
             }
 
             PdfTextField phone = (PdfTextField)(document.AcroForm.Fields["Phone"]);
