@@ -13,6 +13,13 @@
         hideTarget('showOptionalAssistance');
     });
 
+    $(document).on('click', '#cancel-optional-assistance', function () {
+        hideTarget('optional-assistance-form');
+        hideTarget('hideOptionalAssistance');
+        showTarget('showOptionalAssistance');
+    });
+
+    
     $(document).on('click', '#hideOptionalAssistance', function () {
         hideTarget('optional-assistance-form');
         hideTarget('hideOptionalAssistance');
@@ -31,6 +38,12 @@
         showTarget('showParentPlan');
     });
 
+    $(document).on('click', '#cancel-parent-plan', function () {
+        hideTarget('parenting-plan-form');
+        hideTarget('hideParentPlan');
+        showTarget('showParentPlan');
+    });
+
 
 </script>
 <h2>Finishing Up!</h2>
@@ -42,7 +55,7 @@
         <input type="button" value="I would like to take advantage of additional assistance" class="btn btn-default" id="showOptionalAssistance" />
         <input type="button" value="Hide" class="btn btn-default hidden" id="hideOptionalAssistance" />
         <div class="container hidden" id="optional-assistance-form">
-            @Html.Action("GetOptionalAssistanceForm", Model);
+            @Html.Action("GetOptionalAssistanceForm", Model)
         </div>
     </div>
 </div>
@@ -55,7 +68,7 @@
         <input type="button" value="I have a parenting plan in effect" class="btn btn-default" id="showParentPlan" onclick="showTarget('parenting-plan-form')" />
         <input type="button" value="Hide" class="btn btn-default hidden" id="hideParentPlan" onclick="hideTarget('parenting-plan-form')" />
         <div class="container hidden" id="parenting-plan-form">
-            @Html.Action("GetParentPlanForm", Model);
+            @Html.Action("GetParentPlanForm", Model)
         </div>
     </div>
 </div>
