@@ -1864,10 +1864,6 @@ namespace IGrad.Controllers
                     annually.Value = new PdfString("No value provided.");
                 }
             }
-
-
-
-
             return writeDocument(document);
         }
 
@@ -1903,7 +1899,7 @@ namespace IGrad.Controllers
                         lastSchoolState.Value = new PdfString(prevHighSchool.HighSchoolState);
 
                         PdfTextField grade = (PdfTextField)(document.AcroForm.Fields["Grade"]);
-                        grade.Value = new PdfString(this.user.SchoolInfo.CurrentGrade.ToString());
+                        grade.Value = new PdfString(prevHighSchool.HighSchoolGrade.ToString());
 
                     }
                 }
