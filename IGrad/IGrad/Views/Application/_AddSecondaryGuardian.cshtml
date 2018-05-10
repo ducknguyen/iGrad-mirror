@@ -14,16 +14,16 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="row">
             <div class="form-group col-md-4">
-                @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "control-label " })
-                @Html.EditorFor(model => model.Name.FName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First" } })
+                @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "control-label required-marker " })
+                @Html.EditorFor(model => model.Name.FName, new { htmlAttributes = new { @class = "form-control", @placeholder = "First", required = "required" } })
             </div>
             <div class="form-group col-md-2">
-                @Html.LabelFor(model => model.Name.MName, htmlAttributes: new { @class = "control-label" })
-                @Html.EditorFor(model => model.Name.MName, new { htmlAttributes = new { @class = "form-control", @placeholder = "M.I" } })
+                @Html.LabelFor(model => model.Name.MName, htmlAttributes: new { @class = "control-label required-marker" })
+                @Html.EditorFor(model => model.Name.MName, new { htmlAttributes = new { @class = "form-control", @placeholder = "M.I", required = "required" } })
             </div>
             <div class="form-group col-md-4">
-                @Html.LabelFor(model => model.Name.LName, htmlAttributes: new { @class = "control-label" })
-                @Html.EditorFor(model => model.Name.LName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last" } })
+                @Html.LabelFor(model => model.Name.LName, htmlAttributes: new { @class = "control-label required-marker" })
+                @Html.EditorFor(model => model.Name.LName, new { htmlAttributes = new { @class = "form-control", @placeholder = "Last", required = "required" } })
             </div>
             <div class="form-group col-md-2">
                 @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "" })
@@ -32,28 +32,28 @@
         </div>
         <div class="row">
             <div class="form-group col-md-4">
-                @Html.LabelFor(model => model.PhoneOne, htmlAttributes: new { @class = "control-label" })
-                @Html.EditorFor(model => model.PhoneOne.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = CustomHelper.GetPhoneNumberPlaceholder() } })
+                @Html.LabelFor(model => model.PhoneOne, htmlAttributes: new { @class = "control-label required-marker" })
+                @Html.EditorFor(model => model.PhoneOne.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = CustomHelper.GetPhoneNumberPlaceholder(), required = "required" } })
             </div>
             <div class="form-group col-md-2">
-                @Html.LabelFor(model => model.PhoneOne.PhoneType, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.PhoneOne.PhoneType, htmlAttributes: new { @class = "control-label required-marker" })
                 @Html.DropDownListFor(model => model.PhoneOne.PhoneType, Model.PhoneOne.PhoneTypeSelectList, new { @class = "form-control dropdown-toggle" })
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-4">
-                @Html.LabelFor(model => model.PhoneTwo, htmlAttributes: new { @class = "control-label" })
-                @Html.EditorFor(model => model.PhoneTwo.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = CustomHelper.GetPhoneNumberPlaceholder() } })
+                @Html.LabelFor(model => model.PhoneTwo, htmlAttributes: new { @class = "control-label required-marker" })
+                @Html.EditorFor(model => model.PhoneTwo.PhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = CustomHelper.GetPhoneNumberPlaceholder(), required = "required" } })
             </div>
             <div class="form-group col-md-2">
-                @Html.LabelFor(model => model.PhoneTwo.PhoneType, htmlAttributes: new { @class = "control-label" })
+                @Html.LabelFor(model => model.PhoneTwo.PhoneType, htmlAttributes: new { @class = "control-label required-marker" })
                 @Html.DropDownListFor(model => model.PhoneTwo.PhoneType, Model.PhoneTwo.PhoneTypeSelectList, new { @class = "form-control dropdown-toggle" })
             </div>
         </div>
         <div class="row">
             <div class="form-group col-md-4">
-                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = CustomHelper.GetEmailPlaceholder() } })
+                @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label required-marker" })
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @placeholder = CustomHelper.GetEmailPlaceholder(), required = "required" } })
             </div>
             <div class="form-group col-md-4">
                 @Html.EditorFor(model => model.IsActiveMilitary, new { htmlAttributes = new { @class = "required", @placeholder = "" } })
@@ -68,16 +68,16 @@
     </div>
     <div class="row">
         <div class="form-group col-md-4">
-            @Html.LabelFor(model => model.Address.Street, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Address.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Street Address" } })
+            @Html.LabelFor(model => model.Address.Street, htmlAttributes: new { @class = "control-label required-marker" })
+            @Html.EditorFor(model => model.Address.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Street Address", required = "required" } })
         </div>
         <div class="form-group col-md-3">
-            @Html.LabelFor(model => model.Address.City, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Address.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+            @Html.LabelFor(model => model.Address.City, htmlAttributes: new { @class = "control-label required-marker" })
+            @Html.EditorFor(model => model.Address.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City", required = "required" } })
         </div>
         <div class="form-group col-md-3">
-            @Html.LabelFor(model => model.Address.State, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.Address.State, new { htmlAttributes = new { @class = "form-control", @placeholder = "State" } })
+            @Html.LabelFor(model => model.Address.State, htmlAttributes: new { @class = "control-label required-marker" })
+            @Html.EditorFor(model => model.Address.State, new { htmlAttributes = new { @class = "form-control", @placeholder = "State", required = "required" } })
         </div>
         <div class="form-group col-md-2">
             @Html.LabelFor(model => model.Address.POBox, htmlAttributes: new { @class = "control-label" })

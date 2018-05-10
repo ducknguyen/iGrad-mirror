@@ -1981,7 +1981,7 @@ namespace IGrad.Controllers
                 tribalMembershipIsChildsGrandparent.Checked = user.NativeAmericanEducation.TribalMembershipIsChildsGrandparent;
 
                 PdfTextField nameOfTribeOrBandOfMembership = (PdfTextField)(document.AcroForm.Fields["NameOfTribeOrBandOfMembership"]);
-                nameOfTribeOrBandOfMembership.Value = new PdfString(user.NativeAmericanEducation.NameOfTribeOrBandOfMembership.ToString());
+                nameOfTribeOrBandOfMembership.Value = new PdfString(user.NativeAmericanEducation.NameOfTribeOrBandOfMembership);
 
                 PdfCheckBoxField tribeOrBandIsFederallyRecognized = (PdfCheckBoxField)(document.AcroForm.Fields["TribeOrBandIsFederallyRecognized"]);
                 tribeOrBandIsFederallyRecognized.Checked = user.NativeAmericanEducation.TribeOrBandIsFederallyRecognized;
