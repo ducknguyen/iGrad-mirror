@@ -362,11 +362,18 @@ namespace IGrad.Controllers
                 UserContext db = new UserContext();
                 _user = db.Users.Where(u => u.UserID == UserID)
                     .Include(u => u.LanguageHisory)
+                    .Include(u => u.SchoolInfo.PriorEducation)
                     .FirstOrDefault();
 
                 if (_user.LanguageHisory == null)
                 {
                     _user.LanguageHisory = new LanguageHistory();
+                }
+                if(_user.SchoolInfo.PriorEducation == null)
+                {
+                    PriorEducation defaultPriorEd = new PriorEducation();
+                    defaultPriorEd.firstAttendanceOfUSEducation = DateTime.Parse("01/01/1900");
+                    _user.SchoolInfo.PriorEducation = defaultPriorEd;
                 }
             }
             catch (Exception ex)
@@ -385,6 +392,7 @@ namespace IGrad.Controllers
             {
                 var data = db.Users
                        .Include(u => u.LanguageHisory)
+                       .Include(u => u.SchoolInfo.PriorEducation)
                        .Where(u => u.UserID == UserID)
                        .FirstOrDefault<UserModel>();
 
@@ -397,6 +405,14 @@ namespace IGrad.Controllers
                 {
                     data.LanguageHisory = user.LanguageHisory;
                 }
+                if(user.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation < DateTime.Parse("01/01/1900"))
+                {
+                    user.SchoolInfo.PriorEducation.firstAttendanceOfUSEducation = DateTime.Parse("01/01/1900");
+                }
+                user.LanguageHisory.UserID = UserID;
+                user.SchoolInfo.PriorEducation.UserID = UserID;
+                data.SchoolInfo.PriorEducation = user.SchoolInfo.PriorEducation;
+
                 db.SaveChanges();
             }
             return RedirectToAction("GetEducationForm", "Application");
@@ -425,6 +441,7 @@ namespace IGrad.Controllers
                     .Include(u => u.EmergencyContacts.Select(p => p.PhoneOne))
                     .Include(u => u.EmergencyContacts.Select(p => p.PhoneTwo))
                     .Include(u => u.HomelessAssistance)
+                    .Include(u => u.ResidentAddressIsMailingAddress)
                     .FirstOrDefault();
             }
             catch (Exception ex)
