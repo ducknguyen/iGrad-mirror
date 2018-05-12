@@ -92,6 +92,9 @@
         </div>
     </div>
     <!-- GENDER, EMAIL AND PHONE END --->
+
+    <br />
+
     <!-- MILITARY INFO START -->
     <h3 class="bg-info">
         Parent / Guardian's Military Affiliation
@@ -139,7 +142,7 @@
 
     <!-- END MILITARY INFORMATION -->
 
-
+    <br />
 
     <!-- **********RACE AND ETHNICITY START********** -->
     <div class="row">
@@ -159,7 +162,7 @@
             @*@Html.LabelFor(model => model.ConsideredRaceAndEthnicity, htmlAttributes: new { @class = "control-label required-marker" })*@
             @Html.Label("Select your race", htmlAttributes: new { @class = "control-label required-marker" })
             <br />
-            <button class="btn btn-info" type="button" data-toggle="modal" data-target="#race-modal" id="race-button">
+            <button class="btn btn-warning" type="button" data-toggle="modal" data-target="#race-modal" id="race-button">
                 Student Race
             </button>
 

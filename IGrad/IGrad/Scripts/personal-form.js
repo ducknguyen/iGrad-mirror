@@ -123,3 +123,21 @@ $('a[data-parent="#accordion"]').click(function () {
         $(this).find(".fa-plus-circle").show();
     }
 });
+
+function processTribalSubmission() {
+    $('#tribal-success-prompt').removeClass("hidden");
+}
+/*
+$('#native-education').submit(function () {
+    var count = 0;
+    $('#native-education input:visible:not(:submit)').each(function () {
+        if ($(this).length > 0) {
+            count++;
+        }
+    });
+    console.log(count);
+    if (count > 0) {
+        $('#tribal-success-prompt').show();
+    }
+});
+*/

@@ -12,18 +12,21 @@
     @Html.AntiForgeryToken()
 
     <!-- FULL NAME AND NAME OF TRIBE/BAND  -->
-    <div class="row">
-        <div class="col-md-6 form-group">
-            @Html.LabelFor(model => model.NameOfIndividualWithTribalEnrollment, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.NameOfIndividualWithTribalEnrollment, new { htmlAttributes = new { @class = "form-control", @placeholder = "Full name" } })
-            @Html.ValidationMessageFor(model => model.NameOfIndividualWithTribalEnrollment, "", new { @class = "text-danger" })
-        </div>
-        <div class="col-md-6 form-group">
-            @Html.LabelFor(model => model.NameOfTribeOrBandOfMembership, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.NameOfTribeOrBandOfMembership, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name of tribe/band" } })
-            @Html.ValidationMessageFor(model => model.NameOfTribeOrBandOfMembership, "", new { @class = "text-danger" })
-        </div>
+<div class="row">
+    <div class="col-md-12">
+        <h4>Basic information</h4>
     </div>
+    <div class="col-md-6 form-group">
+        @Html.LabelFor(model => model.NameOfIndividualWithTribalEnrollment, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.NameOfIndividualWithTribalEnrollment, new { htmlAttributes = new { @class = "form-control", @placeholder = "Full name" } })
+        @Html.ValidationMessageFor(model => model.NameOfIndividualWithTribalEnrollment, "", new { @class = "text-danger" })
+    </div>
+    <div class="col-md-6 form-group">
+        @Html.LabelFor(model => model.NameOfTribeOrBandOfMembership, htmlAttributes: new { @class = "control-label" })
+        @Html.EditorFor(model => model.NameOfTribeOrBandOfMembership, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name of tribe/band" } })
+        @Html.ValidationMessageFor(model => model.NameOfTribeOrBandOfMembership, "", new { @class = "text-danger" })
+    </div>
+</div>
 
     <!--  TRIBAL RELATIONSHIP-->
     <div class="row">
@@ -150,8 +153,14 @@
 
 
     <div class="row">
-        <div class="col-md-10 form-group">
-            <input type="submit" form="native-education" value="Save information" class="btn btn-primary" />
+        <div class="col-md-12 form-group">
+            <button type="submit" form="native-education" class="btn btn-primary" onclick="processTribalSubmission()">Save Enrollment Information</button>
+        </div>
+        <div class="col-md-12">
+            <span id="tribal-success-prompt" class="hidden success-message">
+                <i class="far fa-check-circle"></i>
+                Tribal information has been saved successfully
+            </span>
         </div>
     </div>
 
