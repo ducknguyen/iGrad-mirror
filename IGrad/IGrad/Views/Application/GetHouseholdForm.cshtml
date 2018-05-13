@@ -20,50 +20,50 @@
         <!-- STUDENT LIVES WITH -->
         <h4 class="required-marker">Student lives with</h4>
         <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 @Html.RadioButtonFor(model => model.LivesWith.LivesWithBothParents, true, htmlAttributes: new { @class = "live-with", Name="lives-with" })
                 @Html.LabelFor(model => model.LivesWith.LivesWithBothParents, htmlAttributes: new { @class = "" })
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 @Html.RadioButtonFor(model => model.LivesWith.LivesWithMotherOnly, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
                 @Html.LabelFor(model => model.LivesWith.LivesWithMotherOnly, htmlAttributes: new { @class = "" })
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 @Html.RadioButtonFor(model => model.LivesWith.LivesWithFatherOnly, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
                 @Html.LabelFor(model => model.LivesWith.LivesWithFatherOnly, htmlAttributes: new { @class = "" })
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 @Html.RadioButtonFor(model => model.LivesWith.LivesWithGrandparents, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
                 @Html.LabelFor(model => model.LivesWith.LivesWithGrandparents, htmlAttributes: new { @class = "" })
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 @Html.RadioButtonFor(model => model.LivesWith.LivesWithFatherAndStepMom, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
                 @Html.LabelFor(model => model.LivesWith.LivesWithFatherAndStepMom, htmlAttributes: new { @class = "" })
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 @Html.RadioButtonFor(model => model.LivesWith.LivesWithMotherAndStepDad, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
                 @Html.LabelFor(model => model.LivesWith.LivesWithMotherAndStepDad, htmlAttributes: new { @class = "" })
             </div>
         </div>
 
         <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 @Html.RadioButtonFor(model => model.LivesWith.LivesWithGuardian, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
                 @Html.LabelFor(model => model.LivesWith.LivesWithGuardian, htmlAttributes: new { @class = "" })
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 @Html.RadioButtonFor(model => model.LivesWith.LivesWithFosterParents, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
                 @Html.LabelFor(model => model.LivesWith.LivesWithFosterParents, htmlAttributes: new { @class = "" })
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 @Html.RadioButtonFor(model => model.LivesWith.LivesWithAgency, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
                 @Html.LabelFor(model => model.LivesWith.LivesWithAgency, htmlAttributes: new { @class = "" })
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 @Html.RadioButtonFor(model => model.LivesWith.HomelessDistressed, true, htmlAttributes: new { @class = "live-with", @id = "isHomelessCheckbox", @onclick = "homelessToggled()", Name = "lives-with" })
                 @Html.LabelFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "" })
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 @Html.RadioButtonFor(model => model.LivesWith.LivesWithSelf, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
                 @Html.LabelFor(model => model.LivesWith.LivesWithSelf, htmlAttributes: new { @class = "" })
             </div>
