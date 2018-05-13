@@ -11,25 +11,25 @@ namespace IGrad.Models.User
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int fieldId { get; set; }
         public Guid UserID { get; set; }
-        [DisplayName("Student Lives With Both Parents")]
+        [DisplayName("Both Parents")]
         public bool LivesWithBothParents { get; set; }
-        [DisplayName("Student Lives With Guardian")]
+        [DisplayName("Guardian")]
         public bool LivesWithGuardian { get; set; }
-        [DisplayName("Student Lives With Mother Only")]
+        [DisplayName("Mother Only")]
         public bool LivesWithMotherOnly { get; set; }
-        [DisplayName("Student Lives With Father Only")]
+        [DisplayName("Father Only")]
         public bool LivesWithFatherOnly { get; set; }
-        [DisplayName("Student Lives With Grandparents")]
+        [DisplayName("Grandparents")]
         public bool LivesWithGrandparents { get; set; }
-        [DisplayName("Student Provides Own Housing ")]
+        [DisplayName("Provides Own Housing ")]
         public bool LivesWithSelf { get; set; }
-        [DisplayName("Student Lives With Father and Step Mother")]
+        [DisplayName("Father and Step Mother")]
         public bool LivesWithFatherAndStepMom { get; set; }
-        [DisplayName("Student Lives With Mother and Step Father")]
+        [DisplayName("Mother and Step Father")]
         public bool LivesWithMotherAndStepDad { get; set; }
-        [DisplayName("Student Lives With Foster Parents")]
+        [DisplayName("Foster Parents")]
         public bool LivesWithFosterParents { get; set; }
-        [DisplayName("Student Housing Provided By Agency")]
+        [DisplayName("Housing Provided By Agency")]
         public bool LivesWithAgency { get; set; }
         [DisplayName("Homeless / Distressed")]
         public bool HomelessDistressed { get; set; }
