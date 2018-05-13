@@ -23,19 +23,12 @@ function trackPersonalFormProgress() {
         }
     });
 
-    // append value to progressbar
+    
     currentProgress = (count / totalRequiredFields) * 100;
-  //console.log(currentProgress + " - " + count + " - " + totalRequiredFields);
-    //progressBar.attr("value", currentProgress);
-    updateTextDisplay(currentProgress, count, totalRequiredFields);
-}
+    console.log(currentProgress + " - " + count + " - " + totalRequiredFields);
 
-function updateTextDisplay(currentProgress, count, totalCount) {
-    console.log(currentProgress + " - " + count + " - " + totalCount);
-    progressBar.attr("aria-valuenow", currentProgress);
-    progressBar.css("width", currentProgress+"%");
-    $('#current-progress-count').text(count);
-    $('#total-count').text(totalCount);
+    // append value to progressbar
+    updateTextDisplay(currentProgress, count, totalRequiredFields);
 }
 
 /**
@@ -58,8 +51,18 @@ function trackFormProgress() {
         }
     });
 
-    // append value to progressbar
+    
     currentProgress = (count / totalRequiredFields) * 100;
     console.log(currentProgress + " - " + count + " - " + totalRequiredFields);
-    progressBar.attr("value", currentProgress);
+
+    // append value to progressbar
+    updateTextDisplay(currentProgress, count, totalRequiredFields);
+}
+
+function updateTextDisplay(currentProgress, count, totalCount) {
+    //console.log("inside update " + currentProgress + " - " + count + " - " + totalCount);
+    progressBar.attr("aria-valuenow", currentProgress);
+    progressBar.css("width", currentProgress + "%");
+    $('#current-progress-count').text(count);
+    $('#total-count').text(totalCount);
 }

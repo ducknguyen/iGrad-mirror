@@ -127,17 +127,3 @@ $('a[data-parent="#accordion"]').click(function () {
 function processTribalSubmission() {
     $('#tribal-success-prompt').removeClass("hidden");
 }
-/*
-$('#native-education').submit(function () {
-    var count = 0;
-    $('#native-education input:visible:not(:submit)').each(function () {
-        if ($(this).length > 0) {
-            count++;
-        }
-    });
-    console.log(count);
-    if (count > 0) {
-        $('#tribal-success-prompt').show();
-    }
-});
-*/

@@ -141,12 +141,12 @@
         </div>
         <div class="col-md-2 form-group">
             @Html.LabelFor(model => model.AddressOfTribeMaintainingEnrollment.State, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.AddressOfTribeMaintainingEnrollment.State, new { htmlAttributes = new { @class = "form-control", @placeholder = "State" } })
+            @Html.DropDownListFor(model => model.AddressOfTribeMaintainingEnrollment.State, Model.AddressOfTribeMaintainingEnrollment.StateSelectList, "Select", htmlAttributes: new { @class = "form-control required-checker", required = "required" })
             @Html.ValidationMessageFor(model => model.AddressOfTribeMaintainingEnrollment.State, "", new { @class = "text-danger" })
         </div>
         <div class="col-md-2 form-group">
             @Html.LabelFor(model => model.AddressOfTribeMaintainingEnrollment.Zip, htmlAttributes: new { @class = "control-label" })
-            @Html.EditorFor(model => model.AddressOfTribeMaintainingEnrollment.Zip, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip" } })
+            @Html.EditorFor(model => model.AddressOfTribeMaintainingEnrollment.Zip, new { htmlAttributes = new { @class = "form-control", @placeholder = "Zip", maxlength = "5" } })
             @Html.ValidationMessageFor(model => model.AddressOfTribeMaintainingEnrollment.Zip, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -169,6 +169,10 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('[data-toggle="tooltip"]').tooltip({ container: 'body' });
+        });
+
+        $('#native-education :input').change(function () {
+            $('#tribal-success-prompt').addClass("hidden");
         });
     </script>
 }

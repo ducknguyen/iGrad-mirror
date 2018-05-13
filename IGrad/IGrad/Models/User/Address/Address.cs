@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace IGrad.Models.User
 {
@@ -14,6 +16,14 @@ namespace IGrad.Models.User
         public string AptNum { get; set; }
         public string City { get; set; }
         public string State { get; set; }
+        public IEnumerable<SelectListItem> StateSelectList
+        {
+            get
+            {
+                List<SelectListItem> stateList = CustomHelpers.CustomHelper.generateStateDropDownList();
+                return stateList;
+            }
+        }
         public int Zip { get; set; }
         public string POBox { get; set; }
 
