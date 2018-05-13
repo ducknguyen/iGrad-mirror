@@ -441,8 +441,7 @@ namespace IGrad.Controllers
                     .Include(u => u.EmergencyContacts.Select(p => p.PhoneOne))
                     .Include(u => u.EmergencyContacts.Select(p => p.PhoneTwo))
                     .Include(u => u.HomelessAssistance)
-                    .Include(u => u.ResidentAddressIsMailingAddress)
-                    .FirstOrDefault();
+                    .FirstOrDefault<UserModel>();
             }
             catch (Exception ex)
             {
@@ -504,6 +503,7 @@ namespace IGrad.Controllers
                 data.MailingAddress = user.MailingAddress;
                 data.ResidentAddress = user.ResidentAddress;
                 data.SecondaryHouseholdAddress = user.SecondaryHouseholdAddress;
+                data.ResidentAddressIsMailingAddress = user.ResidentAddressIsMailingAddress;
                 data.LivesWith = user.LivesWith;
 
                 

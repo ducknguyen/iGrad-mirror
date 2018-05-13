@@ -80,13 +80,13 @@
             <button class="btn btn-default" form="" type="button" onclick="hideTarget('homeless-information')">Hide</button>
             <div class="container" id="homeless-information">
                 @{if (Model.HomelessAssistance != null)
-                {
-                    Html.RenderPartial("_HomelessAssistanceForm", Model.HomelessAssistance);
-                }
-                else
-                {
-                    @Html.Action("GetAddHomelessAssistanceForm", "Application");
-            }
+                    {
+                        Html.RenderPartial("_HomelessAssistanceForm", Model.HomelessAssistance);
+                    }
+                    else
+                    {
+                        @Html.Action("GetAddHomelessAssistanceForm", "Application");
+                    }
                 }
             </div>
             <hr />
