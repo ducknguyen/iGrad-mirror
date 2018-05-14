@@ -401,46 +401,21 @@ namespace IGrad.Controllers
             PdfTextField studentBirthplaceCountry = (PdfTextField)(document.AcroForm.Fields["BirthplaceCountry"]);
             studentBirthplaceCountry.Value = new PdfString(user.BirthPlace.Country);
 
-            //Lives with checkboxes
-            PdfCheckBoxField livesWithBothParents = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithBothParents"]);
-            livesWithBothParents.Checked = user.LivesWith.LivesWithBothParents;
+            //TODO , fix this sheeeyit
+            string studentLivesWithFieldName = user.LivesWith.StudentLivesWith;
+            if (studentLivesWithFieldName != null)
+            {
+                PdfCheckBoxField studentLivesWith = (PdfCheckBoxField)(document.AcroForm.Fields[studentLivesWithFieldName]);
+                studentLivesWith.Checked = true;
+            }
 
-            PdfCheckBoxField livesWithMotherOnly = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithMotherOnly"]);
-            livesWithMotherOnly.Checked = user.LivesWith.LivesWithMotherOnly;
-
-            PdfCheckBoxField livesWithFatherAndStepMom = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithFatherAndStepMom"]);
-            livesWithFatherAndStepMom.Checked = user.LivesWith.LivesWithFatherAndStepMom;
-
-            PdfCheckBoxField livesWithGuardian = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithGuardian"]);
-            livesWithGuardian.Checked = user.LivesWith.LivesWithGuardian;
-
-            PdfCheckBoxField livesWithSelf = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithSelf"]);
-            livesWithSelf.Checked = user.LivesWith.LivesWithSelf;
-
-            PdfCheckBoxField livesWithGrandparents = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithGrandparents"]);
-            livesWithGrandparents.Checked = user.LivesWith.LivesWithGrandparents;
-
-            PdfCheckBoxField livesWithFatherOnly = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithFatherOnly"]);
-            livesWithFatherOnly.Checked = user.LivesWith.LivesWithFatherOnly;
-
-            PdfCheckBoxField livesWithMotherAndStepDad = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithMotherAndStepDad"]);
-            livesWithMotherAndStepDad.Checked = user.LivesWith.LivesWithMotherAndStepDad;
-
-            PdfCheckBoxField livesWithFosterParents = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithFosterParents"]);
-            livesWithFosterParents.Checked = user.LivesWith.LivesWithFosterParents;
-
-            PdfCheckBoxField livesWithAgency = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithAgency"]);
-            livesWithAgency.Checked = user.LivesWith.LivesWithAgency;
-
-            //check if they live with other, fill out description and check the checkbox for other as we're not capturing the other checkbox.
-            if (user.LivesWith.Other != "")
+            if(studentLivesWithFieldName == "LivesWithOther")
             {
                 PdfTextField livesWithOtherDesc = (PdfTextField)(document.AcroForm.Fields["LivesWithOtherDesc"]);
                 livesWithOtherDesc.Value = new PdfString(user.LivesWith.Other);
-
-                PdfCheckBoxField livesWithOther = (PdfCheckBoxField)(document.AcroForm.Fields["LivesWithOther"]);
-                livesWithOther.Checked = true;
             }
+           
+
 
             #region primary guardians
             //Primary guardian information

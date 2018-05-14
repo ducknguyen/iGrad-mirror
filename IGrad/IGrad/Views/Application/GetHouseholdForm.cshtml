@@ -7,7 +7,18 @@
 }
 
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
-
+<script src="~/Scripts/application.js"></script>
+<script type="text/javascript">
+    $(document).on('change', '#lives-with-dropdown', function () {
+        if ($('#lives-with-dropdown option:selected').val() == 'LivesWithOther') {
+            showTarget('lives-with-other-desc');
+        }
+        else {
+            $('#LivesWith_Other').val("");
+            hideTarget('lives-with-other-desc');
+        }
+    })
+</script>
 @using (Html.BeginForm("GetHouseholdForm", "Application", FormMethod.Post, new { enctype = "multipart/form-data", @id = "household-form" }))
 {
     <h2>Household Information</h2>
@@ -21,51 +32,10 @@
         <h4 class="required-marker">Student lives with</h4>
         <div class="row">
             <div class="form-group col-md-4">
-                @Html.RadioButtonFor(model => model.LivesWith.LivesWithBothParents, true, htmlAttributes: new { @class = "live-with", Name="lives-with" })
-                @Html.LabelFor(model => model.LivesWith.LivesWithBothParents, htmlAttributes: new { @class = "" })
+                @Html.DropDownListFor(model => model.LivesWith.StudentLivesWith, Model.LivesWith.LivesWithSelectList,"",new { @class = "form-control required-checker", required = "required", @id="lives-with-dropdown" })
             </div>
-            <div class="form-group col-md-4">
-                @Html.RadioButtonFor(model => model.LivesWith.LivesWithMotherOnly, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
-                @Html.LabelFor(model => model.LivesWith.LivesWithMotherOnly, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="form-group col-md-4">
-                @Html.RadioButtonFor(model => model.LivesWith.LivesWithFatherOnly, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
-                @Html.LabelFor(model => model.LivesWith.LivesWithFatherOnly, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="form-group col-md-4">
-                @Html.RadioButtonFor(model => model.LivesWith.LivesWithGrandparents, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
-                @Html.LabelFor(model => model.LivesWith.LivesWithGrandparents, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="form-group col-md-4">
-                @Html.RadioButtonFor(model => model.LivesWith.LivesWithFatherAndStepMom, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
-                @Html.LabelFor(model => model.LivesWith.LivesWithFatherAndStepMom, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="form-group col-md-4">
-                @Html.RadioButtonFor(model => model.LivesWith.LivesWithMotherAndStepDad, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
-                @Html.LabelFor(model => model.LivesWith.LivesWithMotherAndStepDad, htmlAttributes: new { @class = "" })
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-4">
-                @Html.RadioButtonFor(model => model.LivesWith.LivesWithGuardian, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
-                @Html.LabelFor(model => model.LivesWith.LivesWithGuardian, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="form-group col-md-4">
-                @Html.RadioButtonFor(model => model.LivesWith.LivesWithFosterParents, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
-                @Html.LabelFor(model => model.LivesWith.LivesWithFosterParents, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="form-group col-md-4">
-                @Html.RadioButtonFor(model => model.LivesWith.LivesWithAgency, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
-                @Html.LabelFor(model => model.LivesWith.LivesWithAgency, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="form-group col-md-4">
-                @Html.RadioButtonFor(model => model.LivesWith.HomelessDistressed, true, htmlAttributes: new { @class = "live-with", @id = "isHomelessCheckbox", @onclick = "homelessToggled()", Name = "lives-with" })
-                @Html.LabelFor(model => model.LivesWith.HomelessDistressed, htmlAttributes: new { @class = "" })
-            </div>
-            <div class="form-group col-md-4">
-                @Html.RadioButtonFor(model => model.LivesWith.LivesWithSelf, true, htmlAttributes: new { @class = "live-with", Name = "lives-with" })
-                @Html.LabelFor(model => model.LivesWith.LivesWithSelf, htmlAttributes: new { @class = "" })
+            <div class="form-group col-md-6 hidden" id="lives-with-other-desc">
+                @Html.TextBoxFor(model => model.LivesWith.Other, new {@class="form-control" , @placeholder ="Explain Living Situation"})
             </div>
         </div>
 

@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 
 namespace IGrad.Models.User
 {
@@ -11,28 +13,6 @@ namespace IGrad.Models.User
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int fieldId { get; set; }
         public Guid UserID { get; set; }
-        [DisplayName("Both Parents")]
-        public bool LivesWithBothParents { get; set; }
-        [DisplayName("Guardian")]
-        public bool LivesWithGuardian { get; set; }
-        [DisplayName("Mother Only")]
-        public bool LivesWithMotherOnly { get; set; }
-        [DisplayName("Father Only")]
-        public bool LivesWithFatherOnly { get; set; }
-        [DisplayName("Grandparents")]
-        public bool LivesWithGrandparents { get; set; }
-        [DisplayName("Provides Own Housing ")]
-        public bool LivesWithSelf { get; set; }
-        [DisplayName("Father and Step Mother")]
-        public bool LivesWithFatherAndStepMom { get; set; }
-        [DisplayName("Mother and Step Father")]
-        public bool LivesWithMotherAndStepDad { get; set; }
-        [DisplayName("Foster Parents")]
-        public bool LivesWithFosterParents { get; set; }
-        [DisplayName("Housing Provided By Agency")]
-        public bool LivesWithAgency { get; set; }
-        [DisplayName("Homeless / Distressed")]
-        public bool HomelessDistressed { get; set; }
         [DisplayName("Total People In Residence")]
         public int TotalPeopleInResidence { get; set; }
         [DisplayName("Annual Household Income")]
@@ -40,5 +20,40 @@ namespace IGrad.Models.User
         [DisplayName("Name of Agency Providing Housing")]
         public string AgencyName { get; set; }
         public string Other { get; set; }
+        public string StudentLivesWith { get; set; }
+        public IEnumerable<SelectListItem> LivesWithSelectList
+        {
+            get
+            {
+                List<SelectListItem> items = new List<SelectListItem>();
+                items.Add(new SelectListItem { Text = "Both Parents", Value = ELiveWithOptions.LivesWithBothParents.ToString() });
+                items.Add(new SelectListItem { Text = "Mother Only", Value = ELiveWithOptions.LivesWithMotherOnly.ToString() });
+                items.Add(new SelectListItem { Text = "Father Only", Value = ELiveWithOptions.LivesWithFatherOnly.ToString() });
+                items.Add(new SelectListItem { Text = "Grandparents", Value = ELiveWithOptions.LivesWithGrandparents.ToString() });
+                items.Add(new SelectListItem { Text = "Provides Own Housing", Value = ELiveWithOptions.LivesWithSelf.ToString() });
+                items.Add(new SelectListItem { Text = "Father and Step Mother", Value = ELiveWithOptions.LivesWithFatherAndStepMom.ToString() });
+                items.Add(new SelectListItem { Text = "Mother and Step Father", Value = ELiveWithOptions.LivesWithMotherAndStepDad.ToString() });
+                items.Add(new SelectListItem { Text = "Foster Parents", Value = ELiveWithOptions.LivesWithFosterParents.ToString() });
+                items.Add(new SelectListItem { Text = "Agency Provides Housing", Value = ELiveWithOptions.LivesWithAgency.ToString() });
+                items.Add(new SelectListItem { Text = "Homeless / Distressed", Value = ELiveWithOptions.HomelessDistressed.ToString() });
+                items.Add(new SelectListItem { Text = "Other", Value = ELiveWithOptions.LivesWithOther.ToString() });
+                return items;
+            }
+        }
+
+        public enum ELiveWithOptions
+        {
+            LivesWithBothParents,
+            LivesWithMotherOnly,
+            LivesWithFatherOnly,
+            LivesWithGrandparents,
+            LivesWithSelf,
+            LivesWithFatherAndStepMom,
+            LivesWithMotherAndStepDad,
+            LivesWithFosterParents,
+            LivesWithAgency,
+            HomelessDistressed,
+            LivesWithOther
+        }
     }
 }
