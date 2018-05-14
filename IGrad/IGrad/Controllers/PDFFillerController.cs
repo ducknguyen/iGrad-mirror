@@ -479,11 +479,20 @@ namespace IGrad.Controllers
                 phoneOneType.Value = new PdfString(guardian2.PhoneOne.PhoneType.ToString());
 
                 //phone 2
-                PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2PhoneTwo"];
-                phoneTwo.Value = new PdfString(guardian2.PhoneTwo.PhoneNumber.ToString());
-                //phone 2 type
-                PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2PhoneTwoType"];
-                phoneTwoType.Value = new PdfString(guardian2.PhoneTwo.PhoneType.ToString());
+                if (guardian2.PhoneTwo != null)
+                {
+                    if (guardian2.PhoneTwo.PhoneNumber != null)
+                    {
+                        PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2PhoneTwo"];
+                        phoneTwo.Value = new PdfString(guardian2.PhoneTwo.PhoneNumber.ToString());
+                    }
+                    //phone 2 type
+                    if (guardian2.PhoneTwo.PhoneType != null)
+                    {
+                        PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2PhoneTwoType"];
+                        phoneTwoType.Value = new PdfString(guardian2.PhoneTwo.PhoneType.ToString());
+                    }
+                }
 
                 //email
                 PdfTextField email = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2Email"];
@@ -538,11 +547,20 @@ namespace IGrad.Controllers
                     phoneOneType.Value = new PdfString(guardian1.PhoneOne.PhoneType.ToString());
 
                     //phone 2
-                    PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1PhoneTwo"];
-                    phoneTwo.Value = new PdfString(guardian1.PhoneTwo.PhoneNumber.ToString());
-                    //phone 2 type
-                    PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1PhoneTwoType"];
-                    phoneTwoType.Value = new PdfString(guardian1.PhoneTwo.PhoneType.ToString());
+                    if (guardian1.PhoneTwo != null)
+                    {
+                        if (guardian1.PhoneTwo.PhoneNumber != null)
+                        {
+                            PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1PhoneTwo"];
+                            phoneTwo.Value = new PdfString(guardian1.PhoneTwo.PhoneNumber.ToString());
+                        }
+                        //phone 2 type
+                        if (guardian1.PhoneTwo.PhoneType != null)
+                        {
+                            PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1PhoneTwoType"];
+                            phoneTwoType.Value = new PdfString(guardian1.PhoneTwo.PhoneType.ToString());
+                        }
+                    }
 
                     //email
                     PdfTextField email = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1Email"];
@@ -581,11 +599,20 @@ namespace IGrad.Controllers
                     phoneOneType.Value = new PdfString(guardian2.PhoneOne.PhoneType.ToString());
 
                     //phone 2
-                    PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2PhoneTwo"];
-                    phoneTwo.Value = new PdfString(guardian2.PhoneTwo.PhoneNumber.ToString());
-                    //phone 2 type
-                    PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2PhoneTwoType"];
-                    phoneTwoType.Value = new PdfString(guardian2.PhoneTwo.PhoneType.ToString());
+                    if (guardian2.PhoneTwo != null)
+                    {
+                        if (guardian2.PhoneTwo.PhoneNumber != null)
+                        {
+                            PdfTextField phoneTwo = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2PhoneTwo"];
+                            phoneTwo.Value = new PdfString(guardian2.PhoneTwo.PhoneNumber.ToString());
+                        }
+                        //phone 2 type
+                        if (guardian2.PhoneTwo.PhoneType != null)
+                        {
+                            PdfTextField phoneTwoType = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2PhoneTwoType"];
+                            phoneTwoType.Value = new PdfString(guardian2.PhoneTwo.PhoneType.ToString());
+                        }
+                    }
 
                     //email
                     PdfTextField email = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2Email"];
