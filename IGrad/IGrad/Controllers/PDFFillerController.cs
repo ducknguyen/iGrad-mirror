@@ -243,8 +243,11 @@ namespace IGrad.Controllers
             PdfTextField lastName = (PdfTextField)(document.AcroForm.Fields["StudentLastName"]);
             lastName.Value = new PdfString(this.user.Name.LName);
 
-            PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MI"]);
-            middleInitial.Value = new PdfString(this.user.Name.MName);
+            if (this.user.Name.MName != null)
+            {
+                PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MI"]);
+                middleInitial.Value = new PdfString(this.user.Name.MName);
+            }
 
             PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
             birthday.Value = new PdfString(this.user.Birthday.ToString("MM-dd-yyyy"));
@@ -339,8 +342,11 @@ namespace IGrad.Controllers
             PdfTextField studentFirstName = (PdfTextField)(document.AcroForm.Fields["StudentFirstName"]);
             studentFirstName.Value = new PdfString(user.Name.FName);
 
-            PdfTextField studentMiddleName = (PdfTextField)(document.AcroForm.Fields["StudentMiddleName"]);
-            studentMiddleName.Value = new PdfString(user.Name.MName);
+            if (user.Name.MName != null)
+            {
+                PdfTextField studentMiddleName = (PdfTextField)(document.AcroForm.Fields["StudentMiddleName"]);
+                studentMiddleName.Value = new PdfString(user.Name.MName);
+            }
 
             PdfTextField studentPrevName = (PdfTextField)(document.AcroForm.Fields["StudentPreviousName"]);
             studentPrevName.Value = new PdfString(user.Name.PreviousName);
@@ -402,7 +408,7 @@ namespace IGrad.Controllers
                     guardian1Name.Value = new PdfString(guardian1.Name.LName + " " + guardian1.Name.FName + guardian1.Name.MName.Substring(0, 1));
                 }else
                 {
-                    guardian1Name.Value = new PdfString(guardian1.Name.LName + " " + guardian1.Name.FName );
+                    guardian1Name.Value = new PdfString(guardian1.Name.LName + " " + guardian1.Name.FName);
                 }
 
                 string guardianRelationshipCheckBoxName = "PrimaryGuardian1" + guardian1.Relationship;
@@ -450,9 +456,16 @@ namespace IGrad.Controllers
             {
                 Guardian guardian2 = primaryGuardians[1];
                 //fill name
-                PdfTextField guardian2Name = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2Name"];
-                guardian2Name.Value = new PdfString(guardian2.Name.LName + " " + guardian2.Name.FName + guardian2.Name.MName.Substring(0, 1));
-
+                if (guardian2.Name.MName != null)
+                {
+                    PdfTextField guardian2Name = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2Name"];
+                    guardian2Name.Value = new PdfString(guardian2.Name.LName + " " + guardian2.Name.FName + guardian2.Name.MName.Substring(0, 1));
+                }
+                else
+                {
+                    PdfTextField guardian2Name = (PdfTextField)document.AcroForm.Fields["PrimaryGuardian2Name"];
+                    guardian2Name.Value = new PdfString(guardian2.Name.LName + " " + guardian2.Name.FName);
+                }
                 string guardianRelationshipCheckBoxName = "PrimaryGuardian2" + guardian2.Relationship;
 
                 PdfCheckBoxField relationshipCheckbox = (PdfCheckBoxField)document.AcroForm.Fields[guardianRelationshipCheckBoxName];
@@ -499,9 +512,16 @@ namespace IGrad.Controllers
                 {
                     Guardian guardian1 = secondaryGuardians[0];
                     //fill name
-                    PdfTextField guardian1Name = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1Name"];
-                    guardian1Name.Value = new PdfString(guardian1.Name.LName + " " + guardian1.Name.FName + guardian1.Name.MName.Substring(0, 1));
-
+                    if (guardian1.Name.MName != null)
+                    {
+                        PdfTextField guardian1Name = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1Name"];
+                        guardian1Name.Value = new PdfString(guardian1.Name.LName + " " + guardian1.Name.FName + guardian1.Name.MName.Substring(0, 1));
+                    }
+                    else
+                    {
+                        PdfTextField guardian1Name = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian1Name"];
+                        guardian1Name.Value = new PdfString(guardian1.Name.LName + " " + guardian1.Name.FName);
+                    }
                     string guardianRelationshipCheckBoxName = "SecondaryGuardian1" + guardian1.Relationship;
                     if (guardian1.Relationship != "Guardian")
                     {
@@ -535,9 +555,16 @@ namespace IGrad.Controllers
                 {
                     Guardian guardian2 = secondaryGuardians[0];
                     //fill name
-                    PdfTextField guardian1Name = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2Name"];
-                    guardian1Name.Value = new PdfString(guardian2.Name.LName + " " + guardian2.Name.FName + guardian2.Name.MName.Substring(0, 1));
-
+                    if (guardian2.Name.MName != null)
+                    {
+                        PdfTextField guardian1Name = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2Name"];
+                        guardian1Name.Value = new PdfString(guardian2.Name.LName + " " + guardian2.Name.FName + guardian2.Name.MName.Substring(0, 1));
+                    }
+                    else
+                    {
+                        PdfTextField guardian1Name = (PdfTextField)document.AcroForm.Fields["SecondaryGuardian2Name"];
+                        guardian1Name.Value = new PdfString(guardian2.Name.LName + " " + guardian2.Name.FName);
+                    }
                     string guardianRelationshipCheckBoxName = "SecondaryGuardian2" + guardian2.Relationship;
                     if (guardian2.Relationship != "Guardian")
                     {
@@ -1023,9 +1050,16 @@ namespace IGrad.Controllers
             }
             else
             {
-                PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
-                name.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
-
+                if (user.Name.MName != null)
+                {
+                    PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
+                    name.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
+                }
+                else
+                {
+                    PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
+                    name.Value = new PdfString(user.Name.FName + " " + user.Name.LName);
+                }
                 HashSet<string> isRaceSet = new HashSet<string>();
                 foreach (var prop in user.ConsideredRaceAndEthnicity.GetType().GetProperties())
                 {
@@ -1066,9 +1100,16 @@ namespace IGrad.Controllers
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
-            PdfTextField studentName = (PdfTextField)(document.AcroForm.Fields["StudentName"]);
-            studentName.Value = new PdfString(this.user.Name.FName + " " + this.user.Name.MName + " " + this.user.Name.LName);
-
+            if (this.user.Name.MName != null)
+            {
+                PdfTextField studentName = (PdfTextField)(document.AcroForm.Fields["StudentName"]);
+                studentName.Value = new PdfString(this.user.Name.FName + " " + this.user.Name.MName + " " + this.user.Name.LName);
+            }
+            else
+            {
+                PdfTextField studentName = (PdfTextField)(document.AcroForm.Fields["StudentName"]);
+                studentName.Value = new PdfString(this.user.Name.FName + " " + this.user.Name.LName);
+            }
             PdfTextField studentGrade = (PdfTextField)(document.AcroForm.Fields["Grade"]);
             studentGrade.Value = new PdfString(Convert.ToString(this.user.SchoolInfo.CurrentGrade));
 
@@ -1170,8 +1211,11 @@ namespace IGrad.Controllers
             PdfTextField lastName = (PdfTextField)(document.AcroForm.Fields["LastName"]);
             lastName.Value = new PdfString(this.user.Name.LName);
 
-            PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MiddleName"]);
-            middleInitial.Value = new PdfString(this.user.Name.MName);
+            if (this.user.Name.MName != null)
+            {
+                PdfTextField middleInitial = (PdfTextField)(document.AcroForm.Fields["MiddleName"]);
+                middleInitial.Value = new PdfString(this.user.Name.MName);
+            }
 
             PdfTextField preferedName = (PdfTextField)(document.AcroForm.Fields["PreferredName"]);
             preferedName.Value = new PdfString(this.user.Name.NickName);
@@ -1548,9 +1592,16 @@ namespace IGrad.Controllers
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
             //Name, Date, Birthday, gender, and School
-            PdfTextField studentName = (PdfTextField)(document.AcroForm.Fields["StudentName"]);
-            studentName.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
-
+            if (user.Name.MName != null)
+            {
+                PdfTextField studentName = (PdfTextField)(document.AcroForm.Fields["StudentName"]);
+                studentName.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
+            }
+            else
+            {
+                PdfTextField studentName = (PdfTextField)(document.AcroForm.Fields["StudentName"]);
+                studentName.Value = new PdfString(user.Name.FName + " " + user.Name.LName);
+            }
             PdfTextField todayDate = (PdfTextField)(document.AcroForm.Fields["TodayDate"]);
             todayDate.Value = new PdfString(DateTime.Now.Date.ToShortDateString());
 
@@ -1861,8 +1912,11 @@ namespace IGrad.Controllers
             PdfTextField fName = (PdfTextField)(document.AcroForm.Fields["First"]);
             fName.Value = new PdfString(this.user.Name.FName);
 
-            PdfTextField mi = (PdfTextField)(document.AcroForm.Fields["MI"]);
-            mi.Value = new PdfString(this.user.Name.MName);
+            if (this.user.Name.MName != null)
+            {
+                PdfTextField mi = (PdfTextField)(document.AcroForm.Fields["MI"]);
+                mi.Value = new PdfString(this.user.Name.MName);
+            }
 
             PdfTextField dob = (PdfTextField)(document.AcroForm.Fields["DOB"]);
             dob.Value = new PdfString(this.user.Birthday.ToString("MM-dd-yyyy"));
@@ -1903,9 +1957,16 @@ namespace IGrad.Controllers
             //check for null object
             if (user.NativeAmericanEducation != null)
             {
-                PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
-                name.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
-
+                if (user.Name.MName != null)
+                {
+                    PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
+                    name.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
+                }
+                else
+                {
+                    PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
+                    name.Value = new PdfString(user.Name.FName + " " + user.Name.LName);
+                }
                 PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
                 birthday.Value = new PdfString(user.Birthday.ToShortDateString());
 
@@ -2091,10 +2152,16 @@ namespace IGrad.Controllers
             // Set the flag so we can flatten once done.
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
-
-            PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
-            name.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
-
+            if (user.Name.MName != null)
+            {
+                PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
+                name.Value = new PdfString(user.Name.FName + " " + user.Name.MName + " " + user.Name.LName);
+            }
+            else
+            {
+                PdfTextField name = (PdfTextField)(document.AcroForm.Fields["Name"]);
+                name.Value = new PdfString(user.Name.FName + " " + user.Name.LName);
+            }
             PdfTextField birthday = (PdfTextField)(document.AcroForm.Fields["Birthday"]);
             birthday.Value = new PdfString(user.Birthday.ToShortDateString());
 
