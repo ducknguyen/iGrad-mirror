@@ -73,11 +73,11 @@
             </div>
             <div class="form-group col-md-3">
                 @Html.LabelFor(model => model.ResidentAddress.City, htmlAttributes: new { @class = "required-marker" })
-                @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "City", required = "required" })
+                @Html.TextBoxFor(model => model.ResidentAddress.City, htmlAttributes: new { @class = "form-control", @placeholder = "City", required = "required" })
             </div>
             <div class="form-group col-md-2">
                 @Html.LabelFor(model => model.ResidentAddress.State, htmlAttributes: new { @class = "required-marker" })
-                @Html.TextBoxFor(model => model.ResidentAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "State", required = "required" })
+                @Html.TextBoxFor(model => model.ResidentAddress.State, htmlAttributes: new { @class = "form-control", @placeholder = "State", required = "required" })
             </div>
             <div class="form-group col-md-2">
                 @Html.LabelFor(model => model.ResidentAddress.Zip, htmlAttributes: new { @class = "required-marker" })
@@ -176,7 +176,7 @@
 </div>
 
 <br />
-
+<hr />
 <div class="" id="prompt-secondary-residence">
     <br />
     <!-- PROMPT FOR SECONDARY GUARDIAN -->
@@ -212,11 +212,11 @@
 
             <input type="hidden" name="secondary-guardian-selection" class="progressbar-checker" value="" />
         </div>
-
+        <br />
         <!-- SECONDARY GUARDIAN ADDRESS -->
         <div class="row">
             <div class="col-md-12">
-                <h4>Please specify secondary guardian(s) address</h4>
+                <h4>Please Specify Secondary Guardian(s) Address</h4>
             </div>
             <div class="form-group col-md-3">
                 @Html.LabelFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "required-marker" })
@@ -224,11 +224,11 @@
             </div>
             <div class="form-group col-md-3">
                 @Html.LabelFor(model => model.SecondaryHouseholdAddress.City, htmlAttributes: new { @class = "required-marker" })
-                @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "City", @form = "household-form" })
+                @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.City, htmlAttributes: new { @class = "form-control", @placeholder = "City", @form = "household-form" })
             </div>
             <div class="form-group col-md-2">
                 @Html.LabelFor(model => model.SecondaryHouseholdAddress.State, htmlAttributes: new { @class = "required-marker" })
-                @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.Street, htmlAttributes: new { @class = "form-control", @placeholder = "State", @form = "household-form" })
+                @Html.TextBoxFor(model => model.SecondaryHouseholdAddress.State, htmlAttributes: new { @class = "form-control", @placeholder = "State", @form = "household-form" })
             </div>
             <div class="form-group col-md-2">
                 @Html.LabelFor(model => model.SecondaryHouseholdAddress.Zip, htmlAttributes: new { @class = "required-marker" })
@@ -244,6 +244,7 @@
 </div>
 <!-- ADD GUARDIANS END -->
 
+<hr />
 
 <!-- ADD EMERGENCY CONTACT -->
 <div class="wrapper" id="add-emergency-contact-container">
@@ -275,6 +276,7 @@
     <input type="hidden" name="emergency-section" class="progressbar-checker" />
 </div>
 <!-- ADD EMERGENCY CONTACT END -->
+<hr />
 
 <br /><br />
 
@@ -299,6 +301,7 @@
     </div>
 </div>
 <!-- ADD SIBLINGS END -->
+<hr />
 
 
 <div class="form-row">
