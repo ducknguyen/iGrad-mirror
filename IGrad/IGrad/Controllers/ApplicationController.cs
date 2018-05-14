@@ -849,6 +849,7 @@ namespace IGrad.Controllers
             else
             {
                 user.NativeAmericanEducation = new NativeAmericanEducation();
+                user.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment = new Address();
                 return PartialView("_GetNativeAmericanEducationForm", user.NativeAmericanEducation);
             }
         }

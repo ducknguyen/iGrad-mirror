@@ -6,7 +6,7 @@
     UpdateTargetId = "",
     InsertionMode = InsertionMode.Replace,
 
-}))
+}, new { @id = "homeless-form" }))
 {
     @Html.AntiForgeryToken()
     
@@ -70,7 +70,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Submit" class="btn btn-default" onclick="hideTarget('homeless-information')" />
+                    <input type="submit" value="Submit" class="btn btn-success" form="homeless-form" onclick="hideTarget('homeless-information')" />
                     <input type="button" value="Cancel"  class="btn btn-default" onclick="hideTarget('homeless-information')" />
                 </div>
             </div>

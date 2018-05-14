@@ -13,9 +13,13 @@
         if ($('#lives-with-dropdown option:selected').val() == 'LivesWithOther') {
             showTarget('lives-with-other-desc');
         }
+        else if ($('#lives-with-dropdown option:selected').val() == 'HomelessDistressed'){
+            loadHomelessInfoForm();
+        }
         else {
             $('#LivesWith_Other').val("");
             hideTarget('lives-with-other-desc');
+            hideTarget('homeless-container');
         }
     })
 </script>
@@ -43,25 +47,7 @@
         <!-- STUDENT LIVES WITH END -->
 
 
-        <!-- HOMELESS SECTION -->
-        <div class="container" id="homeless-container">
-            <h3 class="bg-info">Homeless / Distressed Additional Information</h3>
-            <button class="btn btn-default" form="" type="button" onclick="showTarget('homeless-information')">Show</button>
-            <button class="btn btn-default" form="" type="button" onclick="hideTarget('homeless-information')">Hide</button>
-            <div class="container" id="homeless-information">
-                @{if (Model.HomelessAssistance != null)
-                    {
-                        Html.RenderPartial("_HomelessAssistanceForm", Model.HomelessAssistance);
-                    }
-                    else
-                    {
-                        @Html.Action("GetAddHomelessAssistanceForm", "Application");
-                    }
-                }
-            </div>
-            <hr />
-        </div>
-        <!-- HOMELESS SECTION END -->
+
 
 
         <!-- TOTAL RESIDENCE AND INCOME -->
@@ -143,6 +129,26 @@
     </div>
     <!-- PRIMARY ADDRESS END -->
 }
+
+<!-- HOMELESS SECTION -->
+<div class="container" id="homeless-container">
+    <h3 class="bg-info">Homeless / Distressed Additional Information</h3>
+    <button class="btn btn-default" form="" type="button" onclick="showTarget('homeless-information')">Show</button>
+    <button class="btn btn-default" form="" type="button" onclick="hideTarget('homeless-information')">Hide</button>
+    <div class="container" id="homeless-information">
+        @{if (Model.HomelessAssistance != null)
+            {
+                Html.RenderPartial("_HomelessAssistanceForm", Model.HomelessAssistance);
+            }
+            else
+            {
+                @Html.Action("GetAddHomelessAssistanceForm", "Application");
+            }
+        }
+    </div>
+    <hr />
+</div>
+<!-- HOMELESS SECTION END -->
 
 <!-- ADDING GUARDIAN -->
 <div id="add-primary-guardian-container">
@@ -371,17 +377,18 @@
         $("#homeless-information").load('@Url.Action("GetAddHomelessAssistanceForm", "Application")');
     }
 
-    function homelessToggled() {
-        if ($('#isHomelessCheckbox').is(':checked')) {
-            loadHomelessInfoForm();
-            showTarget('homeless-container');
-            showTarget('homeless-information');
-            console.log("ishomeless is checked");
-        }
-        else {
-            hideTarget('homeless-container')
-        }
-    }
+    //commented out 5/14/2018, Duck, you can delete if you don't need.
+    //function homelessToggled() {
+    //    if ($('#isHomelessCheckbox').is(':checked')) {
+    //        loadHomelessInfoForm();
+    //        showTarget('homeless-container');
+    //        showTarget('homeless-information');
+    //        console.log("ishomeless is checked");
+    //    }
+    //    else {
+    //        hideTarget('homeless-container')
+    //    }
+    //}
 
     /* DELETE FUNCTIONS */
     function deleteEmergencyContact(fieldId) {

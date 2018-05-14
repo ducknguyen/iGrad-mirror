@@ -18,7 +18,7 @@
     <small class="form-text required-marker-indicator">* required fields.</small>
     <hr>
 
-    <h3 class="bg-info">Basic information</h3>
+    <h3 class="bg-info">Basic Information</h3>
 
     <!-- STUDENT NAME START -->
     <div class="row">
@@ -110,7 +110,7 @@
     <h4 class="required-marker">Please select appropriate affiliation below</h4>
     <div class="row">
         <div class="col-md-6">
-            @Html.DropDownListFor(model => model.MilitaryInfo.AffiliationType, Model.MilitaryInfo.MilitarySelectList,"Select Military Affiliation",new { @class = "form-control" , required="required"})
+            @Html.DropDownListFor(model => model.MilitaryInfo.AffiliationType, Model.MilitaryInfo.MilitarySelectList,"Select Military Affiliation",new { @class = "form-control required-checker", required="required"})
         </div>
      </div>
     <input type="hidden" name="selectedMilitary" class="progressbar-checker" value="">
