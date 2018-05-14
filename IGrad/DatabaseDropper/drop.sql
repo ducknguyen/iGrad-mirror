@@ -232,3 +232,7 @@ GO
 IF EXISTS (SELECT * FROM sys.tables WHERE name = 'NativeAmericanEducations')
 DROP TABLE [dbo].[NativeAmericanEducations]
 GO
+
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'OpenHouses')
+DROP TABLE [dbo].[OpenHouses]
+GO
