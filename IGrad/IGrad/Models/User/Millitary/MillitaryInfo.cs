@@ -1,30 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Web;
+
+using System.Web.Mvc;
 
 namespace IGrad.Models.User
 {
-    public class MillitaryInfo
+    public class MilitaryInfo
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int fieldId { get; set; }
+        public string AffiliationType { get; set; }
 
-        [DisplayName("U.S. Armed Forces active duty")]
-        public bool ArmedForcesActiveDuty { get; set; }
-        [DisplayName("U.S. Armed Forces reserves")]
-        public bool ArmedForcesReserved { get; set; }
-        [DisplayName("National Guard member")]
-        public bool NationalGuard { get; set; }
-        [DisplayName("More than one member of Armed Forces/Nat")]
-        public bool MoreThanOne { get; set; }
-        [DisplayName("No Affiliation")]
-        public bool None { get; set; }
-        [DisplayName("No response/refused to state")]
-        public bool PreferNotToAnswer { get; set; }
+        public IEnumerable<SelectListItem> MilitarySelectList
+        {
+            get
+            {
+                List<SelectListItem> items = new List<SelectListItem>();
+                items.Add(new SelectListItem { Text = "No Affiliation", Value = EMilitaryAffiliation.None.ToString() });
+                items.Add(new SelectListItem { Text = "Prefer Not To Answer", Value = EMilitaryAffiliation.PreferNotToAnswer.ToString() });
+                items.Add(new SelectListItem { Text = "U.S. Armed Forces Active Duty", Value = EMilitaryAffiliation.ArmedForcesActiveDuty.ToString() });
+                items.Add(new SelectListItem { Text = "U.S. Armed Forces Reserves", Value = EMilitaryAffiliation.ArmedForcesReserved.ToString() });
+                items.Add(new SelectListItem { Text = "National Guard Member", Value = EMilitaryAffiliation.NationalGuard.ToString() });
+                items.Add(new SelectListItem { Text = "More Than One Member of Armed Forces/National Guard", Value = EMilitaryAffiliation.MoreThanOne.ToString() });
+               
+                return items;
+            }
+        }
+
+        public enum EMilitaryAffiliation
+        {
+            ArmedForcesActiveDuty,
+            ArmedForcesReserved,
+            NationalGuard,
+            MoreThanOne,
+            None,
+            PreferNotToAnswer
+
+        }
     }
 }

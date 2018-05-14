@@ -51,7 +51,7 @@ namespace IGrad.Models.User
         public bool isComplete { get; set; }
         public Roles role { get; set; }
         public HomelessAssistancePreferences HomelessAssistance { get; set; }
-        public MillitaryInfo MillitaryInfo { get; set; }
+        public MilitaryInfo MilitaryInfo { get; set; }
         public OptionalAssistance OptionalOpportunities { get; set; }
 
         public List<Guardian> GetPrimaryGuardians()

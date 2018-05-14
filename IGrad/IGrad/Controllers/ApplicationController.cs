@@ -64,7 +64,7 @@ namespace IGrad.Controllers
                     .Include(u => u.Name)
                     .Include(u => u.BirthPlace)
                     .Include(u => u.ConsideredRaceAndEthnicity)
-                    .Include(u => u.MillitaryInfo)
+                    .Include(u => u.MilitaryInfo)
                     .Include(u => u.NativeAmericanEducation)
                     .Include(u => u.NativeAmericanEducation.AddressOfTribeMaintainingEnrollment)
                     .Include(u => u.PhoneInfo)
@@ -93,7 +93,7 @@ namespace IGrad.Controllers
                        .Include(u => u.BirthPlace)
                        .Include(u => u.ConsideredRaceAndEthnicity)
                        .Include(u => u.PhoneInfo)
-                       .Include(u => u.MillitaryInfo)
+                       .Include(u => u.MilitaryInfo)
                        .Where(u => u.UserID == user.UserID)
                        .FirstOrDefault<UserModel>();
 
@@ -171,7 +171,7 @@ namespace IGrad.Controllers
                 #endregion
 
                 data.Birthday = user.Birthday;
-                data.MillitaryInfo = user.MillitaryInfo;
+                data.MilitaryInfo = user.MilitaryInfo;
 
                 db.SaveChanges();
             }

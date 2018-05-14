@@ -375,7 +375,7 @@ namespace IGrad.Controllers
                         _userModel.SchoolInfo.UserID = newGuid;
                         _userModel.LivesWith = new LivesWith();
                         _userModel.LivesWith.UserID = newGuid;
-                        _userModel.MillitaryInfo = new MillitaryInfo();
+                        _userModel.MilitaryInfo = new MilitaryInfo();
                         _userModel.MailingAddress = new Address();
                         _userModel.MailingAddress.UserID = newGuid;
                         _userModel.Name = new Name();

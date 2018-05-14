@@ -107,37 +107,12 @@
         </span>
     </h3>
 
-    <h4 class="required-marker">Please check appropriate affiliation below</h4>
+    <h4 class="required-marker">Please select appropriate affiliation below</h4>
     <div class="row">
         <div class="col-md-6">
-            @Html.RadioButtonFor(model => model.MillitaryInfo.ArmedForcesActiveDuty, "true", new { @class = "miltary-checkbox" , Name="military-info" })
-            @Html.LabelFor(model => model.MillitaryInfo.ArmedForcesActiveDuty, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(model => model.MilitaryInfo.AffiliationType, Model.MilitaryInfo.MilitarySelectList,"Select Military Affiliation",new { @class = "form-control" , required="required"})
         </div>
-        <div class="col-md-6">
-            @Html.RadioButtonFor(model => model.MillitaryInfo.ArmedForcesReserved, true, new { @class = "miltary-checkbox", Name = "military-info" })
-            @Html.LabelFor(model => model.MillitaryInfo.ArmedForcesReserved, htmlAttributes: new { @class = "control-label" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            @Html.RadioButtonFor(model => model.MillitaryInfo.NationalGuard, true, new { @class = "miltary-checkbox", Name = "military-info" })
-            @Html.LabelFor(model => model.MillitaryInfo.NationalGuard, htmlAttributes: new { @class = "control-label" })
-        </div>
-        <div class="col-md-6">
-            @Html.RadioButtonFor(model => model.MillitaryInfo.MoreThanOne, true, new { @class = "miltary-checkbox", Name = "military-info" })
-            @Html.LabelFor(model => model.MillitaryInfo.MoreThanOne, htmlAttributes: new { @class = "control-label" })
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            @Html.RadioButtonFor(model => model.MillitaryInfo.None, true, new { @class = "miltary-checkbox", Name = "military-info" })
-            @Html.LabelFor(model => model.MillitaryInfo.None, htmlAttributes: new { @class = "control-label" })
-        </div>
-        <div class="col-md-6">
-            @Html.RadioButtonFor(model => model.MillitaryInfo.PreferNotToAnswer, true, new { @class = "miltary-checkbox", Name = "military-info" })
-            @Html.LabelFor(model => model.MillitaryInfo.PreferNotToAnswer, htmlAttributes: new { @class = "control-label" })
-        </div>
-    </div>
+     </div>
     <input type="hidden" name="selectedMilitary" class="progressbar-checker" value="">
 
     <!-- END MILITARY INFORMATION -->

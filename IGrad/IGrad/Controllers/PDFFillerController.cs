@@ -58,7 +58,7 @@ namespace IGrad.Controllers
                        .Include(u => u.SecondaryHouseholdAddress)
                        .Include(u => u.OptionalOpportunities)
                        .Include(u => u.StudentsParentingPlan)
-                       .Include(u => u.MillitaryInfo)
+                       .Include(u => u.MilitaryInfo)
                        .Include(u => u.Guardians.Select(k=>k.Address))
                        .Include(u => u.StudentChildCare)
                        .Include(u => u.EmergencyContacts)
@@ -217,39 +217,11 @@ namespace IGrad.Controllers
             PdfTextField newSchool = (PdfTextField)(document.AcroForm.Fields["School"]);
             newSchool.Value = new PdfString("iGrad");
 
-            PdfCheckBoxField activeduty = (PdfCheckBoxField)(document.AcroForm.Fields["ActiveDuty"]);
-            PdfCheckBoxField nationalguard = (PdfCheckBoxField)(document.AcroForm.Fields["NationalGuard"]);
-            PdfCheckBoxField morethanone = (PdfCheckBoxField)(document.AcroForm.Fields["MoreThanOne"]);
-            PdfCheckBoxField none = (PdfCheckBoxField)(document.AcroForm.Fields["None"]);
-            PdfCheckBoxField reserves = (PdfCheckBoxField)(document.AcroForm.Fields["Reserves"]);
-            PdfCheckBoxField refused = (PdfCheckBoxField)(document.AcroForm.Fields["Refused"]);
-
-            if (user.MillitaryInfo != null)
+            if (user.MilitaryInfo != null)
             {
-                if (user.MillitaryInfo.ArmedForcesActiveDuty)
-                {
-                    activeduty.Checked = true;
-                }
-                if (user.MillitaryInfo.NationalGuard)
-                {
-                    nationalguard.Checked = true;
-                }
-                if (user.MillitaryInfo.MoreThanOne)
-                {
-                    morethanone.Checked = true;
-                }
-                if (user.MillitaryInfo.None)
-                {
-                    none.Checked = true;
-                }
-                if (user.MillitaryInfo.ArmedForcesReserved)
-                {
-                    reserves.Checked = true;
-                }
-                if (user.MillitaryInfo.PreferNotToAnswer)
-                {
-                    refused.Checked = true;
-                }
+                string militaryChoice = user.MilitaryInfo.AffiliationType;
+                PdfCheckBoxField militaryCheckbox = (PdfCheckBoxField)(document.AcroForm.Fields[militaryChoice]);
+                militaryCheckbox.Checked = true;
             }
 
             return writeDocument(document);
