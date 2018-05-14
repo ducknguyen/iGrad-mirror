@@ -161,7 +161,7 @@ namespace IGrad.Controllers
 
         private bool UserRequiresHomelessAssistanceForm()
         {
-            if (user.HomelessAssistance != null)
+            if (user.HomelessAssistance != null && user.LivesWith.StudentLivesWith == LivesWith.ELiveWithOptions.HomelessDistressed.ToString())
             {
                 return true;
             }
