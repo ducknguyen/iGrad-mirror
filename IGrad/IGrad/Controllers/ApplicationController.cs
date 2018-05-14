@@ -974,5 +974,15 @@ namespace IGrad.Controllers
                 db.SaveChanges();
             }
         }
+
+        public ActionResult FinalPage()
+        {
+            using (OpenHouseContext db = new OpenHouseContext())
+            {
+                int idToUse = db.OpenHouse.Select(m => m.id).Max(); // get latest if needed
+                var data = db.OpenHouse.Where(m => m.id == idToUse).FirstOrDefault();
+                return View(data);
+            } 
+        }
     }
 }

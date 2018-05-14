@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using System.IO;
 using PagedList;
 using IGrad.Models.Income;
+using IGrad.Models.OpenHouse;
 
 namespace IGrad.Controllers
 {
@@ -211,6 +212,35 @@ namespace IGrad.Controllers
         }
 
         [Authorize]
+        public ActionResult OpenHouse()
+        {
+            using (OpenHouseContext ohc = new OpenHouseContext())
+            {
+                int idToUse = ohc.OpenHouse.Select(m => m.id).Max(); // get latest if needed
+                var data = ohc.OpenHouse.Where(m => m.id == idToUse).FirstOrDefault();
+                return View(data);
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult FinalPage(OpenHouse oh)
+        {
+            using (OpenHouseContext ohc = new OpenHouseContext())
+            {
+                int idToUse = ohc.OpenHouse.Select(m => m.id).Max(); // get latest if needed
+                var data = ohc.OpenHouse.Where(m => m.id == idToUse).FirstOrDefault();
+
+
+                data.Announcements = oh.Announcements;
+                data.OpenDays = oh.OpenDays;
+                data.WhatToBring = oh.WhatToBring;
+                ohc.SaveChanges();
+            }
+            return RedirectToAction("Index", "Admin");
+        }
+
+        [Authorize]
         [HttpPost]
         public ActionResult FamilyIncome(FamilyIncome income)
         {
@@ -234,7 +264,7 @@ namespace IGrad.Controllers
 
                 ic.SaveChanges();
             }
-            return RedirectToAction("FamilyIncome", "Admin");
+            return RedirectToAction("Index", "Admin");
         }
     }
 }

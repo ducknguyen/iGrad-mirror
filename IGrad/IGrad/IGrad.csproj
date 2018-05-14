@@ -224,6 +224,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Context\ContextHelper.cs" />
     <Compile Include="Context\IncomeContext.cs" />
+    <Compile Include="Context\OpenHouseContext.cs" />
     <Compile Include="Context\UserContext.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
@@ -235,11 +236,13 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="CustomHelpers\CustomHelper.cs" />
+    <Compile Include="Helpers\RoleIdentifier.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Income\FamilyIncome.cs" />
     <Compile Include="Models\Income\IncomeTable.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\OpenHouse\OpenHouse.cs" />
     <Compile Include="Models\User\Address\Address.cs" />
     <Compile Include="Models\User\BirthPlace\BirthPlaceLocation.cs" />
     <Compile Include="Models\User\Celebrate\Celebrate.cs" />
@@ -429,6 +432,9 @@
     <Content Include="Views\Application\_AddPrimaryGuardian.cshtml" />
     <Content Include="Views\Application\_AddSecondaryGuardian.cshtml" />
     <Content Include="Views\Application\_AddParentingPlan.cshtml" />
+    <Content Include="Views\Application\FinalPage.cshtml" />
+    <Content Include="Views\Admin\openhouse.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

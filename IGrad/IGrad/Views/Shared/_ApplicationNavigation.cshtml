@@ -1,7 +1,20 @@
 ﻿<header class="contact-head">
     <div class="container">
-        <h4 class="text-right">(253) 373-4723</h4>
-    </div>
+        @using IGrad.Helpers
+
+        @{ 
+            bool isAdmin = RoleIdentifier.isAdmin();
+         }
+        
+       <h4 class="text-right">(253) 373-4723 
+        @if (isAdmin == true)
+       {
+
+        <button type="button" class="btn btn-primary">
+            <a href="@Url.Action("Index","Admin")" style="color: black;">Admin</a>
+        </button>
+       }</h4>
+</div>
 </header>
 <div class="container">
     <nav class="navbar navbar-toggleable-md">

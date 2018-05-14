@@ -13,6 +13,7 @@ using System.Data.Entity.Validation;
 using System.Collections.Generic;
 using IGrad.Models.Income;
 using System.Xml;
+using IGrad.Models.OpenHouse;
 
 namespace IGrad.Controllers
 {
@@ -200,6 +201,7 @@ namespace IGrad.Controllers
                             _userModel.SchoolInfo.UserID = newGuid;
                             _userModel.LivesWith = new LivesWith();
                             _userModel.LivesWith.UserID = newGuid;
+                            _userModel.MilitaryInfo = new MilitaryInfo();
                             _userModel.MailingAddress = new Address();
                             _userModel.MailingAddress.UserID = newGuid;
                             _userModel.Name = new Name();
@@ -238,74 +240,101 @@ namespace IGrad.Controllers
                         }
                     }
 
-
-
-                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    string[] income1 = { "$ 0 to 1, 860", "$ 0 to 930", "$ 0 to 859", "$ 0 to 430", "$ 0 to 22,311" };
-                    string[] income2 = { "$ 1,861 to 2,504", "$ 931 to 1,252", "$ 860 to 1,156", "$ 431 to 578", "$ 22,312 to 30,044" };
-                    string[] income3 = { "$ 2,505 to 3,149", "$ 1,253 to 1,575", "$ 1,157 to 1,453", "$ 579 to 727", "$ 30,045 to 37,777" };
-                    string[] income4 = { "$ 3,150 to 3,793", "$ 1,576 to 1,897", "$ 1,454 to 1,751", "$ 728 to 876", "$ 37,778 to 45,510" };
-                    string[] income5 = { "$ 3,794 to 4,437", "$ 1,898 to 2,219", "$ 1,752 to 2,048", "$ 877 to 1,024", "$ 46,511 to 53,243" };
-                    string[] income6 = { "$ 4,438 to 5,082", "$ 2,220 to 2,541", "$ 2,049 to 2,346", "$ 1,025 to 1,173", "$ 53,244 to 60,976" };
-                    string[] income7 = { "$ 5,083 to 5,726", "$ 2,542 to 2,863", "$ 2,347 to 2,643", "$ 1,174 to 1,322", "$ 60,977 to 68,709" };
-                    string[] income8 = { "$ 5,727 to 6,371", "$ 2,864 to 3,186", "$ 2,644 to 2,941", "$ 1,323 to 1,471", "$ 68,710 to 76,442" };
-                    string[] income9 = { "$ 6,372 to 7,016", "$ 3, 187 to 3,509", "$ 2,942 to 3,239", "$ 1,472 to 1,620", "$ 76,443 to 84,175" };
-                    string[] income10 = { "$ 7,107 to 7,661", "$ 3,510 to 3,832", "$ 3,240 to 3,537", "$ 1,621 to 1,769", "$ 84,176 to 91,908" };
-                    string[] income11 = { "$ 7,662 to 8,306", "$ 3,833 to 4,155", "$ 3,538 to 3,835", "$ 1,770 to 1,918", "$ 91,909 to 99,641" };
-                    string[] income12 = { "$ 8,307 to 8,951", "$ 4,156 to 4,478", "$ 3,836 to 4,133", "$ 1,919 to 2,067", "$ 99,642 to 107,374" };
-                    string[] income13 = { "$ 8,952 to 9,596", "$ 4,479 to 4,801", "$ 4,134 to 4,431", "$ 2,068 to 2,216", "$ 107,375 to 115,107" };
-                    string[] income14 = { "$ 9,597 to 10,241", "$ 4,802 to 5,124", "$ 4,432 to 4,729", "$ 2,217 to 2,365", "$ 115,108 to 122,840" };
-                    string[] income15 = { "$ 10,242 to 10,886", "$ 5,125 to 5,447", "$ 4,730 to 5,027", "$ 2,366 to 2,514", "$ 122,841 to 130,573" };
-
-                    using (var ic = new IncomeContext())
+                    if (!CheckIfOpenHouseTableExists())
                     {
-
-                        List<string[]> list = new List<string[]>();
-                        list.Add(income1);
-                        list.Add(income2);
-                        list.Add(income3);
-                        list.Add(income4);
-                        list.Add(income5);
-                        list.Add(income6);
-                        list.Add(income7);
-                        list.Add(income8);
-                        list.Add(income9);
-                        list.Add(income10);
-                        list.Add(income11);
-                        list.Add(income12);
-                        list.Add(income13);
-                        list.Add(income14);
-                        list.Add(income15);
-
-                        FamilyIncome income = new FamilyIncome();
-                        income.incomeTable = new List<IncomeTable>();
-                        income.id = 0;
-                        income.EffectiveDates = "Income Chart Effective from July 1, 2017 through June 30, 2018";
-                        income.IncomeTableYears = "2017-18 Family Income Survey";
-                        for (int i = 0; i < list.Count; i++)
+                        OpenHouse ohObj = new OpenHouse();
+                        ohObj.OpenDays = "Every Tuesday at 5:30PM & Thursday at 11AM";
+                        ohObj.WhatToBring = "A picture id as well as signed forms";
+                        using (OpenHouseContext ohc = new OpenHouseContext())
                         {
-                            IncomeTable table = new IncomeTable();
-                            table.Monthly = list[i][0];
-                            table.TwiceMonthly = list[i][1];
-                            table.TwoWeeks = list[i][2];
-                            table.Weekly = list[i][3];
-                            table.Annually = list[i][4];
-                            income.incomeTable.Add(table);
-                        }
-
-                        ic.Income.Add(income);
-                        try
-                        {
-                            ic.SaveChanges();
-                        }
-                        catch (DbEntityValidationException ex)
-                        {
-                            foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                            ohc.OpenHouse.Add(ohObj);
+                            try
                             {
-                                foreach (var validationError in entityValidationErrors.ValidationErrors)
+                                ohc.SaveChanges();
+                            }
+                            catch (DbEntityValidationException ex)
+                            {
+                                foreach (var entityValidationErrors in ex.EntityValidationErrors)
                                 {
-                                    Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                                    {
+                                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+
+                    if (!CheckIfIncomeTableExists())
+                    {
+                        //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                        string[] income1 = { "$ 0 to 1, 860", "$ 0 to 930", "$ 0 to 859", "$ 0 to 430", "$ 0 to 22,311" };
+                        string[] income2 = { "$ 1,861 to 2,504", "$ 931 to 1,252", "$ 860 to 1,156", "$ 431 to 578", "$ 22,312 to 30,044" };
+                        string[] income3 = { "$ 2,505 to 3,149", "$ 1,253 to 1,575", "$ 1,157 to 1,453", "$ 579 to 727", "$ 30,045 to 37,777" };
+                        string[] income4 = { "$ 3,150 to 3,793", "$ 1,576 to 1,897", "$ 1,454 to 1,751", "$ 728 to 876", "$ 37,778 to 45,510" };
+                        string[] income5 = { "$ 3,794 to 4,437", "$ 1,898 to 2,219", "$ 1,752 to 2,048", "$ 877 to 1,024", "$ 46,511 to 53,243" };
+                        string[] income6 = { "$ 4,438 to 5,082", "$ 2,220 to 2,541", "$ 2,049 to 2,346", "$ 1,025 to 1,173", "$ 53,244 to 60,976" };
+                        string[] income7 = { "$ 5,083 to 5,726", "$ 2,542 to 2,863", "$ 2,347 to 2,643", "$ 1,174 to 1,322", "$ 60,977 to 68,709" };
+                        string[] income8 = { "$ 5,727 to 6,371", "$ 2,864 to 3,186", "$ 2,644 to 2,941", "$ 1,323 to 1,471", "$ 68,710 to 76,442" };
+                        string[] income9 = { "$ 6,372 to 7,016", "$ 3, 187 to 3,509", "$ 2,942 to 3,239", "$ 1,472 to 1,620", "$ 76,443 to 84,175" };
+                        string[] income10 = { "$ 7,107 to 7,661", "$ 3,510 to 3,832", "$ 3,240 to 3,537", "$ 1,621 to 1,769", "$ 84,176 to 91,908" };
+                        string[] income11 = { "$ 7,662 to 8,306", "$ 3,833 to 4,155", "$ 3,538 to 3,835", "$ 1,770 to 1,918", "$ 91,909 to 99,641" };
+                        string[] income12 = { "$ 8,307 to 8,951", "$ 4,156 to 4,478", "$ 3,836 to 4,133", "$ 1,919 to 2,067", "$ 99,642 to 107,374" };
+                        string[] income13 = { "$ 8,952 to 9,596", "$ 4,479 to 4,801", "$ 4,134 to 4,431", "$ 2,068 to 2,216", "$ 107,375 to 115,107" };
+                        string[] income14 = { "$ 9,597 to 10,241", "$ 4,802 to 5,124", "$ 4,432 to 4,729", "$ 2,217 to 2,365", "$ 115,108 to 122,840" };
+                        string[] income15 = { "$ 10,242 to 10,886", "$ 5,125 to 5,447", "$ 4,730 to 5,027", "$ 2,366 to 2,514", "$ 122,841 to 130,573" };
+
+                        using (var ic = new IncomeContext())
+                        {
+
+                            List<string[]> list = new List<string[]>();
+                            list.Add(income1);
+                            list.Add(income2);
+                            list.Add(income3);
+                            list.Add(income4);
+                            list.Add(income5);
+                            list.Add(income6);
+                            list.Add(income7);
+                            list.Add(income8);
+                            list.Add(income9);
+                            list.Add(income10);
+                            list.Add(income11);
+                            list.Add(income12);
+                            list.Add(income13);
+                            list.Add(income14);
+                            list.Add(income15);
+
+                            FamilyIncome income = new FamilyIncome();
+                            income.incomeTable = new List<IncomeTable>();
+                            income.id = 0;
+                            income.EffectiveDates = "Income Chart Effective from July 1, 2017 through June 30, 2018";
+                            income.IncomeTableYears = "2017-18 Family Income Survey";
+                            for (int i = 0; i < list.Count; i++)
+                            {
+                                IncomeTable table = new IncomeTable();
+                                table.Monthly = list[i][0];
+                                table.TwiceMonthly = list[i][1];
+                                table.TwoWeeks = list[i][2];
+                                table.Weekly = list[i][3];
+                                table.Annually = list[i][4];
+                                income.incomeTable.Add(table);
+                            }
+
+                            ic.Income.Add(income);
+                            try
+                            {
+                                ic.SaveChanges();
+                            }
+                            catch (DbEntityValidationException ex)
+                            {
+                                foreach (var entityValidationErrors in ex.EntityValidationErrors)
+                                {
+                                    foreach (var validationError in entityValidationErrors.ValidationErrors)
+                                    {
+                                        Response.Write("Property: " + validationError.PropertyName + " Error: " + validationError.ErrorMessage);
+                                    }
                                 }
                             }
                         }
@@ -314,6 +343,43 @@ namespace IGrad.Controllers
             }
         }
 
+        private bool CheckIfIncomeTableExists()
+        {
+            try
+            {
+                using (IncomeContext ic = new IncomeContext())
+                {
+                    if(ic.Income.Count() > 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch(Exception ex)
+            {
+                return false;
+            }
+        }
+
+        private bool CheckIfOpenHouseTableExists()
+        {
+            try
+            {
+                using (OpenHouseContext ohc = new OpenHouseContext())
+                {
+                    if (ohc.OpenHouse.Count() > 0)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
 
         //
         // POST: /Account/Register
