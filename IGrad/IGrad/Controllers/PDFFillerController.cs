@@ -1925,7 +1925,7 @@ namespace IGrad.Controllers
             document.AcroForm.Elements.SetBoolean("/NeedAppearances", true);
 
             PdfTextField firstrqst = (PdfTextField)(document.AcroForm.Fields["1st rqst"]);
-            firstrqst.Value = new PdfString("X");
+            firstrqst.Value = new PdfString(DateTime.Now.ToShortDateString());
 
             if (this.user.SchoolInfo.HighSchoolInformation != null)
             {
