@@ -220,8 +220,11 @@ namespace IGrad.Controllers
             if (user.MilitaryInfo != null)
             {
                 string militaryChoice = user.MilitaryInfo.AffiliationType;
-                PdfCheckBoxField militaryCheckbox = (PdfCheckBoxField)(document.AcroForm.Fields[militaryChoice]);
-                militaryCheckbox.Checked = true;
+                if(militaryChoice != null && militaryChoice != "")
+                {
+                    PdfCheckBoxField militaryCheckbox = (PdfCheckBoxField)(document.AcroForm.Fields[militaryChoice]);
+                    militaryCheckbox.Checked = true;
+                }
             }
 
             return writeDocument(document);
@@ -976,6 +979,17 @@ namespace IGrad.Controllers
                     }
                 }
             }
+
+            if(schoolsInWAStringBuilder.Length > 0)
+            {
+                PdfCheckBoxField schoolsAttendedInWashingtonCheckBox = (PdfCheckBoxField)document.AcroForm.Fields["SchoolsAttendedInWashingtonTrue"];
+                schoolsAttendedInWashingtonCheckBox.Checked = true;
+            }
+            else
+            {
+                PdfCheckBoxField schoolsAttendedInWashingtonCheckBox = (PdfCheckBoxField)document.AcroForm.Fields["SchoolsAttendedInWashingtonFalse"];
+                schoolsAttendedInWashingtonCheckBox.Checked = true;
+            }
             PdfTextField schoolsAttendedInWashington = (PdfTextField)document.AcroForm.Fields["SchoolsAttendedInWashington"];
             schoolsAttendedInWashington.Value = new PdfString(schoolsInWAStringBuilder.ToString());
 
@@ -984,14 +998,22 @@ namespace IGrad.Controllers
 
             //Attended school in kent school district
 
+            if(schoolsInKentSchoolDistrictStringBuilder.Length > 0)
+            {
+                PdfCheckBoxField schoolsAttendedInKentSDCheckBox = (PdfCheckBoxField)document.AcroForm.Fields["SchoolsAttendedInKentSchoolDistrictTrue"];
+                schoolsAttendedInKentSDCheckBox.Checked = true;
+            }
+            else
+            {
+                PdfCheckBoxField schoolsAttendedInKentSDCheckBox = (PdfCheckBoxField)document.AcroForm.Fields["SchoolsAttendedInKentSchoolDistrictFalse"];
+                schoolsAttendedInKentSDCheckBox.Checked = true;
+            }
+
             PdfTextField schoolsAttendedInKentSD = (PdfTextField)document.AcroForm.Fields["SchoolsAttendedInKentSchoolDistrict"];
             schoolsAttendedInKentSD.Value = new PdfString(schoolsInKentSchoolDistrictStringBuilder.ToString());
 
             PdfTextField schoolsAttendedInKentSDDate = (PdfTextField)document.AcroForm.Fields["SchoolsAttendedInKentSchoolDistrictDate"];
             schoolsAttendedInKentSDDate.Value = new PdfString(lastKentSDAttendDate.ToString());
-
-
-
 
             //student suspended for weapons violation
             if (user.SchoolInfo.PreviousSchoolViolation != null)
