@@ -29,6 +29,14 @@ function trackPersonalFormProgress() {
 
     // append value to progressbar
     updateTextDisplay(currentProgress, count, totalRequiredFields);
+
+    if(currentProgress == 100 && count == totalRequiredFields) {
+        $('.main-body').addClass("completed-form");
+        $('.completed-form-title').removeClass('hidden');
+    } else {
+        $('.main-body').removeClass("completed-form");
+        $('.completed-form-title').addClass('hidden');
+    }
 }
 
 /**
@@ -57,10 +65,17 @@ function trackFormProgress() {
 
     // append value to progressbar
     updateTextDisplay(currentProgress, count, totalRequiredFields);
+
+    if(currentProgress == 100 && count == totalRequiredFields) {
+        $('.main-body').addClass("completed-form");
+        $('.completed-form-title').removeClass('hidden');
+    } else {
+        $('.main-body').removeClass("completed-form");
+        $('.completed-form-title').addClass('hidden');
+    }
 }
 
 function updateTextDisplay(currentProgress, count, totalCount) {
-    //console.log("inside update " + currentProgress + " - " + count + " - " + totalCount);
     progressBar.attr("aria-valuenow", currentProgress);
     progressBar.css("width", currentProgress + "%");
     $('#current-progress-count').text(count);

@@ -85,6 +85,16 @@ function updateViolationHistory(violationList) {
     var toUpdate = $('input[type=hidden][name=violation-history]');
     toUpdate.val(violationList);
 }
+
+function noViolationPrompt(){
+    hideTarget('add-violation-information');
+
+    violationList.push(1);
+    updateViolationHistory(violationList);
+    $('#no-violation-prompt').removeClass('hidden');
+
+    trackFormProgress();
+}
 /* VIOLATIONS RELATED FUNCTIONS END */
 
 // track input changes

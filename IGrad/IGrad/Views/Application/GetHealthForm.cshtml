@@ -15,7 +15,10 @@
 </script>
 @using (Html.BeginForm("GetHealthForm", "Application", FormMethod.Post, new { enctype = "multipart/form-data", @id = "health-form" }))
 {
-<h2>Health Information</h2>
+<h2>
+    Health Information
+    <span class="completed-form-title pull-right hidden">Completed <i class="fas fa-check"></i></span>
+</h2>
 <small class="form-text required-marker-indicator">* required fields.</small>
 <hr>
 
@@ -471,11 +474,16 @@
             </p>
         </div>
     </div>
+
+    <br>
 </div>
 
 
 <div class="form-row">
     <hr>
+    <div class="pull-left">
+        <h2><span class="completed-form-title pull-right hidden">Form Completed <i class="fas fa-check"></i></span></h2>
+    </div>
     <div class="pull-right">
         <button class="btn btn-primary btn-lg btn-success" type="submit" form="health-form">
             Continue

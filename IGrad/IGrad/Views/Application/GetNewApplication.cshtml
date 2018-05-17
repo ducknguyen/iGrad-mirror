@@ -14,7 +14,10 @@
 
 @using (Html.BeginForm("GetNewApplication", "Application", FormMethod.Post, new { @id = "personal-info", enctype = "multipart/form-data", @onsubmit = "return validateGetNewApplicationSection()" }))
 {
-    <h2>Personal Information</h2>
+    <h2>
+        Personal Information
+        <span class="completed-form-title pull-right hidden">Completed <i class="fas fa-check"></i></span>
+    </h2>
     <small class="form-text required-marker-indicator">* required fields.</small>
     <hr>
 
@@ -621,6 +624,9 @@
 
 <div class="form-row">
     <hr />
+    <div class="pull-left">
+        <h2><span class="completed-form-title pull-right hidden">Form Completed <i class="fas fa-check"></i></span></h2>
+    </div>
     <div class="pull-right">
         <button class="btn btn-lg btn-success" form="personal-info" type="submit">
             Continue

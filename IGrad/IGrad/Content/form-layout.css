@@ -129,14 +129,22 @@ nav {
     font-weight:600;
 }
 
-
+/* ---------------------------------------------------
+    COMPLETED FORM
+----------------------------------------------------- */
+.completed-form h3 {
+    background-color: #5cb85c;
+}
+.completed-form-title {
+    color: #5cb85c;
+}
 /* ---------------------------------------------------
     FORM COMPONENTS
 ----------------------------------------------------- */
 .bg-info {
     color: white;
     background-color: #5bc0de;
-    padding: 8px;
+    padding: 8px
 }
 
 .tooltip-inner {
