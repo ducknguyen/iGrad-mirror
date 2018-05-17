@@ -11,13 +11,13 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <h4>According to the McKinney-Vento Homeless Assistance Act, 42 U.S.C.11431:</h4>
         <p>
             The term "homeless children and youth" means:
-            (i) individuals who lack a fixed, regular, and adequate nighttime residence and includes
+            <br>
+            (i) Individuals who lack a fixed, regular, and adequate nighttime residence and includes
             children and youth who are sharing the housing of other persons due to loss of housing,
             economic hardship, or a similar reason; are living in motels, hotels, trailer parks, or
             camping grounds due to the lack of alternative accommodations; are living in emergency
@@ -38,42 +38,34 @@
             Secondary Education Act of 1965} who qualify as homeless for the purposes of this
             subtitle because they are living in circumstances described in clauses (I) through (iii).
         </p>
-            <div class="form-group">
-                @Html.LabelFor(model => model.ContactByPhone, htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.ContactByPhone)
-                        @Html.ValidationMessageFor(model => model.ContactByPhone, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+
+        <hr />
+    
+        <label>My family currently fits one or more of the above definitions. Please contact me by:</label>
+        <div class="container">
+            <div class="form-group col-md-12">
+                @Html.EditorFor(model => model.ContactByPhone)
+                @Html.LabelFor(model => model.ContactByPhone, htmlAttributes: new { @class = "control-label" })
+                @Html.ValidationMessageFor(model => model.ContactByPhone, "", new { @class = "text-danger" })
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ContactByEmail, htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.ContactByEmail)
-                        @Html.ValidationMessageFor(model => model.ContactByEmail, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="form-group col-md-12">
+                @Html.EditorFor(model => model.ContactByEmail)
+                @Html.LabelFor(model => model.ContactByEmail, htmlAttributes: new { @class = "control-label" })
+                @Html.ValidationMessageFor(model => model.ContactByEmail, "", new { @class = "text-danger" })
             </div>
 
-            <div class="form-group">
-                @Html.LabelFor(model => model.ContactByStudentNote, htmlAttributes: new { @class = "control-label col-md-3" })
-                <div class="col-md-9">
-                    <div class="checkbox">
-                        @Html.EditorFor(model => model.ContactByStudentNote)
-                        @Html.ValidationMessageFor(model => model.ContactByStudentNote, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+            <div class="form-group col-md-12">
+                @Html.EditorFor(model => model.ContactByStudentNote)
+                @Html.LabelFor(model => model.ContactByStudentNote, htmlAttributes: new { @class = "control-label" })
+                @Html.ValidationMessageFor(model => model.ContactByStudentNote, "", new { @class = "text-danger" })
             </div>
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Submit" class="btn btn-success" form="homeless-form" onclick="hideTarget('homeless-information')" />
-                    <input type="button" value="Cancel"  class="btn btn-default" onclick="hideTarget('homeless-information')" />
-                </div>
+            <div class="form-group col-md-12">
+                <input type="submit" value="Submit" class="btn btn-success" form="homeless-form" onclick="hideTarget('homeless-information')" />
+                <input type="button" value="Cancel"  class="btn btn-default" onclick="hideTarget('homeless-information')" />
             </div>
-</div>
+        </div>
+    </div>
 }
 

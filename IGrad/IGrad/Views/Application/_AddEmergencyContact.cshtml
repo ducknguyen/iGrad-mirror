@@ -9,6 +9,7 @@
 }))
 {
 
+    <hr>
     <div class="row">
         <div class="form-group col-md-4">
             @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "" })
@@ -56,14 +57,11 @@
         </div>
     </div>
 
-   
-
-
-            <br />
-            <div class="row">
-                <div class="col-md-12">
-                    <button id="submitButton" type="submit" class="btn btn-success" onclick="processAddEmergencyContact()">Submit Emergency Contact</button>
-                    <button id="cancelButton" type="button" class="btn btn-danger" onclick="emergencyContactFormCancel()">Cancel</button>
-                </div>
-            </div>
+    <br />
+    <div class="row">
+        <div class="col-md-12">
+            <button id="submitButton" type="submit" class="btn btn-success" onclick="processAddEmergencyContact()">Submit Emergency Contact</button>
+            <button id="cancelButton" type="button" class="btn btn-default" onclick="emergencyContactFormCancel()">Cancel</button>
+        </div>
+    </div>
 }

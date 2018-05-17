@@ -10,8 +10,8 @@
 {
     @Html.AntiForgeryToken()
     <div class="" id="add-secondary-guardian-form">
-        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <hr>
         <div class="row">
             <div class="form-group col-md-4">
                 @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "control-label required-marker " })

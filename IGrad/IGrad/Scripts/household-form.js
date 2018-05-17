@@ -4,7 +4,7 @@ var secondaryGuardian = [];
 var emergencyContacts = [];
 
 $(document).ready(function () {
-    homelessToggled();
+    //homelessToggled();
     trackCurrentTablesStatus();
 
     totalRequiredFields = $('.required-marker:visible').length;
@@ -34,18 +34,18 @@ $(document).ready(function () {
 })
 
 function trackCurrentTablesStatus() {
-    $('#primary-guardians table tbody tr').each(function () {
-        console.log("in primary");
+    $('#primary-guardians tbody tr').each(function () {
+    console.log('inside primary');
         primaryGuardian.push(primaryGuardian.length+1);
     })
 
-    $('#secondary-guardians table tbody tr').each(function () {
-        console.log("in secondary");
+    $('#secondary-guardians tbody tr').each(function () {
+    console.log('inside secondary');
         secondaryGuardian.push(secondaryGuardian.length+1);
     })
 
-    $('#emergency-contacts-table table tbody tr').each(function () {
-        console.log("in emergency");
+    $('#emergency-contacts-table tbody tr').each(function () {
+        console.log('inside emergency');
         emergencyContacts.push(emergencyContacts.length+1);
     })
 
@@ -92,7 +92,7 @@ function processAddEmergencyContact() {
     hideTarget('add-emergency-contact');
     showTarget('add-emergency-contact-button');
 
-    var toUpdate = $('input[type=hidden][name="emergency-section"]');
+    var toUpdate = $('input[type=hidden][name="emergency-selection"]');
     emergencyContacts.push(emergencyContacts.length);
     toUpdate.val(emergencyContacts);
 
