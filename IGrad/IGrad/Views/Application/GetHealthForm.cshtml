@@ -19,11 +19,11 @@
 <small class="form-text required-marker-indicator">* required fields.</small>
 <hr>
 
-<div class="description-text">
-    <p>
-        This information is needed to plan an appropriate program for the student and to prepare for any emergency situation if one should arise. Your school nurse will contact you if there are any additional questions.
-    </p>
-</div>
+<h3 class="bg-info">Medical History</h3>
+<p>
+    This information is needed to plan an appropriate program for the student and to prepare for any emergency situation if one should arise. 
+    Your school nurse will contact you if there are any additional questions.
+</p>
 <div class="container">
     <!-- CATEGORY 1 START -->
     <div class="row">
@@ -31,7 +31,7 @@
             Check all that apply
         </div>
         <div class="col-md-6">
-            Please explain any yes answers
+            Please explain
         </div>
     </div>
     <br>
@@ -260,12 +260,20 @@
         </div>
     </div>
 
-
+    <br>
+    
     <!-- CATEGORY 2 START -->
     <!-- ANAPHYLAXIS -->
-    <div class="col-md-9 col-md-offset-1">
+    <div class="row">
         <div id="anaphylaxis-information" class="medical-information">
-            <h3 class="bg-info">Anaphylaxis</h3>
+            <br>
+            <h3 class="bg-info">
+                Anaphylaxis
+                <span data-toggle="tooltip" data-placement="right" title="If the student has anaphylactic allergy as indicated above, please answer the
+                    following questions" class="user-hint">
+                    <i class="fas fa-info-circle"></i>
+                </span>
+            </h3>
             <div class="form-group">
                 @Html.LabelFor(model => model.AnaphylaxisAllerigicTo, htmlAttributes: new { @class = "" })
                 @Html.EditorFor(model => model.AnaphylaxisAllerigicTo, new { htmlAttributes = new { @class = "form-control", @placeholder = "Tree nuts, fish, wheat, etc.." } })
@@ -283,22 +291,29 @@
     </div>
 
     <!-- DIABETES -->
-    <div class="col-md-9 col-md-offset-1">
+    <div class="row">
         <div id="diabetes-information" class="medical-information">
-            <hr>
+            <br>
             <h3 class="bg-info">Diabetes</h3>
             <p>
-                There is a state law, which requires all students with diabetes to have an individualized health care plan implemented in the school setting. If the student is diabetic, please contact the school nurse to help write your student's plan.
+                There is a state law, which requires all students with diabetes to have an individualized health care plan implemented in the school setting. 
+                If the student is diabetic, please contact the school nurse to help write your student's plan.
             </p>
+            <br>
         </div>
     </div>
 
-
     <!-- ASTHMA INFORMATION -->
-    <div class="col-md-9 col-md-offset-1">
+    <div class="row">
         <div id="asthma-information" class="medical-information">
-            <hr>
-            <h3 class="bg-info">Asthma</h3>
+            <br>
+            <h3 class="bg-info">
+                Asthma
+                <span data-toggle="tooltip" data-placement="right" title="If the student has asthma as indicated above, please answer the
+                    following questions" class="user-hint">
+                    <i class="fas fa-info-circle"></i>
+                </span>
+            </h3>
             <div class="form-group">
                 @Html.LabelFor(model => model.HowLongAsthma, htmlAttributes: new { @class = "" })
                 @Html.EditorFor(model => model.HowLongAsthma, new { htmlAttributes = new { @class = "form-control", @placeholder = "Years and months" } })
@@ -447,9 +462,9 @@
 
 
     <!-- THREATENING CONDITIONS -->
-    <div class="col-md-9 col-md-offset-1">
+    <div class="row">
         <div id="life-threatening-condition">
-            <hr>
+            <br>
             <h3 class="bg-info">Life Threatening Conditions</h3>
             <p>
                 RCW 28A.210.320-Children with Life-Threatening Conditions, requires a medication or treatment order as a prerequisite for children with life-threatening conditions to attend public schools. The new law defines “life- threatening condition” as a health condition that will put the child in danger of death during the school day, if a medication or treatment order and a nursing care plan are not in place. Potential life-threatening conditions include, but are not limited to, students with seizure disorders, diabetes, life-threatening allergies, and some students with asthma and heart conditions. If this law applies to your student, please contact the nurse at your child’s school.
@@ -459,39 +474,8 @@
 </div>
 
 
-    @*<!-- CATEGORY 1 -->
-        <div id="medical-history">
-            <div class="card">
-                <div class="card-header" id="category-1-heading">
-                    <h4 class="mb-0">
-                        <button class="btn btn-link" data-toggle="collapse" data-target="#category-1" aria-expanded="true" aria-controls="category-1">
-                            Health Category #1
-                        </button>
-                    </h4>
-                </div>
-
-                <div id="category-1" class="collapse" aria-labelledby="category-1-heading" data-parent="#medical-history">
-                    <div class="card-body">
-                        @{Html.RenderPartial("_HealthCategory1", Model.HealthInfo);}
-                    </div>
-                </div>
-            </div>
-
-
-            <!-- CATEGORY 2 -->
-            <div class="">
-                <h4 class="mb-0" id="category-2-heading">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#category-2" aria-expanded="true" aria-controls="category-2">
-                        Health Category #2
-                    </button>
-                </h4>
-                <div id="category-2" class="collapse" aria-labelledby="category-2-heading" data-parent="#medical-history">
-                    @{Html.RenderPartial("_HealthCategory2", Model.HealthInfo);}
-                </div>
-            </div>
-        </div>*@
-
 <div class="form-row">
+    <hr>
     <div class="pull-right">
         <button class="btn btn-primary btn-lg btn-success" type="submit" form="health-form">
             Continue
