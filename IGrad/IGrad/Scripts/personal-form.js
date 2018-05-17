@@ -83,7 +83,7 @@ function UpdateRaceList(currentCheckbox, isChecked) {
 
 $(':input').change(function () {
     // check if current input is radio button
-    if ($(this).hasClass('required-checker')) {
+    if ($(this).hasClass('radio-checker')) {
         var toUpdate = $('input[type=hidden][name="' + $(this).attr("name") + '"]');
         toUpdate.val($(this).val());
     }

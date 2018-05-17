@@ -8,12 +8,12 @@
 @Styles.Render("/Content/educationform.css")
 <script src="~/Scripts/jquery.unobtrusive-ajax.min.js" type="text/javascript"></script>
 
-<h2>Previous Education</h2>
+<h2>Education Information</h2>
 <small class="form-text required-marker-indicator">* required fields.</small>
 <hr>
 
 <!-- ADD PREVIOUS HIGH SCHOOL-->
-<h3 class="bg-info">High School Information</h3>
+<h3 class="bg-info">Previous Education Information</h3>
 <h4 class="required-marker">Add A Previous High School</h4>
 <div class="" id="highschool-info">
     @{if (Model.SchoolInfo.HighSchoolInformation != null)
@@ -35,7 +35,7 @@
 {
     <!-- GENERAL INFORMATION -->
     <div class="wrapper">
-        <h3 class="bg-info">General Information</h3>
+        <h3 class="bg-info">School Background</h3>
         <div class="row">
             <div class="form-group col-md-3">
                 @Html.LabelFor(model => model.SchoolInfo.IsExpelledOrSuspended, htmlAttributes: new { @class = "control-label required-marker" })
@@ -77,13 +77,13 @@
         </div>
     </div>
 
+    <br />
 
     <div class="wrapper row">
         <!-- SPECIAL PROGRAMS -->
-        <div class="col-md-6">
+        <div class="col-md-12">
             <h3 class="bg-info">Special programs</h3>
-            <p class="">Did the student participate in any of the following programs? <small>(Check all that apply)</small></p>
-
+            <label>Did the student participate in any of the following programs? <small>(Check all that apply)</small></label>
             <br />
             @Html.CheckBoxFor(model => model.QualifiedOrEnrolledInProgam.SpecialEducation, htmlAttributes: new { @class = "" })
             @Html.LabelFor(model => model.QualifiedOrEnrolledInProgam.SpecialEducation, htmlAttributes: new { @class = "" })
@@ -106,6 +106,9 @@
     </div>
 }
 <!-- END FORM -->
+
+<br />
+
 <!-- VIOLATIONS CHECK -->
 <div class="wrapper">
     <h3 class="bg-info">Previous Violation</h3>
@@ -115,7 +118,7 @@
             {
                 <div class="">
                     <button class="btn btn-success" onclick="loadViolationInfo()">Yes, add violation</button>
-                    <button class="btn " value="" onclick="hideTarget('violation-container')">No</button>
+                    <button class="btn btn-default" value="" onclick="noViolationPrompt()">No</button>
                 </div>
             }
             else
@@ -128,11 +131,18 @@
         <div class="" id="add-violation-information">
         </div>
     </div>
+
+    <span id="no-violation-prompt" class="success-message hidden">
+        <i class="fas fa-check-circle"></i>
+        No violation has been selected, in case you choose to add a violation, please refresh the page
+    </span>
     <input type="hidden" name="violation-history" class="progressbar-checker" value="">
 </div>
 
+<br />
 
 <div class="form-row">
+    <hr />
     <div class="pull-right">
         <button class="btn btn-primary btn-lg btn-success" type="submit" form="education-form">
             Continue
