@@ -1266,8 +1266,12 @@ namespace IGrad.Controllers
                 middleInitial.Value = new PdfString(this.user.Name.MName);
             }
 
-            PdfTextField preferedName = (PdfTextField)(document.AcroForm.Fields["PreferredName"]);
-            preferedName.Value = new PdfString(this.user.Name.NickName);
+            if(user.Name.NickName != null)
+            {
+                PdfTextField preferedName = (PdfTextField)(document.AcroForm.Fields["PreferredName"]);
+                preferedName.Value = new PdfString(this.user.Name.NickName);
+            }
+           
 
             // Birthday
             if (this.user.Birthday != null)
