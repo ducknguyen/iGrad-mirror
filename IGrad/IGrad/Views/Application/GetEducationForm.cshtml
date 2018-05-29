@@ -60,22 +60,22 @@
         <div class="row">
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.TextAreaFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "form-control", @rows = 3, @placeholder = "Student opinions...", required = "required" })
+                @Html.TextBoxFor(model => model.SchoolInfo.SchoolOpinion, htmlAttributes: new { @class = "form-control", @rows = 3, @placeholder = "Student opinions...", required = "required" })
             </div>
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.TextAreaFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "form-control", @rows = 3, @placeholder = "Student performance...", required = "required" })
+                @Html.TextBoxFor(model => model.SchoolInfo.HowDoingInSchool, htmlAttributes: new { @class = "form-control", @rows = 3, @placeholder = "Student performance...", required = "required" })
             </div>
         </div>
 
         <div class="row">
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.TextAreaFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "form-control", @rows = 4, @placeholder = "Strengths and improvements...", required = "required" })
+                @Html.TextBoxFor(model => model.SchoolInfo.StrengthAndWeakness, htmlAttributes: new { @class = "form-control", @rows = 4, @placeholder = "Strengths and improvements...", required = "required" })
             </div>
             <div class="form-group col-md-6">
                 @Html.LabelFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "control-label" })
-                @Html.TextAreaFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "form-control", @rows = 4, @placeholder = "Comments..." })
+                @Html.TextBoxFor(model => model.SchoolInfo.ParentAdditionalFeedbackInfo, htmlAttributes: new { @class = "form-control", @rows = 4, @placeholder = "Comments..." })
             </div>
         </div>
     </div>
