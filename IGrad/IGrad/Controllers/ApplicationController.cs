@@ -975,6 +975,7 @@ namespace IGrad.Controllers
             }
         }
 
+        [Authorize]
         public ActionResult FinalPage()
         {
             using (OpenHouseContext db = new OpenHouseContext())
