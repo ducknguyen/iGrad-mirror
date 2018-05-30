@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Add Immunization PDF";
+}
+
+<h2>Upload Updated Immunization PDF</h2>
+<hr />
+
+@using (Html.BeginForm("AddImmunizationPDF", "Admin", FormMethod.Post,
+                      new { enctype = "multipart/form-data" }))
+{
+
+    
+    <input type="file" name="FileUpload1" />
+    <br />
+    <input type="submit" value="Upload" class="btn" />
+}

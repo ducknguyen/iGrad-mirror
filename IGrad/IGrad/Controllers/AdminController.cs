@@ -172,6 +172,28 @@ namespace IGrad.Controllers
         }
 
         [Authorize]
+        public ActionResult AddImmunization()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [Authorize]
+        public ActionResult AddImmunizationPDF()
+        {
+            /* Code to save save model data into database. */
+
+            foreach (string upload in Request.Files)
+            {
+                if (Request.Files[upload].ContentLength == 0) continue;
+                string pathToSave = Server.MapPath("~/media/documents/");
+                string filename = "ImmunizationStatus.pdf";
+                Request.Files[upload].SaveAs(Path.Combine(pathToSave, filename));
+            }
+            return RedirectToAction("Index", "Admin");
+        }
+
+        [Authorize]
         public ActionResult Details(Guid? userID)
         {
             if (userID == null)
