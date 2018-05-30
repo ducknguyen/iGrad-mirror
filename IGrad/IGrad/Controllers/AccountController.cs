@@ -388,7 +388,9 @@ namespace IGrad.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model, bool isAdmin = false)
         {
-            XmlDocument doc = new XmlDocument();
+            if (ModelState.IsValid)
+            {
+                XmlDocument doc = new XmlDocument();
             //doc.Load("books.xml");
             doc.Load(System.Web.Hosting.HostingEnvironment.MapPath("~/admin.xml"));
 
@@ -407,8 +409,7 @@ namespace IGrad.Controllers
             }
             dbAdmin.Dispose();
 
-            if (ModelState.IsValid)
-            {
+            
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
@@ -498,18 +499,20 @@ namespace IGrad.Controllers
 
                     if (!isAdmin)
                     {
-                        return RedirectToAction("Index", "Home");
+                        return Json(new { success = true });
+                        //return RedirectToAction("Index", "Home");
                     }
                     else if(isAdmin)
                     {
-                        return RedirectToAction("Index", "Admin");
+                        return Json(new { success = true });
+                        //return RedirectToAction("Index", "Admin");
                     }
                 }
                 AddErrors(result);
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return Json(new { success = false });
         }
 
         //

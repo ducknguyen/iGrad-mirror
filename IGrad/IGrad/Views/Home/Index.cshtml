@@ -5,6 +5,10 @@
 }
 
 @Styles.Render("~/Content/homepage.css")
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    
+}
 
 <header class="contact-head">
     <div class="container">
@@ -35,35 +39,36 @@
 <div class="container landscape">
     <div class="col-md-12 test">
         <div class="col-md-6 test1">
-            <div class="form-box">
-                <div class="form-bottom">
-                    <div class="container">
-                        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-                        {
-                            @Html.AntiForgeryToken()
-                            @Html.ValidationSummary("", new { @class = "text-danger" })
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Email, new { @class = "control-label" })
-                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.Password, new { @class = "control-label" })
-                                @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
-                                @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" id="submitbttn" class="btn btn-signup">
-                                    <i class="fas fa-pencil-alt"></i>
-                                    APPLY NOW
-                                </button>
-                            </div>
-                        }
+                <div class="form-box">
+                    <div class="form-bottom">
+                        <div class="container">
+                            @using (Html.BeginForm("Register", "Account", FormMethod.Post,
+                                new { encType = "multipart/form-data", id = "myform", name = "myform" }))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary("", new { @class = "text-danger" })
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Email, new { @class = "control-label" })
+                                    @Html.TextBoxFor(m => m.Email, new { id = "email", @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Password, new { @class = "control-label" })
+                                    @Html.PasswordFor(m => m.Password, new { id = "password1", @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.ConfirmPassword, new { @class = "control-label" })
+                                    @Html.PasswordFor(m => m.ConfirmPassword, new { id = "password2", @class = "form-control" })
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" id="submitbttn" class="btn btn-signup">
+                                        <i class="fas fa-pencil-alt"></i>
+                                        APPLY NOW
+                                    </button>
+                                </div>
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
         </div>
         <div class="col-md-6 igrad-external">
             <a id="igrad-external" href="https://www.kent.k12.wa.us/iG" target="_blank">
@@ -83,25 +88,48 @@
 <br>
 
 <!-- The Modal -->
-<div class="container-popup" id="container-popup" style="visibility: hidden">
+<div class="container-popup" id="container-popup">
     <div class="popup">
         <img src="@Url.Content("~/media/images/loading.gif")" style="width: 130px; height: 130px;"/>
     </div>
 </div>
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
 <script type="text/javascript">
-// Get the modal
-    var modal = document.getElementById('container-popup');
 
-var btn = document.getElementById("submitbttn");
+    $(document).ready(function () {
 
-    // When the user clicks on the button, open the modal
-    btn.onclick = function () {
-        modal.style.visibility = "visible";
-    modal.style.display = "block";
-    }
+        // Hide the "busy" Gif at load:
+        $("#container-popup").hide();
+
+        $("#myform").submit(function(event){
+            event.preventDefault();
+
+            // Show the "busy" Gif:
+            $("#container-popup").show();
+            var url = $(this).attr("action");
+            var formData = $(this).serialize();
+            $.ajax({
+                url: url,
+                type: "POST",
+                data: formData,
+                dataType: "json",
+                success: function (resp) {
+                    if (resp.success)
+                    {
+                        // reload to be redirected to application
+                        location.reload();
+                    }
+                    else
+                    {
+                        // Hide the "busy" gif:
+                        $("#container-popup").hide();
+                    }
+                }
+            })
+        });
+    });
+    
+
 </script>
