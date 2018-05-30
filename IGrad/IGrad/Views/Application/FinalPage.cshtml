@@ -36,13 +36,33 @@
 <hr />
 
 <!-- download PDF -->
-<div class="row">
+<div class="row" id="showDownload">
     <div class="col-md-12">
         <h4 class="danger btn-danger">WARNING: This button will download all of your personal information on the forms to the computer you're on.</h4>
         <h4 class="danger btn-danger">Please do not download these files to a public machine.</h4>
         <br />
-        <button class="btn btn-lg  btn-success">
+        <input type="checkbox" id="myCheck" onclick="clickedcheckbox(this)"> I acknowlege that i want to download these pdf's and am not downloading to a public computer (machine).
+        <br />
+        <hr />
+        <button class="btn btn-lg  btn-success" id="downloadBttn">
             @Html.ActionLink("Download Complete Forms To My Computer", "GetFilledPDF", "Application")
         </button>
     </div>
 </div>
+
+<script>
+    $("#downloadBttn").hide();
+
+
+    function clickedcheckbox(cb)
+    {
+        if (cb.checked)
+        {
+            $("#downloadBttn").show();
+        }
+        else
+        {
+            $("#downloadBttn").hide();
+        }
+    }
+</script>
