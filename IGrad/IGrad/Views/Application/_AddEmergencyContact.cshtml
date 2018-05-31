@@ -5,23 +5,23 @@
     HttpMethod = "Post",
     UpdateTargetId = "emergency-contacts",
     InsertionMode = InsertionMode.Replace,
+    OnSuccess = "refreshEmergencyContact"
 
 }))
 {
-
     <hr>
     <div class="row">
         <div class="form-group col-md-4">
-            @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "" })
-            @Html.TextBoxFor(model => model.Name.FName, htmlAttributes: new { @class = "form-control", @placeholder = "First" })
+            @Html.LabelFor(model => model.Name.FName, htmlAttributes: new { @class = "required-marker" })
+            @Html.TextBoxFor(model => model.Name.FName, htmlAttributes: new { @class = "form-control", @placeholder = "First", @required ="required" })
         </div>
         <div class="form-group col-md-2">
             @Html.LabelFor(model => model.Name.MName, htmlAttributes: new { @class = "" })
             @Html.TextBoxFor(model => model.Name.MName, htmlAttributes: new { @class = "form-control", @placeholder = "Middle" })
         </div>
         <div class="form-group col-md-4">
-            @Html.LabelFor(model => model.Name.LName, htmlAttributes: new { @class = "" })
-            @Html.TextBoxFor(model => model.Name.LName, htmlAttributes: new { @class = "form-control", @placeholder = "Last" })
+            @Html.LabelFor(model => model.Name.LName, htmlAttributes: new { @class = "required-marker" })
+            @Html.TextBoxFor(model => model.Name.LName, htmlAttributes: new { @class = "form-control", @placeholder = "Last", @required = "required" })
         </div>
         <div class="form-group col-md-2">
             @Html.LabelFor(model => model.Relationship, htmlAttributes: new { @class = "" })
@@ -31,29 +31,29 @@
 
     <div class="row">
         <div class="form-group col-md-4">
-            @Html.LabelFor(model => model.PhoneOne, htmlAttributes: new { @class = "" })
-            @Html.TextBoxFor(model => model.PhoneOne.PhoneNumber, htmlAttributes: new { @class = "form-control", @placeholder = CustomHelper.GetPhoneNumberPlaceholder() })
+            @Html.LabelFor(model => model.PhoneOne, htmlAttributes: new { @class = "required-marker" })
+            @Html.TextBoxFor(model => model.PhoneOne.PhoneNumber, htmlAttributes: new { @class = "form-control", @placeholder = CustomHelper.GetPhoneNumberPlaceholder(), @required = "required" })
         </div>
         <div class="form-group col-md-2">
-            @Html.LabelFor(model => model.PhoneOne.PhoneType, htmlAttributes: new { @class = "" })
-            @Html.DropDownListFor(model => model.PhoneOne.PhoneType, Model.PhoneOne.PhoneTypeSelectList, htmlAttributes: new { @class = "form-control dropdown-toggle" })
+            @Html.LabelFor(model => model.PhoneOne.PhoneType, htmlAttributes: new { @class = "required-marker" })
+            @Html.DropDownListFor(model => model.PhoneOne.PhoneType, Model.PhoneOne.PhoneTypeSelectList, htmlAttributes: new { @class = "form-control dropdown-toggle", @required = "required" })
         </div>
     </div>
     <div class="row">
         <div class="form-group col-md-4">
-            @Html.LabelFor(model => model.PhoneTwo, htmlAttributes: new { @class = "" })
-            @Html.TextBoxFor(model => model.PhoneTwo.PhoneNumber, htmlAttributes: new { @class = "form-control", @placeholder = CustomHelper.GetPhoneNumberPlaceholder() })
+            @Html.LabelFor(model => model.PhoneTwo, htmlAttributes: new { @class = "required-marker" })
+            @Html.TextBoxFor(model => model.PhoneTwo.PhoneNumber, htmlAttributes: new { @class = "form-control", @placeholder = CustomHelper.GetPhoneNumberPlaceholder(), @required = "required" })
         </div>
         <div class="form-group col-md-2">
-            @Html.LabelFor(model => model.PhoneTwo.PhoneType, htmlAttributes: new { @class = "" })
+            @Html.LabelFor(model => model.PhoneTwo.PhoneType, htmlAttributes: new { @class = "required-marker" })
             @Html.DropDownListFor(model => model.PhoneTwo.PhoneType, Model.PhoneTwo.PhoneTypeSelectList, htmlAttributes: new { @class = "form-control dropdown-toggle" })
         </div>
     </div>
 
     <div class="row">
         <div class="form-group col-md-4">
-            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "" })
-            @Html.TextBoxFor(model => model.EmailAddress, htmlAttributes: new { @class = "form-control", @placeholder = CustomHelper.GetEmailPlaceholder() })
+            @Html.LabelFor(model => model.EmailAddress, htmlAttributes: new { @class = "required-marker" })
+            @Html.TextBoxFor(model => model.EmailAddress, htmlAttributes: new { @class = "form-control", @placeholder = CustomHelper.GetEmailPlaceholder(), @required = "required" })
         </div>
     </div>
 

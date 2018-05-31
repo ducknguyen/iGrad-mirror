@@ -67,9 +67,6 @@ function residentIsMailingAddress() {
 
 /* GUARDIAN FUNCTIONS */
 function processAddGuardian(type){
-    hideTarget('add-' + type + '-guardian');
-    showTarget('add-' + type + '-guardian-button');
-
     var toUpdate = $('input[type=hidden][name="' + type + '-guardian-selection"]');
     if (type == "primary") {
         primaryGuardian.push(primaryGuardian.length);
@@ -77,10 +74,30 @@ function processAddGuardian(type){
     } else {
         secondaryGuardian.push(secondaryGuardian.length);
         toUpdate.val(secondaryGuardian);
-    }
 
+    }
     trackFormProgress();
 }
+
+
+
+function refreshPrimaryGuardian() {
+    hideTarget('add-primary-guardian');
+    showTarget('add-primary-guardian-button');
+}
+
+function refreshSecondaryGuardian() {
+    hideTarget('add-secondary-guardian');
+    showTarget('add-secondary-guardian-button');
+}
+
+function refreshEmergencyContact(){
+    hideTarget('add-emergency-contact');
+    showTarget('add-emergency-contact-button');
+}
+
+
+
 
 function guardianFormCancel(type) {
     showTarget('add-' + type + '-guardian-button');
@@ -89,8 +106,7 @@ function guardianFormCancel(type) {
 
 /* EMERGENCY CONTACT FUNCTIONS */
 function processAddEmergencyContact() {
-    hideTarget('add-emergency-contact');
-    showTarget('add-emergency-contact-button');
+
 
     var toUpdate = $('input[type=hidden][name="emergency-selection"]');
     emergencyContacts.push(emergencyContacts.length);

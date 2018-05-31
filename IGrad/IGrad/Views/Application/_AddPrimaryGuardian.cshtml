@@ -1,11 +1,27 @@
 ﻿@model IGrad.Models.User.Guardian
+<script type="text/javascript">
+    $("#fillGuardianAddressButton").click(fillGuardianAddress);
 
+    function fillGuardianAddress() {
+        //get resident address values
+        var street = $('#ResidentAddress_Street').val();
+        var city = $('#ResidentAddress_City').val();
+        var state = $('#ResidentAddress_State').val();
+        var poBox = $('#ResidentAddress_POBox').val();
+
+        //assign default guardian residence values
+        $("#Address_Street").val(street);
+        $("#Address_City").val(city);
+        $("#Address_State").val(state);
+        $("#Address_POBox").val(poBox);
+    }
+</script>
 @using (Ajax.BeginForm("SubmitGuardianInfo", "Application", new AjaxOptions()
 {
-    HttpMethod = "Post",
-    UpdateTargetId = "primary-guardians",
-    InsertionMode = InsertionMode.Replace,
-
+        HttpMethod = "Post",
+        UpdateTargetId = "primary-guardians",
+        InsertionMode = InsertionMode.Replace,
+        OnSuccess = "refreshPrimaryGuardian"
 }))
 {
     @Html.AntiForgeryToken()
@@ -69,6 +85,7 @@
     </div>
     <div class="row">
         <div class="form-group col-md-4">
+            <button class="btn-primary btn-sm" id="fillGuardianAddressButton" type="button" onclick="fillGuardianAddressButton()">Autofill</button>
             @Html.LabelFor(model => model.Address.Street, htmlAttributes: new { @class = "control-label required-marker" })
             @Html.EditorFor(model => model.Address.Street, new { htmlAttributes = new { @class = "form-control", @placeholder = "Street Address", required = "required" } })
         </div>

@@ -60,6 +60,11 @@ function processDeleteHighSchool(fieldId) {
     updateHighSchoolHistory(highSchoolList);
     trackFormProgress();
 }
+
+function refreshHighSchool() {
+    hideTarget('school-information');
+    showTarget('add-new-highschool-button');
+}
 /* HIGH SCHOOL RELATED FUNCTIONS END*/
 
 /* VIOLATIONS RELATED FUNCTIONS */

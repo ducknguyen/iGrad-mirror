@@ -14,6 +14,7 @@
     HttpMethod = "Post",
     UpdateTargetId = "highschool-info",
     InsertionMode = InsertionMode.Replace,
+    OnSuccess = "refreshHighSchool"
 
 }, new { @id = "add-hs-form" }))
 {
@@ -24,22 +25,22 @@
         <div class="row">
             <div class="form-group col-md-4">
                 @Html.LabelFor(model => model.HighSchoolName, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.EditorFor(model => model.HighSchoolName, new { htmlAttributes = new { @class = "form-control hs-info", @placeholder = "School name" } })
+                @Html.EditorFor(model => model.HighSchoolName, new { htmlAttributes = new { @class = "form-control hs-info", @placeholder = "School name", @required="required"} })
                 @Html.ValidationMessageFor(model => model.HighSchoolName, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-2">
                 @Html.LabelFor(model => model.HighSchoolYear, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.EditorFor(model => model.HighSchoolYear, new { htmlAttributes = new { @class = "form-control hs-info", @placeholder = "Last year attended" } })
+                @Html.EditorFor(model => model.HighSchoolYear, new { htmlAttributes = new { @class = "form-control hs-info", @placeholder = "Last year attended", @required = "required" } })
                 @Html.ValidationMessageFor(model => model.HighSchoolYear, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-4">
                 @Html.LabelFor(model => model.HighSchoolState, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.EditorFor(model => model.HighSchoolState, new { htmlAttributes = new { @class = "form-control", @placeholder = "State" } })
+                @Html.EditorFor(model => model.HighSchoolState, new { htmlAttributes = new { @class = "form-control", @placeholder = "State", @required = "required" } })
                 @Html.ValidationMessageFor(model => model.HighSchoolState, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-2">
                 @Html.LabelFor(model => model.HighSchoolCity, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.EditorFor(model => model.HighSchoolCity, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+                @Html.EditorFor(model => model.HighSchoolCity, new { htmlAttributes = new { @class = "form-control", @placeholder = "City", @required = "required" } })
                 @Html.ValidationMessageFor(model => model.HighSchoolCity, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -47,12 +48,12 @@
         <div class="row">
             <div class="form-group col-md-4">
                 @Html.LabelFor(model => model.SchoolDistrict, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.EditorFor(model => model.SchoolDistrict, new { htmlAttributes = new { @class = "form-control", @placeholder= "School District" } })
+                @Html.EditorFor(model => model.SchoolDistrict, new { htmlAttributes = new { @class = "form-control", @placeholder= "School District", @required = "required" } })
                 @Html.ValidationMessageFor(model => model.SchoolDistrict, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-3">
                 @Html.LabelFor(model => model.HighSchoolGrade, htmlAttributes: new { @class = "control-label required-marker" })
-                @Html.EditorFor(model => model.HighSchoolGrade, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.HighSchoolGrade, new { htmlAttributes = new { @class = "form-control", @required = "required" } })
                 @Html.ValidationMessageFor(model => model.HighSchoolGrade, "", new { @class = "text-danger" })
             </div>
             <div class="form-group col-md-4">
