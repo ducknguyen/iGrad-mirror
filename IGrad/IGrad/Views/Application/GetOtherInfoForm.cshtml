@@ -18,13 +18,18 @@
         hideTarget('hideOptionalAssistance');
         showTarget('showOptionalAssistance');
     });
-
     
     $(document).on('click', '#hideOptionalAssistance', function () {
         hideTarget('optional-assistance-form');
         hideTarget('hideOptionalAssistance');
         showTarget('showOptionalAssistance');
     });
+
+    function showOptionalAssistanceButton() {
+        hideTarget('optional-assistance-form');
+        hideTarget('hideOptionalAssistance');
+        showTarget('showOptionalAssistance');
+    }
 
     $(document).on('click', '#showParentPlan', function () {
         showTarget('parenting-plan-form');
@@ -43,6 +48,12 @@
         hideTarget('hideParentPlan');
         showTarget('showParentPlan');
     });
+
+    function showParentingPlanButton() {
+        hideTarget('parenting-plan-form');
+        hideTarget('hideParentPlan');
+        showTarget('showParentPlan');
+    }
 
 
 </script>

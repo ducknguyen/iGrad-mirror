@@ -1,10 +1,11 @@
 ﻿@model IGrad.Models.User.OptionalOpportunities.OptionalAssistance
 
 @using (Ajax.BeginForm("SubmitOptionalAssistanceForm", "Application", new AjaxOptions()
-{
-    HttpMethod = "Post",
-    UpdateTargetId = "",
-    InsertionMode = InsertionMode.Replace,
+    {
+        HttpMethod = "Post",
+        UpdateTargetId = "",
+        InsertionMode = InsertionMode.Replace,
+        OnSuccess = "showOptionalAssistanceButton"
 
 }))
 {
@@ -73,7 +74,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Submit Assistance Request" class="btn btn-success" onclick="hideTarget('optional-assistance-form')" />
+                <input type="submit" value="Submit Assistance Request" class="btn btn-success"/>
                 <input type="button" value="Cancel" id="cancel-optional-assistance" class="btn btn-default" onclick="hideTarget('optional-assistance-form')" />
             </div>
         </div>
