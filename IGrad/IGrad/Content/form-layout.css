@@ -166,6 +166,15 @@ input[type=radio] {
     font-weight: 600;
 }
 
+.blur-content {
+    -webkit-filter: blur(5px);
+    filter: blur(5px);
+}
+.clear-content {
+    -webkit-filter: blur(0);
+    filter: blur(0);
+}
+
 /* ---------------------------------------------------
     TOOLTIP POPUP
 ----------------------------------------------------- */
