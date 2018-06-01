@@ -1,0 +1,6 @@
+Exception Type: System.Web.HttpException
+Exception: A potentially dangerous Request.Path value was detected from the client (*).
+Stack Trace: 
+   at System.Web.HttpRequest.ValidateInputIfRequiredByConfig()
+   at System.Web.HttpApplication.PipelineStepManager.ValidateHelper(HttpContext context)
+

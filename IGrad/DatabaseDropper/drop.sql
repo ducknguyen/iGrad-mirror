@@ -79,9 +79,9 @@ IF EXISTS (SELECT * FROM sys.tables WHERE name = 'AspNetUserClaims')
 ALTER TABLE [dbo].[AspNetUserClaims] DROP CONSTRAINT [FK_dbo.AspNetUserClaims_dbo.AspNetUsers_UserId]
 GO
 
-IF EXISTS (SELECT * FROM sys.tables WHERE name = 'MillitaryInfoes')
-ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.MillitaryInfoes_MillitaryInfo_fieldId]
-DROP TABLE [dbo].[MillitaryInfoes]
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'MilitaryInfoes')
+ALTER TABLE [dbo].[User] DROP CONSTRAINT [FK_dbo.User_dbo.MilitaryInfoes_MilitaryInfo_fieldId]
+DROP TABLE [dbo].[MilitaryInfoes]
 GO
 
 
