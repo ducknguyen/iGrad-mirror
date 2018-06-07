@@ -90,7 +90,7 @@
         </div>
         <div class="col-md-4 form-group">
             @Html.LabelFor(model => model.PhoneInfo.PhoneNumber, htmlAttributes: new { @class = "control-label required-marker" })
-            @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control required-checker", @placeholder = CustomHelper.GetPhoneNumberPlaceholder(), required = "required", @onblur = "validatePhoneNumber()" } })
+            @Html.EditorFor(model => model.PhoneInfo.PhoneNumber, new { htmlAttributes = new { @class = "form-control required-checker phone-validate", @placeholder = CustomHelper.GetPhoneNumberPlaceholder(), maxlength="12", required="required" } })
             @Html.ValidationMessageFor(model => model.PhoneInfo.PhoneNumber, "", new { @class = "text-danger" })
         </div>
     </div>
@@ -102,10 +102,10 @@
     <h3 class="bg-info">
         Parent / Guardian's Military Affiliation
         <span data-toggle="tooltip" data-placement="right" title="The State legislature has passed a law requireing Washington State public schools
-              to collect information on military affiliation (Bill 5163).
-              This information allows educators and policymakers to monitor critical elements of education success, including academic progress and
-              proficiency, special and advanced program participation. Reliable information about student performance will assist educators in more
-              effectively transitioning students to a new school and enable districts to discover and implment best practices." class="user-hint">
+              to collect information on military affiliation (Bill 5163).This information allows educators and policymakers to monitor critical 
+              elements of education success, including academic progress and proficiency, special and advanced program participation. Reliable 
+              information about student performance will assist educators in more effectively transitioning students to a new school and enable 
+              districts to discover and implment best practices." class="user-hint">
             <i class="fas fa-info-circle"></i>
         </span>
     </h3>

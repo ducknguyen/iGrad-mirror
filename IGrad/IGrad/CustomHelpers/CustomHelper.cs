@@ -53,7 +53,7 @@ namespace IGrad.CustomHelpers
         //see E.123 telecom standard
         public static string GetPhoneNumberPlaceholder()
         {
-            return "(607) 123 4567";
+            return "555-555-5555";
         }
     }
 }

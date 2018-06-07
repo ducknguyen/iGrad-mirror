@@ -11,22 +11,16 @@ function validateBirthday() {
 function validateEmail() {
     var emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var emailInputFieldId = '#Email';
-    var emailValidationOutputField = $("span[data-valmsg-for='Email'");
+    var emailValidationOutputField = $("span[data-valmsg-for='Email']");
 
     validateField(emailInputFieldId, emailPattern, emailValidationOutputField, "email");
 }
 
-function validatePhoneNumber() {
-    var phoneNumberPattern = /^\(?\d{3}\)?-? *\d{3}-? *-?\d{4}$/;
-    var phoneNumberInputFieldId = '#PhoneInfo_PhoneNumber';
-    var phoneNumberValidationOuputField = $("span[data-valmsg-for='PhoneInfo.PhoneNumber']");
-
-    validateField(phoneNumberInputFieldId, phoneNumberPattern, phoneNumberValidationOuputField, "phone number");
-}
-
 function validateField(inputFieldId, pattern, outputSpan, fieldDescriptor) {
+    console.log(inputFieldId + " -- " + pattern + " -- " + fieldDescriptor);
     var fieldInput = $(inputFieldId).val();
     if (!pattern.test(fieldInput)) {
+        console.log("did not pass");
         validations[inputFieldId] = false;
         outputSpan.text("Please enter a valid " + fieldDescriptor);
     } else {
@@ -34,6 +28,14 @@ function validateField(inputFieldId, pattern, outputSpan, fieldDescriptor) {
         outputSpan.text("");
     }
 }
+
+$('input.phone-validate').focusout(function(){
+    var phoneNumberPattern = /^\d{3}-\d{3}-\d{4}$/;
+    var phoneNumberTarget = '#'+($(this).attr("id"));
+    var phoneValidationOutputField = $('span[data-valmsg-for="' + ($(this).attr("name")) +'"');
+
+    validateField(phoneNumberTarget, phoneNumberPattern, phoneValidationOutputField, "phone number");
+});
 
 function validateGetNewApplicationSection() {
     validateBirthday();
@@ -57,3 +59,4 @@ function validateGetNewApplicationSection() {
 
     return isValidForm;
 }
+

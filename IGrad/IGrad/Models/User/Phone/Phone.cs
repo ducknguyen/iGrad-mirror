@@ -14,7 +14,7 @@ namespace IGrad.Models.User
         public int fieldId { get; set; }
         public Guid UserID { get; set; }
         [DisplayName("Phone Number")]
-        [RegularExpression(@"\(?\d{3}\)?-? *\d{3}-? *-?\d{4}")]
+        [RegularExpression(@"\d{3}[\-]\d{3}[\-]\d{4}")]
         public string PhoneNumber { get; set; }
         [DisplayName("Phone Type")]
         public string PhoneType { get; set; }

@@ -6,17 +6,12 @@ function showTarget(targetId) {
     $('#' + targetId).removeClass('hidden');
 }
 
-$("input:not(.race-checkbox)").focus(function(){
-    console.log("inside focus");
+$(":input").focus(function(){
     var parent = $(this).parent().closest('.row');
-    $('.row').addClass("blur-content");
-    parent.removeClass("blur-content");
-    parent.addClass("clear-content");
+    parent.addClass("row-clarify");
 });
 
-$("input:not(.race-checkbox)").focusout(function(){
-    console.log("inside focusout");
+$(":input").focusout(function(){
     var parent = $(this).parent().closest('.row');
-    $('.row').removeClass("blur-content");
-    parent.removeClass("clear-content");
+    parent.removeClass("row-clarify");
 });
